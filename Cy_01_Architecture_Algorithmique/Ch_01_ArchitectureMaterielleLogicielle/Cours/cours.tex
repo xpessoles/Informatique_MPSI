@@ -5,11 +5,156 @@ Programmation
 
 \section{Architecture matérielle d'un ordinateur}
 \subsection{Modèle de Von Neumann}
+
+Pour pouvoir exécuter des algorithmes arbitraires, les ordinateurs actuels sont tous bâtis
+autour du même modèle architectural théorique, l’architecture de Von Neumann, même
+si la mise en œuvre pratique est un peu plus complexe.
+
+Le premier ordinateur électronique fut l’ENIAC
+(dont le but était de calculer des tables indiquant les paramètres de tir d’une batterie d’artillerie
+en fonction de la distance de l’objectif, du vent, etc.) dont la construction démarra
+en 1943. 
+Son architecture a été décrite dans un rapport de John Von Neumann en 1945 et
+est depuis appelée «~architecture de Von Neumann~». Depuis près de 70 ans, à quelques variations
+près, cette  architecture sert de base à la plupart des systèmes à microprocesseur actuel. 
+%\begin{figure}[h]
+
+\begin{minipage}[c]{.49\linewidth}
+Elle est composée des éléments suivants :
+\begin{itemize}
+\item d'une mémoire vive ;
+\item d'un processeur qu'on peut conceptuellement décomposer en une unité de contrôle et
+une unité de calcul arithmétique et logique ;
+\item de dispositifs périphériques, appelés simplement périphériques ;
+\item d'un canal de communication entre la mémoire, le processeur et les périphériques, appelé
+le bus.
+\end{itemize}
+\end{minipage} \hfill
+\begin{minipage}[c]{.49\linewidth}
+\begin{center}
+\includegraphics[width=.99\textwidth]{von.png}
+%\caption{Architecture de Von Neumann}
+%\label{}
+\end{center}
+\end{minipage}
+%\end{figure}
+
 \subsection{La carte mère et ses composants}
 \subsubsection{La carte mère}
-\subsubsection{Les microprocesseurs}
+\noindent
+\begin{minipage}[c]{.49\linewidth}
+\noindent La carte mère est un des éléments central de l'ordinateur. Elle assure la liaison avec le boîtier, mais surtout, elle comporte : 
+\begin{itemize}
+\item l'interface avec le processeur \textit{via} le socket (le socket de la carte mère est à choisir en fonction du processeur souhaité);
+\item les connecteurs permettant de brancher la mémoire RAM;
+\item le BIOS;
+\item les connecteurs SATA permettant par exemple de relier le disque dur;
+\item la carte son et souvent la carte graphique;
+\item les connecteurs USB, audio, video (VGA ou HDMI), RJ45... permettant la connexion des différents périphériques;
+\item des ports PCI (PCI-Express) permettant de connecter des cartes d'interfaces supplémentaires \textit{etc}.
+\end{itemize}
+\end{minipage} \hfill
+\begin{minipage}[c]{.49\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{fig_01_CarteMere}
+\end{center}
+\end{minipage}
+
+\subsubsection{Le processeur}
+\begin{minipage}[c]{.65\linewidth}
+Le processeur (ou unité centrale de traitement) est le composant exécutant toutes les opérations de base. La fréquence d'un processeur, s'exprime en Ghz. Il s'agit du nombre d'opérations qu'il peut faire par seconde.
+
+En effet, un processeur peut-être multi-c\oe{}ur, c'est-à-dire qu'il possède plusieurs c\oe{}urs physiques fonctionnant de façon simultanée. Un processeur multi-c\oe{}ur permet de réaliser des opérations simultanées (à condition que le système d'exploitation puisse le gérer). 
+De plus, il existe des processeurs multi-thread permettant d'exécuter plusieurs tâches en parallèles (sur le même processeur). 
+
+En conséquence, pour comparer la rapidité de deux processeurs, la fréquence ne suffit pas, le nombre de cœurs et le nombre de threads sont à prendre en compte. 
+
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+\includegraphics[width=.8\textwidth]{cpu_amd_p.png}
+\includegraphics[width=.8\textwidth]{cpu_intel.png}
+\end{center}
+\end{minipage}
 \subsubsection{Notion de bus}
+En informatique, le terme bus désigne un ensemble de fils support de l'information et organe de communication entre différents composants.Il existe deux grands types de bus :
+\begin{itemize}
+\item le bus série : il comporte plusieurs fils, dont la masse (référence de potentiel), le fil de données, le fil d'horloge. Les données sont transmises en série;
+\item le bus parallèle : il comporte un fil de masse, un fil d'horloge, et $n$ fils de données pour un bus $n$ bits ; les données sont transmises en parallèle.
+\end{itemize}
+
+Par ailleurs, des bus sont intégrés dans des puces. Par exemple, dans les microprocesseurs, les différents constituants communiquent entre eux par des bus parallèles. Ainsi, sur la carte mère, la communication est assurée par :
+\begin{itemize}
+\item le bus système qui relie le micorprocesseur au chipset;
+\item le bus mémoire qui relie le chipset à la mémoire vive;
+\item le bus d'extension qui relie le chipset aux connecteurs d'entrée -- sortie.
+\end{itemize}
+
+	
+Sur la carte mère sont intégrés différents bus parallèles que l'on peut même parfois distinguer. Ces bus permettent de relier les différents constituants entre eux afin qu'ils communiquent. On retrouve des bus d'adresses, de données et de contrôle.
+
+Entre la carte mère et les différents périphériques (disque dur par exemple), on utilise de plus en plus des bus séries. Ainsi, après le tout IDE, bus parallèle qui a été massivement utilisé dans les ordinateurs grand public, le bus SATA est de plus en plus utilisé. 
+\vspace{.25cm}
+
+
+\noindent \begin{minipage}[c]{.7\linewidth}
+Plusieurs normes SATA ont été développées. 
+Cette technologie présente des débits bien plus importants que les disques durs mécaniques  (60 Mo/s au mieux) mais s'adapte bien aux débits des SSD qui avoisinent les \SI{500}{Mo/s}.
+\end{minipage} \hfill
+\begin{minipage}[c]{.29\linewidth}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Norme & Débit (Mo/s) \\
+\hline
+SATA I & 187,5 \\ \hline
+SATA II & 375 \\ \hline
+SATA III & 750 \\ \hline
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+
 \subsection{Les mémoires}
+\subsubsection{Les mémoires de masse -- Disque dur}
+
+\begin{minipage}[c]{.6\linewidth}
+Un disque dur (non SSD) est composé de disques rigides et paramagnétiques (en aluminium, en verre ou en céramique) recouverts d'une couche magnétique et d'un film protecteur. Ces plateaux sont entraînés par un moteur électrique dont la fréquence de rotation est fixe. La fréquence de rotation peut atteindre les \SI{15 000}{tr.min^{-1}}. Un bras, sur lequel sont fixées les têtes de lecture -- écriture, est aussi motorisé pour atteindre les différentes parties du disque. La distance entre les têtes et les plateaux est de l'ordre de 10 \textit{nm}. Elle est maintenue par un coussin d'air formé par la rotation des disques. 
+\end{minipage} \hfill
+\begin{minipage}[c]{.35\linewidth}
+\begin{center}
+\includegraphics[width=.9\textwidth]{dd_comp.png}
+\end{center}
+\end{minipage} 
+
+Les têtes de lecture -- écriture sont inductives et permettent de générer un champ magnétique dans deux sens opposés permettant de polariser la couche magnétique du disque. Ainsi, en mode lecture les changements de polarité sont transcrits par un convertisseur analogique numérique (CAN) en bits (0 ou 1).
+
+Les données sont organisées en pistes concentriques, les données les plus rapidement accessibles étant celles situées sur le disque extérieur. Chaque piste est divisée en secteurs (d'un minimum de 512 octets). Enfin, on appelle cylindre l'ensemble de données situé sur une même piste mais sur un plateau différent. 
+
+
+La capacité des disques durs atteint les 4 To (téraoctet). Lorsqu'ils sont connectés en SATA, le débit oscille entre 30 et 60 \textit{Mo/s} et peut atteindre les 600 \textit{Mo/s}. Enfin, pour améliorer les performances d'accès aux données, ils possèdent une mémoire cache pouvant aller jusqu'à 128 \textit{Mo} sur laquelle sont stockées les informations fréquemment utilisées. 
+
+Les performances des disques SSD (\textit{Solid State Drive}) sont supérieures à celles des disques durs classiques. Deux critères penchent néanmoins en sa défaveur. D'une part le prix du Go est presque 10 fois plus élevé 
+que pour un disque dur mécanique. D'autre part, certaines technologies de SSD présentent l'inconvénient d'être limité en nombre de cycles d'écriture -- lecture.
+
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Caractéristiques} & \textbf{Disque dur mécanique} & \textbf{SSD} \\ \hline
+Temps d'accès & En moyenne 12ms & 0.1ms \\ \hline
+Poids & De 400g à 700g & Quelques dizaines de grammes \\ \hline
+Consommation en veille & De l'ordre du Watt & 100 mW \\ \hline
+Consommation en activité & 4W environ & 900 mW \\ \hline
+Bruit  & En moyenne 40 dB & 0 dB\\ \hline
+\end{tabular}
+\end{center}
+
+
+
+
+
 \subsection{Communication}
 
 \section{Système d'exploitation -- Operating Systems (OS)}
@@ -984,23 +1129,23 @@ Ces quelques fonctions peuvent s'avérer nécessaires car elles sont utilisables
 
 Le symbole * est appelé joker, ou encore wildcard en anglais sous Linux. 
 
-\begin{minipage}[c]{.46\linewidth}
-\begin{term}
+%\begin{minipage}[c]{.46\linewidth}
+%\begin{term}
 
 Le joker vous permet de copier par exemple tous les fichiers image .jpg dans un sous-dossier :
-\begin{termi}[h]
-cp *.jpg mondossier/
-\end{termi}
-\end{term}
-\end{minipage}\hfill
-\begin{minipage}[c]{.46\linewidth}
-\begin{term}
-Vous pouvez aussi vous en servir pour copier tous les fichiers dont le nom commence par « so » :
-\begin{termi}[h]
-cp so* mondossier/
-\end{termi}
-\end{term}
-\end{minipage}
+%\begin{termi}[h]
+%cp *.jpg mondossier/
+%\end{termi}
+%\end{term}
+%\end{minipage}\hfill
+%\begin{minipage}[c]{.46\linewidth}
+%\begin{term}
+%Vous pouvez aussi vous en servir pour copier tous les fichiers dont le nom commence par « so » :
+%\begin{termi}[h]
+%cp so* mondossier/
+%\end{termi}
+%\end{term}
+%\end{minipage}
 
 \subsection{Droits d’accès}
 
