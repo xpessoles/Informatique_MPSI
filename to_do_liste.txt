@@ -1,0 +1,25 @@
+ipt
+%%%%%%%%%
+Chapitre 3 sur les boucles : changer l'exemple pour la boucle if
+Chapitre 6 : problème d'invariant à la fin.
+
+
+
+
+mpsi2
+%%%%%%%%%%%
+C1-1 : faire plus cours
+C2-3 : illustrer le cours avec une simulation du drone
+TD4 : changer la photo de l'imprimante 3D, changer les coefficients dans l'équation différentiel car alpha et K peuvent être confondus avec la classe ou le gain
+C4-1 : refaire les figures pour les coordonnées sphériques et cylindrique car la 3D n'est pas belle.
+
+TP1 : à alléger.
+
+
+
+
+
+PSI
+%%%%%%%%%%
+C4-2 : à réduire
+TD6 : chronométrie correcteur : donner le diagramme de bode réel sinon on peut difficilement donner les marges de phases. 

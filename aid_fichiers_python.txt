@@ -1,0 +1,34 @@
+Pour les cours
+-----------------------
+
+renommer_fichier_tex.py : modifie les noms du cours en fonction de la progression : A lancer 2 fois (en option fait le ménage de tous les fichiers générer par la compilation latex)
+menage_fichiers_cours.py : fait le ménage de tous les fichiers générer par la compilation latex)
+sauver_cours_tex (optionnel si bug) : sauvegarde les anciens fichier sous le nom Ci-j_00.tex
+raz_cours_tex : sauvegarde les anciens fichier (Ci-j_00.tex) en Ci-j.tex
+generer_entete.py : génère les entêtes pour le cours en fonction de la progression
+remise_a_plate_tex.py : remet à plat les fichiers tex avec les bons chemins pour les packages
+generer_titre_presentation.py : génère les entêtes pour la présentation du cours en fonction de la progression
+remise_a_plate_tex_presentation.py( optionnel) : remet à plat les fichiers tex avec les bons chemins pour les packages
+generer_pdf_cours.py : génère les pdf des cours modifiés
+
+
+Pour les TD
+-----------------------
+sauver_td_tex : sauvegarde les anciens fichier sous le nom TDi00.tex
+raz_td (optionnel si bug) : sauvegarde les anciens fichier (TDi00.tex) en TDi.tex
+menage_fichiers_td.py : fait le ménage de tous les fichiers générer par la compilation latex)
+generer_entete_td.py : génère les entêtes pour les td en fonction de la progression
+remise_a_plat_tdtex : remet à plat les fichiers tex des td avec les bons chemins pour les packages
+generer_pdf_td.py : génère les pdf des TD modifiés
+crypter_pdf.py : crypte les TD complets des pdf avec un mot de passe.
+
+
+Pour les TP
+-----------------------
+sauver_tp_tex : sauvegarde les anciens fichier sous le nom TPi00.tex
+raz_tp (optionnel si bug) : sauvegarde les anciens fichier (TPi00.tex) en TPi.tex
+menage_fichiers_tp.py : fait le ménage de tous les fichiers générer par la compilation latex)
+generer_entete_tp.py : génère les entêtes pour les td en fonction de la progression
+remise_a_plat_tptex : remet à plat les fichiers tex des td avec les bons chemins pour les packages
+generer_pdf_tp.py : génère les pdf des TP modifiés (pas créé encore)
+
