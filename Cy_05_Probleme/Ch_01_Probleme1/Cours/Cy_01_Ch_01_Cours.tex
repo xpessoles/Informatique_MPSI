@@ -1,13 +1,14 @@
 %%%% Paramétrage du cours %%%%
 \def\xxactivite{Cours}
+\def\xxauteur{\textsl{Émilien Durif -- Xavier Pessoles}}
 
 \fichefalse
 \proftrue
 \tdfalse
 \courstrue
 
-%\def\xxnumchapitre{Chapitre 1 \vspace{.2cm}}
-%\def\xxchapitre{\hspace{.12cm} }
+\def\xxnumchapitre{Chapitre 1 \vspace{.2cm}}
+\def\xxchapitre{\hspace{.12cm} }
 
 \def\xxcompetences{%
 \textsl{%
@@ -19,19 +20,13 @@
 
 
 
-
-
-%
-%\iflivret
-%\input{../../../style/new_pagegarde}
-%\else
-%\input{../../../style/new_pagegarde}
-%\fi
+\def\xxfigures{
+}%figues de la page de garde
 
 \iflivret
-\input{../../../style/pagegarde_info}
+\input{../../style/new_pagegarde}
 \else
-\input{../../../style/pagegarde_info}
+\input{../../style/new_pagegarde}
 \fi
 \setlength{\columnseprule}{.1pt}
 

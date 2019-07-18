@@ -4,7 +4,8 @@
 import numpy as np
 import xlrd
 import datetime
-import os, glob
+import os, glob, platform
+
 Mois=['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Décembre']
 
 #RAZ du fichier log
@@ -62,7 +63,8 @@ def lire_semanier(fs):
                 competences=fs.cell_value(k,13)
                 figures=fs.cell_value(k,15)
                 date_cours=str(d_cours.day)+' '+Mois[d_cours.month-1]+' '+str(d_cours.year)
-                info_cours.append((date_cours,n_cycle,num_cours,name_cycle,name_cours,supports,competences,figures))
+                ref_cours=str(n_cycle)+'-'+str(num_cours)
+                info_cours.append((date_cours,n_cycle,num_cours,name_cycle,name_cours,supports,competences,figures,ref_cours))
             # #Gestion des TP
             if n_tp not in liste_tp:
                 name_tp=fs.cell_value(k,9)
@@ -71,37 +73,70 @@ def lire_semanier(fs):
                 competences=fs.cell_value(k,13)
                 figures=fs.cell_value(k,15)
                 liste_tp.append(n_tp)
+                ref_cours=fs.cell_value(k,16)#Reference du cours correspondant
                 date_tp=str(d_tp.day)+' '+Mois[d_tp.month-1]+' '+str(d_tp.year)
-                info_tp.append((date_tp,n_cycle,n_tp,name_cycle,name_tp,supports,competences,figures))
+                info_tp.append((date_tp,n_cycle,n_tp,name_cycle,name_tp,supports,competences,figures,ref_cours))
     return info_tp,info_cours
             
 (info_tp,info_cours)=lire_semanier(fs)
 
 #A partir des infos de cours ou TP, écrire dans l'entête les infos correspondantes dans le chemin spécifié nommé rep
-(date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures)=info_cours[0]
+(date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_cours[0]
 
-rep='/Users/emiliendurif/Documents/prepa/MPSI/ipt_mpsi_lamartin/Informatique_MPSI/Cy_01_Architecture_Algorithmique/Ch_01_ArchitectureMaterielleLogicielle/Cours'
-with open(rep+'/info_entete.tex','w',encoding='iso-8859-1') as f:
-    texte_entete=''
-    with open('style/info_Entete0.tex','r',encoding='iso-8859-1') as f0:
-        ligne=f0.readline()
-        while ligne!='':
+
+    
+def trouver_repertoire(info_activite):
+    """Renvoie le repertoire dans lequel ecrire les infos de l'activité"""
+    (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
+    n_cycle,num_activite=ref_cours.split('-')
+    for r in os.listdir():
+        if 'Cy_0'+str(n_cycle) in r:
+            rep_cycle=r
+            for r1 in os.listdir(rep_cycle+'/'):
+                if 'Ch_0'+str(num_activite) in r1:
+                    rep_chapitre=r1
+    rep=rep_cycle+'/'+rep_chapitre
+    return rep
+    
+def genere_fichiers_tex(info_activite):
+    '''Genere le fichier .tex à partir de l'activite donne et du bon repertoire'''
+    (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
+    rep=trouver_repertoire(info_activite)
+    os.system('cp style/Cy_i_Ch_j_Cours.tex '+rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex')
+    os.system('cp style/Cy_i_Ch_j_Cours_PDF.tex '+rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex')
+
+#rep='Cy_01_Architecture_Algorithmique/Ch_01_ArchitectureMaterielleLogicielle/Cours'
+def genere_entete(rep,info_activite):
+    """A partir du cours dont le chemin est donne par rep la fonction genere l'entete donnant toutes infos permettant de generer l'entete du cours."""
+    (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
+    with open(rep+'/info_entete.tex','w',encoding='iso-8859-1') as f:
+        texte_entete=''
+        with open('style/info_Entete0.tex','r',encoding='iso-8859-1') as f0:
             ligne=f0.readline()
-            if '\\def\\xxnumpartie' in ligne:
-                texte_entete+='\\def\\xxnumpartie{'+str(n_cycle)+'}\n'
-            elif '\\def\\xxpartie' in ligne:
-                texte_entete+='\\def\\xxpartie{'+str(name_cycle)+'}\n'
-            elif '\\def\\xxchapitre' in ligne:
-                texte_entete+='\\def\\xxnomchapitre{'+str(name_activite)+'}\n'
-            elif '\\def\\xxnumchapitre' in ligne:
-                texte_entete+='\\def\\xxnumchapitre{'+str(num_activite)+'}\n'
-            elif '\\def\\xxdate' in ligne:
-                texte_entete+='\\def\\xxdate{'+date+'}\n'
-            elif '\\chapterimage{' in ligne:
-                texte_entete+='\\chapterimage{'+figures+'}\n'
-            else: 
-                texte_entete+=ligne
-    f.write(texte_entete)
+            while ligne!='':
+                ligne=f0.readline()
+                if '\\def\\xxnumpartie' in ligne:
+                    texte_entete+='\\def\\xxnumpartie{'+str(n_cycle)+'}\n'
+                elif '\\def\\xxpartie' in ligne:
+                    texte_entete+='\\def\\xxpartie{'+str(name_cycle)+'}\n'
+                elif '\\def\\xxchapitre' in ligne:
+                    texte_entete+='\\def\\xxnomchapitre{'+str(name_activite)+'}\n'
+                elif '\\def\\xxnumchapitre' in ligne:
+                    texte_entete+='\\def\\xxnumchapitre{'+str(num_activite)+'}\n'
+                elif '\\def\\xxdate' in ligne:
+                    texte_entete+='\\def\\xxdate{'+date+'}\n'
+                elif '\\chapterimage{' in ligne:
+                    texte_entete+='\\chapterimage{'+figures+'}\n'
+                else: 
+                    texte_entete+=ligne
+        f.write(texte_entete)
+
+for cours in info_cours:
+    (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=cours
+    rep=trouver_repertoire(cours)
+    genere_fichiers_tex(cours)
+    genere_entete(rep)
+
         
         
         #     col_d=13#Colonne du nom des dossiers
