@@ -1,0 +1,30 @@
+% \question 
+Calculer, sans utiliser la fonction \pyv{sqrt} ni la division flottante \pyv{/}, les nombres suivants.
+\begin{multicols}{4}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item $\dfrac{1}{7,9}$
+    \item $\sqrt{6,2}$
+    \item $\dfrac{1}{\sqrt{3,5}}$
+    \item $2\sqrt{2}$
+  \end{enumerate}
+\end{multicols}
+De base, on ne peut réaliser que des calculs élémentaires avec Python. Cependant, il est possible d'avoir accès à des possibilités de calcul plus avancées en utilisant une \emph{bibliothèque}. 
+Par exemple, la bibliothèque \pyv{math} permet d'avoir accès à de nombreux outils mathématiques. 
+On peut donc taper
+\begin{pyverbatim}
+  from math import sqrt, log, exp, sin, cos, tan, pi, e 
+\end{pyverbatim}
+pour avoir accès à toutes ces fonctions. \\
+Calculer les nombres suivants (on n'hésitera pas à consulter l'aide en ligne).
+\begin{multicols}{4}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item $\e^2$
+    \item $\sqrt{13}$
+    \item $\cos\p{\dfrac{\pi}{5}}$
+    \item $\e^{\sqrt{5}}$
+    \item $\ln 2$
+    \item $\ln 10$
+    \item $\log_{2} 10$
+    \item $\tan\p{\dfrac{\pi}{2}}$
+  \end{enumerate}
+\end{multicols}
