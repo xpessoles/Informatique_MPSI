@@ -10,7 +10,7 @@ Mois=['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembr
 #RAZ du fichier log
 f=open('log.txt','w')
 
-path=r"progression_2019_2020_IPT_MPSI.xlsx"#chemin de la progression
+path=r"progression_2019_2020_IPT_MPSI_0.xlsx"#chemin de la progression
 path_classe=''
 path_site='site'#Chemin pour exporter les pdf vers site
 nligne=40#Derniere ligne où figure une donnée
@@ -59,31 +59,36 @@ def lire_semanier(fs):
                 name_cours=fs.cell_value(k,5)
                 liste_cours.append(n_cours)
                 supports=fs.cell_value(k,11)
-                info_cours.append((d_cours,n_cycle,num_cours,name_cycle,name_cours,supports))
+                competences=fs.cell_value(k,13)
+                figures=fs.cell_value(k,15)
+                date_cours=str(d_cours.day)+' '+Mois[d_cours.month-1]+' '+str(d_cours.year)
+                info_cours.append((date_cours,n_cycle,num_cours,name_cycle,name_cours,supports,competences,figures))
             # #Gestion des TP
             if n_tp not in liste_tp:
                 name_tp=fs.cell_value(k,9)
                 n_tp=int(fs.cell_value(k,8))
+                supports=fs.cell_value(k,12)
+                competences=fs.cell_value(k,13)
+                figures=fs.cell_value(k,15)
                 liste_tp.append(n_tp)
-                info_tp.append((d_tp,n_cycle,n_tp,name_cycle,name_tp))
+                date_tp=str(d_tp.day)+' '+Mois[d_tp.month-1]+' '+str(d_tp.year)
+                info_tp.append((date_tp,n_cycle,n_tp,name_cycle,name_tp,supports,competences,figures))
     return info_tp,info_cours
             
 (info_tp,info_cours)=lire_semanier(fs)
 
 #A partir des infos de cours ou TP, écrire dans l'entête les infos correspondantes dans le chemin spécifié nommé rep
-(date,n_cycle,num_activite,name_cycle,name_activite,supports)=info_cours[0]
-date_f=str(date.day)+' '+Mois[date.month-1]+' '+str(date.year)
+(date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures)=info_cours[0]
+
 rep='/Users/emiliendurif/Documents/prepa/MPSI/ipt_mpsi_lamartin/Informatique_MPSI/Cy_01_Architecture_Algorithmique/Ch_01_ArchitectureMaterielleLogicielle/Cours'
 with open(rep+'/info_entete.tex','w',encoding='iso-8859-1') as f:
     texte_entete=''
     with open('style/info_Entete0.tex','r',encoding='iso-8859-1') as f0:
         ligne=f0.readline()
-        k=0
         while ligne!='':
-            k+=1
             ligne=f0.readline()
             if '\\def\\xxnumpartie' in ligne:
-                texte_entete+='\\def\\xxnumpartie{Cycle '+str(n_cycle)+'}\n'
+                texte_entete+='\\def\\xxnumpartie{'+str(n_cycle)+'}\n'
             elif '\\def\\xxpartie' in ligne:
                 texte_entete+='\\def\\xxpartie{'+str(name_cycle)+'}\n'
             elif '\\def\\xxchapitre' in ligne:
@@ -91,7 +96,9 @@ with open(rep+'/info_entete.tex','w',encoding='iso-8859-1') as f:
             elif '\\def\\xxnumchapitre' in ligne:
                 texte_entete+='\\def\\xxnumchapitre{'+str(num_activite)+'}\n'
             elif '\\def\\xxdate' in ligne:
-                texte_entete+='\\def\\xxdate{'+date_f+'}\n'
+                texte_entete+='\\def\\xxdate{'+date+'}\n'
+            elif '\\chapterimage{' in ligne:
+                texte_entete+='\\chapterimage{'+figures+'}\n'
             else: 
                 texte_entete+=ligne
     f.write(texte_entete)
