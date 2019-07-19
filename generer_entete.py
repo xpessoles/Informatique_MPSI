@@ -11,13 +11,19 @@ Mois=['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembr
 #RAZ du fichier log
 f=open('log.txt','w')
 
-path=r"progression_2019_2020_IPT_MPSI_0.xlsx"#chemin de la progression
+path=r"progression_2019_2020_IPT_MPSI.xlsx"#chemin de la progression
 path_classe=''
 path_site='site'#Chemin pour exporter les pdf vers site
 nligne=40#Derniere ligne où figure une donnée
 delta_td=1#position du jour des TD dans la semaine
 delta_cours=1#position du jour des cours dans la semaine
 delta_tp=3#position du jour des TD dans la semaine
+
+####
+#Definition des colonnes dans le tableau excel
+####
+col_date,col_num_cycle,col_name_cycle,col_num_cours,col_num_tp,col_name_cours,col_name_tp,col_supports_TD,col_supports_tp,col_competences_cours,col_competences_tp,col_figures,col_ref_cours\
+=1,2,3,4,8,5,9,10,11,12,13,16,17
 
 #Ouverture de la progression excel
 classeur=xlrd.open_workbook(path)
@@ -40,16 +46,16 @@ def lire_semanier(fs):
     for k in range(1,nligne):
     #for k in range(1,2):
         if 'Vacances' not in str(fs.cell_value(k,0)):
-            delta = datetime.timedelta(days=(fs.cell_value(k,1)-2))
+            delta = datetime.timedelta(days=(fs.cell_value(k,col_date)-2))
             d_s=d0+delta#Date du début de la semaine
             d_cours=d_s+datetime.timedelta(delta_cours)#Date du cours
             d_td=d_s+datetime.timedelta(delta_td)#Date du TD
             d_tp=d_s+datetime.timedelta(delta_tp)#Date du TD
-            num_cours=int(fs.cell_value(k,4)) #Numero du chapitre
-            n_tp=int(fs.cell_value(k,8)) #Numero du TP
-            if fs.cell_value(k,2)!='':
-                n_cycle=int(fs.cell_value(k,2))#numero du cycle
-                name_cycle=fs.cell_value(k,3)#nom du cycle
+            num_cours=int(fs.cell_value(k,col_num_cours)) #Numero du chapitre
+            n_tp=int(fs.cell_value(k,col_num_tp)) #Numero du TP
+            if fs.cell_value(k,col_num_cycle)!='':
+                n_cycle=int(fs.cell_value(k,col_num_cycle))#numero du cycle
+                name_cycle=fs.cell_value(k,col_name_cycle)#nom du cycle
                 liste_cycle.append(n_cycle)
             else:
                 n_cycle=liste_cycle[-1]
@@ -57,23 +63,23 @@ def lire_semanier(fs):
             n_cours='C'+str(n_cycle)+'-'+str(num_cours)#numero du cours Ci-j avec i le cycle et j le chapitre
             # #Gestion des cours
             if n_cours not in liste_cours:
-                name_cours=fs.cell_value(k,5)
+                name_cours=fs.cell_value(k,col_name_cours)
                 liste_cours.append(n_cours)
-                supports=fs.cell_value(k,11)
-                competences=fs.cell_value(k,13)
-                figures=fs.cell_value(k,15)
+                supports=fs.cell_value(k,col_supports_TD)
+                competences=fs.cell_value(k,col_competences_cours)
+                figures=fs.cell_value(k,col_figures)
                 date_cours=str(d_cours.day)+' '+Mois[d_cours.month-1]+' '+str(d_cours.year)
                 ref_cours=str(n_cycle)+'-'+str(num_cours)
                 info_cours.append((date_cours,n_cycle,num_cours,name_cycle,name_cours,supports,competences,figures,ref_cours))
             # #Gestion des TP
             if n_tp not in liste_tp:
-                name_tp=fs.cell_value(k,9)
-                n_tp=int(fs.cell_value(k,8))
-                supports=fs.cell_value(k,12)
-                competences=fs.cell_value(k,13)
-                figures=fs.cell_value(k,15)
+                name_tp=fs.cell_value(k,col_name_tp)
+                n_tp=int(fs.cell_value(k,col_num_tp))
+                supports=fs.cell_value(k,col_supports_tp)
+                competences=fs.cell_value(k,col_competences_tp)
+                figures=fs.cell_value(k,col_figures)
                 liste_tp.append(n_tp)
-                ref_cours=fs.cell_value(k,16)#Reference du cours correspondant
+                ref_cours=fs.cell_value(k,col_ref_cours)#Reference du cours correspondant
                 date_tp=str(d_tp.day)+' '+Mois[d_tp.month-1]+' '+str(d_tp.year)
                 info_tp.append((date_tp,n_cycle,n_tp,name_cycle,name_tp,supports,competences,figures,ref_cours))
     return info_tp,info_cours
@@ -104,12 +110,23 @@ def genere_fichiers_tex(info_activite):
     rep=trouver_repertoire(info_activite)
     os.system('cp style/Cy_i_Ch_j_Cours.tex '+rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex')
     os.system('cp style/Cy_i_Ch_j_Cours_PDF.tex '+rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex')
+    changer_ligne(rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex}')
+    
+def changer_ligne(fichier,ancienne_ligne,nouvelle_ligne):
+    with open(fichier,'r',encoding='iso-8859-1') as f:
+        texte=f.readlines()
+    with open(fichier,'w',encoding='iso-8859-1') as f:
+        for ligne in texte:
+            if ancienne_ligne in ligne:
+                f.write(nouvelle_ligne)
+            else:
+                f.write(ligne)
 
 #rep='Cy_01_Architecture_Algorithmique/Ch_01_ArchitectureMaterielleLogicielle/Cours'
-def genere_entete(rep,info_activite):
+def genere_entete_cours(rep,info_activite):
     """A partir du cours dont le chemin est donne par rep la fonction genere l'entete donnant toutes infos permettant de generer l'entete du cours."""
     (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
-    with open(rep+'/info_entete.tex','w',encoding='iso-8859-1') as f:
+    with open(rep+'/cours/info_entete.tex','w',encoding='iso-8859-1') as f:
         texte_entete=''
         with open('style/info_Entete0.tex','r',encoding='iso-8859-1') as f0:
             ligne=f0.readline()
@@ -119,8 +136,8 @@ def genere_entete(rep,info_activite):
                     texte_entete+='\\def\\xxnumpartie{'+str(n_cycle)+'}\n'
                 elif '\\def\\xxpartie' in ligne:
                     texte_entete+='\\def\\xxpartie{'+str(name_cycle)+'}\n'
-                elif '\\def\\xxchapitre' in ligne:
-                    texte_entete+='\\def\\xxnomchapitre{'+str(name_activite)+'}\n'
+                elif '\\def\\xxnomchapitre' in ligne:
+                    texte_entete+='\\def\\xxnomchapitre{'+name_activite+'}\n'
                 elif '\\def\\xxnumchapitre' in ligne:
                     texte_entete+='\\def\\xxnumchapitre{'+str(num_activite)+'}\n'
                 elif '\\def\\xxdate' in ligne:
@@ -135,7 +152,7 @@ for cours in info_cours:
     (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=cours
     rep=trouver_repertoire(cours)
     genere_fichiers_tex(cours)
-    genere_entete(rep)
+    genere_entete_cours(rep,cours)
 
         
         
