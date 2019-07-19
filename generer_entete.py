@@ -113,9 +113,9 @@ def genere_fichiers_tex(info_activite):
     changer_ligne(rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex}')
     
 def changer_ligne(fichier,ancienne_ligne,nouvelle_ligne):
-    with open(fichier,'r',encoding='iso-8859-1') as f:
+    with open(fichier,'r',encoding='utf-8') as f:
         texte=f.readlines()
-    with open(fichier,'w',encoding='iso-8859-1') as f:
+    with open(fichier,'w',encoding='utf-8') as f:
         for ligne in texte:
             if ancienne_ligne in ligne:
                 f.write(nouvelle_ligne)
@@ -126,9 +126,9 @@ def changer_ligne(fichier,ancienne_ligne,nouvelle_ligne):
 def genere_entete_cours(rep,info_activite):
     """A partir du cours dont le chemin est donne par rep la fonction genere l'entete donnant toutes infos permettant de generer l'entete du cours."""
     (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
-    with open(rep+'/cours/info_entete.tex','w',encoding='iso-8859-1') as f:
+    with open(rep+'/cours/info_entete.tex','w',encoding='utf-8') as f:
         texte_entete=''
-        with open('style/info_Entete0.tex','r',encoding='iso-8859-1') as f0:
+        with open('style/info_Entete0.tex','r',encoding='utf-8') as f0:
             ligne=f0.readline()
             while ligne!='':
                 ligne=f0.readline()
