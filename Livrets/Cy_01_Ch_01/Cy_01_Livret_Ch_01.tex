@@ -5,7 +5,7 @@
 
 \input{../../style/new_style}
 \input{../../style/macros_SII}
-\input{../../style/Info_Entete}
+
 
 
 \livrettrue
@@ -14,20 +14,24 @@
 
 \newcommand{\cy}{Cy_01_Architecture_Algorithmique}
 \newcommand{\chap}{Ch_01_ArchitectureMaterielleLogicielle}
+
+\input{../../\cy/\chap/info_entete}
+
 \newcommand{\td}{Cy_01_Ch_01_TD_01}
+
 
 % Cours
 \graphicspath{{../../style/png/}{../../\cy/\chap/Cours/images/}}
-\input{../../\cy/\chap/Cours/Cy_01_Ch_01_Cours.tex}
+\input{../../\cy/\chap/Cours/Cy_01_Ch_01_Cours.tex} 
 
 %
-%%%% Applications basiques liaisons équivalentes
-%\renewcommand{\td}{Cy_07_01_Application_01}
-%%% Sujet Normal par défaut
-%\newpage
-%\fichetrue \proffalse \tdtrue \coursfalse \normaltrue \difficilefalse \tdifficilefalse \collefalse
-%\graphicspath{{../../style/png/}{../../\chap/\td/images/}}
-%\input{../../\chap/\td/\td.tex}
+%%%% TD 
+\renewcommand{\td}{Cy_01_Ch_01_TD_01}
+%% Sujet Normal par défaut
+\newpage
+\fichetrue \proffalse \tdtrue \coursfalse \normaltrue \difficilefalse \tdifficilefalse \collefalse
+\graphicspath{{../../style/png/}{../../\cy/\chap/\td/images/}}
+\input{../../\cy/\chap/\td/\td.tex}
 %
 %%% Sujet colle (TO DO)
 %\newpage
