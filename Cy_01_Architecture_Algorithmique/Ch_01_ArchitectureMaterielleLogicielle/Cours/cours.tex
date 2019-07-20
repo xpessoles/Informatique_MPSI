@@ -342,7 +342,91 @@ Il existe deux grandes familles d'OS : Windows et UNIX. UNIX est elle-même une 
 \item sous Windows, lest installations de périphériques est souvent plus aisée. 
 \end{itemize}
 
-Les distributions UNIX sont beaucoup plus répendues qu'on peut parfois le penser : un grand nombre de calculateurs et de serveurs sont sous UNIX, les smartphones, tablettes, box internet sont sous UNIX.
+Les distributions UNIX sont beaucoup plus répandues qu'on peut parfois le penser : un grand nombre de calculateurs et de serveurs sont sous UNIX, les smartphones, tablettes, box internet sont sous UNIX.
+
+
+
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{bureau_win}
+
+\textit{Bureau Windows 10}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{bureau_ubuntu}
+
+\textit{Bureau Ubuntu}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{bureau_mac}
+
+\textit{Bureau MacOS}
+\end{center}
+\end{minipage} 
+
+\subsection{Organisation des fichiers}
+L'organisation des fichiers est totalement différente entre un environnement Windows et un environnement UNIX. 
+En première approximation, sous Windows, les fichiers sont triés d'une part par applications. D'autre part, les fichiers utilisateurs sont stockés dans le dossier C:\textbackslash Users.
+
+Sous UNIX, les fichiers sont triés par type de fichiers puis par applications. D'autre part, les fichiers utilisateurs sont stockés dans le dossier \textbackslash home.
+
+
+\begin{minipage}[c]{.49\linewidth}
+\begin{center}
+\includegraphics[width=.9\linewidth]{archilin.png}
+\textit{Organisation des dossiers sous UNIX}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.49\linewidth}
+
+Quelques dossiers courants sous UNIX:
+\begin{itemize}
+\item \textit{boot} : fichiers permettant le démarrage de Linux;
+\item \textit{etc} : fichiers de configuration;
+\item \textit{home} : répertoires personnels des utilisateurs. On en a déjà parlé un peu avant : c'est dans ce dossier que vous placerez vos fichiers personnels, à la manière du dossier Mes documents de Windows.
+\end{itemize}
+\end{minipage}
+
+\subsection{Droits d’accès}
+
+Les droits d'accès font partie des propriétés d'un fichier. 
+
+Sous UNIX, on peut recenser 3 principaux droits pour un fichier : 
+\begin{itemize}
+\item le droit en lecture (\textit{r -- read}), qui permet à l'utilisateur de lire le contenu du fichier;
+\item le droit en écriture (\textit{w -- write}), qui permet à l'utilisateur d'écrire dans le fichier;
+\item le droit d'exécution (\textit{x -- execute}), qui permet à l'utilisateur d'exécuter le fichier.
+\end{itemize}
+
+Par ailleurs pour un même ordinateur, il peut exister plusieurs utilisateurs. Ces utilisateurs peuvent de plus appartenir à un groupe.
+
+Ainsi il est possible de distribuer des droits à un utilisateur, à un groupe d'utilisateurs ou à tous les utilisateurs.  
+
+\begin{minipage}[c]{.45\linewidth}
+\begin{center}
+\includegraphics[width=.85\textwidth]{droits_win.png}
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}[c]{.45\linewidth}
+\begin{center}
+\includegraphics[width=.8\textwidth]{droits_lin.png}
+$$
+-\underbrace{rw-}_{1}\underbrace{r--}_{2}\underbrace{r--}_{3}
+$$
+\begin{itemize}
+\item 1 : droits pour l'utilisateur pessoles;
+\item 2 : droits pour l'utilisateur user;
+\item 3 : droits pour le reste du monde.
+\end{itemize}
+\end{center}
+\end{minipage}
+
+
+
 \subsection{Notions de réseau}
 \subsection{Arborescence de fichiers}
 \section{Applications -- Sources et binaires}
