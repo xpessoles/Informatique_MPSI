@@ -1,0 +1,55 @@
+%%%% Paramétrage du TD %%%%
+\def\xxactivite{ \ifprof TP -- Corrigé  \else  TP \fi} 
+\def\xxauteur{\textsl{Émilien Durif \\ Xavier Pessoles}}
+
+\def\xxnumchapitre{1}
+\def\xxchapitre{Architecture matérielle et logicielle et Introduction à l'algorithmique}
+\def\xxnomchapitre{Architecture matérielle et logicielle et Introduction à l'algorithmique}
+\def\xxchapitre{1}
+
+\def\xxcompetences{%
+\vspace{-.5cm}
+\footnotesize{
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\vspace{-.2cm}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item ....
+\end{itemize}}}}
+
+\def\xxtitreexo{Titre EXO}
+\def\xxsourceexo{\hspace{.2cm} \footnotesize{Source EXO}}
+
+\def\xxfigures{
+%\includegraphics[width=.6\linewidth]{fig_00}
+}%figues de la page de garde
+
+
+\iflivret
+\input{../../../style/new_pagegarde}
+\else
+\input{../../../style/new_pagegarde}
+\fi
+\setlength{\columnseprule}{.1pt}
+
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\ifprof
+\vspace{4.5cm}
+\else
+\vspace{4.5cm}
+\fi
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{exo}{0}
+
+\input{tp.tex}
+
+
+
+
