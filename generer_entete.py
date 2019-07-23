@@ -74,14 +74,18 @@ def lire_semanier(fs):
             # #Gestion des TP
             if n_tp not in liste_tp:
                 name_tp=fs.cell_value(k,col_name_tp)
-                n_tp=int(fs.cell_value(k,col_num_tp))
+                num_tp=int(fs.cell_value(k,col_num_tp))
+                if num_tp<10:
+                    num_tp='0'+str(num_tp)
+                else:
+                    num_tp=str(num_tp)
                 supports=fs.cell_value(k,col_supports_tp)
                 competences=fs.cell_value(k,col_competences_tp)
                 figures=fs.cell_value(k,col_figures)
                 liste_tp.append(n_tp)
                 ref_cours=fs.cell_value(k,col_ref_cours)#Reference du cours correspondant
                 date_tp=str(d_tp.day)+' '+Mois[d_tp.month-1]+' '+str(d_tp.year)
-                info_tp.append((date_tp,n_cycle,n_tp,name_cycle,name_tp,supports,competences,figures,ref_cours))
+                info_tp.append((date_tp,n_cycle,num_tp,name_cycle,name_tp,supports,competences,figures,ref_cours))
     return info_tp,info_cours
             
 (info_tp,info_cours)=lire_semanier(fs)
@@ -94,7 +98,7 @@ def lire_semanier(fs):
 def trouver_repertoire(info_activite):
     """Renvoie le repertoire dans lequel ecrire les infos de l'activité"""
     (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
-    n_cycle,num_activite=ref_cours.split('-')
+    n_cycle,num_activite=ref_cours.split(';')[0].split('-')
     for r in os.listdir():
         if 'Cy_0'+str(n_cycle) in r:
             rep_cycle=r
@@ -104,13 +108,16 @@ def trouver_repertoire(info_activite):
     rep=rep_cycle+'/'+rep_chapitre
     return rep
     
-def genere_fichiers_tex(info_activite):
+def genere_fichiers_tex(info_activite,type_activite):
     '''Genere le fichier .tex à partir de l'activite donne et du bon repertoire'''
     (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
     rep=trouver_repertoire(info_activite)
-    os.system('cp style/Cy_i_Ch_j_Cours.tex '+rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex')
-    os.system('cp style/Cy_i_Ch_j_Cours_PDF.tex '+rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex')
-    changer_ligne(rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex}')
+    if type_activite=='cours':
+        os.system('cp style/Cy_i_Ch_j_Cours.tex '+rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex')
+        os.system('cp style/Cy_i_Ch_j_Cours_PDF.tex '+rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex')
+        changer_ligne(rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex}')
+    elif type_activite=='tp':
+        os.system('cp style/Cy_i_Ch_j_TP_0k.tex '+rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex')
     
 def changer_ligne(fichier,ancienne_ligne,nouvelle_ligne):
     with open(fichier,'r',encoding='utf-8') as f:
@@ -123,9 +130,43 @@ def changer_ligne(fichier,ancienne_ligne,nouvelle_ligne):
                 f.write(ligne)
 
 #rep='Cy_01_Architecture_Algorithmique/Ch_01_ArchitectureMaterielleLogicielle/Cours'
-def genere_entete_cours(rep,info_activite):
+# def genere_entete_cours(rep,info_activite):
+#     """A partir du cours dont le chemin est donne par rep la fonction genere l'entete donnant toutes infos permettant de generer l'entete du cours."""
+#     (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
+#     with open(rep+'/cours/info_entete.tex','w',encoding='utf-8') as f:
+#         texte_entete=''
+#         with open('style/info_Entete0.tex','r',encoding='utf-8') as f0:
+#             ligne=f0.readline()
+#             while ligne!='':
+#                 ligne=f0.readline()
+#                 if '\\def\\xxnumpartie' in ligne:
+#                     texte_entete+='\\def\\xxnumpartie{'+str(n_cycle)+'}\n'
+#                 elif '\\def\\xxpartie' in ligne:
+#                     texte_entete+='\\def\\xxpartie{'+str(name_cycle)+'}\n'
+#                 elif '\\def\\xxnomchapitre' in ligne:
+#                     texte_entete+='\\def\\xxnomchapitre{'+name_activite+'}\n'
+#                 elif '\\def\\xxnumchapitre' in ligne:
+#                     texte_entete+='\\def\\xxnumchapitre{'+str(num_activite)+'}\n'
+#                 elif '\\def\\xxdate' in ligne:
+#                     texte_entete+='\\def\\xxdate{'+date+'}\n'
+#                 elif '\\chapterimage{' in ligne:
+#                     texte_entete+='\\chapterimage{'+figures+'}\n'
+#                 else: 
+#                     texte_entete+=ligne
+#         f.write(texte_entete)
+        
+        
+def genere_entete(rep,info_activite,type_activite):
     """A partir du cours dont le chemin est donne par rep la fonction genere l'entete donnant toutes infos permettant de generer l'entete du cours."""
     (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
+    if type_activite=='cours':
+        file_entete=rep+'/cours/info_entete.tex'
+    elif type_activite=='tp':
+        n_cycle,num_activite=ref_cours.split(';')[0].split('-')
+        file_entete=rep+'/TP'+num_activite+'/info_entete.tex'
+        #Il faut s'assurer que le repertoire existe.
+    else:
+        print("mauvais choix d'activite")
     with open(rep+'/cours/info_entete.tex','w',encoding='utf-8') as f:
         texte_entete=''
         with open('style/info_Entete0.tex','r',encoding='utf-8') as f0:
@@ -144,6 +185,8 @@ def genere_entete_cours(rep,info_activite):
                     texte_entete+='\\def\\xxdate{'+date+'}\n'
                 elif '\\chapterimage{' in ligne:
                     texte_entete+='\\chapterimage{'+figures+'}\n'
+                elif '\\begin{itemize}[label=\\ding{112},font=\\color{ocre}]' in ligne:
+                    texte_entete+='\\begin{itemize}[label=\\ding{112},font=\\color{ocre}]\n\\item '+competences+'\n'
                 else: 
                     texte_entete+=ligne
         f.write(texte_entete)
@@ -151,8 +194,8 @@ def genere_entete_cours(rep,info_activite):
 for cours in info_cours:
     (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=cours
     rep=trouver_repertoire(cours)
-    genere_fichiers_tex(cours)
-    genere_entete_cours(rep,cours)
+    genere_fichiers_tex(cours,'cours')
+    genere_entete(rep,cours,'cours')
 
         
         
