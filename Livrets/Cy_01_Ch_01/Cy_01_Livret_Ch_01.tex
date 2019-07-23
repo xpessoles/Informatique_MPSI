@@ -1,0 +1,58 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Modélisation des  chaînes de solides},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{../../style/new_style}
+\input{../../style/macros_SII}
+
+
+
+\livrettrue
+
+\begin{document}
+
+\newcommand{\cy}{Cy_01_Architecture_Algorithmique}
+\newcommand{\chap}{Ch_01_ArchitectureMaterielleLogicielle}
+
+\input{../../\cy/\chap/info_entete}
+
+\newcommand{\td}{Cy_01_Ch_01_TD_01}
+
+
+% Cours
+\graphicspath{{../../style/png/}{../../\cy/\chap/Cours/images/}}
+\input{../../\cy/\chap/Cours/Cy_01_Ch_01_Cours.tex} 
+
+%
+%%%% TD 
+\renewcommand{\td}{Cy_01_Ch_01_TD_01}
+%% Sujet Normal par défaut
+\newpage
+\fichetrue \proffalse \tdtrue \coursfalse \normaltrue \difficilefalse \tdifficilefalse \collefalse
+\graphicspath{{../../style/png/}{../../\cy/\chap/\td/images/}}
+\input{../../\cy/\chap/\td/\td.tex}
+%
+%%% Sujet colle (TO DO)
+%\newpage
+%\fichetrue \proffalse \tdtrue \coursfalse \normaltrue \difficilefalse \tdifficilefalse \colletrue
+%\graphicspath{{../../style/png/}{../../\chap/\td/images/}}
+%\input{../../\chap/\td/\td.tex}
+
+%% Sujet Corrigé
+%\newpage
+%\fichetrue \proftrue \tdtrue \coursfalse \normaltrue \difficilefalse  \tdifficilefalse \collefalse
+%\graphicspath{{../../style/png/}{../../\chap/\td/images/}}
+%\input{../../\chap/\td/\td.tex}
+
+
+%%%  Corrigé
+%\newpage
+%\fichetrue \proftrue \tdtrue \coursfalse \normaltrue \difficilefalse  \tdifficilefalse \collefalse
+%\graphicspath{{../../style/png/}{../../\chap/\td/images/}}
+%\input{../../\chap/\td/\td.tex}
+
+\end{document}
+
+
+
