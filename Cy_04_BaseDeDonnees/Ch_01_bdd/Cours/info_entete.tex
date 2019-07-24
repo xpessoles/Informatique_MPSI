@@ -1,6 +1,9 @@
 % Déclaration des titres
 % -------------------------------------
 
+
+\graphicspath{{../../../style/png/}{images/}{../../../exos//}}
+
 \def\discipline{Informatique}
 \def\xxtete{Informatique}
 
@@ -12,6 +15,7 @@
 \def\xxchapitre{1}
 \def\xxnumchapitre{1}
 \def\xxnomchapitre{Base de données}
+\def\xxnumactivite{1}
 
 \def\xxposongletx{2}
 \def\xxposonglettext{1.45}
@@ -22,8 +26,8 @@
 
 
 \def\xxpied{%
-\xxnumpartie -- \xxpartie\\
-\xxnumchapitre -- \xxactivite -- \xxnomchapitre%
+Cycle \xxnumpartie -- \xxpartie\\
+Chapitre \xxnumchapitre -- \xxactivite -\xxnumactivite -- \xxnomchapitre%
 }
 
 \setcounter{secnumdepth}{5}
@@ -34,10 +38,22 @@
 \textsl{%
 \textbf{Savoirs et compétences :}\\
 \begin{itemize}[label=\ding{112},font=\color{ocre}]
-\item BDD.S1; BDD.S2
-\item ....
+\item  
+\item  
+\item  
+\item  
+\item  
+\item BDD.S1 Vocabulaire des bases de données : relation, attribut, domaine, schéma de relation ; notion de clé primaire.
+\item BDD.S2 Opérateurs usuels sur les ensembles dans un contexte de bases de données : union, intersection, différence.
 \end{itemize}
 }}
+
+
+%Infos sur les supports
+\def\xxtitreexo{}
+\def\xxsourceexo{\hspace{.2cm} \footnotesize{}}
+%\def\xxtitreexo{Titre EXO}
+%\def\xxsourceexo{\hspace{.2cm} \footnotesize{Source EXO}}
 
 
 %---------------------------------------------------------------------------

@@ -1,6 +1,9 @@
 % Déclaration des titres
 % -------------------------------------
 
+
+\graphicspath{{../../../style/png/}{images/}{../../../exos//}}
+
 \def\discipline{Informatique}
 \def\xxtete{Informatique}
 
@@ -12,6 +15,7 @@
 \def\xxchapitre{1}
 \def\xxnumchapitre{1}
 \def\xxnomchapitre{Invariance et variance}
+\def\xxnumactivite{1}
 
 \def\xxposongletx{2}
 \def\xxposonglettext{1.45}
@@ -22,8 +26,8 @@
 
 
 \def\xxpied{%
-\xxnumpartie -- \xxpartie\\
-\xxnumchapitre -- \xxactivite -- \xxnomchapitre%
+Cycle \xxnumpartie -- \xxpartie\\
+Chapitre \xxnumchapitre -- \xxactivite -\xxnumactivite -- \xxnomchapitre%
 }
 
 \setcounter{secnumdepth}{5}
@@ -34,10 +38,25 @@
 \textsl{%
 \textbf{Savoirs et compétences :}\\
 \begin{itemize}[label=\ding{112},font=\color{ocre}]
-\item AN.C1; AN.C2; AN.S1; AN.S2; AN.S4
-\item ....
+\item  
+\item  
+\item  
+\item AN.C1 Justifier qu’une itération (ou boucle) produit l’effet attendu au moyen d’un invariant
+\item AN.C2 Démontrer qu’une boucle se termine effectivement
+\item AN.S1 Recherche dans une liste, recherche du maximum dans une liste de nombres, calcul de la moyenne et de la variance.
+\item AN.S2 Recherche par dichotomie. 
+\item AN.S4 Recherche d’un mot dans une chaîne de caractères. 
+\item  
+\item  
 \end{itemize}
 }}
+
+
+%Infos sur les supports
+\def\xxtitreexo{}
+\def\xxsourceexo{\hspace{.2cm} \footnotesize{}}
+%\def\xxtitreexo{Titre EXO}
+%\def\xxsourceexo{\hspace{.2cm} \footnotesize{Source EXO}}
 
 
 %---------------------------------------------------------------------------
