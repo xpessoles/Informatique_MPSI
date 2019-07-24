@@ -1,0 +1,48 @@
+%%%% Paramétrage du cours %%%%
+\def\xxactivite{Travaux Pratique}
+\def\xxauteur{\textsl{Émilien Durif -- Xavier Pessoles}}
+
+\fichefalse
+\proftrue
+\tdfalse
+\courstrue
+
+\input{info_entete}
+
+
+\def\xxtitreexo{Titre EXO}
+\def\xxsourceexo{\hspace{.2cm} \footnotesize{Source EXO}}
+
+\def\xxfigures{
+%\includegraphics[width=.6\linewidth]{fig_00}
+}%figues de la page de garde
+
+
+\iflivret
+\input{../../../style/new_pagegarde}
+\else
+\input{../../../style/new_pagegarde}
+\fi
+\setlength{\columnseprule}{.1pt}
+
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\ifprof
+\vspace{4.5cm}
+\else
+\vspace{4.5cm}
+\fi
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{exo}{0}
+
+\input{tp.tex}
+
+
+
+

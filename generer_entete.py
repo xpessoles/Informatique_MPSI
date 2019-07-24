@@ -117,7 +117,12 @@ def genere_fichiers_tex(info_activite,type_activite):
         os.system('cp style/Cy_i_Ch_j_Cours_PDF.tex '+rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex')
         changer_ligne(rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex}')
     elif type_activite=='tp':
-        os.system('cp style/Cy_i_Ch_j_TP_0k.tex '+rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex')
+        num_chapitre=ref_cours.split('-')[1]
+        if os.path.exists(rep+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite)==False:
+            os.mkdir(rep+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite)
+        os.system('cp style/Cy_i_Ch_j_TP_k.tex '+rep+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'.tex')
+        os.system('cp style/Cy_i_Ch_j_TP_k_pdf.tex '+rep+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'_pdf.tex')
+        changer_ligne(rep+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'_pdf.tex','\\input{Cy_01_Ch_01_TP_01}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'.tex}')
     
 def changer_ligne(fichier,ancienne_ligne,nouvelle_ligne):
     with open(fichier,'r',encoding='utf-8') as f:
@@ -162,12 +167,11 @@ def genere_entete(rep,info_activite,type_activite):
     if type_activite=='cours':
         file_entete=rep+'/cours/info_entete.tex'
     elif type_activite=='tp':
-        n_cycle,num_activite=ref_cours.split(';')[0].split('-')
-        file_entete=rep+'/TP'+num_activite+'/info_entete.tex'
-        #Il faut s'assurer que le repertoire existe.
+        num_chapitre=ref_cours.split('-')[1]
+        file_entete=rep+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'/info_entete.tex'
     else:
         print("mauvais choix d'activite")
-    with open(rep+'/cours/info_entete.tex','w',encoding='utf-8') as f:
+    with open(file_entete,'w',encoding='utf-8') as f:
         texte_entete=''
         with open('style/info_Entete0.tex','r',encoding='utf-8') as f0:
             ligne=f0.readline()
@@ -181,6 +185,8 @@ def genere_entete(rep,info_activite,type_activite):
                     texte_entete+='\\def\\xxnomchapitre{'+name_activite+'}\n'
                 elif '\\def\\xxnumchapitre' in ligne:
                     texte_entete+='\\def\\xxnumchapitre{'+str(num_activite)+'}\n'
+                elif '\\def\\xxchapitre' in ligne:
+                    texte_entete+='\\def\\xxchapitre{'+str(num_activite)+'}\n'
                 elif '\\def\\xxdate' in ligne:
                     texte_entete+='\\def\\xxdate{'+date+'}\n'
                 elif '\\chapterimage{' in ligne:
@@ -196,6 +202,12 @@ for cours in info_cours:
     rep=trouver_repertoire(cours)
     genere_fichiers_tex(cours,'cours')
     genere_entete(rep,cours,'cours')
+    
+for tp in info_tp:
+    (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=tp
+    rep=trouver_repertoire(tp)
+    genere_fichiers_tex(tp,'tp')
+    genere_entete(rep,tp,'tp')
 
         
         
