@@ -15,6 +15,11 @@ path=r"progression_2019_2020_IPT_MPSI.xlsx"#chemin de la progression
 path_classe=''
 path_site='site'#Chemin pour exporter les pdf vers site
 
+#Separateur de dossier
+if platform.system()=='Windows':
+    sep='\\'
+else:
+    sep='/'
 
 ####
 #Definition des colonnes dans le tableau excel
@@ -104,7 +109,7 @@ def trouver_repertoire(info_activite):
             for r1 in os.listdir(rep_cycle+'/'):
                 if 'Ch_0'+str(num_activite) in r1:
                     rep_chapitre=r1
-    rep=rep_cycle+'/'+rep_chapitre
+    rep=rep_cycle+sep+rep_chapitre
     return rep
     
 def genere_fichiers_tex(info_activite,type_activite):
@@ -112,16 +117,16 @@ def genere_fichiers_tex(info_activite,type_activite):
     (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
     rep=trouver_repertoire(info_activite)
     if type_activite=='cours':
-        os.system('cp style/Cy_i_Ch_j_Cours.tex '+rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex')
-        os.system('cp style/Cy_i_Ch_j_Cours_PDF.tex '+rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex')
-        changer_ligne(rep+'/cours/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex}')
+        os.system('cp style'+sep+'Cy_i_Ch_j_Cours.tex '+rep+sep+'cours'+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex')
+        os.system('cp style'+sep+'Cy_i_Ch_j_Cours_PDF.tex '+rep+sep+'cours'+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex')
+        changer_ligne(rep+sep+'cours'+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex}')
     elif type_activite=='tp':
         num_chapitre=ref_cours.split(';')[0].split('-')[1]
-        if os.path.exists(rep+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite)==False:
-            os.mkdir(rep+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite)
-        os.system('cp style/Cy_i_Ch_j_TP_k.tex '+rep+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'.tex')
-        os.system('cp style/Cy_i_Ch_j_TP_k_pdf.tex '+rep+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'_pdf.tex')
-        changer_ligne(rep+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'_pdf.tex','\\input{Cy_01_Ch_01_TP_01}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'.tex}')
+        if os.path.exists(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite)==False:
+            os.mkdir(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite)
+        os.system('cp style'+sep+'Cy_i_Ch_j_TP_k.tex '+rep+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'.tex')
+        os.system('cp style'+sep+'Cy_i_Ch_j_TP_k_pdf.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'_pdf.tex')
+        changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'_pdf.tex','\\input{Cy_01_Ch_01_TP_01}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite+'.tex}')
     
 def changer_ligne(fichier,ancienne_ligne,nouvelle_ligne):
     with open(fichier,'r',encoding='utf-8') as f:
@@ -195,14 +200,14 @@ def genere_entete(rep,info_activite,type_activite):
     #competences=competences.split(';')
     num_chapitre=trouver_chapitre(ref_cours)
     if type_activite=='cours':
-        file_entete=rep+'/cours/info_entete.tex'
+        file_entete=rep+sep+'cours'+sep+'info_entete.tex'
     elif type_activite=='tp':
-        file_entete=rep+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite+'/info_entete.tex'
+        file_entete=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite+sep+'info_entete.tex'
     else:
         print("mauvais choix d'activite")
     with open(file_entete,'w',encoding='utf-8') as f:
         texte_entete=''
-        with open('style/info_Entete0.tex','r',encoding='utf-8') as f0:
+        with open('style'+sep+'info_Entete0.tex','r',encoding='utf-8') as f0:
             ligne=f0.readline()
             while ligne!='':
                 ligne=f0.readline()
@@ -230,9 +235,8 @@ def genere_entete(rep,info_activite,type_activite):
                 elif '\\begin{itemize}[label=\\ding{112},font=\\color{ocre}]' in ligne:
                     texte_entete+='\\begin{itemize}[label=\\ding{112},font=\\color{ocre}]\n'
                     code_competence,nom_long,nom_court=trouver_texte_competence(competences,path)
-                    print(code_competence)
                     for k in range(len(code_competence)):
-                        texte_entete+='\\item '+code_competence[k]+' '+nom_court[k]+'\n'
+                        texte_entete+='\\item '+code_competence[k]+' : '+nom_court[k]+'\n'
                 elif '%Infos sur les supports' in ligne:
                     texte_entete+='%Infos sur les supports\n'
                     for support in supports.split(';'):
@@ -256,7 +260,7 @@ def trouver_texte_competence(competences,path):
             nom_long=[]
             code_competence=[]
             while fs.cell_value(k,0)!='fin':
-                if fs.cell_value(k,col_code) in competences:
+                if fs.cell_value(k,col_code) in competences and fs.cell_value(k,col_code)!='':
                     nom_court.append(fs.cell_value(k,col_nom_court))
                     nom_long.append(fs.cell_value(k,col_nom_long))
                     code_competence.append(fs.cell_value(k,col_code))
@@ -270,10 +274,10 @@ def genere_support(rep,info_activite,type_activite):
     rep=trouver_repertoire(info_activite) 
     num_chapitre=trouver_chapitre(ref_cours)
     if type_activite=='cours':
-        rep_activite=rep+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TD_'+num_activite
+        rep_activite=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TD_'+num_activite
     elif type_activite=='tp':
-        rep_activite=rep+'/Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite
-    with open(rep_activite+'/tp.tex','w',encoding='utf-8') as f:
+        rep_activite=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite
+    with open(rep_activite+sep+'tp.tex','w',encoding='utf-8') as f:
         if len(supports)>0:
             for support in supports.split(';'):
                 f.write('\\input{'+'../../../exos/'+support+'}\n')
@@ -317,36 +321,4 @@ for tp in info_tp:
     genere_entete(rep,tp,'tp')
     genere_support(rep,tp,'tp')
     
-
-        
-        
-        #     col_d=13#Colonne du nom des dossiers
-        #     if fs.cell_value(k,col_d) !='':
-        #         rep=fs.cell_value(k,col_d)
-        #     rep0=os.listdir(path_classe+'/'+rep)
-        #     for rep_cours in rep0:
-        #         #Edition des entetes
-        #         if n_cours in rep_cours:#Se positionner dans un repertoire de cours
-        #             name_cours=fs.cell_value(k,5)#nom du cours
-        #             d_cours_f=str(d_cours.day)+' '+Mois[d_cours.month-1]+' '+str(d_cours.year)#Date du cours écrite en français
-        #             with open(path_classe+'/'+rep+'/'+rep_cours+'/entete.tex','w',encoding='iso-8859-1') as f:
-        #                 f.write('\\renewcommand{\\cycle}{'+n_cycle+' : '+name_cycle+'}\n')
-        #                 f.write('\\renewcommand{\\cycleresume}{'+n_cycle+' : '+cycle_resume+'}\n')
-        #                 f.write('\\renewcommand{\\titre}{'+name_cours+'}\n')
-        #                 f.write('\\renewcommand{\\numero}{'+n_cours+'}\n')
-        #                 f.write('\\renewcommand{\\auteur}{Emilien DURIF}\n')
-        #                 f.write('\\renewcommand{\\etablissement}{Lycée La Martinière Monplaisir Lyon}\n')
-        #                 f.write("\\renewcommand{\\discipline}{Sciences Industrielles pour l'Ingénieur}\n")
-        #                 if answer=='1':
-        #                     f.write('\\renewcommand{\\classe}{Classe préparatoire M.P.S.I.}\n')
-        #                 elif answer=='2':
-        #                     f.write('\\renewcommand{\\classe}{Classe préparatoire P.S.I.}\n')
-        #                 f.write('\\renewcommand{\\annee}{2018 - 2019}\n')
-        #                 f.write('\\renewcommand{\\icone}{/Users/emiliendurif/Documents/prepa/latex/images/logo_martiniere.jpg}\n')
-        #                 f.write('\\renewcommand{\\competences}{}\n')
-        #                 f.write('\\renewcommand{\\date}	{'+d_cours_f+'}\n')
-        #         
-        # liste_cours.append(n_cours)#Validation du nouveau cours
-
-                    
 
