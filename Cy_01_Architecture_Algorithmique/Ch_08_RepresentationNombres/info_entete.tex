@@ -1,16 +1,21 @@
 % Déclaration des titres
 % -------------------------------------
 
+
+\graphicspath{{../../style/png/}{images/}{../../exos//}}
+
 \def\discipline{Informatique}
 \def\xxtete{Informatique}
 
 \def\classe{\textsf{MPSI}}
 \def\xxnumpartie{1}
-\def\xxpartie{Architecture mat�rielle et initiation � l'algorithmique}
-\def\xxdate{11 D�cembre 2019}
+\def\xxpartie{Architecture matérielle et initiation à l'algorithmique}
+\def\xxdate{11 Décembre 2019}
 
+\def\xxchapitre{8}
 \def\xxnumchapitre{8}
-\def\xxnomchapitre{Architecture matérielle et logicielle et Introduction à l'algorithmique}
+\def\xxnomchapitre{Représentation des nombres}
+\def\xxnumactivite{8}
 
 \def\xxposongletx{2}
 \def\xxposonglettext{1.45}
@@ -21,13 +26,33 @@
 
 
 \def\xxpied{%
-\xxnumpartie -- \xxpartie\\
-\xxnumchapitre -- \xxactivite -- \xxnomchapitre%
+Cycle \xxnumpartie -- \xxpartie\\
+Chapitre \xxnumchapitre -- \xxactivite -\xxnumactivite -- \xxnomchapitre%
 }
 
 \setcounter{secnumdepth}{5}
 \chapterimage{Fond_ALG}
 \def\xxfigures{}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\begin{itemize}[label=\ding{112},font=\color{ocre}]
+\item AA.C2 : Appréhender les limitations intrinsèques à la manipulation informatique des nombres
+\item AA.C3 : Initier un sens critique au sujet de la qualité et de la précision des résultats de calculs numériques sur ordinateur
+\item AA.S4 : Principe de la représentation des nombres entiers en mémoire
+\item AA.S5 : Principe de la représentation des nombres réels en mémoire
+\end{itemize}
+}}
+
+
+%Infos sur les supports
+\def\xxtitreexo{}
+\def\xxsourceexo{\hspace{.2cm} \footnotesize{}}
+%\def\xxtitreexo{Titre EXO}
+%\def\xxsourceexo{\hspace{.2cm} \footnotesize{Source EXO}}
+
+
 %---------------------------------------------------------------------------
 
 

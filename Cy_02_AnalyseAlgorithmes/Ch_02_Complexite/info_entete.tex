@@ -1,6 +1,9 @@
 % Déclaration des titres
 % -------------------------------------
 
+
+\graphicspath{{../../style/png/}{images/}{../../exos//}}
+
 \def\discipline{Informatique}
 \def\xxtete{Informatique}
 
@@ -9,8 +12,10 @@
 \def\xxpartie{Analyse des algorithmes}
 \def\xxdate{22 Janvier 2020}
 
+\def\xxchapitre{2}
 \def\xxnumchapitre{2}
-\def\xxnomchapitre{Architecture matérielle et logicielle et Introduction à l'algorithmique}
+\def\xxnomchapitre{Complexité}
+\def\xxnumactivite{2}
 
 \def\xxposongletx{2}
 \def\xxposonglettext{1.45}
@@ -21,13 +26,33 @@
 
 
 \def\xxpied{%
-\xxnumpartie -- \xxpartie\\
-\xxnumchapitre -- \xxactivite -- \xxnomchapitre%
+Cycle \xxnumpartie -- \xxpartie\\
+Chapitre \xxnumchapitre -- \xxactivite -\xxnumactivite -- \xxnomchapitre%
 }
 
 \setcounter{secnumdepth}{5}
 \chapterimage{Fond_ANA}
 \def\xxfigures{}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\begin{itemize}[label=\ding{112},font=\color{ocre}]
+\item AN.C3 : S’interroger sur l’efficacité algorithmique temporelle d’un algorithme
+\item AN.S1 : Recherche dans une liste, recherche du maximum dans une liste de nombres, calcul de la moyenne et de la variance.
+\item AN.S2 : Recherche par dichotomie. 
+\item AN.S4 : Recherche d’un mot dans une chaîne de caractères. 
+\end{itemize}
+}}
+
+
+%Infos sur les supports
+\def\xxtitreexo{}
+\def\xxsourceexo{\hspace{.2cm} \footnotesize{}}
+%\def\xxtitreexo{Titre EXO}
+%\def\xxsourceexo{\hspace{.2cm} \footnotesize{Source EXO}}
+
+
 %---------------------------------------------------------------------------
 
 

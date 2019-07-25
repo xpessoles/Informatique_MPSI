@@ -117,9 +117,14 @@ def genere_fichiers_tex(info_activite,type_activite):
     (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
     rep=trouver_repertoire(info_activite)
     if type_activite=='cours':
-        os.system('cp style'+sep+'Cy_i_Ch_j_Cours.tex '+rep+sep+'cours'+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex')
-        os.system('cp style'+sep+'Cy_i_Ch_j_Cours_PDF.tex '+rep+sep+'cours'+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex')
-        changer_ligne(rep+sep+'cours'+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex}')
+        os.system('cp style'+sep+'Cy_i_Ch_j_Cours.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex')
+        os.system('cp style'+sep+'Cy_i_Ch_j_Cours_PDF.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex')
+        os.system('cp style'+sep+'Cy_i_livret_Ch_j.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_livret_Ch_0'+str(num_activite)+'.tex')
+        os.system('cp style'+sep+'Cy_i_Ch_j_TD_j.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_TD_0'+str(num_activite)+'.tex')
+        # print(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex')
+        changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex}')
+        changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_livret_Ch_0'+str(num_activite)+'.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex}')
+        changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_livret_Ch_0'+str(num_activite)+'.tex','\\input{Cy_01_Ch_01_TD_01.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_TD_0'+str(num_activite)+'.tex}')
     elif type_activite=='tp':
         num_chapitre=ref_cours.split(';')[0].split('-')[1]
         if os.path.exists(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre)+'_TP_'+num_activite)==False:
@@ -138,32 +143,7 @@ def changer_ligne(fichier,ancienne_ligne,nouvelle_ligne):
             else:
                 f.write(ligne)
 
-#rep='Cy_01_Architecture_Algorithmique/Ch_01_ArchitectureMaterielleLogicielle/Cours'
-# def genere_entete_cours(rep,info_activite):
-#     """A partir du cours dont le chemin est donne par rep la fonction genere l'entete donnant toutes infos permettant de generer l'entete du cours."""
-#     (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
-#     with open(rep+'/cours/info_entete.tex','w',encoding='utf-8') as f:
-#         texte_entete=''
-#         with open('style/info_Entete0.tex','r',encoding='utf-8') as f0:
-#             ligne=f0.readline()
-#             while ligne!='':
-#                 ligne=f0.readline()
-#                 if '\\def\\xxnumpartie' in ligne:
-#                     texte_entete+='\\def\\xxnumpartie{'+str(n_cycle)+'}\n'
-#                 elif '\\def\\xxpartie' in ligne:
-#                     texte_entete+='\\def\\xxpartie{'+str(name_cycle)+'}\n'
-#                 elif '\\def\\xxnomchapitre' in ligne:
-#                     texte_entete+='\\def\\xxnomchapitre{'+name_activite+'}\n'
-#                 elif '\\def\\xxnumchapitre' in ligne:
-#                     texte_entete+='\\def\\xxnumchapitre{'+str(num_activite)+'}\n'
-#                 elif '\\def\\xxdate' in ligne:
-#                     texte_entete+='\\def\\xxdate{'+date+'}\n'
-#                 elif '\\chapterimage{' in ligne:
-#                     texte_entete+='\\chapterimage{'+figures+'}\n'
-#                 else: 
-#                     texte_entete+=ligne
-#         f.write(texte_entete)
-        
+
 
 def trouver_chapitre(ref_cours):
     '''A partir de la reference du cours, trouve le ou les numero de chapitre et renvoie dans num_chapitre'''
@@ -200,7 +180,19 @@ def genere_entete(rep,info_activite,type_activite):
     #competences=competences.split(';')
     num_chapitre=trouver_chapitre(ref_cours)
     if type_activite=='cours':
-        file_entete=rep+sep+'cours'+sep+'info_entete.tex'
+        file_entete=rep+sep+'info_entete.tex'
+        if os.path.exists(rep+sep+'cours/'):
+            os.system('rm -Rf '+rep+sep+'cours/')
+        if os.path.exists(rep+sep+'TD_01/'):
+            os.system('rm -Rf '+rep+sep+'TD_01/')
+        if os.path.exists(rep+sep+'TP_01/'):
+            os.system('rm -Rf '+rep+sep+'TP_01/')
+        if os.path.exists(rep+sep+'cours.tex')==False:
+            os.system('cp style/cours0.tex '+rep+sep+'cours.tex')
+        if os.path.exists(rep+sep+'td.tex')==False:
+            os.system('cp style/td0.tex '+rep+sep+'td.tex')
+        if os.path.exists(rep+sep+'images/')==False:
+            os.system('mkdir '+rep+sep+'images/')
     elif type_activite=='tp':
         file_entete=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite+sep+'info_entete.tex'
     else:
@@ -227,10 +219,10 @@ def genere_entete(rep,info_activite,type_activite):
                     texte_entete+='\\def\\xxdate{'+date+'}\n'
                 elif '\\chapterimage{' in ligne:
                     texte_entete+='\\chapterimage{'+figures+'}\n'
-                elif '\\graphicspath{{../../../style/png/}{images/}' in ligne:
-                    texte_entete+='\\graphicspath{{../../../style/png/}{images/}'
+                elif '\\graphicspath{{../../style/png/}{images/}' in ligne:
+                    texte_entete+='\\graphicspath{{../../style/png/}{images/}'
                     for support in supports.split(';'):
-                        texte_entete+='{../../../exos/'+support+'/}'
+                        texte_entete+='{../../exos/'+support+'/}'
                     texte_entete+='}\n'
                 elif '\\begin{itemize}[label=\\ding{112},font=\\color{ocre}]' in ligne:
                     texte_entete+='\\begin{itemize}[label=\\ding{112},font=\\color{ocre}]\n'
@@ -274,13 +266,14 @@ def genere_support(rep,info_activite,type_activite):
     rep=trouver_repertoire(info_activite) 
     num_chapitre=trouver_chapitre(ref_cours)
     if type_activite=='cours':
-        rep_activite=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TD_'+num_activite
+        rep_activite=rep+sep+'td.tex'
+        # print(num_activite,rep_activite,supports)
     elif type_activite=='tp':
-        rep_activite=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite
-    with open(rep_activite+sep+'tp.tex','w',encoding='utf-8') as f:
+        rep_activite=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite+sep+'tp.tex'
+    with open(rep_activite,'w',encoding='utf-8') as f:
         if len(supports)>0:
             for support in supports.split(';'):
-                f.write('\\input{'+'../../../exos/'+support+'}\n')
+                f.write('\\input{'+'../../exos/'+support+'}\n')
         else:
             f.write('\n')
     return None
@@ -313,6 +306,7 @@ for cours in info_cours:
     rep=trouver_repertoire(cours)
     genere_fichiers_tex(cours,'cours')
     genere_entete(rep,cours,'cours')
+    genere_support(rep,cours,'cours')
     
 for tp in info_tp:
     (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=tp
