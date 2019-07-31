@@ -1,4 +1,419 @@
-\section{Quelques définitions}
-Informatique
-Algorithmique
-Programmation
+\section{Expressions}
+
+
+Les \emph{valeurs} désignent les données manipulées par un algorithme ou une fonction. Une valeur 
+peut ainsi être  : un nombre, un caractère, une chaîne de caractères, une valeur de vérité 
+(\texttt{Vrai} ou \texttt{Faux}) et bien d'autres ... En Python, comme dans la plupart des 
+langages 
+de programmation, ces valeurs sont \emph{typées} selon l'objet qu'elles représentent : il y a ainsi 
+des valeurs de type entier, flottant, chaîne de caractères, booléens ...   Leur représentation en 
+mémoire varie beaucoup d'un langage à l'autre, mais ce sont souvent les mêmes objets que l'on 
+cherche à traduire.\\
+
+Une \emph{expression} est une suite de caractères faisant intervenir des valeurs et des 
+opérations, afin d'obtenir une nouvelle valeur. Pour calculer cette nouvelle valeur,
+la machine doit \emph{évaluer} l'expression. Voici des exemples d'expressions : \texttt{42 , 1+4 , 
+1.2 / 3.0 , x+3 }.\\
+En Python, pour évaluer une expression, il suffit de la saisir dans un interpréteur, qui
+calcule et affiche alors la valeur qu'il a calculée :\\
+\begin{pyconsole}
+42
+1+4
+\end{pyconsole}
+
+\section{Types simples}
+
+En programmation, associer un type à une valeur permet :
+\begin{enumerate}
+\item de classer les valeurs en catégories similaires. Par exemple, tous les
+entiers (type int), tous les flottants (type float)...
+\item de contrôler quelles opérations sont faisables sur ces valeurs : par
+exemple, tout entier (type int) pourra être utilisé dans une soustraction, ..., alors 
+qu'une chaîne ne le pourra pas. Il sera également impossible d'additioner un entier et un booléen. 
+Dans certains langages, par exemple en Caml, il est même impossible d'additioner un entier et un 
+flottant.                                             
+\end{enumerate}
+
+Une expression n'a a priori pas de type, car le type de la valeur qu'elle renvoie dépend des types 
+des sous-expressions. Ainsi \texttt{a+b} sera un entier (resp. un flottant, une chaîne) si 
+\texttt{a} et \texttt{b} le sont, mais sera un flottant si \texttt{a} est un entier et \texttt{b} 
+un flottant.\\
+
+Pour afficher le type d'une valeur ou d'une expression après l'avoir évaluée, on utilise 
+\texttt{type} :\\
+\begin{pyconsole}
+type(42)
+type(1.2/3.0)
+\end{pyconsole}
+Le mot qui suit \texttt{class} indique le type de la valeur, entier (\texttt{int} en anglais) pour 
+la première et flottant (\texttt{float} en anglais) pour la seconde. Le mot \texttt{class} fait 
+référence au fait que Pytho, est un langage \emph{orienté objet}, ce que nous ignorerons pour 
+l'instant.\\
+
+Passons en revue les types et les opérations les plus courants en Python .
+
+\subsection{Entiers}
+
+Ce type est noté \texttt{int} en Python .\\
+
+\noindent$\bullet$ \textbf{Constantes :} Ce sont les entiers écrits en base 10, et ils ne sont pas 
+bornés en Python .\\
+
+\noindent$\bullet$ \textbf{Opérateurs :}
+\begin{enumerate}
+ \item + : addition usuelle.
+ \item - : soustraction usuelle (\texttt{15-9} renvoie \texttt{6}), mais aussi opposé 
+(\texttt{-4}). 
+\item  // : \emph{division entière} : \texttt{a//b} correspond au quotient de la 
+division euclidienne de \texttt{a} par \textbf{b} si \texttt{b} est strictement positif 
+(\texttt{256 // 3} renvoie \texttt{85} car $256 = 85*3 + 1$). Mais si \texttt{b} est strictement 
+négatif, alors \texttt{a//b} renvoie ce quotient moins 1 ($15 = (-4)\times(-4)-1=(-4)\times(-3)+3$, 
+le quotient de la division euclidienne de 15 par $-4$ est $-3$, mais \texttt{15//-4} renvoie 
+\texttt{-4}). Cette division n'est pas définie si \texttt{b} est nul.
+\item $\%$ : \emph{modulo} : même remarque que dans le point précédent, relativement au reste de la 
+division euclidienne cette fois (\texttt{256 \% 3} renvoie 
+\texttt{1}, \texttt{15\%-4} renvoie \texttt{-1}).
+\item ** : exponentiation (\texttt{2\raisebox{0.3ex}{**}3} renvoie \texttt{8}).
+\end{enumerate}
+
+Les \emph{règles de précédence}, autrement dit les règles de priorité entre opérations, sont 
+similaires aux règles mathématiques usuelles.
+
+\subsection{Flottants}
+
+Ce type est noté \texttt{float} en Python .\\
+
+\noindent$\bullet$ \textbf{Constantes :} Ce sont les \emph{nombres à virgule flottante}. Nous en
+donnerons une définition précise dans un chapitre ultérieur : pour simplifier, disons pour 
+l'instant que ce sont des nombres à virgule, avec un nombre borné de chiffres dans leur écriture.\\
+
+\noindent$\bullet$ \textbf{Opérateurs :}
+\begin{enumerate}
+ \item + : addition usuelle.
+ \item - : soustraction usuelle, et aussi opposé.
+\item  / : division usuelle.
+\item ** : exponentiation. Remarquer la différence entre \texttt{2\raisebox{0.3ex}{**}100} et 
+\texttt{2.\raisebox{0.3ex}{**}100} ou \texttt{2\raisebox{0.3ex}{**}100.}.
+\end{enumerate}
+
+\noindent\textbf{Avertissement :} ce qui précéde est valable en Python 3. Attention à l'Opérateur 
+\texttt{/} en Python 2 !!!!\\
+
+\subsection{Booléens}
+
+En logique et mathématiques, le mot \emph{booléen} a été donné en hommage au mathématicien 
+britannique George Boole. Ce type est noté \texttt{bool} en Python .\\
+
+\noindent$\bullet$ \textbf{Constantes :} Il y en a deux : \texttt{True} et \texttt{False}.\\
+
+\noindent$\bullet$ \textbf{Opérateurs :}
+\begin{enumerate}
+ \item \texttt{not} : négation usuelle.
+ \item \texttt{and} : conjonction usuelle.
+ \item \texttt{or} : disjonction usuelle.
+\end{enumerate}
+
+\begin{exemple}
+\texttt{True or False} renvoie \texttt{True}, \texttt{not ( False or 
+True) and True} renvoie \texttt{False}.
+\end{exemple}
+
+\noindent$\bullet$ \textbf{Opérateurs de comparaison :}
+\begin{enumerate}
+ \item \texttt{==} : test d'égalité : \texttt{2==3} renvoie \texttt{False}, \texttt{4==4} renvoie 
+\texttt{True}. Problème : \texttt{0.1+0.2==0.3} renvoie \texttt{False} ! Nous y reviendrons plus 
+tard. Il ne faut pas confondre \texttt{==} avec \texttt{=}, symbole de l'\emph{affectation}.
+ \item \texttt{!=} : \texttt{a != b} est une écriture équivalente à \texttt{not (a == b)}.
+ \item \texttt{<,>,<=,>=} : ce à quoi on s'attend.
+\end{enumerate}
+
+
+\begin{rem}
+Python \ permet les chaînes de comparaisons : \texttt{1<2<3} renvoie
+\texttt{True}, et \texttt{(1<2<-2) and (-5<2<6)} renvoie \texttt{False}.
+\end{rem}
+
+\subsection{Conversions}
+
+Il est possible de convertir en entier en flottant avec la fonction \texttt{float}. La réciproque est possible dans une certaine 
+mesure : \texttt{float(2)} renvoie \texttt{2.0}, \texttt{int(2.0)} renvoie \texttt{2}, mais \texttt{int(2.5)} renvoie \texttt{2} et 
+\texttt{int(-3.5)} renvoie \texttt{-3}.
+
+La fonction \texttt{int} appliquée à un nombre flottant procède donc à une troncature, ce n'est pas la fonction donnant la partie entière d'un nombre flottant (fonction \texttt{floor} du module \texttt{math}).
+
+\section{Types composés}
+
+On dit qu'une valeur est de \emph{type composé} si elles formées à partir de plusieurs autres 
+valeurs de types plus simples. De nombreuses constructions sont définies sur tous les types 
+composés.\\
+
+\subsection{$n$-uplets ou tuples}
+
+Ce type est noté \texttt{tuple} en Python .\\
+
+\noindent$\bullet$ \textbf{Construction et composantes :}\\
+
+Les $n$-uplets généralisent les couples. Un couple s'écrira \texttt{(a,b)}, un triplet 
+\texttt{(a,b,c)} ... etc. Il existe même des 1-uplets : il faut les écrire \texttt{(a,)}, et non 
+\texttt{(a)} : cette dernière écriture est équivalente à \texttt{a}, tout simplement.\\
+Il n'est pas obligatoire que les éléments d'un tuple soient de même type. Par exemple, 
+\texttt{(1,1.2,True)} est un triplet tout à fait valable.\\
+On accède à la $k\ieme$ coordonnée d'un tuple \texttt{t} par la commande \texttt{t[k]}. Attention : 
+\textbf{en Python , les coordonnées sont numérotées à partir de 0} ! On dit que $k$ est 
+l'\emph{indice} de \texttt{t[k]}. Ainsi, si \texttt{t = (1,2,3)}, \texttt{t[0]} vaut 1, 
+\texttt{t[2]} vaut 3, et \texttt{t[3]} n'existe pas.\\
+
+On dit que les tuples sont \emph{immuables} : il n'est pas possible de changer un élément d'un 
+tuple.\\
+
+\noindent$\bullet$ \textbf{Opérateurs :}
+\begin{enumerate}
+ \item + : concaténation. \texttt{(1,2,3)+(1,4,5,6)} renvoie \texttt{1,2,3,1,4,5,6}.
+ \item \texttt{len} : \emph{longueur} du tuple. \texttt{len(1,2,3)} renvoie \texttt{3}.
+ \item \texttt{in} : test d'appartenance. \texttt{3 in (1,2,3)} renvoie \texttt{True}, alors que 
+\texttt{3 in (1,2,4,5)} renvoie \texttt{False}.
+\item le \emph{slicing}, qui permet de construire des sous-tuples : \texttt{(5,2,6,7,8,9)[1:5]} 
+renvoie \texttt{(2,6,7,8)} (attention à la borne de droite !).\\
+\end{enumerate}
+
+
+\subsection{Chaînes de caractères}
+
+Ce type est noté \texttt{str} en Python , pour \emph{string} en anglais.\\
+
+\noindent$\bullet$ \textbf{Construction et composantes :}\\
+
+
+Ce sont des suites finies de caractères, un caractère étant en python un caractère du clavier. On 
+les note entre guillemets ou apostrophes : \texttt{``Ceci est un chaîne de caractères''} ou  
+\texttt{'Ceci est une chaîne de caractères'}. La chaîne vide se note \texttt{``}\texttt{''} ou 
+\texttt{''}. Un caractère est une chaîne de longueur 1.\\
+On accède aux composantes d'une chaîne de la même manière que pour un tuple.\\
+
+\noindent$\bullet$ \textbf{Opérateurs :}
+
+Ce sont les mêmes que pour les tuples.
+
+\subsection{Listes}
+
+Ce type est noté \texttt{list} en Python .\\
+
+Comme les tuples, les \emph{listes} sont des suites finies de valeurs arbitraires, mais cette fois 
+ils sont \emph{mutables} : on peut changer la valeur d'une composante d'une liste.\\
+Les listes s'écrivent entre crochets. On change la valeur de la $k\ieme$ composante d'une liste 
+\texttt{L} grâce à la commande \texttt{L[k] = n}, où \texttt{n} est la nouvelle valeur. Ainsi :\\
+\begin{pyconsole}
+L = [1,2,3] 
+L[0] = 4  
+L 
+\end{pyconsole}
+
+Les autres opérateurs sont les mêmes que pour les tuples et les chaînes.
+
+\subsection{Conversions}
+
+On peut convertir des types simples en chaînes avec la fonction \texttt{str} : \texttt{str(2.3)} 
+renvoie \texttt{'2.3'}.\\
+À l'inverse, \texttt{int, float} et \texttt{bool} permettent de faire l'inverse quand cela est 
+cohérent : \textbf{bool('True')} renvoie \texttt{True}, mais \texttt{int('2.3')} renvoie une 
+erreur.\\
+
+Il est également possible de passer d'un type composé à un autre grâce aux fonctions \texttt{str}, 
+\texttt{tuple} et \texttt{list} : \texttt{str( (1,'a',[1,2]) )} renvoie \texttt{``(1,'a',[1,2])''}, 
+\texttt{tuple( [1,2,3] )} renvoie \texttt{(1,2,3)} et \texttt{list('Coucou ?')} renvoie 
+\texttt{['C', 'o', 'u', 'c', 'o', 'u', ' ', '?']}.
+
+
+\section{Variables}
+
+\subsection{Qu'est-ce qu'une variable ?}
+
+Une \textbf{variable} désigne une zone mémoire de l'ordinateur dans la RAM.\\
+Il s'agit d'un endroit où l'on peut \textbf{stocker} une valeur, y \textbf{accéder} et 
+\textbf{changer} cette valeur.\\
+
+Pour faire référence à une variable, on utilise un nom de variable, en général composé d'une ou 
+plusieurs lettres. Dans la mesure du possible, on choisit un nom explicite, ce qui permet une 
+meilleure lecture du programme.
+
+On essaiera tant que possible d'éviter d'utiliser les caractères suivants comme noms de variables:
+\begin{itemize}
+  \item \texttt{O} (O majuscule), se confond avec $0$ ;
+  \item \texttt{o} (O minuscule), se confond avec $0$ ;
+  \item \texttt{l} (L minuscule), se confond avec $1$. 
+\end{itemize}
+
+
+\subsection{Affectation}
+
+Quand on stocke une valeur \texttt{d} dans une variable \texttt{var}, on dit que l'on 
+\textbf{affecte} \texttt{d} à la variable \texttt{var}. La valeur
+\texttt{d} est encore appelée \textbf{la donnée}.
+
+En Python , cette affectation est faite avec la commande \texttt{=}, comme suit.  
+
+\begin{pyconsole}
+>>> var  = d
+\end{pyconsole}
+
+
+Les variables (et donc l'affectation) sont incontournables : si vous ne stockez pas une donnée 
+(résultat par exemple d'un calcul), vous ne pourrez pas la réutiliser, ni la modifier.
+
+
+
+\begin{exemple}~
+\begin{pyconsole}
+>>> x = 42	# x prend la valeur 42.
+>>> x = x + 2	# on additionne à la donnée stockée dans x  
+		# le nombre 2 et on stocke le résultat de 
+		# nouveau dans x
+>>> x 		# on accède à la valeur qui est mémorisée 
+		# dans x.
+ 44
+\end{pyconsole}
+\end{exemple}
+
+Dans la variable affectée, la nouvelle donnée \og écrase\fg\ la donnée précédente : on perd son 
+ancienne valeur.
+
+Dans un programme Python \ , on utilisera l'instruction \texttt{print(x)}
+pour afficher dans la console la valeur de la variable \texttt{x}.
+
+Il est également possible d'affecter des valeurs à plusieurs variables en une fois, en utilisant 
+des tuples. Ainsi : \texttt{a,b = (1,2)} affecte la valeur 1 à \texttt{a} et la valeur 2 à 
+\texttt{b}.
+
+
+
+%TODO parler de représentation en mémoire, cf. ancien chapitre 5.
+
+\section{Fonctions}
+\subsection{Objectif : modularité des programmes}
+
+Pour répondre à un problème donné, il est souvent nécessaire d'enchaîner plusieurs voire un nombre 
+important d'instructions.
+
+Pour améliorer la lisibilité d'un programme et aussi pour pouvoir réutiliser 
+ces instructions classiques (dans le même programme ou dans un autre),
+on privilégie les programmes simples (ou sous-programmes) appelés \textbf{fonctions}.
+
+Dans chaque langage, il y a déjà un nombre incalculable de fonctions déjà construites (en Python , 
+par exemple, \texttt{print}) mais on s'aperçoit très vite que l'on a besoin de créer ses propres 
+fonctions.
+
+
+\subsection{\'Ecriture en langage naturel}
+
+\fbox{\begin{minipage}{15cm}
+
+On appelle \texttt{DefFonction} l'opération qui consiste à définir une nouvelle fonction nommée 
+\textbf{nom-de-la-fonction} présentée comme suit : 
+\begin{center}
+\texttt{DefFonction} \begin{tabular}{|l}
+					\textbf{nom\_ de\_la\_fonction}(\textit{paramètres})\\
+ \hspace{5ex} \og commentaire expliquant la fonction \fg\\
+\hspace{5ex}	bloc d'instructions\\
+\hspace{5ex}	sortie du résultat\\
+					\textbf{fin}
+					\end{tabular}
+\end{center}
+\end{minipage}}
+
+\vspace{0.5cm}
+\begin{exemple}
+On veut convertir en secondes une durée donnée en heures, minutes et secondes : 
+
+\texttt{DefFonction} 
+\begin{tabular}{|l}
+				\textbf{conversion}(h,m,s)\\
+\hspace{5ex}  \og convertit en secondes une durée donnée en heures, \\
+  \hspace{10ex} minutes et secondes \fg\\
+\hspace{5ex} $t \leftarrow 3600*h+60*m+s$\\
+\hspace{5ex} Renvoyer t\\
+				  \textbf{fin}
+				  \end{tabular}
+
+\vspace{2ex}									
+\textbf{Une fois définie, pour l'utiliser, on écrit son nom suivi, entre parenthèses, des 
+paramètres.} 
+
+\vspace{0.2cm}
+Pour convertir 2h35mn45s, on écrit \textbf{conversion}(2,35,45) (réponse : 9345).
+
+\end{exemple}
+
+\begin{rem}
+
+\begin{itemize}
+	\item Pour bien se faire comprendre, il est important de choisir un nom de fonction 
+explicite. 
+Il faut aussi mettre des commentaires pour expliquer ce que fait la fonction.
+	\item Il est nécessaire de bien cibler les paramètres dont on a besoin 
+c'est-à-dire les données nécessaires à l'exécution de la fonction.
+	\item Il faut repérer ce que renvoie la fonction : rien (exemple : un simple affichage ou 
+la modification d'un fichier...), un nombre entier, 
+un flottant, une liste...
+
+Reprenons l'exemple de la conversion 
+
+\begin{description}
+ \item[1er cas.] 
+\
+
+\texttt{DefFonction} 
+\begin{tabular}{|l}
+				\textbf{conversion}(h,m,s)\\
+ \hspace{5ex}  \og convertit en secondes une durée donnée en heures, \\
+  \hspace{5ex}  \hspace{5ex} minutes et secondes \fg\\
+	\hspace{5ex} $t \leftarrow 3600*h+60*m+s$\\
+	\hspace{5ex} Renvoyer t\\
+				  \textbf{fin}
+				  \end{tabular}
+
+Si on écrit \texttt{rep}=\textbf{conversion}(h,m,s), on trouvera dans \texttt{rep} un nombre entier.
+
+\item[2ème cas.] 
+\
+
+\texttt{DefFonction} 
+\begin{tabular}{|l}
+				\textbf{conversion}(h,m,s)\\
+ \hspace{5ex}  \og convertit en secondes une durée donnée en heures, \\
+  \hspace{10ex} minutes et secondes \fg\\
+ \hspace{5ex} $t \leftarrow 3600*h+60*m+s$\\
+ \hspace{5ex} Afficher t\\
+				  \textbf{fin}
+				  \end{tabular}
+
+Si on écrit \texttt{rep}=\textbf{conversion}(h,m,s), on  ne trouvera rien dans \texttt{rep} mais la 
+valeur s'affichera à l'écran.
+\end{description}
+
+
+
+	\item Enfin, il faut toujours tester sa fonction sur un ensemble significatif de valeurs 
+pour repérer d'éventuelles erreurs ou manquements.
+\end{itemize}
+\end{rem}
+
+\subsection{\'Ecriture en Python }
+
+\begin{pyconsole}
+ def nom_de_la_fonction(parametres):
+     """ commentaire expliquant la fonction"""
+     bloc d'instructions
+     return(resultat)
+ 
+ 
+\end{pyconsole}
+
+\begin{rem}
+ L'indentation des blocs n'est pas là que pour décorer. Dans la plupart des langages de 
+programmation on \emph{conseille} d'indenter les différents blocs afin de faciliter la lecture du 
+code. En Python , l'indentation est \emph{signifiante} : après le mot-clé \texttt{def}, chaque 
+ligne indentée fait partie de la fonction. La première ligne non indentée rencontrée marque la 
+fin de la fonction : cette ligne ne fait plus partie de la fonction, mais celles qui précéde en 
+font partie. Il est donc \emph{impératif} d'indenter quand il le faut, et seulement 
+quand il le faut. On rencontrera ce phénomène constamment en Python .
+\end{rem}
