@@ -16,11 +16,13 @@ la machine doit \emph{évaluer} l'expression. Voici des exemples d'expressions :
 1.2 / 3.0 , x+3 }.\\
 En Python, pour évaluer une expression, il suffit de la saisir dans un interpréteur, qui
 calcule et affiche alors la valeur qu'il a calculée :\\
+\begin{xxpy}~\\ 
+\vspace{-1cm}
 \begin{pyconsole}
 42
 1+4
 \end{pyconsole}
-
+\end{xxpy}
 \section{Types simples}
 
 En programmation, associer un type à une valeur permet :
@@ -253,7 +255,7 @@ Quand on stocke une valeur \texttt{d} dans une variable \texttt{var}, on dit que
 En Python , cette affectation est faite avec la commande \texttt{=}, comme suit.  
 
 \begin{pyconsole}
->>> var  = d
+var  = d
 \end{pyconsole}
 
 
@@ -264,11 +266,11 @@ Les variables (et donc l'affectation) sont incontournables : si vous ne stockez 
 
 \begin{exemple}~
 \begin{pyconsole}
->>> x = 42	# x prend la valeur 42.
->>> x = x + 2	# on additionne à la donnée stockée dans x  
+x = 42	# x prend la valeur 42.
+x = x + 2	# on additionne à la donnée stockée dans x  
 		# le nombre 2 et on stocke le résultat de 
 		# nouveau dans x
->>> x 		# on accède à la valeur qui est mémorisée 
+x 		# on accède à la valeur qui est mémorisée 
 		# dans x.
  44
 \end{pyconsole}
@@ -395,18 +397,16 @@ valeur s'affichera à l'écran.
 	\item Enfin, il faut toujours tester sa fonction sur un ensemble significatif de valeurs 
 pour repérer d'éventuelles erreurs ou manquements.
 \end{itemize}
-\end{rem}
+\end{rem} 
 
 \subsection{\'Ecriture en Python }
 
-\begin{pyconsole}
- def nom_de_la_fonction(parametres):
-     """ commentaire expliquant la fonction"""
-     bloc d'instructions
-     return(resultat)
- 
- 
-\end{pyconsole}
+%\begin{pyconsole}
+%def nom_de_la_fonction(parametres):
+%     '''''' commentaire expliquant la fonction ''''''
+%     #bloc d'instructions
+%     #return(resultat)
+%\end{pyconsole}
 
 \begin{rem}
  L'indentation des blocs n'est pas là que pour décorer. Dans la plupart des langages de 
