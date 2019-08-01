@@ -1,22 +1,23 @@
 \section{Quelques définitions}
 
-\begin{defi}{valeurs}
+\begin{defi}[Valeurs]
 Les valeurs désignent les données manipulées par un algorithme ou une fonction. Une valeur 
 peut ainsi être  : un nombre, un caractère, une chaîne de caractères, une valeur de vérité 
-(\texttt{Vrai} ou \texttt{Faux}) et bien d'autres ... En Python, comme dans la plupart des 
-langages 
+(\texttt{Vrai} ou \texttt{Faux}) et bien d'autres ... 
+
+En Python, comme dans la plupart des langages 
 de programmation, ces valeurs sont \textbf{typées} selon l'objet qu'elles représentent : il y a ainsi 
-des valeurs de type entier, flottant, chaîne de caractères, booléens ...   Leur représentation en 
+des valeurs de \textbf{type} entier, flottant, chaîne de caractères, booléens ...   Leur représentation en 
 mémoire varie beaucoup d'un langage à l'autre, mais ce sont souvent les mêmes objets que l'on 
 cherche à traduire.
 \end{defi}
 
-\begin{defi}{expression}
+\begin{defi}[Expression]
 
 Une expression est une suite de caractères faisant intervenir des valeurs et des 
 opérations, afin d'obtenir une nouvelle valeur. Pour calculer cette nouvelle valeur,
 la machine doit \emph{évaluer} l'expression. Voici des exemples d'expressions : \texttt{42 , 1+4 , 
-1.2 / 3.0 , x+3 }.
+1.2 / 3.0 , x+3}.
 
 \end{defi}
 
@@ -34,7 +35,7 @@ calcule et affiche alors la valeur qu'il a calculée.
 \section{Types simples}
 
 En programmation, associer un type à une valeur permet :
-\begin{enumerate}
+\begin{itemize}
 \item de classer les valeurs en catégories similaires. Par exemple, tous les
 entiers (type int), tous les flottants (type float)...
 \item de contrôler quelles opérations sont faisables sur ces valeurs : par
@@ -42,96 +43,91 @@ exemple, tout entier (type int) pourra être utilisé dans une soustraction, ...
 qu'une chaîne ne le pourra pas. Il sera également impossible d'additioner un entier et un booléen. 
 Dans certains langages, par exemple en Caml, il est même impossible d'additioner un entier et un 
 flottant.                                             
-\end{enumerate}
+\end{itemize}
 
 Une expression n'a a priori pas de type, car le type de la valeur qu'elle renvoie dépend des types 
 des sous-expressions. Ainsi \texttt{a+b} sera un entier (resp. un flottant, une chaîne) si 
 \texttt{a} et \texttt{b} le sont, mais sera un flottant si \texttt{a} est un entier et \texttt{b} 
-un flottant.\\
+un flottant.
 
+
+\begin{xxpyconsole}%~\\ \vspace{-.5cm}
 Pour afficher le type d'une valeur ou d'une expression après l'avoir évaluée, on utilise 
-\texttt{type} :\\
-\begin{xxpyconsole}~\\ \vspace{-.5cm}
+\texttt{type}.
 \begin{pyconsole}
 type(42)
 type(1.2/3.0)
 \end{pyconsole}
-\end{xxpyconsole}
-
 Le mot qui suit \texttt{class} indique le type de la valeur, entier (\texttt{int} en anglais) pour 
 la première et flottant (\texttt{float} en anglais) pour la seconde. Le mot \texttt{class} fait 
-référence au fait que Pytho, est un langage \emph{orienté objet}, ce que nous ignorerons pour 
+référence au fait que Python, est un langage \emph{orienté objet}, ce que nous ignorerons pour 
 l'instant.\\
+\end{xxpyconsole}
 
-Passons en revue les types et les opérations les plus courants en Python .
+
+
+
 
 \subsection{Entiers}
-
+\begin{defi}[Entiers]
 Ce type est noté \texttt{int} en Python .\\
-
-\noindent$\bullet$ \textbf{Constantes :} Ce sont les entiers écrits en base 10, et ils ne sont pas 
-bornés en Python .\\
-
-\noindent$\bullet$ \textbf{Opérateurs :}
+\begin{itemize}
+\item \textbf{Constantes :} ce sont les entiers relatifs écrits en base 10. Ils ne sont pas 
+bornés en Python .
+\item \textbf{Opérateurs :}
 \begin{enumerate}
- \item + : addition usuelle.
- \item - : soustraction usuelle (\texttt{15-9} renvoie \texttt{6}), mais aussi opposé 
-(\texttt{-4}). 
-\item  // : \emph{division entière} : \texttt{a//b} correspond au quotient de la 
+ \item $+$ : addition usuelle;
+ \item $-$ : soustraction usuelle (\texttt{15-9} renvoie \texttt{6}), mais aussi opposé (\texttt{-4});
+\item  $//$ : \emph{division entière} : \texttt{a//b} correspond au quotient de la 
 division euclidienne de \texttt{a} par \textbf{b} si \texttt{b} est strictement positif 
 (\texttt{256 // 3} renvoie \texttt{85} car $256 = 85*3 + 1$). Mais si \texttt{b} est strictement 
 négatif, alors \texttt{a//b} renvoie ce quotient moins 1 ($15 = (-4)\times(-4)-1=(-4)\times(-3)+3$, 
 le quotient de la division euclidienne de 15 par $-4$ est $-3$, mais \texttt{15//-4} renvoie 
-\texttt{-4}). Cette division n'est pas définie si \texttt{b} est nul.
+\texttt{-4}). Cette division n'est pas définie si \texttt{b} est nul;
 \item $\%$ : \emph{modulo} : même remarque que dans le point précédent, relativement au reste de la 
 division euclidienne cette fois (\texttt{256 \% 3} renvoie 
 \texttt{1}, \texttt{15\%-4} renvoie \texttt{-1}).
-\item ** : exponentiation (\texttt{2\raisebox{0.3ex}{**}3} renvoie \texttt{8}).
+\item $**$ : exponentiation (\texttt{2\raisebox{0.3ex}{**}3} renvoie \texttt{8}).
 \end{enumerate}
-
+\end{itemize}
 Les \emph{règles de précédence}, autrement dit les règles de priorité entre opérations, sont 
 similaires aux règles mathématiques usuelles.
-
+\end{defi}
 \subsection{Flottants}
-
-Ce type est noté \texttt{float} en Python .\\
-
-\noindent$\bullet$ \textbf{Constantes :} Ce sont les \emph{nombres à virgule flottante}. Nous en
+\begin{defi}[Flottants]
+Ce type est noté \texttt{float} en Python .
+\begin{itemize}
+\item  \textbf{Constantes :} ce sont les \emph{nombres à virgule flottante}. Nous en
 donnerons une définition précise dans un chapitre ultérieur : pour simplifier, disons pour 
-l'instant que ce sont des nombres à virgule, avec un nombre borné de chiffres dans leur écriture.\\
-
-\noindent$\bullet$ \textbf{Opérateurs :}
+l'instant que ce sont des nombres à virgule, avec un nombre borné de chiffres dans leur écriture.
+\item \textbf{Opérateurs : }
 \begin{enumerate}
- \item + : addition usuelle.
- \item - : soustraction usuelle, et aussi opposé.
-\item  / : division usuelle.
-\item ** : exponentiation. Remarquer la différence entre \texttt{2\raisebox{0.3ex}{**}100} et 
+ \item $+$ : addition usuelle;
+ \item $-$ : soustraction usuelle, et aussi opposé.
+\item  $/$ : division usuelle.
+\item $**$ : exponentiation. Remarquer la différence entre \texttt{2\raisebox{0.3ex}{**}100} et 
 \texttt{2.\raisebox{0.3ex}{**}100} ou \texttt{2\raisebox{0.3ex}{**}100.}.
 \end{enumerate}
-
-\noindent\textbf{Avertissement :} ce qui précéde est valable en Python 3. Attention à l'Opérateur 
-\texttt{/} en Python 2 !!!!\\
+\end{itemize}
+\noindent\textbf{Avertissement :} ce qui précédé est valable en Python 3. Attention à l'opérateur 
+\texttt{/} en Python 2 !!!!
+\end{defi}
 
 \subsection{Booléens}
 
-En logique et mathématiques, le mot \emph{booléen} a été donné en hommage au mathématicien 
-britannique George Boole. Ce type est noté \texttt{bool} en Python .\\
 
-\noindent$\bullet$ \textbf{Constantes :} Il y en a deux : \texttt{True} et \texttt{False}.\\
-
-\noindent$\bullet$ \textbf{Opérateurs :}
+\begin{defi}[Booléen\footnote{Le mot \emph{booléen} a été donné en hommage au mathématicien 
+britannique George Boole.}]
+Ce type est noté \texttt{bool} en Python.
+\begin{itemize}
+\item \textbf{Constantes :} il y en a deux : \texttt{True} et \texttt{False}.
+\item \textbf{Opérateurs :}
 \begin{enumerate}
- \item \texttt{not} : négation usuelle.
- \item \texttt{and} : conjonction usuelle.
+ \item \texttt{not} : négation usuelle;
+ \item \texttt{and} : conjonction usuelle;
  \item \texttt{or} : disjonction usuelle.
 \end{enumerate}
-
-\begin{exemple}
-\texttt{True or False} renvoie \texttt{True}, \texttt{not ( False or 
-True) and True} renvoie \texttt{False}.
-\end{exemple}
-
-\noindent$\bullet$ \textbf{Opérateurs de comparaison :}
+\item \textbf{Opérateurs de comparaison :}
 \begin{enumerate}
  \item \texttt{==} : test d'égalité : \texttt{2==3} renvoie \texttt{False}, \texttt{4==4} renvoie 
 \texttt{True}. Problème : \texttt{0.1+0.2==0.3} renvoie \texttt{False} ! Nous y reviendrons plus 
@@ -139,14 +135,20 @@ tard. Il ne faut pas confondre \texttt{==} avec \texttt{=}, symbole de l'\emph{a
  \item \texttt{!=} : \texttt{a != b} est une écriture équivalente à \texttt{not (a == b)}.
  \item \texttt{<,>,<=,>=} : ce à quoi on s'attend.
 \end{enumerate}
+\end{itemize}
+\end{defi}
 
+
+\begin{exemple}
+\texttt{True or False} renvoie \texttt{True}. \texttt{not(False or True) and True} renvoie \texttt{False}.
+\end{exemple}
 
 \begin{rem}
 Python \ permet les chaînes de comparaisons : \texttt{1<2<3} renvoie
 \texttt{True}, et \texttt{(1<2<-2) and (-5<2<6)} renvoie \texttt{False}.
 \end{rem}
 
-\subsection{Conversions}
+\subsection{Conversions \textit{-- Cast}}
 
 Il est possible de convertir en entier en flottant avec la fonction \texttt{float}. La réciproque est possible dans une certaine 
 mesure : \texttt{float(2)} renvoie \texttt{2.0}, \texttt{int(2.0)} renvoie \texttt{2}, mais \texttt{int(2.5)} renvoie \texttt{2} et 
@@ -155,18 +157,18 @@ mesure : \texttt{float(2)} renvoie \texttt{2.0}, \texttt{int(2.0)} renvoie \text
 La fonction \texttt{int} appliquée à un nombre flottant procède donc à une troncature, ce n'est pas la fonction donnant la partie entière d'un nombre flottant (fonction \texttt{floor} du module \texttt{math}).
 
 \section{Types composés}
-
-On dit qu'une valeur est de \emph{type composé} si elles formées à partir de plusieurs autres 
+\begin{defi}
+On dit qu'une valeur est de type composé si elle est formée à partir de plusieurs autres 
 valeurs de types plus simples. De nombreuses constructions sont définies sur tous les types 
-composés.\\
+composés.
+\end{defi}
 
 \subsection{$n$-uplets ou tuples}
 
-Ce type est noté \texttt{tuple} en Python .\\
-
-\noindent$\bullet$ \textbf{Construction et composantes :}\\
-
-Les $n$-uplets généralisent les couples. Un couple s'écrira \texttt{(a,b)}, un triplet 
+\begin{defi}[tuple]
+Ce type est noté \texttt{tuple} en Python .
+\begin{itemize}
+\item \textbf{Construction et composantes :} les $n$-uplets généralisent les couples. Un couple s'écrira \texttt{(a,b)}, un triplet 
 \texttt{(a,b,c)} ... etc. Il existe même des 1-uplets : il faut les écrire \texttt{(a,)}, et non 
 \texttt{(a)} : cette dernière écriture est équivalente à \texttt{a}, tout simplement.\\
 Il n'est pas obligatoire que les éléments d'un tuple soient de même type. Par exemple, 
@@ -175,46 +177,40 @@ On accède à la $k\ieme$ coordonnée d'un tuple \texttt{t} par la commande \tex
 \textbf{en Python , les coordonnées sont numérotées à partir de 0} ! On dit que $k$ est 
 l'\emph{indice} de \texttt{t[k]}. Ainsi, si \texttt{t = (1,2,3)}, \texttt{t[0]} vaut 1, 
 \texttt{t[2]} vaut 3, et \texttt{t[3]} n'existe pas.\\
-
-On dit que les tuples sont \emph{immuables} : il n'est pas possible de changer un élément d'un 
-tuple.\\
-
-\noindent$\bullet$ \textbf{Opérateurs :}
+On dit que les tuples sont \textbf{immuables} ou \textbf{non mutables}: il n'est pas possible de changer un élément d'un 
+tuple.
+\item \textbf{Opérateurs :}
 \begin{enumerate}
- \item + : concaténation. \texttt{(1,2,3)+(1,4,5,6)} renvoie \texttt{1,2,3,1,4,5,6}.
- \item \texttt{len} : \emph{longueur} du tuple. \texttt{len(1,2,3)} renvoie \texttt{3}.
+ \item $+$ : concaténation. \texttt{(1,2,3)+(1,4,5,6)} renvoie \texttt{1,2,3,1,4,5,6};
+ \item \texttt{len} : \emph{longueur} du tuple. \texttt{len(1,2,3)} renvoie \texttt{3};
  \item \texttt{in} : test d'appartenance. \texttt{3 in (1,2,3)} renvoie \texttt{True}, alors que 
-\texttt{3 in (1,2,4,5)} renvoie \texttt{False}.
+\texttt{3 in (1,2,4,5)} renvoie \texttt{False};
 \item le \emph{slicing}, qui permet de construire des sous-tuples : \texttt{(5,2,6,7,8,9)[1:5]} 
 renvoie \texttt{(2,6,7,8)} (attention à la borne de droite !).\\
 \end{enumerate}
-
+\end{itemize}
+\end{defi}
 
 \subsection{Chaînes de caractères}
-
-Ce type est noté \texttt{str} en Python , pour \emph{string} en anglais.\\
-
-\noindent$\bullet$ \textbf{Construction et composantes :}\\
-
-
-Ce sont des suites finies de caractères, un caractère étant en python un caractère du clavier. On 
+\begin{defi}[Chaînes de caractères]
+Ce type est noté \texttt{str} en Python , pour \emph{string} en anglais.
+\begin{itemize}
+\item \textbf{Construction et composantes :} ce sont des suites finies de caractères, un caractère étant en python un caractère du clavier. On 
 les note entre guillemets ou apostrophes : \texttt{``Ceci est un chaîne de caractères''} ou  
 \texttt{'Ceci est une chaîne de caractères'}. La chaîne vide se note \texttt{``}\texttt{''} ou 
 \texttt{''}. Un caractère est une chaîne de longueur 1.\\
-On accède aux composantes d'une chaîne de la même manière que pour un tuple.\\
-
-\noindent$\bullet$ \textbf{Opérateurs :}
-
-Ce sont les mêmes que pour les tuples.
-
+On accède aux composantes d'une chaîne de la même manière que pour un tuple.
+\item \textbf{Opérateurs :} ce sont les mêmes que pour les tuples.
+\end{itemize}
+\end{defi}
 \subsection{Listes}
-
-Ce type est noté \texttt{list} en Python .\\
+\begin{defi}[Listes]
+Ce type est noté \texttt{list} en Python .
 
 Comme les tuples, les \emph{listes} sont des suites finies de valeurs arbitraires, mais cette fois 
-ils sont \emph{mutables} : on peut changer la valeur d'une composante d'une liste.\\
+ils sont \textbf{mutables} : on peut changer la valeur d'une composante d'une liste.\\
 Les listes s'écrivent entre crochets. On change la valeur de la $k\ieme$ composante d'une liste 
-\texttt{L} grâce à la commande \texttt{L[k] = n}, où \texttt{n} est la nouvelle valeur. Ainsi :\\
+\texttt{L} grâce à la commande \texttt{L[k] = n}, où \texttt{n} est la nouvelle valeur. Ainsi :
 \begin{pyconsole}
 L = [1,2,3] 
 L[0] = 4  
@@ -222,6 +218,7 @@ L
 \end{pyconsole}
 
 Les autres opérateurs sont les mêmes que pour les tuples et les chaînes.
+\end{defi}
 
 \subsection{Conversions}
 

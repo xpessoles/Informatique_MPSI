@@ -1,16 +1,16 @@
-=>PYTHONTEX#pycon#default#default#0#console####cours.tex#27#
+=>PYTHONTEX#pycon#default#default#0#console####cours.tex#28#
 42
 1+4
-=>PYTHONTEX#pycon#default#default#1#console####cours.tex#55#
+=>PYTHONTEX#pycon#default#default#1#console####cours.tex#57#
 type(42)
 type(1.2/3.0)
-=>PYTHONTEX#pycon#default#default#2#console####cours.tex#218#
+=>PYTHONTEX#pycon#default#default#2#console####cours.tex#214#
 L = [1,2,3]
 L[0] = 4
 L
-=>PYTHONTEX#pycon#default#default#3#console####cours.tex#268#
+=>PYTHONTEX#pycon#default#default#3#console####cours.tex#265#
 var  = 1
-=>PYTHONTEX#pycon#default#default#4#console####cours.tex#279#
+=>PYTHONTEX#pycon#default#default#4#console####cours.tex#276#
 x = 42       # x prend la valeur 42.
 x = x + 2	# on additionne à la donnée stockée dans x le nombre 2 et on
              # stocke le résultat de nouveau dans x
