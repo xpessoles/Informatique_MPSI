@@ -1,28 +1,36 @@
-\section{Expressions}
+\section{Quelques définitions}
 
-
-Les \emph{valeurs} désignent les données manipulées par un algorithme ou une fonction. Une valeur 
+\begin{defi}{valeurs}
+Les valeurs désignent les données manipulées par un algorithme ou une fonction. Une valeur 
 peut ainsi être  : un nombre, un caractère, une chaîne de caractères, une valeur de vérité 
 (\texttt{Vrai} ou \texttt{Faux}) et bien d'autres ... En Python, comme dans la plupart des 
 langages 
-de programmation, ces valeurs sont \emph{typées} selon l'objet qu'elles représentent : il y a ainsi 
+de programmation, ces valeurs sont \textbf{typées} selon l'objet qu'elles représentent : il y a ainsi 
 des valeurs de type entier, flottant, chaîne de caractères, booléens ...   Leur représentation en 
 mémoire varie beaucoup d'un langage à l'autre, mais ce sont souvent les mêmes objets que l'on 
-cherche à traduire.\\
+cherche à traduire.
+\end{defi}
 
-Une \emph{expression} est une suite de caractères faisant intervenir des valeurs et des 
+\begin{defi}{expression}
+
+Une expression est une suite de caractères faisant intervenir des valeurs et des 
 opérations, afin d'obtenir une nouvelle valeur. Pour calculer cette nouvelle valeur,
 la machine doit \emph{évaluer} l'expression. Voici des exemples d'expressions : \texttt{42 , 1+4 , 
-1.2 / 3.0 , x+3 }.\\
-En Python, pour évaluer une expression, il suffit de la saisir dans un interpréteur, qui
-calcule et affiche alors la valeur qu'il a calculée :\\
-\begin{xxpy}~\\ 
-\vspace{-1cm}
+1.2 / 3.0 , x+3 }.
+
+\end{defi}
+
+
+\begin{xxpyconsole}%~\\ \vspace{-.5cm}
+En Python, pour évaluer une expression, il suffit de la saisir dans un interpréteur (consoles), qui
+calcule et affiche alors la valeur qu'il a calculée.
 \begin{pyconsole}
 42
 1+4
 \end{pyconsole}
-\end{xxpy}
+\end{xxpyconsole}
+
+
 \section{Types simples}
 
 En programmation, associer un type à une valeur permet :
@@ -43,10 +51,13 @@ un flottant.\\
 
 Pour afficher le type d'une valeur ou d'une expression après l'avoir évaluée, on utilise 
 \texttt{type} :\\
+\begin{xxpyconsole}~\\ \vspace{-.5cm}
 \begin{pyconsole}
 type(42)
 type(1.2/3.0)
 \end{pyconsole}
+\end{xxpyconsole}
+
 Le mot qui suit \texttt{class} indique le type de la valeur, entier (\texttt{int} en anglais) pour 
 la première et flottant (\texttt{float} en anglais) pour la seconde. Le mot \texttt{class} fait 
 référence au fait que Pytho, est un langage \emph{orienté objet}, ce que nous ignorerons pour 
@@ -255,7 +266,7 @@ Quand on stocke une valeur \texttt{d} dans une variable \texttt{var}, on dit que
 En Python , cette affectation est faite avec la commande \texttt{=}, comme suit.  
 
 \begin{pyconsole}
-var  = d
+var  = 1
 \end{pyconsole}
 
 
@@ -264,17 +275,16 @@ Les variables (et donc l'affectation) sont incontournables : si vous ne stockez 
 
 
 
-\begin{exemple}~
+\begin{xxpyconsole}~\\ \vspace{-.5cm}%\begin{exemple}~
 \begin{pyconsole}
-x = 42	# x prend la valeur 42.
-x = x + 2	# on additionne à la donnée stockée dans x  
-		# le nombre 2 et on stocke le résultat de 
-		# nouveau dans x
-x 		# on accède à la valeur qui est mémorisée 
-		# dans x.
- 44
+x = 42       # x prend la valeur 42.
+x = x + 2	# on additionne à la donnée stockée dans x le nombre 2 et on 
+             # stocke le résultat de nouveau dans x 
+x            # on accède à la valeur qui est mémorisée dans x.
+44
 \end{pyconsole}
-\end{exemple}
+\end{xxpyconsole}
+%\end{exemple}
 
 Dans la variable affectée, la nouvelle donnée \og écrase\fg\ la donnée précédente : on perd son 
 ancienne valeur.

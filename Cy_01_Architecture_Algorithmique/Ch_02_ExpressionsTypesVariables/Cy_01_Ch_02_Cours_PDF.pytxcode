@@ -1,30 +1,21 @@
-=>PYTHONTEX#pycon#default#default#0#console####cours.tex#19#
+=>PYTHONTEX#pycon#default#default#0#console####cours.tex#27#
 42
 1+4
-=>PYTHONTEX#pycon#default#default#1#console####cours.tex#44#
+=>PYTHONTEX#pycon#default#default#1#console####cours.tex#55#
 type(42)
 type(1.2/3.0)
-=>PYTHONTEX#pycon#default#default#2#console####cours.tex#205#
+=>PYTHONTEX#pycon#default#default#2#console####cours.tex#218#
 L = [1,2,3]
 L[0] = 4
 L
-=>PYTHONTEX#pycon#default#default#3#console####cours.tex#255#
->>> var  = d
-=>PYTHONTEX#pycon#default#default#4#console####cours.tex#266#
->>> x = 42	# x prend la valeur 42.
->>> x = x + 2	# on additionne à la donnée stockée dans x
-		# le nombre 2 et on stocke le résultat de
-		# nouveau dans x
->>> x 		# on accède à la valeur qui est mémorisée
-		# dans x.
- 44
-=>PYTHONTEX#pycon#default#default#5#console####cours.tex#402#
- def nom_de_la_fonction(parametres):
-     """ commentaire expliquant la fonction"""
-     bloc d'instructions
-     return(resultat)
-
-
+=>PYTHONTEX#pycon#default#default#3#console####cours.tex#268#
+var  = 1
+=>PYTHONTEX#pycon#default#default#4#console####cours.tex#279#
+x = 42       # x prend la valeur 42.
+x = x + 2	# on additionne à la donnée stockée dans x le nombre 2 et on
+             # stocke le résultat de nouveau dans x
+x            # on accède à la valeur qui est mémorisée dans x.
+44
 =>PYTHONTEX:SETTINGS#
 version=0.16
 outputdir=pythontex-files-Cy_01_Ch_02_Cours_PDF
