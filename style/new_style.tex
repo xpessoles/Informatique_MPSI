@@ -55,6 +55,46 @@
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 
 %----------------------------------------------------------------------------------------
+%	Code PYTHON
+%----------------------------------------------------------------------------------------
+
+\usepackage[rerun=errors,makestderr=true]{pythontex}
+\usepackage{listings}
+\lstloadlanguages{Python}
+
+\lstset{language=Python,
+        columns=fullflexible,
+%	  identifierstyle=\sffamily,
+	  basicstyle=\ttfamily,
+	  keywordstyle=\bf,
+	  commentstyle=\normalfont,
+%	  numbers=none, numberstyle=\small, numbersep=30pt, %gestion numérotation
+%	  showstringspaces=false,%pour cacher le symbole d'espacement dans les chaînes
+	  breaklines=true, %passage à la ligne automatique
+	  prebreak=\mbox{$\swarrow$},
+%	  includerangemarker=false, % pour inclure partiellement des fichiers
+%	  rangeprefix=\#\ 
+	  }
+
+
+\lstset{
+  literate={ö}{{\"o}}1
+           {ä}{{\"a}}1
+           {ü}{{\"u}}1
+           {é}{{\'e}}1
+           {è}{{\`e}}1
+           {ê}{{\^e}}1
+           {à}{{\`a}}1
+           {â}{{\^a}}1
+           {ù}{{\`u}}1
+           {ç}{{\c{c}}}1
+           {î}{{\^{i}}}1
+           {ô}{{\^{o}}}1
+           {É}{{\'{E}}}1
+}
+
+
+%----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY AND INDEX
 %----------------------------------------------------------------------------------------
 
