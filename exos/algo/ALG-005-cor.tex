@@ -1,6 +1,11 @@
 \begin{enumerate}
 \item Nous pouvons proposer le programme suivant :
+\iflivret
+\lstinputlisting[fontadjust]{../../exos/algo/ALG-005/ALG-005-cor.py}
+\else
 \lstinputlisting{ALG-005-cor.py}
+\fi
+
 \item Démontrons l'invariant : à chaque tour de boucle, $u=S_k$ et $v=S_{k+1}$.\\
 Initialement, à l'entrée du premier tour de boucle, nous avons $k=2$, $u=\dfrac{(-1)^2}{2\ln 2}=S_2$ et 
 $v=u+\dfrac{(-1)^{k+1}}{(k+1)\ln(k+1)}=S_3$. L'invariant est donc vérifié.\\
