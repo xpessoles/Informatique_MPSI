@@ -9,22 +9,24 @@
 \input{../../style/macros_maths_info}
 %\input{../../style/programHeadings.tex}
 \livrettrue
-%\usepackage{minted}
+\usepackage{minted}
 \usepackage[rerun=errors,makestderr=true]{pythontex}
 \usepackage{listings}
 \lstloadlanguages{Python}
 
 \lstset{language=Python,
-	  identifierstyle=\ttfamily,
+        columns=fullflexible,
+%	  identifierstyle=\sffamily,
 	  basicstyle=\ttfamily,
 	  keywordstyle=\bf,
-	  commentstyle=\normalfont\footnotesize,
-	  numbers=none, numberstyle=\small, numbersep=30pt, %gestion numérotation
-	  showstringspaces=false,%pour cacher le symbole d'espacement dans les chaînes
+	  commentstyle=\normalfont,
+%	  numbers=none, numberstyle=\small, numbersep=30pt, %gestion numérotation
+%	  showstringspaces=false,%pour cacher le symbole d'espacement dans les chaînes
 	  breaklines=true, %passage à la ligne automatique
 	  prebreak=\mbox{$\swarrow$},
-	  includerangemarker=false, % pour inclure partiellement des fichiers
-	  rangeprefix=\#\ }
+%	  includerangemarker=false, % pour inclure partiellement des fichiers
+%	  rangeprefix=\#\ 
+	  }
 
 
 \lstset{
