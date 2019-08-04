@@ -10,7 +10,7 @@ Nous nous intéresserons au probème suivant, dit \emph{de Cauchy} :
 \end{equation}
 avec la condition initiale $y(t_{0})=y_{0}$,\\
 
-\clearslide{}
+%\clearslide{}
 où:
 \begin{itemize}
 \item $y$ est l'inconnue ;
@@ -20,18 +20,18 @@ où:
 \item $t_{0}\in I$ et $y_{0}\in E$.
 \end{itemize}
 
-\clearslide{}
+%\clearslide{}
 
 \begin{rem}
 En mathématiques et en physique, l'habitude est plutôt de considérer les équations 
 différentielles sous la forme $y'=F(t,y)$ et non $y'=F(y,t)$.\\
-Mais en \python, la fonction \texttt{odeint}, que nous verrons en fin de chapitre, 
+Mais en Python, la fonction \texttt{odeint}, que nous verrons en fin de chapitre, 
 utilise l'écriture $y'=F(y,t)$. Par souci de simplicité, nous nous conformerons à cette 
 écriture dans ce cours.
 \end{rem}
 
 
-\clearslide{}
+%\clearslide{}
 \subsection{Notion de solution.}
 
 On appelle \emph{solution} du problème précédent tout couple $(y,J)$ où :
@@ -46,7 +46,7 @@ On appelle \emph{solution} du problème précédent tout couple $(y,J)$ où :
 On dit qu'une telle solution est \emph{maximale} s'il est
 impossible de prolonger $y$ en une solution sur un intervalle strictement
 plus grand que $J$.
-\clearslide{}
+%\clearslide{}
 
 \subsection{Premier exemple : équation linéaire.}
 Une solution de l'équation~(\ref{eq:o1}) avec la condition initiale $y(1)=2
@@ -66,7 +66,7 @@ La seule solution maximale est dans ce cas:
 \begin{equation*}
   \fct{\R}{\R,}{t}{2\e^{t}.}
 \end{equation*}
-\clearslide{}
+%\clearslide{}
 
 \subsection{Second exemple : équation non linéaire.}
 
@@ -82,7 +82,7 @@ avec la condition initiale $y(0)=\frac{1}{36}$ :
 \item il y a une unique solution maximale: $t\mapsto\sqrt{\frac{7}{252 - 6t}}$;
 \item cette solution maximale est définie sur $]-\infty, 42[$.
 \end{itemize}
-\clearslide{}
+%\clearslide{}
 \subsection{Théorème de Cauchy-Lipschitz.}
 
 \emph{Sous des hypothèses raisonnables sur F :} pour chaque problème de Cauchy, il existe une unique solution
@@ -111,14 +111,14 @@ savons pas calculer de primitive. Nous sommes donc incapables de résoudre ces �
 exacte. Quand il s'agit d'équations différentielles d'ordre supérieur ou non linéaires, la 
 situation est encore moins favorable.
 
-\clearslide{}
+%\clearslide{}
 
 Que faire s'il nous faut vraiment une solution à une telle équation différentielle ? Une 
 possibilité est d'essayer d'obtenir une \emph{approximation numérique} d'une solution exacte. La 
 méthode d'Euler est la méthode classique la plus simple pour faire cela. Le principe assez 
 élémentaire de cette méthode est le suivant.
 
-\clearslide{}
+%\clearslide{}
 
 On cherche à déterminer une approximation sur $[a,b]$ de la fonction $f : [a,b] \to \R$ vérifiant 
 \begin{equation*}
@@ -134,7 +134,7 @@ où $n\in\N^{*}$, et l'on subdivise l'intervalle $[a,b]$ en $n$ segments, en pos
 \end{equation*}
 Ainsi, $t_0 = a$ et $t_n = b$. On dit que $(t_0,\dots,t_n)$ est une subdivision régulière du segment $[a,b]$, avec $n+1$ points ou $n$ segments (ou morceaux). 
 
-\clearslide{}
+%\clearslide{}
 
 On va ensuite construire $y_0,\dots,y_n$. L'approximation de la courbe de $f$ sera alors la ligne brisée reliant les points de coordonnées $(t_k,y_k)$. 
 
@@ -151,18 +151,18 @@ L'approximation de la solution au temps $t_{k+1}$ est alors (voir la figure~\ref
           &= y_k + hF(y_k,t_k).
 \end{align*}
 
-\clearslide{}
+%\clearslide{}
 
 % On espère alors que l'on aura $y_{k} \approx f(t_{k})$ pour tout $k \in \iif{1,n}$.
 
 \begin{figure}[h!]
 \begin{center}
-\resizebox{0.8\textwidth}{!}{\input{euler-generique.pdf_t}}
+\resizebox{0.8\textwidth}{!}{\input{images/euler-generique.pdf_t}}
 \caption{Illustration du principe de la méthode d'Euler.}
 \label{11:fig:principeEuler}
 \end{center}
 \end{figure}
-\clearslide{}
+%\clearslide{}
 
 Par récurrence, on construit ainsi, de proche en proche, les réels $y_0$, $y_1$, $y_2$, $\cdots$, $y_n$ qui 
 sont des approximations des $f(t_k)$. Chaque approximation $y_{k+1}$ est construite à partir de 
@@ -205,7 +205,7 @@ En fait:
 \item Le second dépend des équations considérées.
 \end{itemize}
 
-\clearslide{}
+%\clearslide{}
 Informatiquement:
 \begin{itemize}
 \item Si le pas est grand, l'approximation est mauvaise;
@@ -214,7 +214,7 @@ Informatiquement:
   plus d'autres problèmes.
 \end{itemize}
 
-\clearslide{}
+%\clearslide{}
 \section{Mise en œuvre.}
 
 \subsection{Implantation de la méthode d'Euler.}
@@ -448,7 +448,7 @@ plt.savefig('oscillateur_amorti_phase.png')
     \end{center}
 \end{figure}
 
-\clearslide{}
+%\clearslide{}
 \section{Utilisation de scipy}
 
 Nous ne sommes pas les seuls à vouloir résoudre numériquement des
@@ -462,7 +462,7 @@ Il existe de nombreux intérêt à réutiliser une implantation existante :
 \item problèmes de performance connus (remarqués par d'autres).
 \end{itemize}
 
-\clearslide{}
+%\clearslide{}
 
 De plus on peut espérer :
 \begin{itemize}
@@ -476,7 +476,7 @@ Dans le cas du logiciel libre :
 \item sinon, on peut réparer le logiciel soi-même (ou le faire réparer).
 \end{itemize}
 
-\clearslide{}
+%\clearslide{}
 La bibliothèque \pyv{scipy} propose un grand nombre de méthodes de calcul numérique. En particulier, \pyv{odeint} :
 \begin{itemize}
 \item est une fonction de la bibliothèque \pyv{scipy.integrate} ;
@@ -486,14 +486,14 @@ La bibliothèque \pyv{scipy} propose un grand nombre de méthodes de calcul num�
 \item choisit elle-même le pas à utiliser.
 \end{itemize}
 
-\clearslide{}
+%\clearslide{}
 On l'utilise comme suit.
 \begin{pyverbatim}
 from scipy.integrate import odeint
 y_list = odeint(F, y0, t_list)
 \end{pyverbatim}
 
-\clearslide{}
+%\clearslide{}
 Reprenons l'exemple de l'oscillateur amorti (voir le résultat figure~\ref{11:fig:oscillateur_amorti_odeint}).
 \begin{pyverbatim}
 from scipy.integrate import odeint
@@ -527,7 +527,7 @@ plt.savefig('oscillateur_amorti_odeint.png')
 \end{pyverbatim}
 
 
-\clearslide{}
+%\clearslide{}
 
 \begin{figure}[!h]
     \begin{center}
@@ -539,7 +539,7 @@ plt.savefig('oscillateur_amorti_odeint.png')
 \textsc{Attention !} On ne donne pas les extrémités de l'intervalle mais les points  où l'on veut des valeurs, \pyv{y0} (condition initiale) est la valeur en
   \pyv{t_list[0]}.
 
-\clearslide{}
+%\clearslide{}
 
 
 \section{Influence du pas de discrétisation}
@@ -562,7 +562,7 @@ Plusieurs facteurs contribuent à l'erreur~:
 \item des \emph{erreurs de calcul} (les flottants ne sont pas les réels)
 \end{itemize}
 
-\clearslide{}
+%\clearslide{}
 Rappelons que pour un pas $h$ on note $n$ le nombre de morceaux utilisés. Pour les erreurs de méthode, on dit qu'il y a \emph{convergence} si :
 \begin{enumerate}
 \item la somme $e(h)=\displaystyle\sum_{k=0}^n |y(t_k)-y_k|$ des petites erreurs 
@@ -581,7 +581,7 @@ $e(h)\leq Kh^p$, autrement dit l'erreur de consistance est un $O(h^{p})$.
 La méthode d'Euler est une méthode d'ordre $1$.
 
 
-\clearslide{}
+%\clearslide{}
 \section{Annexe : autres méthodes.}
 \subsection{Méthode d'Euler implicite}
 La méthode d'Euler présentée jusqu'ici est dite \emph{explicite}~:
@@ -591,7 +591,7 @@ $y_{k+1}$ ne dépend que $y_k$ et $t_k$.
  y_{k+1} = y_{k} + h F(y_{k},t_{k})
 \end{equation*}
 
-\clearslide{}
+%\clearslide{}
 Mais en reprenant les approximations qui ont conduit à ce schéma, 
 nous pouvons aussi bien écrire~:
 \begin{equation*}
@@ -615,7 +615,7 @@ Si $y_{n} = y(t_{n})$, il existe $c\in]t_{n},t_{n+1}[$ tel que
 
 Tout le problème est d'estimer $y'(c)$.
 
-\clearslide{}
+%\clearslide{}
 
 On connaît l'idée de la méthode d'Euler explicite~:
 \begin{equation*}
@@ -629,7 +629,7 @@ Puis
 \end{equation*}
 (erreur locale en $O(h^{2})$)
 
-\clearslide{}
+%\clearslide{}
 L'idée de la méthode de Heun est la suivante~:
 \begin{equation*}
   y'(c)\approx \frac{y'(t_{n})+y'(t_{n+1})}{2}
@@ -655,7 +655,7 @@ Puis
 
 On peut alors montrer que l'erreur locale est en $O(h^{3})$.
 
-\clearslide{}
+%\clearslide{}
 
 \subsection{Méthode de Runge-Kutta}
 
@@ -690,7 +690,7 @@ Elle est facile à programmer et donc très populaire.
 
 \section{Exercices}
 
-\begin{exo}
+%\begin{exo}
   Déterminer une solution approchée des équations suivantes, à chaque fois par la méthode d'Euler, avec \texttt{odeint} et, si possible, théoriquement.
   \begin{enumerate}
     \item $y' = \sin(y)$, $y(0) = \dfrac{\pi}{2}$, sur $[0,1]$.
@@ -698,22 +698,22 @@ Elle est facile à programmer et donc très populaire.
     \item $\dfrac{y'}{1+y^2} = 1$, $y(0) = 1$, sur $\left[0,\dfrac{\pi}{4} \right[$.
     \item $y'+y^2=t$, $y(0) = 1$, sur $[0,1]$.
   \end{enumerate}
-\end{exo}
+%\end{exo}
 
-\begin{exo}
+%\begin{exo}
   Vectorialiser les équations suivantes (\emph{i.e.} donner une équation vectorielle d'ordre 1 équivalente, dont on détaillera la construction de la variable et la condition initiale).
   \begin{enumerate}
     \item $y'' + 2y' + y = 5$, $y(0) = 3$, $y'(0) = 3$.
     \item $y'' + 5t \sin(y) = t^3$, $y(0) = 0$, $y'(0) = 1$.
     \item $t^3y''' + 9t^2y'' + 18ty' + 6y = 5$, $y(1) = 2$, $y'(1) = 0$, $y''(1) = 0$, sur $\R_+^\ast$.  
   \end{enumerate}
-\end{exo}
+%\end{exo}
 
-\begin{exo}
+%\begin{exo}
   Déterminer une solution approchée de chacune des équations précédentes, à chaque fois par la méthode d'Euler, avec \texttt{odeint} et, si possible, théoriquement.
-\end{exo}
+%\end{exo}
 
-\begin{exo}
+%\begin{exo}
    Problème de cinétique chimique: avec trois réactifs, $A$, $B$ et
 $C$. $A$ se transforme en $B$ qui se transforme en $C$ (réactions d'ordre $1$). 
 Les concentrations de $A$, $B$ et $C$ suivent donc les équations suivantes.
@@ -729,5 +729,5 @@ regarder l'évolution
 jusqu'à $t=6\text{s}$.
 
 Tracer l'évolution des concentrations des réactifs, par la méthode d'Euler et avec scipy.
-\end{exo} 
-\end{document}
+%\end{exo} 
+%\end{document}
