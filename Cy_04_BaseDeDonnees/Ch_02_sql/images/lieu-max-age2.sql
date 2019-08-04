@@ -1,0 +1,5 @@
+SELECT *
+FROM PERSONNE
+ORDER BY datenaissance ASC
+LIMIT 1
+;

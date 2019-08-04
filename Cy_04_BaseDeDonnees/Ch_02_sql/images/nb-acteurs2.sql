@@ -1,0 +1,3 @@
+SELECT COUNT(DISTINCT idacteur) AS nbacteurs
+FROM JOUE
+;

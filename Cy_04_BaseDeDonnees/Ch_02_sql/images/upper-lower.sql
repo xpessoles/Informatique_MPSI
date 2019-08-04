@@ -1,0 +1,3 @@
+SELECT UPPER(prenom), LOWER(prenom)
+FROM PERSONNE
+;

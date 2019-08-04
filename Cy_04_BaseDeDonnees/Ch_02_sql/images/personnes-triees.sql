@@ -1,0 +1,3 @@
+SELECT * 
+FROM PERSONNE 
+ORDER BY datenaissance DESC;

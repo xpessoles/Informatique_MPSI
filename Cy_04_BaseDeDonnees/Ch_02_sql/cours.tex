@@ -1,4 +1,593 @@
-\section{Quelques définitions}
-Informatique
-Algorithmique
-Programmation
+\section{Le modèle logique (MLD)}
+
+On a représenté des données par des tables. Voici par exemple celle des films.
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+  titre & date\\
+\midrule
+  Gran Torino & 2008\\
+  The good, the Bad and the Ugly& 1966\\
+  Study in Pink & 2010\\
+  Schindler's List& 1993\\
+  Dr Strangelove&1964\\
+  Invictus& 2009\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Au départ, on a identifié les films par leur titre. On dit que le
+champ titre de la table «films» est une \emph{clé primaire} pour
+signifier que :
+\begin{itemize}
+\item tout film a un titre;
+\item pour un titre donné, il y au plus un film ayant ce titre;
+\item on fera référence à tout film par son titre.
+\end{itemize}
+Une clé primaire peut être constituée de plusieurs champs. 
+%\clearslide{}
+Exemple
+pour la table «personnes» sans identifiants :  le couple (nom, prénom). On dit qu'il
+s'agit  d'une clé primaire \emph{composée}.
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+nom & prénom & datenaissance\\
+\midrule
+Kubrick&Stanley&1928\\
+Spielberg & Steven& 1946\\
+Eastwood & Clint& 1930\\
+Cumberbatch & Benedict & 1976\\
+Freeman & Martin& 1971\\
+Leone & Sergio & 1929 \\
+McGuigan & Paul & 1963\\
+Sellers&Peter&1925\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%\clearslide{}
+
+On a vu qu'il est préférable d'utiliser des identifiants pour faire référence à une personne. La clef primaire est alors naturellement cet identifiant. 
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+id & nom & prénom & datenaissance\\
+\midrule
+1&Kubrick&Stanley&1928\\
+2&Spielberg & Steven& 1946\\
+3&Eastwood & Clint& 1930\\
+4&Cumberbatch & Benedict & 1976\\
+5&Freeman & Martin& 1971\\
+6&Leone & Sergio & 1929 \\
+7&McGuigan & Paul & 1963\\
+8&Sellers&Peter&1925\\
+\bottomrule
+\end{tabular}
+\end{center}
+%\clearslide{}
+
+Dans la table «joue» (sans identifiants), on fait référence à ces clés.
+On dit que les champs (nom, prénom) de la table «joue» sont une \emph{clé
+étrangère} car ils font référence à une clé primaire de la table
+«personnes».
+
+\begin{center}
+  \begin{tabular}{llll}
+    \toprule
+    nom & prenom & titre & nom (de personnage)\\
+    \midrule
+    Eastwood & Clint & {\tiny The good, the Bad and the Ugly}& Blondie\\
+    Eastwood & Clint & Gran Torino& Walt Kowalski\\
+    Cumberbatch&Benedict&Study in Pink& Sherlock Holmes\\
+    Freeman & Martin&Study in Pink&Dr John Watson\\
+    Selers & Peters&Dr Strangelove&Dr Strangelove\\
+    Selers & Peters&Dr Strangelove&{\tiny Group Capt. Lionel Mandrake}\\
+    Selers & Peters&Dr Strangelove&{\small President Merkin Muffley}\\
+\bottomrule
+  \end{tabular}
+\end{center}
+
+%\clearslide{}
+
+%\begin{exo}
+  Voici la table de la relation «joue», avec les identifiants.
+\begin{center}
+  \begin{tabular}{lll}
+    \toprule
+    idacteur&idfilm&idpersonnage \\
+    \midrule
+    3&2&2\\
+    3&1&1\\
+    4&3&3\\
+    5&3&4\\
+    8&5&5\\
+    8&5&6\\
+    8&5&7\\
+    \bottomrule
+  \end{tabular}
+\end{center}
+Que peut-on considérer comme clef primaire ? Y a-t-il une ou des clef étrangères ?
+%\end{exo}
+
+
+
+\section{Vers le modèle physique (MPD)}
+
+Pour implanter  cette base de  données on peut choisir  n'importe quel
+langage de programmation.
+
+\textbf{Mais} tous les langages ne sont pas aussi adaptés à la
+modélisation et l'interrogation des données.
+
+
+\subsection{SQL}
+
+Nous allons étudier le langage \textbf{SQL}\footnote{Prononcer comme le mot anglais
+  \textit{sequel}.}, pour : \emph{Standard Query Language}.
+
+
+Notamment
+\begin{itemize}
+\item C'est un langage de définition de données (LDD ou DDL), pour définir le
+  format des données.
+\item C'est un langage de manipulation de données (LMD ou DML) pour ajouter ou
+  supprimer des données.
+\item Il possède une instruction SELECT pour effectuer des requêtes (recherches) sur
+  les données.
+\end{itemize}
+
+C'est \textbf{le} standard actuel (décliné en différentes versions),
+implanté dans les systèmes de gestion de bases de données.
+
+%\clearslide{}
+\subsection{Définition de tables}
+
+Nous allons utiliser SQLite, un outil très dépouillé pour la
+manipulation d'une base de données.
+
+En SQlite, une base de données est stockée dans un fichier (et tout
+fichier contient une unique base de données).
+
+%\clearslide{}
+\subsubsection{Lancement de SQLite}
+
+En ligne de commande, taper
+\begin{Verbatim}[commandchars=\\\{\}]
+sqlite3 \emph{f}
+\end{Verbatim}
+pour lancer l'interface (textuelle) de sqlite3.
+
+Cette  commande:
+\begin{itemize}
+\item  ouvre  la base  de  données contenue  dans le  fichier
+\emph{f};
+\item crée cette base si ce fichier n'existe pas.
+\end{itemize}
+
+%\clearslide{}
+\subsubsection{Table «personne»}
+
+On va créer une table «personne» avec 4 champs:
+\begin{itemize}
+\item \verb+id+
+\item \verb+nom+
+\item \verb+prenom+
+\item \verb+datenaissance+
+\end{itemize}
+
+Il reste à préciser le \emph{type} des données que contiendront ces
+champs.
+
+\subsubsection{Types de données en SQL}
+SQL permet de nombreux types de données, dont :
+\begin{description}
+\item[VARCHAR($n$)] (une chaîne de caractères d'au plus $n$ caractères) ;
+\item[INT ou INTEGER] (entier) ;
+\item[REAL] (nombre flottant) ;
+\item[DECIMAL($p$, $s$)] (décimal sur $p$ chiffres, dont $s$ après la virgule) ;
+\item[DATE] (une date, par exemple : 2016-02-29)
+\item[TIME] (une heure de la journée, par exemple 15:43:07, précision en
+  général $10^{-7} s$) ;
+\item[DATETIME] (couple des deux précédents, par exemple 2016-02-29 15:43:07).
+\end{description}
+
+
+\subsection{Définition des tables}
+
+La définition de tables est l'objet de la partie de SQL appelée DDL (\emph{Data Definition
+Language}). Les deux opérations les plus importantes sont :
+\begin{description}
+\item[CREATE] pour créer une table ;
+\item[DROP] pour effacer une table («DROP TABLE \emph{nomtable};»).
+\end{description}
+
+On les utilise de la manière suivante.
+
+
+
+\lstset{language=SQL,morekeywords={REFERENCES}}
+\lstinputlisting{images/create-personne.sql}
+
+On fera attention à 
+\begin{itemize}
+\item ne pas oublier de terminer les commandes par des «;»
+\item noter la déclaration de la clé primaire.
+\end{itemize}
+
+%\clearslide{}
+
+On crée de même la table «personnage»:
+\lstinputlisting{images/create-personnage.sql}
+
+
+
+%\clearslide{}
+et la table «joue»
+\lstinputlisting{images/create-joue.sql}
+
+Notez bien les déclarations de clés étrangères.
+Enfin, on crée la table \og film\fg .
+\lstinputlisting{images/create-film.sql}
+%\clearslide{}
+\subsection{Manipulation des tables }
+
+La manipulation de tables est l'objet de la partie de SQL appelée DML (\emph{Data Manipulation
+Language}). Voici quelques actions possibles.
+\subsubsection{Insertions de valeurs}
+
+On peut insérer une donnée:
+\begin{lstlisting}
+INSERT INTO PERSONNE (nom, prenom, datenaissance)
+  VALUES('Kubrick', 'Stanley', date('1928-07-26'));
+\end{lstlisting}
+
+%\clearslide{}
+On remarquera que l'on n'a pas donné de valeur pour la variable \texttt{id}.
+
+\begin{itemize}
+\item Pour une clé primaire entière, la base de données donne une
+  valeur si on ne la fournit pas.
+\item On peut indiquer lors de la création de
+  la table une valeur par défaut pour les champs manquants, sinon la
+  valeur \texttt{NULL} est mise par défaut, sauf si on l'a interdit
+  lors de la création de la table.
+\end{itemize}
+
+%\clearslide{}
+\begin{exemple}
+La commande
+\begin{lstlisting}
+INSERT INTO PERSONNE (prenom, nom)
+  VALUES ('Clint', 'Eastwood');
+\end{lstlisting}
+est accepté (pas de date de naissance renseignée), alors que 
+\begin{lstlisting}
+INSERT INTO PERSONNE (nom) VALUES ('Spielberg');
+\end{lstlisting}
+déclenche l'erreur suivante. 
+\begin{Verbatim}
+Error: PERSONNE.prenom may not be NULL
+\end{Verbatim}
+\end{exemple}
+
+
+
+\begin{rem}
+  Il n'y a pas besoin de mettre les champs dans le même ordre que dans la
+déclaration de la table.
+\end{rem}
+ 
+%\clearslide{}
+
+
+%\clearslide{}
+\subsubsection{Modification de valeurs}
+On peut modifier une valeur déjà renseignée. 
+\begin{lstlisting}
+UPDATE PERSONNE
+SET datenaissance = date('1930-05-31')
+WHERE prenom = 'Clint' AND nom = 'Eastwood';
+\end{lstlisting}
+
+\subsubsection{Suppression de valeurs}
+On peut aussi supprimer des entrées de la base de données. 
+\begin{lstlisting}
+DELETE FROM PERSONNE WHERE prenom='Clint';
+\end{lstlisting}
+%\clearslide{}
+
+\subsubsection{Vérification des contraintes de clés primaires}
+Lorsque l'on ajoute une valeur dans une nouvelle base et que l'on veut spécifier la clef primaire, cette dernière ne doit bien évidemment pas avoir déjà été affectée. 
+\begin{lstlisting}
+INSERT INTO PERSONNE (id, prenom, nom)
+  VALUES (3, 'Steven', 'Spielberg');
+INSERT INTO PERSONNE (id, prenom, nom)
+  VALUES (3, 'Benedict', 'Cumberbatch');
+\end{lstlisting}
+La première insertion acceptée, la deuxième donne:
+\begin{Verbatim}
+Error: PRIMARY KEY must be unique
+\end{Verbatim}
+
+%\clearslide{}
+\subsection{Requêtes}
+
+Les requêtes SQL sont introduites par le mot-clé \texttt{SELECT}.
+
+Une requête renvoie une liste de $n$-uplets, que l'on peut identifier à une table.  De très nombreuses variantes de cette requête sont possibles, mais elles ont toutes en commun la structure suivante. 
+\begin{lstlisting}
+  SELECT col 
+  FROM t ;
+\end{lstlisting}
+qui renvoie les colonnes désignées par \texttt{col} de la table \texttt{t}. On remarquera que \texttt{t} peut être le résultat d'une  autre requête, c'est-à-dire que l'on pourra avoir des constructions du type
+\begin{lstlisting}
+  SELECT col 
+  FROM (SELECT colbis 
+        FROM [...]
+  );
+\end{lstlisting}
+Enfin, on pourra renommer les colonnes (on dit qu'on leur donne un \emph{alias}) par la commande \texttt{AS} : 
+\begin{lstlisting}
+  SELECT col AS alias 
+  FROM t ;
+\end{lstlisting}
+
+
+\subsubsection{Lister tous les éléments d'une table}
+On dispose d'un symbole \emph{joker} \texttt{*}, qui désigne toutes les colonnes d'une table. 
+\lstinputlisting{images/star-from-personne.sql}
+% columns/nom/.style={string type},
+% columns/prenom/.style={string type},
+% columns/datenaissance/.style={string type},
+\pgfplotstableset{col sep=tab,
+  every head row/.style={before row=\toprule,after row=\midrule},
+  every last row/.style={after row=\bottomrule},
+  string type,
+  column type=l,
+}
+\begin{center}
+\pgfplotstabletypeset{images/star-from-personne.csv}
+\end{center}
+%\clearslide{}
+\subsubsection{Lister certaines colonnes d'une table}
+
+\lstinputlisting{images/nom-prenom-personne.sql}
+\begin{center}
+\pgfplotstabletypeset{images/nom-prenom-personne.csv}
+\end{center}
+
+\subsubsection{Lister certaines lignes d'une table.}
+Si on sait que Clint Eastwood est le réalisateur no 3:
+\lstinputlisting{images/films-eastwood.sql}
+\begin{center}
+\pgfplotstabletypeset{images/films-eastwood.csv}
+\end{center}
+
+Et sinon, on utilise une requête \emph{croisée}, sur les tables \og film \fg\ et \og personne\fg\ :
+\lstinputlisting{images/films-eastwood2.sql}
+\begin{center}
+\pgfplotstabletypeset{images/films-eastwood2.csv}
+\end{center}
+
+
+% \lstinputlisting{star-from-personne-film.sql}
+% \begin{center}
+% \pgfplotstabletypeset{star-from-personne-film.csv}
+% \end{center}
+
+\subsubsection{Calcul de jointure.}
+
+Dans l'exemple précédent, on construit le \emph{produit cartésien} des tables \texttt{FILM} et \texttt{PERSONNE}, écrit comme la table \texttt{FILM, PERSONNE}. 
+Cela revient, pour chaque ligne de la table \texttt{FILM}, de lui concaténer chaque ligne de la table \texttt{PERSONNE}. 
+Cela crée une table ayant autant de lignes que le produit des nombre de lignes des tables \texttt{FILM} et \texttt{PERSONNE}.
+
+L'instruction précédente ne conserve dans cette table produit que les lignes pour lesquelles les identifiants du réalisateur du film et celui de la personne coïncident. 
+On a donc concaténé à chaque ligne de la table \texttt{FILM} la ligne de la table \texttt{PERSONNE} du réalisateur de ce film. 
+On dit que l'on a réalisé une \emph{jointure} de ces deux tables, selon le critère \texttt{idrealisateur = PERSONNE.id}. 
+
+On peut reformuler la requête précédente en utilisant l'instruction spécifique \texttt{JOIN ON}.
+\lstinputlisting{images/films-eastwood-join.sql}
+\begin{center}
+\pgfplotstabletypeset{images/films-eastwood-join.csv}
+\end{center}
+
+\begin{rem}
+  On peut mettre tout type de clause booléenne à droite du \textbf{\texttt{ON}}, même si seul l'exemple présenté est au programme. 
+  
+  On peut aussi mettre plusieurs instructions \texttt{JOIN ON}, qui partent toutes d'une même table centrale. 
+\end{rem}
+
+
+\subsubsection{Ensembles ou listes ?}
+Commençons par un exemple. 
+\lstinputlisting{images/acteurs-non-distincts.sql}
+\begin{center}
+\pgfplotstabletypeset{images/acteurs-non-distincts.csv}
+\end{center}
+
+\texttt{SELECT} ne renvoie pas un ensemble de $n$-uplets mais en fait
+une liste de $n$-uplets: il peut y avoir des doublons. On peut les
+supprimer:
+
+\lstinputlisting{images/acteurs.sql}
+\begin{center}
+\pgfplotstabletypeset{images/acteurs.csv}
+\end{center}
+
+\subsubsection{Tri des résultats.}
+On peut trier la liste renvoyée (par ordre alphabétique sur les chaînes de caractères, temporel sur les dates).
+
+On peut trier par ordre croissant avec le mot clef \texttt{ASC}.
+\lstinputlisting{images/acteurs-tries.sql}
+\begin{center}
+\pgfplotstabletypeset{images/acteurs-tries.csv}
+\end{center}
+
+On peut trier par ordre décroissant avec le mot clef \texttt{DESC}.
+\lstinputlisting{images/personnes-triees.sql}
+\begin{center}
+%\pgfplotstabletypeset{images/personnes-triees.csv} % FICHIER A TROUVER
+\end{center}
+
+
+\subsubsection{Requêtes agrégats.}
+On peut compter le nombre de lignes d'une table par la fonction  \texttt{COUNT}.
+\'Etant donné une colonne, on peut facilement calculer des moyennes (fonction \texttt{AVG}), obtenir le maximum (\texttt{MAX}) et le minimum (\texttt{MIN}), ou bien une somme (\texttt{SUM}). 
+\lstinputlisting{images/nb-films.sql}
+\begin{center}
+\pgfplotstabletypeset{images/nb-films.csv}
+\end{center}
+
+%\clearslide{}
+\lstinputlisting{images/date-prem-film.sql}
+\begin{center}
+\pgfplotstabletypeset{images/date-prem-film.csv}
+\end{center}
+
+%\clearslide{}
+
+On peut calculer des cumuls. Par exemple, le nombre de films que les
+différents réalisateurs ont tournés:
+
+\lstinputlisting{images/realisateurs-nb.sql}
+\begin{center}
+\pgfplotstabletypeset{images/realisateurs-nb.csv}
+\end{center}
+
+%\clearslide{}
+Pour compter dans combien de
+films chaque acteur a joué:
+
+\lstinputlisting{images/acteurs-nb-roles.sql}
+\begin{center}
+\pgfplotstabletypeset{images/acteurs-nb-roles.csv}
+\end{center}
+
+%\clearslide{}
+Aïe, ce n'est clairement pas ce qu'on voulait (Peter Sellers n'a joué
+que
+dans un film de notre base de données). Pourquoi?
+%\clearslide{}
+
+Façon possible de corriger (compliquée)
+\lstinputlisting{images/acteurs-nb-films.sql}
+\begin{center}
+\pgfplotstabletypeset{images/acteurs-nb-films.csv}
+\end{center}
+%\clearslide{}
+La condition \texttt{WHERE} porte sur les données qu'on va ensuite
+agréger. On peut aussi mettre des conditions sur les agrégats à
+retenir:
+
+\lstinputlisting{images/acteurs-plusieurs-roles.sql}
+\begin{center}
+\pgfplotstabletypeset{images/acteurs-plusieurs-roles.csv}
+\end{center}
+
+\subsubsection{Opérations sur les tables.}
+
+On peut faire l'union de deux tables avec la commande \texttt{UNION}, l'intersection de deux tables avec la commande \texttt{INTERSECT} et la différence (au sens ensembliste) de deux tables avec la commande \texttt{EXCEPT}. 
+Tout ceci permet d'écrire plus simplement des requêtes, qui demanderaient des écritures lourdes à base de \texttt{WHERE}, \texttt{AND}, \texttt{OR} \textit{etc.}
+
+Par exemple, de manière quelque peu factice, on peut vouloir obtenir  la liste des personnes nées après 1950 ou dont l'identifiant est inférieur ou égal à 4. 
+
+\lstinputlisting{images/ex-union.sql}
+\begin{center}
+\pgfplotstabletypeset{images/ex-union.csv}
+\end{center}
+
+De même, on peut obtenir la liste des personnes nées après 1950 et dont l'identifiant est inférieur ou égal à 4. 
+
+\lstinputlisting{images/ex-intersect.sql}
+\begin{center}
+\pgfplotstabletypeset{images/ex-intersect.csv}
+\end{center}
+
+Enfin, on peut obtenir la liste des personnes nées après 1950, exceptées celles dont l'identifiant est inférieur ou égal à 4. 
+
+\lstinputlisting{images/ex-except.sql}
+\begin{center}
+\pgfplotstabletypeset{images/ex-except.csv}
+\end{center}
+
+\subsection{Annexes}
+
+Cette partie ne sera pas traitée en cours.
+
+\subsubsection{Calcul du lieu d'un maximum, d'un minimum.}
+C'est une question assez fréquente. On peut par exemple chercher à déterminer le ou les acteurs les plus âgés (\emph{i.e.} qui possède la date de naissance minimale. 
+
+Une première requête imbriquée naïve. 
+
+\lstinputlisting{images/lieu-max-age1.sql}
+\begin{center}
+\pgfplotstabletypeset{images/lieu-max-age1.csv}
+\end{center}
+
+Sous la condition qu'il n'y a qu'un enregistrement réalisant ce minimum, on pourra aussi utiliser l'idée suivante : il suffit de trier la table par dates de naissances, puis de conserver uniquement le premier enregistrement (fonction \texttt{LIMIT}, on pourra aussi utiliser  \texttt{OFFSET k} pour passer les \texttt{k} premières lignes).
+\lstinputlisting{images/lieu-max-age2.sql}
+\begin{center}
+FICHIER MANQUANT %\pgfplotstabletypeset{images/lieu-max-age2.csv}
+\end{center}
+
+\subsubsection{Compter des enregistrements différents.}
+
+On peut essayer de compter le nombre d'enregistrements ayant des valeurs distinctes. Par exemple : combien d'acteurs ont joué dans les films de notre base ? 
+
+Commençons part une requête imbriquée naïve. 
+\lstinputlisting{images/nb-acteurs1.sql}
+\begin{center}
+FICHIER MANQUANT %\pgfplotstabletypeset{images/nb-acteurs1.csv}
+\end{center}
+
+On peut aussi écrire cela comme suit. 
+\lstinputlisting{images/nb-acteurs2.sql}
+\begin{center}
+\pgfplotstabletypeset{images/nb-acteurs2.csv}
+\end{center}
+\subsubsection{Opérations sur les nombres et les chaînes de caractères.}
+
+On peut réaliser des opérations arithmétiques sur les nombres : \texttt{+} pour l'addition, \texttt{-} pour la soustraction \emph{etc.}    
+
+Par exemple, pour l'addition.
+\lstinputlisting{images/addition.sql}
+\begin{center}
+FICHIER MANQUANT %\pgfplotstabletypeset{images/addition.csv}
+\end{center}
+
+Attention, comme en Python, les opérations sur les entiers donnent des résultats entiers. 
+\lstinputlisting{images/division1.sql}
+\begin{center}
+FICHIER MANQUANT %\pgfplotstabletypeset{images/division1.csv}
+\end{center}
+
+Pour effectuer des divisions flottantes (par exemple, pour calculer ici un pourcentage), on pourra utiliser une fonction de conversion ou bien ruser avec la division entière.
+\lstinputlisting{images/division2.sql}
+\begin{center}
+FICHIER MANQUANT %\pgfplotstabletypeset{images/division2.csv}
+\end{center}
+
+On pourra mettre des chaînes de caractères en minuscules ou en majuscules.
+\lstinputlisting{images/upper-lower.sql}
+\begin{center}
+FICHIER MANQUANT %\pgfplotstabletypeset{images/upper-lower.csv}
+\end{center}
+
+Cette liste n'est bien entendu pas exhaustive. 
+
+\section{Exercices}
+
+Donner des requêtes pour:
+
+\begin{itemize}
+\item trouver le nombre d'acteurs qui ont joué au moins deux rôles ;
+\item trouver les acteurs qui sont aussi des réalisateurs ;
+\item trouver les acteurs nés le 1er janvier 1930 ou après ;
+\item compter les acteurs nés avant le 1er janvier 1940 ;
+\item trouver les acteurs qui ont joué au moins dans un film où jouait
+  Martin Freeman ;
+\item trouver les réalisateurs qui ont dirigé Clint Eastwood.
+\end{itemize}
