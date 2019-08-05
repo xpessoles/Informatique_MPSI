@@ -1,4 +1,766 @@
-\section{Quelques définitions}
-Informatique
-Algorithmique
-Programmation
+\section{Résumé des épisodes précédents}
+
+On a déjà vu les notions suivantes.
+\begin{enumerate}
+\item MCD (Entité-Association) pour la représentation conceptuelle d'un problème.
+\item MLD pour transcrire le MCD en tables.
+\item Implantation dans une base de données SQL (MPD).
+\item Les requêtes SQL.
+\end{enumerate}
+
+%\clearslide{}
+
+\section{Problème}
+
+Comment raisonner sur les opérations effectuées sur une base de
+données ? Pour cela, on a besoin de  modéliser  ce problème correctement
+(comprendre : mathématiquement).
+
+La modélisation que nous allons utiliser est \emph{le modèle relationnel}.
+
+On peut en distinguer deux parties.
+\begin{description}
+\item[Structure du modèle relationnel :] modélisation des données (contenues dans des tables).
+\item[Algèbre relationnelle :] modélisation mathématique des requêtes SQL.
+\end{description}
+
+\section{Structure du modèle relationnel}
+
+On veut formaliser la notion de tables contenant des colonnes nommées.
+
+\begin{defi}[Attribut, domaine]
+  On appelle  ensemble d'\emph{attributs} un ensemble noté \att{} (potentiellement infini).
+
+  Pour tout attribut $a\in\att$, on appelle \emph{domaine de }$a$ un ensemble de
+  \emph{constantes} noté \dom($a$) (analogue au \emph{type} de $a$).
+
+  Le domaine, noté \dom{}, est union de toutes les constantes de tous les attributs : 
+  \begin{equation*}
+    \dom = \bigcup_{a \in \att} \dom(a).
+  \end{equation*}
+\end{defi}
+
+\begin{exemple}
+  Attributs de notre base : $\tttitre$, $\ttnom$,
+$\ttprenom$, $\ttid$,
+$\ttdate$, $\ttdatenais$, $\ttidr$, $\ttidfilm$, $\ttidacteur$, $\ttidpersonnage$. 
+
+Le domaine de l'attribut $\tttitre$ : $\{$\texttt{"Gran Torino"}; \texttt{"The Good, the Bad and the Ugly"}; \texttt{"Study in Pink"}; \texttt{"Schindler's List"}; \texttt{"Dr Strangelove"}; \texttt{"Invictus"} $\}$. 
+\end{exemple}
+
+%\clearslide{}
+
+\begin{defi}[Schémas]
+  On appelle \emph{schéma relationnel} un $n$-uplet d'attributs (on parlera aussi de champs d'un schéma relationnel). L'ensemble des noms des schémas relationnels, noté \relname, est supposé disjoint de \att. 
+  
+  Un \emph{schéma de bases de données} est un ensemble fini de schémas relationnels.
+\end{defi}
+
+%\clearslide{}
+
+\begin{exemple}
+  Dans notre base de données, nous avons quatre schémas relationnels : 
+  \begin{align*}
+    \PERSONNE = & (\ttid,\ttprenom,\ttnom,\ttdatenais) \\
+    \FILM = & (\ttid,\tttitre,\ttdate,\ttidr) \\
+    \PERSONNAGE = & (\ttid,\ttnom) \\
+    \JOUE = & (\ttidacteur, \ttidfilm, \ttidr)
+  \end{align*}
+  et nous considérons le schéma de base de donnée 
+  \begin{equation*}
+    \texttt{MPSIMDB} = (\PERSONNE,\FILM,\PERSONNAGE,\JOUE).
+  \end{equation*}
+  Les champs de $\PERSONNE$ sont : $\ttid$, $\ttprenom$, $\ttnom$, $\ttdatenais$.
+\end{exemple}
+
+
+
+
+%\clearslide{}
+
+On notera parfois $\FILM[\ttid,\ \tttitre,\ \ttdate,\ \ttidr]$ pour dénoter $\FILM$
+et rappeler les champs de $\FILM$.
+
+Pour deux $n$-uplets d'attributs $U$, $V$, on notera $V \subset U$ si les champs de $V$ sont aussi dans $U$ et s'y trouvent dans le même ordre. 
+\begin{exemple}
+  On pourra noter 
+  \begin{equation*}
+    (\ttprenom,\ttnom) \subset (\ttid,\ttprenom,\ttnom,\ttdatenais)
+  \end{equation*}
+  et l'on pourra aussi noter 
+  \begin{equation*}
+    \PERSONNE[\ttprenom,\ttnom] = (\ttprenom,\ttnom).
+  \end{equation*}
+\end{exemple}
+
+
+%\clearslide{}
+
+\begin{defi}[Relation]
+  Une \emph{relation} $R$ (ou table) associée à un schéma relationnel $S = (A_1,\dots,A_n)$, ou \emph{instance
+    d'un schéma relationnel $R[S]$}, est un ensemble fini de $n$-uplets appartenant à $\dom(A_1) \times \dots \times \dom(A_n)$.
+\end{defi}
+%\clearslide{}
+
+\begin{exemple}
+  La table associée au schéma $$\FILM[\ttid,\ \tttitre,\ \ttdate,\ \ttidr]$$ est la suivante. 
+  \begin{align*}
+    (1&,\texttt{"Gran Torino"}&,2008&,3)\\
+    (2&,\texttt{"The Good, the Bad and the Ugly"}&,1966&,6) \\
+    (3&,\texttt{"Study in Pink"}&,2010&,7)\\
+    (4&,\texttt{"Schindler's List"}&,1993&,2)\\
+    (5&,\texttt{"Dr Strangelove"}&,1964&,1)\\
+    (6&,\texttt{"Invictus"}&,2009&,3)
+  \end{align*}
+\end{exemple}
+
+%\clearslide{}
+Pour un élément $t$ d'une relation $R$ sur un schéma $S = (A_1,\dots,A_n)$, pour $T  \subset S$ on notera $t[T]$ les éléments de $t$ portant sur les champs de $T$. 
+
+\begin{exemple}
+  Sur le schéma $\FILM[\ttid,\ \tttitre,\ \ttdate,\ \ttidr]$ et la relation écrite précédemment, avec 
+  \begin{equation*}
+    t = (1,\texttt{"Gran Torino"},2008,3), 
+  \end{equation*}
+  on pourra écrire 
+  \begin{equation*}
+    t[\ttid] = 1
+  \end{equation*}
+  et 
+  \begin{equation*}
+    t[\tttitre,\ \ttdate]  =(\texttt{"Gran Torino"},2008).
+  \end{equation*}
+
+\end{exemple}
+
+
+%\clearslide{}
+\begin{defi}[Base de données]
+  Une \emph{base de données} est la donnée d'un schéma de base de données et, pour chacun de ces schémas relationnels, d'une relation sur ce schéma. 
+\end{defi}
+
+\begin{exemple}
+  La base de donnée \texttt{MPSIMDB} détaillée dans les cours précédent.
+\end{exemple}
+
+%\clearslide{}
+\section{Algèbre relationnelle}
+
+On étudie des opérations sur les données d'une base (similaire aux LCI vue en cours de mathématiques).
+
+%\clearslide{}
+Nous détaillerons neuf opérations :
+\begin{enumerate}
+\item projection ;
+\item sélection ;
+\item renommage ;
+\item produit cartésien ;
+\item division cartésienne ; 
+\item jointure (naturelle) ;
+\item union ;
+\item intersection ;
+\item différence.
+\end{enumerate}
+
+%\clearslide{}
+\subsection{Projection}
+
+Quels sont les noms et les prénoms des personnes de notre base de donnée ? Pour répondre à la question, il suffit de prendre les colonnes
+$\ttnom$ et $\ttprenom$ de la table $\PERSONNE{}$. On dit qu'on \emph{projette} la
+table $\PERSONNE$ sur les attributs $(\ttnom,\ \ttprenom)$.
+
+%\clearslide{}
+\begin{defi}[Projection]
+  Soit $n\in \N^{*}$ et $A_{1}, \ldots{}, A_{n}\in
+  \att$. On appelle opération de \emph{projection sur les attributs
+    $(A_{1}, \ldots, A_{n})$}
+  et l'on note $\pi_{A_{1},\ldots,A_{n}}$ l'opération définie par
+  \begin{equation*}
+    \pi_{A_{1},\ldots,A_{n}}(R) = \left\{t[A_{1}\,\ldots\,A_{n}] | t \in R \right\}
+  \end{equation*}
+  pour toute relation $R$ ayant au moins les attributs $A_{1}$,
+  \ldots{}, $A_{n}$.
+  
+  Ainsi, la projection d'une relation sur $(A_{1}, \ldots{}, A_{n})$ est une relation de schéma $(A_1,\dots,A_n)$.
+\end{defi}
+
+%\clearslide{}
+En SQL, une projection se traduit par l'instruction \texttt{SELECT} (qui ne correspond donc pas à une sélection !). 
+\begin{exemple}
+  On obtient les noms et les prénoms des personnes de notre base de donnée par l'opération 
+  \begin{equation*}
+    \pi_{\ttnom,\ \ttprenom}(\PERSONNE).
+  \end{equation*}
+  La requête SQL traduisant cette projection est 
+\begin{verbatim}
+SELECT nom, prenom
+FROM PERSONNE ; 
+\end{verbatim}
+
+\end{exemple}
+%\clearslide{}
+\subsection{Sélection}
+
+Quelles sont les personnes dont le prénom est «Clint» ? Pour répondre à la question, on \emph{sélectionne}, dans la table
+\PERSONNE{}, les nuplets dont le champ \ttprenom{} est «Clint».
+
+%\clearslide{}
+\begin{defi}[Sélection]
+  Pour un critère de sélection $C$ (fonction à valeurs booléennes définie sur un $n$-uplet de domaines), on définit l'opération de sélection $\sigma_{C}$ qui, à toute relation $R$ dont les champs sont compatibles avec $C$, associe
+  \begin{equation*}
+    \sigma_C(R) = \left\{t \in R~|~ C(t)\right\}.
+  \end{equation*}
+  Ainsi, on sélectionne les élements de $R$ vérifiant $C$, $\sigma_C(R)$ étant une relation de même schéma relationnel que $R$. 
+  %\clearslide{}
+  Pour deux attributs $A,B\in \att$ et $a\in \dom$, on définit notamment les opérations de 
+  sélection $\sigma_{A=a}$ et $\sigma_{A=B}$, comme les fonctions définies
+  par
+  \begin{align*}
+    \sigma_{A=a}(R)&=\left\{t\in R~|~t[A]=a\right\},\\
+    \sigma_{A=B}(R)&=\left\{t\in R~|~t[A]=t[B]\right\}.
+  \end{align*}
+  pour toute relation $R$ ayant au moins $A$ (resp. et $B$) comme 
+  attribut(s).
+\end{defi}
+
+%\clearslide{}
+En SQL, la sélection se traduit par l'instruction \texttt{WHERE}. 
+\begin{exemple}
+  Les personnes dont le prénom est «Clint» sont obtenues par 
+  \begin{equation*}
+    \sigma_{\ttprenom = \textrm{"Clint"}}(\PERSONNE).
+  \end{equation*}
+  La requête SQL traduisant cette sélection est 
+\begin{verbatim}
+SELECT * 
+FROM PERSONNE 
+WHERE prenom = "Clint";
+\end{verbatim}
+\end{exemple}
+
+%\clearslide{}
+\subsection{Renommage}
+
+Comment faire lorsque deux tables partagent un même attibut et que l'on veut les utiliser conjointement ? 
+On peut alors  \emph{renommer} un des champs concernés. 
+
+\begin{defi}[Renommage]
+  Soit $U$ un ensemble fini d'attributs.  On appelle \emph{renommage d'attributs} toute fonction $f : U\to \att$
+  injective.
+
+  On appelle \emph{opération de renommage $\rho_{f}$ associée à $f$}
+  l'opération qui, à $R[A_1,\dots,A_n]$ associe la relation 
+  \begin{equation*}
+    \rho_{f}(R)[f(A_1),\dots,f(A_n)]=\left\{ t ~|~ t \in R\right\}.
+  \end{equation*}
+  Ainsi, $\rho_f$ ne change que le schéma d'une relation, sans modifier ses éléments. 
+%\clearslide{}
+
+  Souvent:
+  \begin{itemize}
+  \item  $U$ est clair d'après le contexte;
+  \item et $f$ laisse invariant tous les éléments de $U$ sauf $p$
+    éléments $A_{1}$, \ldots{}, $A_{p}$ dont les images respectives
+    sont $B_{1}$, \ldots{}, $B_{p}$.
+  \end{itemize}
+  l'opération de renommage $\rho_{f}$ est alors notée
+  $\rho_{A_{1}\rightarrow B_{1},\ldots,A_{p}\rightarrow B_{p}}$
+\end{defi}
+
+%\clearslide{}
+En SQL, une projection se traduit par l'instruction \texttt{AS}.
+\begin{exemple}
+  Renommer la colonne \ttdate\ de la table \FILM\ en la colonne \texttt{Date\_de\_sortie} correspond à l'opération 
+  \begin{equation*}
+    \rho_{\ttdate \rightarrow \texttt{Date\_de\_sortie}} (\FILM).
+  \end{equation*}
+La requête SQL traduisant ce renommage est 
+\begin{verbatim}
+SELECT id, titre, date AS Date_de_sortie, idrealisateur
+FROM FILM;
+\end{verbatim}
+
+\end{exemple}
+
+
+\subsection{Produit cartésien}
+
+Peut-on obtenir une table comportant toutes les combinaisons possibles de couples d'éléments de \PERSONNE\ et de \JOUE\ ?
+
+\begin{rem} 
+  En mathématiques, $A\times B$ désigne l'ensemble des couples $(x,y)$
+pour $x\in A$ et $y\in B$. Ici, ce sera l'ensemble des $x\oplus y$ où
+$x\oplus y$ désigne la concaténation des deux nuplets $x$ et $y$,
+supposés n'avoir aucun attribut commun.
+\end{rem}
+
+
+%\clearslide{}
+\begin{defi}[Produit cartésien]
+  Soit $R$ et $S$ deux relations dont les ensembles de champs $U$ et $V$ vérifient
+  $U\cap V =\emptyset$. On note $R\times S$ la relation portant sur les champs $U\cup
+  V$ définie par
+  \begin{equation*}
+    R\times S  = \left\{u\oplus v ~|~ u\in R \text{ et } v\in S\right\} 
+  \end{equation*}
+  On pourra bien entendu construire des produits cartésiens de plus de deux relations. 
+\end{defi}
+%\clearslide{}
+
+En SQL, on construit un produit cartésien en renseignant plusieurs tables, séparées par une virgule. 
+\begin{exemple}
+  Le produit cartésien de \PERSONNE\ et de \JOUE\ se note tout simplement $\PERSONNE \times \JOUE$. 
+  La requête SQL traduisant ce produit est 
+\begin{verbatim}
+SELECT * 
+FROM PERSONNE, JOUE;
+\end{verbatim}
+\end{exemple}
+
+%\clearslide{}
+
+\begin{rem}
+  Il faudra donc parfois renommer des colonnes avant de pouvoir construire des produits cartésiens. 
+  On pourra écrire en SQL \texttt{TABLE.attribut} afin de lever les ambiguités. 
+\end{rem}
+
+\begin{exemple}
+  La requête SQL correspondant à l'opération $\PERSONNE \times \rho_{\ttid \rightarrow \ttidfilm}(\FILM)$ est
+\begin{verbatim}
+SELECT PERSONNE.id, nom, prenom, datenaissance, 
+       FILM.id AS idfilm, titre, date, idrealisateur
+FROM PERSONNE, FILM;
+\end{verbatim}
+
+\end{exemple}
+
+
+%\clearslide{}
+\subsection{Division cartésienne}
+
+Quels sont les noms des acteurs ayant joué dans \textbf{tous} les films réalisés par Clint Eastwood ? 
+
+Considérons les notations suivantes
+\begin{itemize}
+\item  $J[\ttnom, \tttitre]$ est l'ensemble des $(n,t) \in (\dom(\ttnom),\dom(\tttitre))$ pour chaque 
+  \begin{itemize}
+    \item[\textbullet] $n$ nom d'une personne ;
+    \item[\textbullet] $t$ titre de film ;
+    \item[\textbullet] tels que $n$ a joué dans $t$ et Clint Eastwood a réalisé $t$.
+  \end{itemize}
+% \item  $P[\ttnom]$ est l'ensemble des $n \in \dom(\ttnom)$ noms de personnes (\emph{i.e.} $P=\pi_{\ttnom}(\PERSONNE)$).
+\item $E[\tttitre]$ est l'ensemble des $t \in \dom(\tttitre)$ tels que $t$ a été réalisé par Clint Eastwood.
+\item $K[\ttnom]$ l'ensemble des  $n \in \dom(\ttnom)$ tels que $n$ a
+  joué dans \textbf{tous} les films de Clint Eastwood.
+\end{itemize}
+
+$K$ est la plus grande relation sur $\left\{\ttnom\right\}$ vérifiant
+$K\times E \subset J$.
+
+Cette relation est appelée \emph{division cartésienne} de $J$ par $E$.
+
+%\clearslide{}
+\begin{defi}[Division cartésienne]
+  Soit $R$ et $S$ deux relations, respectivement sur $U$ et $V$ avec
+  $U\subset V$. Alors la \emph{division cartésienne} de $S$ par $R$
+  est la relation sur $V\setminus U$ notée $S\div R$ et définie par:
+  \begin{align*}
+    S\div R
+    &=  \left\{t  \in S[V\setminus U] ~|~ \forall u \in R, \quad t\oplus u \in S\right\}\\
+    &= \left\{t ~|~ \forall u \in R,~ \exists v \in S, \quad v[U] = u \text{ et }
+      v[V\setminus U]=t\right\}.
+  \end{align*}
+\end{defi}
+Comme nous le verrons plus tard, cette opération n'est pas traduite directement en SQL.
+%\clearslide{}
+\subsection{Jointure simple}
+
+Quels sont les titres des films réalisés par des personnes dont le prénom est
+«Clint»?
+
+Pour répondre:
+\begin{enumerate}
+\item on calcule $I=\sigma_{\ttprenom="Clint"}(\PERSONNE)$ ;
+\item on calcule $J=\pi_{\tttitre, \ttidr}(\FILM)$ ;
+\item\label{item:join:produit}on calcule le produit $I\times J$ ;
+\item\label{item:join:select}on calcule la sélection
+  $S=\sigma_{\ttid=\ttidr}(I\times J)$ ;
+\item le résultat est $\pi_{\tttitre}(S)$.
+\end{enumerate}
+
+Les étapes~\ref{item:join:produit} et~\ref{item:join:select}
+constituent un calcul de \emph{jointure}.
+%\clearslide{}
+\begin{defi}[Jointure]
+  Soit $R$ et $S$ deux relations de champs $U$ et $V$ avec
+  $U\cap V = \emptyset$, $A\in U$ et $B\in V$.
+  Alors
+  la \emph{jointure symétrique de $R$ et $S$ selon $(A,B)$} est la
+  relation notée $R[A=B]S$ de
+  champ $U\cup V$, définie par
+  \begin{equation*}
+    R[A=B] S = \sigma_{A=B}(R\times S).
+  \end{equation*}
+\end{defi}
+
+%\clearslide{}
+La jointure:
+\begin{itemize}
+\item N'apporte \textbf{aucune expressivité} par rapport au produit suivi d'une
+  sélection;
+\item En général, \textbf{se calcule plus facilement} (si on s'y prend
+  bien).
+\end{itemize}
+
+\begin{exemple}
+  Prenez un annuaire téléphonique de Lyon et la liste des
+enseignants de MPSI, calculez la jointure sur le couple nom de
+l'enseignant/nom de l'abonné:
+\begin{itemize}
+\item par produit puis sélection;
+\item directement.
+\end{itemize}
+\end{exemple}
+
+%\clearslide{}
+En SQL, une jointure simple se traduit par l'instruction \texttt{JOIN ON}.
+\begin{exemple}
+Pour obtenir les noms, prénoms des réalisateurs suivis des titres des films qu'ils ont réalisé, il suffit d'écrire l'opération
+\begin{equation*}
+  \pi_{\ttnom,\ \ttprenom,\ \tttitre}(\PERSONNE[\ttid = \ttidr] \FILM).
+\end{equation*}
+La requête SQL traduisant cette jointure est 
+\begin{verbatim}
+SELECT nom, prenom, titre
+FROM PERSONNE JOIN FILM ON PERSONNE.id = idrealisateur;
+\end{verbatim}
+
+\end{exemple}
+
+%\clearslide{}
+\subsection{Union}
+Quels sont les personnes dont le prénom est «Clint» ou «Martin» ? Pour cela, on peut réaliser  \emph{l'union} des deux relations.
+
+\begin{defi}[Union]
+  Soit $R$ et $S$ deux relations de même schéma relationnel (\emph{i.e.}, ayant les mêmes champs), alors \emph{l'union} de $R$ et de $S$ est la relation 
+  \begin{equation*}
+    R\cup S = \left\{x ~|~ x\in R\textrm{ ou }x\in S\right\}.
+  \end{equation*}
+  C'est donc une relation de même schéma que $R$ et $S$.
+\end{defi}
+
+%\clearslide{}
+En SQL, une union se traduit par l'instruction \texttt{UNION}.
+\begin{exemple}
+La table des personnes dont le prénom est «Clint» ou «Martin» s'obtient par l'opération.
+\begin{equation*}
+  \sigma_{\ttprenom="Clint"}(\PERSONNE)\cup \sigma_{\ttprenom="Martin"}(\PERSONNE)
+\end{equation*}
+La requête SQL traduisant cette union est 
+\begin{verbatim}
+SELECT * FROM PERSONNE WHERE prenom = "Clint"
+UNION
+SELECT * FROM PERSONNE WHERE prenom = "Martin";
+\end{verbatim}
+\end{exemple}
+%\clearslide{}
+\begin{rem}
+  On aurait pu remplacer l'union précédente par la sélection 
+  \begin{equation*}
+    \sigma_{\ttprenom=\texttt{"Clint"}\textrm{ ou }\ttprenom=\texttt{"Martin"}}(\PERSONNE),
+  \end{equation*}
+  dont une traduction en SQL est 
+\begin{verbatim}
+SELECT * 
+FROM PERSONNE
+WHERE prenom = "Clint"
+      OR 
+      prenom = "Martin";
+\end{verbatim}
+\end{rem}
+
+%\clearslide{}
+\subsection{Intersection}
+
+Quelles sont les personnes dont le prénom est «Clint» et le nom
+«Eastwood» ? Pour cela, on peut réaliser  \emph{l'intersection} des deux relations.
+\begin{defi}[Intersection]
+  Soit $R$ et $S$ deux relations de même schéma relationnel (\emph{i.e.}, ayant les mêmes champs), alors \emph{l'intersection} de $R$ et de $S$ est la relation 
+  \begin{equation*}
+    R\cap S = \left\{x ~|~ x\in R\textrm{ et }x\in S\right\}.
+  \end{equation*}
+  C'est donc une relation de même schéma que $R$ et $S$.
+\end{defi}
+
+%\clearslide{}
+En SQL, une intersection se traduit par l'instruction \texttt{INTERSECT}.
+\begin{exemple}
+La table des personnes dont le prénom est «Clint» et le nom «Eastwood» s'obtient par l'opération.
+\begin{equation*}
+  \sigma_{\ttprenom="Clint"}(\PERSONNE)\cap \sigma_{\ttnom="Eastwood"}(\PERSONNE)
+\end{equation*}
+La requête SQL traduisant cette union est 
+\begin{verbatim}
+SELECT * FROM PERSONNE WHERE prenom = "Clint"
+INTERSECT
+SELECT * FROM PERSONNE WHERE nom = "Eastwood";
+\end{verbatim}
+\end{exemple}
+
+%\clearslide{}
+\begin{rem}
+  On aurait pu remplacer l'intersection précédente par la sélection 
+  \begin{equation*}
+    \sigma_{\ttprenom=\texttt{"Clint"}\textrm{ et }\ttnom=\texttt{"Eastwood"}}(\PERSONNE),
+  \end{equation*}
+  dont une traduction en SQL est 
+%\begin{verbatim}
+SELECT * 
+FROM PERSONNE
+WHERE prenom = "Clint"
+      AND 
+      nom = "Martin";
+%\end{verbatim}
+\end{rem}
+
+%\clearslide{}
+\begin{rem}
+  On aurait aussi pu remplacer l'intersection précédente par la composition de sélections
+  \begin{equation*}
+    \sigma_{\ttprenom="Clint"}(\sigma_{\ttnom="Eastwood"}(\PERSONNE))
+  \end{equation*}
+  dont une traduction en SQL est 
+%\begin{verbatim}
+SELECT * 
+FROM (SELECT *
+      FROM PERSONNE
+      WHERE nom = "Eastwood")
+WHERE prenom = Clint;
+%\end{verbatim}
+\end{rem}
+%\clearslide{}
+
+\subsection{Différence}
+Quelles sont les identifiants des personnes qui n'ont réalisé aucun film ? Pour cela, on peut réaliser  la \emph{différence} des deux relations.
+
+\begin{defi}[Différence]
+  Soit $R$ et $S$ deux relations de même schéma relationnel (\emph{i.e.}, ayant les mêmes champs), alors la \emph{différence} de $R$ et de $S$ est la relation 
+  \begin{equation*}
+    R\setminus S = \left\{x ~|~ x\in R\textrm{ et }x\notin S\right\}.
+  \end{equation*}
+  C'est donc une relation de même schéma que $R$ et $S$.
+\end{defi}
+
+%\clearslide{}
+En SQL, une différence se traduit par l'instruction \texttt{EXCEPT}.
+\begin{exemple}
+La table des identifiants des personnes n'ayant réalisé aucun film s'obtient par 
+\begin{equation*}
+  \pi_{\ttid}(\PERSONNE)\setminus \rho_{\ttidr\rightarrow\ttid}(\pi_{\ttidr}(\FILM)).
+\end{equation*}
+La requête SQL traduisant cette union est 
+\begin{verbatim}
+SELECT id FROM PERSONNE
+EXCEPT
+SELECT idrealisateur AS id FROM FILM;
+\end{verbatim}
+\end{exemple}
+
+\section{Division cartésienne en SQL}
+
+On veut l'ensemble des  noms des personnes ayant
+joué dans \textbf{tous} les films de Clint Eastwood.
+
+Malheureusement, il n'y a pas d'opérateur de division dans SQL!
+
+On peut calculer d'abord l'ensemble des noms $n$ de personnes n'ayant pas joué dans \textbf{tous} les
+films de Clint Eastwood (réalisateur \no 3), c'est-à-dire pour $n$ tel
+qu'il existe
+au moins un film de Clint Eastwood dans lequel $n$ n'a pas joué, puis
+calculer le complémentaire par différence.
+
+%\clearslide{}
+C'est (horriblement) compliqué :
+\begin{Verbatim}
+SELECT nom FROM PERSONNE
+EXCEPT
+SELECT DISTINCT nom FROM (
+    SELECT nom, titre FROM
+        (SELECT nom FROM PERSONNE),
+        (SELECT titre FROM FILM WHERE idrealisateur=3)
+    EXCEPT
+    SELECT nom, titre FROM PERSONNE, FILM, JOUE
+        WHERE idfilm=FILM.id AND idacteur = PERSONNE.id
+        AND idrealisateur=3
+);
+\end{Verbatim}
+
+%\clearslide{}
+et encore, notre requête:
+\begin{enumerate}
+\item utilise le \ttid{} de Clint Eastwood;
+\item est boguée en cas d'homonymes (on aurait dû faire des recherches
+  sur les \ttid{} et non les \ttnom{}).
+\end{enumerate}
+
+%\clearslide{}
+Deux façons de faire plus simple:
+\begin{enumerate}
+\item Faire autrement;
+\item Décomposer la requête grâce à des vues.
+\end{enumerate}
+
+%\clearslide{}
+Faire autrement:
+%\begin{Verbatim}
+SELECT nom FROM PERSONNE, FILM, JOUE
+WHERE idfilm=FILM.id 
+      AND 
+      idacteur = PERSONNE.id
+      AND 
+      idrealisateur = 3
+GROUP BY PERSONNE.id
+HAVING COUNT(*) =
+  (SELECT COUNT(*) FROM FILM WHERE idrealisateur=3)
+%\end{Verbatim}
+\begin{itemize}
+\item Résout le bogue précédent;
+\item En introduit un autre si le diviseur est vide (i.e. si le
+  réalisateur $3$ n'a réalisé aucun film).
+\end{itemize}
+
+%\clearslide{}
+Décomposer la requête grâce à des vues.
+%\begin{Verbatim}
+-- table des id des films de Clint Eastwood
+CREATE VIEW FILMS\_EASTWOOD AS
+SELECT FILM.id as idfilm
+FROM FILM, PERSONNE
+WHERE idrealisateur = PERSONNE.id
+      AND 
+      nom = 'Eastwood' 
+      AND 
+      prenom = 'Clint';
+%\end{Verbatim}
+(crée une table virtuelle qui contiendra le résultat de cette requête;
+si le contenu des tables \FILM{} et \PERSONNE{} est modifié, la vue
+est modifiée)
+
+%\clearslide{}
+%\begin{Verbatim}
+-- table des couples acteurs/films
+-- pour les films de Clint Eastwood 
+CREATE VIEW ACTEURS\_EASTWOOD AS
+SELECT id, nom, JOUE.idfilm
+FROM FILMS\_EASTWOOD, JOUE, PERSONNE
+WHERE FILMS\_EASTWOOD.idfilm = JOUE.idfilm
+      AND 
+      idacteur=id;
+%\end{Verbatim}
+
+%\clearslide{}
+%\begin{Verbatim}
+-- produit cartésien PERSONNE * FILMS\_EASTWOOD
+CREATE VIEW PROD\_PERSONNE\_FILMS\_EASTWOOD AS
+SELECT id, nom, idfilm
+FROM PERSONNE, FILMS\_EASTWOOD;
+%\end{Verbatim}
+
+%\clearslide{}
+Et finalement, la requête s'écrit
+%\begin{Verbatim}
+SELECT id, nom FROM personne
+EXCEPT
+SELECT id, nom FROM (
+    SELECT * FROM PROD\_PERSONNE\_FILMS\_EASTWOOD
+    EXCEPT
+    SELECT * FROM ACTEURS\_EASTWOOD
+);
+%\end{Verbatim}
+
+(Ouf!)
+%\clearslide{}
+\section{Mis sous le tapis}
+En fait, SQL a quelques autres différences avec l'algèbre
+relationnelle:
+
+\begin{itemize}
+\item existence de requêtes agrégats en SQL ;
+\item les résultats en SQL sont listes et non ensembles (utiliser l'instruction \texttt{DISTINCT} pour obtenir un ensemble à partir d'une liste).
+\end{itemize}
+
+%\clearslide{}
+\section{Agrégats}
+
+On peut ajouter un opérateur d'agrégation à l'algèbre relationnelle.
+
+
+\begin{defi}[fonction d'agrégation]
+  Soit $f$ une fonction prenant en argument une liste $\cL$ d'éléments
+  de $\dom$. On dit que $f$ est une \emph{fonction d'agrégation} si la
+  valeur de $f(\cL)$ ne dépend pas de l'ordre des éléments de $\cL$.
+\end{defi}
+%\clearslide{}
+En pratique, on prendra pour fonctions d'agrégation:
+\begin{itemize}
+\item la fonction de comptage (de la longueur de la liste) notée $\mathrm{count}$;
+\item $\max$;
+\item $\min$;
+\item la fonction moyenne arithmétique des éléments de la liste notée $\mathrm{avg}$;
+\item la fonction somme des éléments de la liste notée $\mathrm{sum}$.
+\end{itemize}
+%\clearslide{}
+\begin{defi}[opération d'agrégation]
+  Soit $A_{1}$, \ldots{}, $A_{n}$ et $B_{1}, \ldots,B_{p}$ des
+  attributs, $R$ une relation dont le champ contient au moins tous
+  ces attributs et $f_{1}$, \ldots{}, $f_{p}$ des fonctions d'agrégation.
+  Alors on note
+  ${}_{A_{1},\ldots,A_{n}}\gamma_{f_1(B_{1}),\ldots,f_p(B_{p})}(R)$ la relation
+  obtenue:
+  \begin{itemize}
+  \item en regroupant les valeurs de $R$ identiques sur les attributs
+    $A_{1}$, \ldots{}, $A_{n}$;
+  \item et en définissant de nouveaux attributs, notés $f_{i}(B_{i})$,
+    pour ces valeurs regroupées, pour tout $i\in\ii{1,p}$, par
+    application de la fonction d'agrégation $f_{i}$ sur chacun de ces
+    agrégats sur l'attribut $B_{i}$.
+  \end{itemize}
+\end{defi}
+\begin{rem}
+  Nous ne rentrerons pas dans le détail du schéma relationnel de cette relation. 
+\end{rem}
+
+%\clearslide{}
+\begin{exemple}
+  Si l'on veut obtenir le nombre de films réalisés par chaque réalisateur (décrit par son identifiant), on utilise l'opération
+  \begin{equation*}
+    {}_{\ttidr}\gamma_{\mathrm{count}(\ttid)}(\FILM).
+  \end{equation*}
+  La requête SQL traduisant cette agrégation est 
+%\begin{verbatim}
+SELECT idrealisateur, COUNT(id)
+FROM FILM
+GROUP BY idrealisateur;
+%\end{verbatim}
+\end{exemple}
+
+
+%\clearslide{}
+\section{Conclusion}
+
+On a vu:
+\begin{itemize}
+\item algèbre relationnelle;
+\item (une partie de) SQL;
+\item le lien entre les deux.
+\end{itemize}
+
+% %\clearslide{}
+% Reste à voir:
+% \begin{itemize}
+% \item comment on utilise SQL depuis un langage de programmation (par
+%   exemple Python);
+% \item quelle architecture ont les systèmes utilisant des bases de
+%   données SQL;
+% \item quelles questions ça soulève.
+% \end{itemize}
