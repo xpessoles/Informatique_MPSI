@@ -21,9 +21,9 @@ On s'intéresse au problème de la recherche du plus long sous-tableau croissant
 % Un sous-tableau $v$ de $t$ est donc caractérisé par une famille $\p{e_0,\dots,e_{n-1}} \in \ens{0,1}^{\ii{0,n}}$, avec, si $0\leq i < n$, $e_i = 1$ si et seulement si $t[i]$ est présent dans $v$.
 % Enfin, on peut voir que pour obtenir toutes les familles de $ \ens{0,1}^{\ii{0,n}}$, il suffit d'écrire la décomposition binaire sur $n$ bits de tous les entiers entre $0$ et $2^n-1$. 
 % 
-% \begin{ex}
+% \begin{exemple}
 %   Avec \pyv{t = [1,5,3,2]}, de longueur 4, le sous-tableau de \pyv{t} décrit par \pyv{[0,0,0,0]} est \pyv{[]}, celui décrit par \pyv{[1,0,0,1]} est \pyv{[1,2]} et celui décrit par \pyv{[0,1,1,1]} est \pyv{[5,3,2]}.
-% \end{ex}
+% \end{exemple}
 % 
 % 
 % On peut alors penser à implémenter l'idée suivante : on parcourt séquentiellement les entiers entre $0$ et $2^n-1$, on calcule l'écriture binaire de chaque entier, cela définit un sous-tableau de $t$ et il ne reste plus qu'à savoir si ce sous-tableau est croissant. 
@@ -35,9 +35,9 @@ On s'intéresse au problème de la recherche du plus long sous-tableau croissant
 % \question{} \'Ecrire une fonction \pyv{plus_un(e)} qui prend en argument un tableau \pyv{e} contenant des $0$ et des $1$ et qui, si \pyv{e} représente l'entier $p$ en binaire, le modifie pour qu'il représente l'entier $p+1$ (modulo $2^n$). \\
 % \emph{Indice : on partira de la fin de \pyv{e} et l'on réfléchira à la propagation de la retenue : tant que l'on rencontre des $1$, on les change en $0$ ; dès que l'on rencontre un $0$, on le change en $1$ et l'on s'arrête.}
 % 
-% \begin{ex}
+% \begin{exemple}
 %   \`A partir de \pyv{e=[0,0,0]}, \pyv{plus_un(e)} change \pyv{e} en \pyv{[0,0,1]}, ensuite \pyv{plus_un(e)}  change \pyv{e} en \pyv{[0,1,0]} etc.
-% \end{ex}
+% \end{exemple}
 % 
 % \medskip{}
 % 
@@ -59,9 +59,9 @@ Pour faire cela, rappelons nous que prendre un sous-tableau de $t$ correspond à
 Un sous-tableau $v$ de $t$ est donc caractérisé par une famille $\p{e_0,\dots,e_{n-1}} \in \ens{0,1}^{\ii{0,n}}$, avec, si $0\leq i < n$, $e_i = 1$ si et seulement si $t[i]$ est présent dans $v$.
 Enfin, on peut voir que pour obtenir toutes les familles de $ \ens{0,1}^{\ii{0,n}}$, il suffit d'écrire la décomposition binaire sur $n$ bits de tous les entiers entre $0$ et $2^n-1$. 
 
-\begin{ex}
+\begin{exemple}
   Avec \pyv{t = [1,5,3,2]}, de longueur 4, le sous-tableau de \pyv{t} décrit par \pyv{[0,0,0,0]} est \pyv{[]}, celui décrit par \pyv{[1,0,0,1]} est \pyv{[1,2]} et celui décrit par \pyv{[0,1,1,1]} est \pyv{[5,3,2]}.
-\end{ex}
+\end{exemple}
 
 
 On peut alors penser à implémenter l'idée suivante : on parcourt séquentiellement les entiers entre $0$ et $2^n-1$, on calcule l'écriture binaire de chaque entier, cela définit un sous-tableau de $t$.
