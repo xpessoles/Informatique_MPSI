@@ -6,9 +6,9 @@ Dans tout ce problème, on s'interdira d'utiliser les opérations entre vecteurs
 
 Dans tout ce problème, on utilisera le type \texttt{array} de \texttt{numpy} pour représenter des vecteurs. 
 On pourra supposer que la ligne suivante a été écrite : 
-\begin{verbatim}
+\begin{pyverbatim}
 from numpy import array, zeros
-\end{verbatim}
+\end{pyverbatim}
 
 Dans tout ce problème, on veillera à l'optimalité des fonctions écrites en termes de complexité temporelle asymptotique. Les réponses clairement sous-optimales seront pénalisées. 
 
@@ -89,8 +89,8 @@ on définit la dérivée discrète de $X$ comme le vecteur $Y$ de longueur $n$ d
     y_0 = x_1-x_0,~y_{n-1} = x_{n-1} - x_{n-2}~\textrm{et}~\forall i \in \ii{1,n-1},~ y_i = \dfrac{1}{2}(x_{i+1}-x_{i-1}).
 \end{equation*}
 
-\question{} Déterminer une matrice $A$ vérifiant $Y = AX$. 
+\question{} Déterminer une matrice $A$ vérifiant $Y = AX$. 
 
-\question{} Écrire une fonction \texttt{CSR\_A(n)} renvoyant les trois vecteurs \texttt{V}, \texttt{L} et \texttt{C} codant $A$ au format CSR.
+\question{} Écrire une fonction \texttt{CSR\_A(n)} renvoyant les trois vecteurs \texttt{V}, \texttt{L} et \texttt{C} codant $A$ au format CSR.
 
 \emph{Indication : on pourra écrire une fonction pour la création de chaque vecteur}

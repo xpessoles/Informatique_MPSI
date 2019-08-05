@@ -20,15 +20,372 @@ decode(c,k)
 c
 =>PYTHONTEX#py#default#defaultverb#10#v####ALG-008.tex#25#
 k
+=>PYTHONTEX#py#gobble=0,numbers=left#defaultverb#0#verbatim####ALG-009.tex#50#
+def kNN(L,c,k,d):
+    """k plus proches voisins du point c dans L
+       d : fonction de distance"""
+    v = []
+    for j in range(L) :
+        a = L[j]
+        if len(v) < k :
+            v.append(a)
+        if d(a,c) < d(v[-1],c) :
+            v[-1] = a
+        i = len(v) - 1
+        while i >= 1 and v[i] < v[i-1] :
+            v[i-1],v[i] = v[i],v[i-1]
+            i = i-1
+    return v
+=>PYTHONTEX#py#default#defaultverb#11#v####STR-001.tex#4#
+est_pal(s)
+=>PYTHONTEX#py#default#defaultverb#12#v####STR-001.tex#4#
+s
+=>PYTHONTEX#py#default#defaultverb#13#v####STR-001.tex#4#
+True
+=>PYTHONTEX#py#default#defaultverb#14#v####STR-001.tex#4#
+s
+=>PYTHONTEX#py#default#defaultverb#15#v####STR-001.tex#4#
+False
+=>PYTHONTEX#py#default#defaultverb#16#v####STR-001.tex#6#
+max_pal(s)
+=>PYTHONTEX#py#default#defaultverb#17#v####STR-001.tex#6#
+s
+=>PYTHONTEX#py#default#defaultverb#18#v####STR-001.tex#6#
+p
+=>PYTHONTEX#py#default#defaultverb#19#v####STR-001.tex#6#
+p
+=>PYTHONTEX#py#default#defaultverb#20#v####COM-001-cor.tex#61#
+lexico((i,j,x),(a,b,y))
+=>PYTHONTEX#py#default#defaultverb#21#v####COM-001-cor.tex#61#
+(i,j)
+=>PYTHONTEX#py#default#defaultverb#22#v####COM-001-cor.tex#61#
+(a,b)
+=>PYTHONTEX#py#default#defaultverb#23#v####COM-001-cor.tex#62#
+M[:iM]
+=>PYTHONTEX#py#default#defaultverb#24#v####COM-001-cor.tex#62#
+N[:iN]
+=>PYTHONTEX#py#default#defaultverb#25#v####COM-001-cor.tex#62#
+S
+=>PYTHONTEX#py#default#defaultverb#26#v####COM-001-cor.tex#62#
+M[:iM]
+=>PYTHONTEX#py#default#defaultverb#27#v####COM-001-cor.tex#62#
+N[:iN]
+=>PYTHONTEX#py#default#defaultverb#28#v####COM-001-cor.tex#63#
+M[:iM]
+=>PYTHONTEX#py#default#defaultverb#29#v####COM-001-cor.tex#63#
+N[:iN]
+=>PYTHONTEX#py#default#defaultverb#30#v####COM-001-cor.tex#63#
+S
+=>PYTHONTEX#py#default#defaultverb#31#v####COM-001-cor.tex#64#
+M[:iM]
+=>PYTHONTEX#py#default#defaultverb#32#v####COM-001-cor.tex#64#
+N[:iN]
+=>PYTHONTEX#py#default#defaultverb#33#v####COM-001-cor.tex#64#
+M[iM:]
+=>PYTHONTEX#py#default#defaultverb#34#v####COM-001-cor.tex#64#
+N[iN:]
+=>PYTHONTEX#py#default#defaultverb#35#v####COM-001-cor.tex#67#
+N[iN]
+=>PYTHONTEX#py#default#defaultverb#36#v####COM-001-cor.tex#68#
+M[iM]
+=>PYTHONTEX#py#default#defaultverb#37#v####COM-001-cor.tex#79#
+while
+=>PYTHONTEX#py#default#defaultverb#38#v####COM-001-cor.tex#80#
+while
+=>PYTHONTEX#py#default#defaultverb#39#v####COM-001-cor.tex#88#
+len
+=>PYTHONTEX#py#default#defaultverb#40#v####COM-001-cor.tex#91#
+range
+=>PYTHONTEX#py#default#defaultverb#41#v####COM-001-cor.tex#92#
+i
+=>PYTHONTEX#py#default#defaultverb#42#v####COM-001-cor.tex#94#
+range
+=>PYTHONTEX#py#default#defaultverb#43#v####COM-001-cor.tex#95#
+j
+=>PYTHONTEX#py#default#defaultverb#44#v####COM-001-cor.tex#100#
+add(M,N)
+=>PYTHONTEX#py#default#defaultverb#45#v####COM-001-cor.tex#110#
+lexico
+=>PYTHONTEX#py#default#defaultverb#46#v####COM-001-cor.tex#111#
+len
+=>PYTHONTEX#py#default#defaultverb#47#v####COM-001-cor.tex#112#
+while
+=>PYTHONTEX#py#default#defaultverb#48#v####COM-001-cor.tex#112#
+lexico
+=>PYTHONTEX#py#default#defaultverb#49#v####COM-001-cor.tex#117#
+add_creuse(M,N)
+=>PYTHONTEX#py#default#defaultverb#50#verbatim####COM-002.tex#8#
+def u(n):
+    """u_n, n : entier naturel"""
+    v = 42
+    # Inv : v = u_0
+    for k in range(n):
+        # Inv : v = u_k
+        v = 15091 * v % 64007
+        # Inv : v = 15091*u_k % 64007 = u_k+1
+    # Inv : au dernier tour, k = n-1, donc v = u_n
+    return v
+
+def S(n):
+    """u_n, n : entier naturel"""
+    s = u(0)
+    # Inv : s = S_0
+    for k in range(n):
+        # Inv : s = S_k
+        s = s + u(k+1)
+        # Inv : v = S_k+u_k+1 = S_k+1
+    # Inv : au dernier tour, k = n-1, donc s = S_n
+    return s
+=>PYTHONTEX#py#default#defaultverb#51#verbatim####COM-003.tex#6#
+def u(n):
+    """u_n, n : entier naturel"""
+    v = 2
+    # Inv : v = u_0
+    for k in range(n):
+        # Inv : v = u_k
+        v = v*v
+        # Inv : v = u_k**2 = u_k+1
+    # Inv : au dernier tour, k = n-1, donc v = u_n
+    return v
+=>PYTHONTEX#py#default#defaultverb#52#verbatim####COM-003.tex#19#
+import timeit
+
+REPEAT=3
+
+def duree(f, x):
+  """Calcule le temps mis par Python pour calculer f(x).
+  Cette fonction effectue en fait le calcul de f(x) REPEAT fois
+  et garde la valeur la plus petite
+  (l'idée est d'éliminer les éventuelles perturbations provoquées
+  par d'autres processus tournant sur la machine)"""
+  t = timeit.Timer(stmt=lambda : f(x))
+  time = min(t.repeat(REPEAT, number=1))
+  return time
+=>PYTHONTEX#py#default#defaultverb#53#verbatim####COM-007.tex#9#
+from numpy import array, zeros
+=>PYTHONTEX#py#default#defaultverb#54#verbatim####COM-007-cor.tex#32#
+def prod(V,L,C,X) :
+    n = len(L)-1
+    Y = zeros(n,1)
+    for i in range(n) :
+        Y[i] = coeff_prod(V,L,C,X,i)
+    return Y
+=>PYTHONTEX#py#default#defaultverb#55#verbatim####COM-007-cor.tex#45#
+def prod_naif(A,X) :
+    n,p = A.shape
+    Y = zeros(n,1)
+    for i in range(n) :
+        S = 0
+        for j in range(p) :
+            S = S + A[i,j] * X[j]
+    return Y
+=>PYTHONTEX#py#default#defaultverb#56#verbatim####COM-007-cor.tex#83#
+def V_A(n) :
+    """Vecteur V de la représentation CSR de A"""
+    V = zeros(2*n)
+    V[0], V[1], V[2*n-2], V[2*n-1] = -1,1,-1,1
+    for i in range(1,n-1):
+        V[2*i], V[2*i+1] = -.5,.5
+    return V
+
+def L_A(n) :
+    """Vecteur L de la représentation CSR de A"""
+    L = zeros(n+1)
+    for i in range(1,n+1) :
+        L[i] = 2*i
+    return L
+
+def C_A(n) :
+    """Vecteur C de la représentation CSR de A"""
+    C = zeros(2*n)
+    C[0], C[1], C[2*n-2], C[2*n-1] = 0,1,n-2,n-1
+    for i in range(1,n-1):
+        C[2*i], C[2*i+1] = i-1,i+1
+    return C
+
+def CSR_A(n) :
+    """Représentation CSR de A"""
+    return V_A(n), L_A(n), C_A(n)
+=>PYTHONTEX#py#default#defaultverb#57#verbatim####EQD-001-cor.tex#10#
+def smul(n,liste):
+	"""
+	Multiplie chaque élément de la liste par un nombre et renvoie une nouvelle liste
+	"""
+	liste2=[]
+	for i in liste:
+		liste2.append(i*n)
+	return liste2
+	
+=>PYTHONTEX#py#default#defaultverb#58#verbatim####EQD-001-cor.tex#110#
+import numpy as np
+def euler(F, tmin, tmax, Y0, n):
+    """Solution de Y'=F(Y,t) sur [a,b], y(a) = y0, pas h"""
+    Y = Y0
+    t = tmin
+    les_y = [Y0[0]]
+    les_z = [Y0[1]]
+    h=(tmax-tmin)/(n-1)
+    les_t = np.arange(tmin,tmax,h)
+    while t+h <= tmax:
+        Y = Y + h * F(Y, t) # surtout pas += !
+        les_y.append(Y[0])
+        les_z.append(Y[1])
+        t += h
+    return les_t, les_y, les_z
+=>PYTHONTEX#py#default#defaultverb#59#verbatim####EQD-001-cor.tex#160#
+def f(x):
+    return -w**2*x
+
+
+def F(Y,t):
+    y=Y[0]
+    z=Y[1]
+    return np.array([z,f(y)])
+=>PYTHONTEX#py#default#defaultverb#60#verbatim####EQD-001-cor.tex#172#
+tmin=0
+tmax=3
+w=2*np.pi
+n=100
+y0=3
+z0=0
+vt,vy,vz=euler(F, tmin, tmax, np.array([y0,z0]), n)
+
+plt.clf()
+plt.plot(vy,vz,'ko-')
+plt.xlabel('y(t)')
+plt.ylabel('z(t)')
+plt.grid()
+plt.savefig('figure1.png')
+=>PYTHONTEX#py#default#defaultverb#61#verbatim####EQD-001-cor.tex#240#
+def verlet(f, tmin, tmax, Y0, n):
+    y,z=Y0[0],Y0[1]
+    valeursy =[ y ]
+    valeursz =[ z ]
+    h=(tmax-tmin)/(n-1)
+    h2sur2=h**2/2. # Hors de la boucle pour la complexité
+    les_t = np.arange(tmin,tmax,h)
+    for k in range ( n-1 ):
+        fi=f(valeursy[-1])
+        y = y + h * valeursz[ -1]+h2sur2*fi
+        z = z + h/2. * (fi+f(y))
+        valeursy . append ( y )
+        valeursz . append ( z )
+    return [les_t,valeursy , valeursz ]
+=>PYTHONTEX#py#default#defaultverb#62#verbatim####EQD-001-cor.tex#263#
+vt,vy,vz=verlet(f, tmin, tmax, np.array([y0,z0]), n)
+
+plt.clf()
+plt.plot(vy,vz,'ko-')
+plt.xlabel('y(t)')
+plt.ylabel('z(t)')
+plt.axis([-15,20,-80,100])
+plt.grid()
+plt.savefig('fig2.png')
+=>PYTHONTEX#py#default#defaultverb#63#verbatim####EQD-003.tex#108#
+R = 1E-2 # m, rayon minimum du bouchon de révolution
+H = 4.5*1E-2 # m, hauteur du bouchon
+rho_eau = 1000 # kg / m**3 masse volumique de l'eau
+rho_b = 240 # kg / m**3, masse volumique du liège
+g = 9.81 # m / s**2, accélération de la pesanteur en
+Cx = 1 # Coefficient de trainée aérodynamique
+N = 1000 # Nombre de trapèzes pour les calculs d'intégrales
+=>PYTHONTEX#py#default#defaultverb#64#v####EQD-003.tex#118#
+T(f,a,b,N)
+=>PYTHONTEX#py#default#defaultverb#65#v####EQD-003.tex#120#
+volume_immerge(z)
+=>PYTHONTEX#py#default#defaultverb#66#v####EQD-003.tex#124#
+Fv(z,zp)
+=>PYTHONTEX#py#default#defaultverb#67#v####EQD-003.tex#146#
+F(Z,t)
+=>PYTHONTEX#py#default#defaultverb#68#v####EQD-003.tex#149#
+euler(F, tmin, tmax, Z0, h)
+=>PYTHONTEX#py#default#defaultverb#69#verbatim####EQD-003-cor.tex#3#
+def T(f,a,b,N):
+    h=(b-a)/N
+    S=(f(a)+f(b))*0.5
+    for k in range(1,N):
+        S+=f(a+k*h)
+    return S*h
+=>PYTHONTEX#py#default#defaultverb#70#verbatim####EQD-003-cor.tex#15#
+from math import sin, pi
+
+def r(z):
+    return R*(1+0.1*sin(np.pi*z/H))
+
+def r2(z):
+    return r(z)**2
+
+def volume_immerge(z):
+    """Renvoie le volume immergé du bouchon.
+    z : profondeur du bas du bouchon"""
+    if z <= 0 :
+        # bouchon hors de l'eau
+        return 0
+    elif z <= H :
+        # bouchon immergé jusqu'à la hauteur z
+        return pi*T(r2,0,z,N)
+    else :
+        # bouchon totalement immergé
+        return pi*T(r2,0,H,N)
+=>PYTHONTEX#py#default#defaultverb#71#verbatim####EQD-003-cor.tex#40#
+V = volume_immerge(H)
+=>PYTHONTEX#py#default#defaultverb#72#verbatim####EQD-003-cor.tex#47#
+def Fv(z,zp):
+    """renvoie la force de frottement visqueux"""
+    if zp==0 or z<0:
+        return 0
+    else:
+        if zp>0 :
+            signe = 1
+        else :
+            signe = -1
+        alpha = -signe*0.5*Cx*rho_eau*zp**2
+        if zp>0 : # Le bouchon descend
+            if 0<=z<H/2:
+                return alpha*pi*r(z)**2
+            else: # z >= H/2
+                return alpha*pi*r(H/2)**2
+        else s: #Le bouchon remonte
+            if 0<=z<H/2:
+                return 0
+            elif H/2<=z<=H:
+                return alpha*pi*(r(H/2)**2-r(z)**2)
+            else : # z>H:
+                return alpha*pi*r(H/2)**2
+=>PYTHONTEX#py#default#defaultverb#73#verbatim####EQD-003-cor.tex#110#
+from numpy import array
+
+def F(Z,t):
+    """Avec frottement visqueux"""
+    z,zp = Z
+    zpp = (Fv(z,zp)- rho_eau*g*volume_immerge(z)) / (rho_b*volume_immerge(H)) + g
+    return array([zp,zpp])
+
+Z0 = array([-0.2,0])
+=>PYTHONTEX#py#default#defaultverb#74#verbatim####EQD-003-cor.tex#125#
+def euler(F, tmin, tmax, Z0, h):
+    """Solution de Z'=F(Z,t) sur [tmin,tmax], Z(tmin) = Z0,"""
+    Z = Z0
+    t = tmin
+    z_list = [Z0] # la liste des valeurs renvoyées
+    t_list = [tmin] # la liste des temps
+    while t+h <= tmax :
+        # Variant : floor((tmax-t)/h)
+        # Invariant : au tour k, z_list = [Z_0,...,Z_k], t_list = [t_0,...,t_k]
+        Z = Z + h * F(Z, t)
+        z_list.append(Z)
+        t = t + h
+        t_list.append(t)
+    return t_list, z_list
 =>PYTHONTEX:SETTINGS#
 version=0.16
 outputdir=pythontex-files-Banque_Exercices_PDF
 workingdir=.
 workingdirset=false
 gobble=none
-rerun=errors
+rerun=default
 hashdependencies=default
-makestderr=true
+makestderr=false
 stderrfilename=full
 keeptemps=none
 pyfuture=default
