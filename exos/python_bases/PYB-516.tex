@@ -1,5 +1,5 @@
 On considère la fonction suivante.
-\begin{Verbatim}[gobble=0,numbers=left]
+\begin{pyverbatim}
 def mystere(L) :
     """Précondition : L est une liste de nombres"""
     x,n,i = L[0],len(L),1
@@ -7,7 +7,7 @@ def mystere(L) :
         L[i-1],L[i] = L[i],L[i-1]
         i = i+1
     return None
-\end{Verbatim}
+\end{pyverbatim}
 
 \question{}Montrer que «$\texttt x = \texttt L[\texttt i-1]$» est un invariant de boucle pour la boucle \texttt{while} de la fonction \texttt{mystere}.
 
