@@ -54,7 +54,7 @@ s
 p
 =>PYTHONTEX#py#default#defaultverb#19#v####STR-001.tex#6#
 p
-=>PYTHONTEX#py#default#defaultverb#20#verbatim####COM-002.tex#8#
+=>PYTHONTEX#py#default#defaultverb#20#verbatim####COM-002.tex#10#
 def u(n):
     """u_n, n : entier naturel"""
     v = 42

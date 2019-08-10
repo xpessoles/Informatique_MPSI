@@ -5,6 +5,8 @@
   ainsi que, pour tout $n\in\N$, $S_n = \displaystyle\sum_{k=0}^n u_k$.
   
   On propose l'algorithme suivant pour calculer les valeurs de $S$. 
+% v = 15091 * v % 64007
+%        # Inv : v = 15091*u_k % 64007 = u_k+1
 \begin{pyverbatim}
 def u(n):
     """u_n, n : entier naturel"""
