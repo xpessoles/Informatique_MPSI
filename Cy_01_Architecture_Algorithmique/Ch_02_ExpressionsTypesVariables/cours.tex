@@ -294,8 +294,15 @@ des tuples. Ainsi : \texttt{a,b = (1,2)} affecte la valeur 1 à \texttt{a} et la
 \texttt{b}.
 
 
+\begin{rem}
+En Python, le \textbf{typage} des variables est \textbf{dynamique}. Cela signifie que lorsqu'on affecte une valeur à une variable, Python reconnait automatiquement le type de la valeur. Ce n'est pas le cas de tous les langages de programmation.
+Par exemple, le \texttt{C} n'est pas typé dynamiquement. Il faut alors déclarer une variable avec un type, puis affecter la valeur. 
+
+\end{rem}
 \subsection{Notion d'adressage}
-%TODO parler de représentation en mémoire, cf. ancien chapitre 5.
+
+En Python, le passage des variables se fait par \textbf{référence}. C'est-à-dire que lorsqu'on manipule une variable (qu'on l'envoie à une foncition par exemple), on ne donne pas comme argument la valeur de la fonction, mais son adresse mémoire. Pour les types non mutables (entiers, flottants, chaîne de caractères, tuples), le passage par référence ne pose pas de problèmes. 
+
 
 \section{Fonctions}
 \subsection{Objectif : modularité des programmes}
