@@ -1,4 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Original author:
 % Mathias Legrand (legrand.mathias@gmail.com) with modifications by:
 % Vel (vel@latextemplates.com)
@@ -369,6 +369,7 @@
 \theoremstyle{blacknumex}
 %\newtheorem{exampleT}{Example}[chapter]
 \newtheorem{exempleT}{Exemple}[section]
+\newtheorem{remarqueT}{Remarque}[section]
 \newtheorem{termT}{Terminal\\}[section]
 \newtheorem{pyT}{Python\\}[section]
 \newtheorem{sciT}{Scilab\\}[section]
@@ -586,6 +587,38 @@ innerbottommargin=5pt]{termBox}
 
 
 % Boite pour Python
+\usepackage{listingsutf8}
+\lstset{
+	language={Python},
+	columns=flexible,
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue}, % je voudrais mettre les mots-clÃ© en gras (\bfseries) mais c'est incompatible avec typewriter
+	commentstyle=\color{gray}, % commentaires
+	backgroundcolor=\color{green!10}, % couleur du fond
+	frame=single, rulecolor=\color{green!10}, % encadrement + couleur de l'encadrement
+	%numbers=left, numberstyle=\tiny, stepnumber=1, numbersep=5pt,
+	showstringspaces=false, % supprime les espaces apparents dans les lignes de texte
+	stringstyle=\color{red!50}\itshape,
+	inputencoding=utf8,
+	extendedchars=true,
+   literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\EUR}}1 {£}{{\pounds}}1
+}
+
+\newcommand*\lstinputpath[1]{\lstset{inputpath=#1}}
+
+
 \newmdenv[skipabove=7pt,
 skipbelow=7pt,
 rightline=false,
@@ -669,6 +702,7 @@ innerbottommargin=5pt]{sqlBox}
 \newenvironment{prop}{\begin{dBox}\begin{propT}}{\end{propT}\end{dBox}}	
 \newenvironment{rappel}{\begin{dBox}\begin{rappelT}}{\end{rappelT}\end{dBox}}	
 \newenvironment{defi}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}	
+\newenvironment{remarque}{\begin{dBox}\begin{remarqueT}}{\end{remarqueT}\end{dBox}}
 \newenvironment{demo}{\begin{demoBox}\begin{demoT}}{\end{demoT}\end{demoBox}}	
 %\newenvironment{exemple}{\begin{exempleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exempleT}}		
 \newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}
@@ -852,3 +886,4 @@ addtohook={%
 \newif\iftdifficile
 \newif\ifcolle
 \newif\iflivret
+\newif\ifTP

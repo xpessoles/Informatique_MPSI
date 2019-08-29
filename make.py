@@ -180,6 +180,10 @@ def genere_entete(rep,info_activite,type_activite):
     #competences=competences.split(';')
     num_chapitre=trouver_chapitre(ref_cours)
     if type_activite=='cours':
+        chemin_relatif='../../'
+    if type_activite=='tp':
+        chemin_relatif='../../../'
+    if type_activite=='cours':
         file_entete=rep+sep+'info_entete.tex'
         if os.path.exists(rep+sep+'cours/'):
             os.system('rm -Rf '+rep+sep+'cours/')
@@ -219,10 +223,15 @@ def genere_entete(rep,info_activite,type_activite):
                     texte_entete+='\\def\\xxdate{'+date+'}\n'
                 elif '\\chapterimage{' in ligne:
                     texte_entete+='\\chapterimage{'+figures+'}\n'
-                elif '\\graphicspath{{../../style/png/}{images/}' in ligne:
-                    texte_entete+='\\graphicspath{{../../style/png/}{images/}'
+                elif '\\lstinputpath{}' in ligne:
+                    texte_entete+='\\lstinputpath{'
                     for support in supports.split(';'):
-                        texte_entete+='{../../exos/'+support+'/}'
+                        texte_entete+='{'+chemin_relatif+'exos/'+support+'/}'
+                    texte_entete+='}\n'
+                elif '\\graphicspath{{../../style/png/}{images/}' in ligne:
+                    texte_entete+='\\graphicspath{{'+chemin_relatif+'style/png/}{images/}'
+                    for support in supports.split(';'):
+                        texte_entete+='{'+chemin_relatif+'exos/'+support+'/}'
                     texte_entete+='}\n'
                 elif '\\begin{itemize}[label=\\ding{112},font=\\color{ocre}]' in ligne:
                     texte_entete+='\\begin{itemize}[label=\\ding{112},font=\\color{ocre}]\n'
@@ -273,7 +282,10 @@ def genere_support(rep,info_activite,type_activite):
     with open(rep_activite,'w',encoding='utf-8') as f:
         if len(supports)>0:
             for support in supports.split(';'):
-                f.write('\\input{'+'../../exos/'+support+'}\n')
+                if type_activite=='cours':
+                    f.write('\\input{'+'../../exos/'+support+'}\n')
+                elif type_activite=='tp':
+                    f.write('\\input{'+'../../../exos/'+support+'}\n')
         else:
             f.write('\n')
     return None

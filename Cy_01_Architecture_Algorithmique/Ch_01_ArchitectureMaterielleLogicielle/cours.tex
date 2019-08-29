@@ -1,12 +1,539 @@
 \section{Quelques définitions}
-Informatique
-Algorithmique
-Programmation
+
+\begin{defi}[Informatique]
+Le terme informatique désigne littéralement l'automatisation du traitement de l'information par ordinateur. Il s'agit en fait des sciences et techniques de l'information. 
+\begin{itemize}
+\item Science du traitement rationnel, notamment par machines automatiques, de l'information considérée comme le support des connaissances humaines et des communications dans les domaines technique, économique et social.
+\item Ensemble des applications de cette science, mettant en œuvre des \textbf{matériels} (ordinateurs) et des \textbf{logiciels}.
+\end{itemize}
+Le terme informatique a été créé en 1962 par Philippe Dreyfus à partir des mots «information» et «automatique».
+\end{defi}
+
+\begin{defi}[Algorithmique]
+Un algorithme est une procédure permettant de résoudre un problème, écrite de façon suffisamment détaillée pour être suivie sans posséder de compétence particulière ni même comprendre le problème que l'on est en train de résoudre.
+
+En informatique un algorithme aura la particularité de permettre de résoudre un type de problème donnée que l'on peut appelé \textbf{classe}.
+
+Il possède en entrée des \textbf{données} qui représente le problème à résoudre et en revoie en retour un résultat qui correspond à la résolution du problème.
+
+
+\end{defi}
+
+\begin{exemple}
+
+\begin{itemize}
+\item Recettes de cuisine dans la limite de la connaissance d'une certaine technicité ;
+\item Notice d'assemblage d'un meuble à condition de disposer des outils nécessaire.
+\end{itemize}
+\end{exemple}
+
+\begin{defi}[Programmation]
+La programmation est la notion qui permet de traduire un algorithme dans un langage particulier à la fois interprétable par la machine et compréhensible par l'homme.
+\end{defi}
+
+
+
+
+
+
+\section{Système d'exploitation -- Operating Systems (OS)}
+\subsection{Présentation}
+
+Dans le cadre du modèle de la machine de von Neumann, un\textbf{ seul programme s’exécute}. Il s'agit donc du système d'exploitation qui est chargé dès le démarrage.  Ce programme a pour but de gérer les accés aux processeurs et à la mémoire et aux périphériques, ce qui permet
+effectivement que l’ordinateur exécute plusieurs programmes à la fois.
+
+Par ailleurs l'OS permet de manière générale de gérer l'organisation des données sur le disque dur ainsi que leur droit d'accès. Il gère aussi les différentes ressources et sert de garde-fou en cas de tentative de mauvaise utilisation des ressources de l'ordinateur.
+
+Pour finir, l'OS permet à un ou plusieurs utilisateurs de s'identifier leur permettant ainsi d'utiliser un seul ordinateur sans nécessairement partager les données et les programmes. 
+
+
+
+\subsection{Exemples d'OS}
+Il existe deux grandes familles d'OS : Windows et UNIX. UNIX est elle-même une grande famille derrière laquelle on peut retrouver beaucoup de distributions:  GNU/Linux (Debian, Ubuntu, \textit{etc.}), FreeBSD, MacOS, \textit{etc}. Les différences pouvant être mises en avant sont les suivantes:
+\begin{itemize}
+\item sous UNIX, il existe des distributions dont les sources sont libres (modifiable par tous);
+\item sous UNIX, l'accès à un shell, permet de réaliser une multitude de tâche en ligne de commande, ce qui est parfois plus efficace qu'avec la souris;
+\item sous UNIX, la base de logiciels disponibles est centralisée, ce qui peut faciliter la recherche d'un logiciel et son installation;
+\item sous Windows, lest installations de périphériques est souvent plus aisée. 
+\end{itemize}
+
+Les distributions UNIX sont beaucoup plus répandues qu'on peut parfois le penser : un grand nombre de calculateurs et de serveurs sont sous UNIX, les smartphones, tablettes, box internet sont sous UNIX.
+
+
+
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{bureau_win}
+
+\textit{Bureau Windows 10}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{bureau_ubuntu}
+
+\textit{Bureau Ubuntu}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{bureau_mac}
+
+\textit{Bureau MacOS}
+\end{center}
+\end{minipage} 
+
+\subsection{Organisation des fichiers}
+
+
+Les données sont organisées par fichiers:
+  \begin{itemize}
+  \item Programmes (et leurs données): $\approx 10^{5}$ fichiers sur mon PC
+  \item Données: $\approx 10^{6}$ fichiers sur mon PC (20 ans de données)
+  \end{itemize}
+  
+\begin{figure}[!htb]
+\begin{minipage}{0.5\textwidth}
+Du point de vue de l'utilisateur les fichiers sont organisés en une \emph{structure arborescente} :
+\begin{itemize}
+	\item Chaque fichier est contenu dans un répertoire. 
+	\item Ce répertoire, ainsi que d'autres répertoires ou fichiers, peuvent éventuellement être à leur tour contenus dans un autre répertoire.
+	\item On peut ainsi remonter dans l'arborescence jusqu'à un répertoire appelée \emph{répertoire racine}.
+\end{itemize}
+
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.9\columnwidth]{cours1_architecture_arborescence.png}\\
+\caption{Arborescence des fichiers \label{arbo}}
+\end{center}
+\end{minipage}
+\end{figure}
+
+
+\begin{remarque}
+L'organisation des fichiers est totalement différente entre un environnement Windows et un environnement UNIX. 
+En première approximation, sous Windows, les fichiers sont triés d'une part par applications. D'autre part, les fichiers utilisateurs sont stockés dans le dossier C:\textbackslash Users.
+\end{remarque}
+
+
+
+\subsubsection{Unix}
+
+Sous UNIX, les fichiers sont triés par type de fichiers puis par applications. 
+
+\begin{itemize}
+\item Arborescence unique: unifie l'accès aux différents disques
+  (locaux, distants, disque dur, clé USB, etc.)
+\item Répertoire racine noté \texttt{/}
+\item \texttt{/$a$/$b$}: fichier ou sous-répertoire  $b$ du
+  sous-répertoire $a$ de la racine. Notation appelée \emph{chemin
+    absolu} du fichier ou répertoire $b$.
+\item \texttt{$a$/$b$}: fichier ou sous-répertoire $b$ d'un sous-répertoire $a$ (d'emplacement non précisé), c'est donc un chemin relatif. 
+	  
+	  Par exemple, si le répertoire courant est \texttt{/home/adent/} et qu'une commande fait référence à \texttt{Documents/trombi.pdf}, le fichier concerné se trouve au chemin absolu \texttt{/home/adent/Documents/trombi.pdf} !
+\end{itemize}
+
+\begin{minipage}[c]{.49\linewidth}
+\begin{center}
+\includegraphics[width=.9\linewidth]{archilin.png}
+\textit{Organisation des dossiers sous UNIX}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.49\linewidth}
+
+Quelques dossiers courants sous UNIX:
+\begin{itemize}
+\item \textit{boot} : fichiers permettant le démarrage de Linux;
+\item \textit{etc} : fichiers de configuration;
+\item \textit{home} : répertoires personnels des utilisateurs. On en a déjà parlé un peu avant : c'est dans ce dossier que vous placerez vos fichiers personnels, à la manière du dossier Mes documents de Windows.
+\end{itemize}
+\end{minipage}
+
+\subsubsection{MS Windows}
+
+\begin{itemize}
+\item Chaque disque a un nom formé d'une lettre suivi de
+  \og{}\texttt{:}\fg{} (\texttt{A:}, \ldots{}, \texttt{Z:}), souvent
+  source de problème (pas de convention standard).
+\item On utilise \texttt{\textbackslash{}} au lieu de \texttt{/} pour
+  noter les sous-répertoires.
+\end{itemize}
+
+\subsubsection{Métadonnées}
+À chaque fichier/répertoire sont associées des informations, appelées
+\emph{métadonnées} et notamment:
+\begin{itemize}
+\item taille du fichier
+\item propriétaire
+\item droits d'accès (lecture, écriture, exécution) pour le
+  propriétaire, les membres de son groupe, les autres utilisateurs
+\item date de dernière modification, dernier accès
+\end{itemize}
+Utilisées par le système pour accorder/refuser l'accès, pour savoir ce
+qui doit être sauvegardé, etc.
+
+\subsection{Droits d’accès}
+
+Les droits d'accès font partie des propriétés d'un fichier. 
+
+Sous UNIX, on peut recenser 3 principaux droits pour un fichier : 
+\begin{itemize}
+\item le droit en lecture (\textit{r -- read}), qui permet à l'utilisateur de lire le contenu du fichier;
+\item le droit en écriture (\textit{w -- write}), qui permet à l'utilisateur d'écrire dans le fichier;
+\item le droit d'exécution (\textit{x -- execute}), qui permet à l'utilisateur d'exécuter le fichier.
+\end{itemize}
+
+Par ailleurs pour un même ordinateur, il peut exister plusieurs utilisateurs. Ces utilisateurs peuvent de plus appartenir à un groupe.
+
+Ainsi il est possible de distribuer des droits à un utilisateur, à un groupe d'utilisateurs ou à tous les utilisateurs.  
+
+\begin{minipage}[c]{.45\linewidth}
+\begin{center}
+\includegraphics[width=.85\textwidth]{droits_win.png}
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}[c]{.45\linewidth}
+\begin{center}
+\includegraphics[width=.8\textwidth]{droits_lin.png}
+$$
+-\underbrace{rw-}_{1}\underbrace{r--}_{2}\underbrace{r--}_{3}
+$$
+\begin{itemize}
+\item 1 : droits pour l'utilisateur pessoles;
+\item 2 : droits pour l'utilisateur user;
+\item 3 : droits pour le reste du monde.
+\end{itemize}
+\end{center}
+\end{minipage}
+
+\subsection{Les programmes}
+
+\begin{prop}
+Les programmes existent essentiellement sous deux formes:
+
+\item \textbf{Programmes en langage machine} Ils contiennent le code des
+  instructions du processeur qu'il faut mettre en mémoire pour
+  exécuter le programme.
+\item \textbf{Scripts} Programmes sous forme de texte dans un langage
+  humainement compréhensible. Techniquement, le système va lancer un
+  programme appelé \emph{interpréteur} et lui donner ce
+  texte. L'interpréteur va alors exécuter le programme.
+\end{prop}
+
+\begin{center}
+\begin{tabular}{|p{0.4\textwidth}|p{0.4\textwidth}|}
+\hline
+\textbf{Programmes en langage machine}& \textbf{Scripts (sous Unix)}\\
+\hline
+\begin{itemize}
+\item Difficiles à écrire directement, spécifiques à une architecture
+  processeur/système d'exploitation donnée.
+\item En général produits par un \emph{compilateur}, programme
+  permettant de transformer un programme écrit dans un langage évolué
+  en langage machine.
+\end{itemize}
+&
+\begin{itemize}
+\item Foultitude de langages disponibles (plus de 200 répertoriés sur
+  wikipedia).
+\item Pour réaliser un script:
+  \begin{itemize}
+  \item écrire le texte du programme dans un fichier texte
+  \item ajouter en première ligne :
+    \verb+#!+ \emph{chemin-vers-l'interpréteur}
+    (par exemple \verb+#! /bin/sh+)
+  \item Donner les droits d'exécution sur le fichier.
+  \end{itemize}
+\end{itemize}
+\\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+\subsection{Notions de réseau}
+Les communications Internet se sont développées à partir des années 1990 et ont connu une croissance exponentielle. Le point clé pour permettre de nombreuses communications par réseau internet est d’utiliser des serveurs qui dialoguent entre eux et des clients.
+\subsubsection{Client -- Serveur}
+Deux ordinateurs sont nécessaires pour créer un réseau.
+\begin{defi}[Serveur]
+Un serveur est un ordinateur ou un logiciel permettant de fournir des services à un ou plusieurs ordinateurs clients : serveur de fichiers, serveur de courrier électronique, serveur web…
+\end{defi}
+
+\begin{defi}[Client]
+Un client est un ordinateur ou un logiciel qui demande des services à un serveur. 
+\end{defi}
+
+\begin{exemple}~\\
+
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Service installé sur le serveur	& Logiciel installé sur le client utilisant le service \\ \hline
+Serveur WEB Apache	&Navigateur (Chrome, Firefox, Iceweasel, Safari,…) \\ \hline
+Serveur de diffusion streaming VLC serveur	& Client lecteur de flux video : VLC Client\\ \hline
+Serveur de mail : Postfix	&Lecteur de mail : Thunderbird\\ \hline
+\end{tabular}
+\end{center}
+\end{exemple}
+
+Pour les utilisateurs, en général, seul le nom du logiciel « client » est connu.
+
+\subsubsection{Architecture d’un réseau local}
+ 	 
+\begin{center}
+\begin{tabular}{p{.47\textwidth}p{.47\textwidth}}
+\begin{center}
+\includegraphics[width=\linewidth]{reseau_01}
+
+Réseau domestique
+\end{center} &
+\begin{center}
+\includegraphics[width=\linewidth]{reseau_02}
+
+Réseau lycéen
+\end{center}
+\end{tabular}
+\end{center}
+
+
+Dans le cas d’un réseau domestique, le serveur (box) est en fait relié à un serveur du fournisseur d’accès, lui-même relié à internet. Dans ce cas, le serveur joue le rôle de routeur. 
+
+Dans un réseau de lycéen (par exemple), le routeur a la particularité de relier un réseau d’ordinateurs à Internet. Il gère aussi la communication entre les ordinateurs du réseau du lycée.
+
+\section{Applications -- Sources et binaires}
+\subsection{Application}
+Une application (ou logiciel) est un fichier que l'on peut exécuter afin de satisfaire un besoin (lire un film, ouvre un fichier pdf, naviguer sur internet...). C'est en général un fichier \textbf{binaire}, c'est à dire qu'en général l'utilisateur ne peut pas savoir comment a été codé le logiciel. Il a été produit par l'éditeur de logiciel via un \textbf{compilateur}.
+
+Pour savoir comment une application est codée, il est nécessaire d'en connaître le \textbf{code source}.  Lorsqu'il s'agit d'un logiciel libre, les sources sont disponibles sur Internet. Lorsqu'on travaille chez un éditeur de logiciel, ce code source est aussi accessible. Dans les autres cas, ce code n'est pas accessible. Dans la majorité des cas, l'utilisateur n'a pas besoin de connaître les sources pour utiliser le logiciel. 
+
+Parmi les codes compilés les connus on peut nommer le \textbf{C} ou le \textbf{C++}. Le langage \textbf{Python} n'a pas besoin d'être compilé pour être exécuté (en apparence). 
+
+
+
+
+\subsection{Python}
+\begin{minipage}[c]{.79\linewidth}
+
+Python est un langage de programmation, dont la première version est sortie en 1991. Créé par Guido van Rossum, il a voyagé du Macintosh de son créateur, qui travaillait à cette époque au Centrum voor Wiskunde en Informatica aux Pays-Bas, jusqu'à se voir associer une organisation à but non lucratif particulièrement dévouée, la Python Software Foundation, créée en 2001. Ce langage a été baptisé ainsi en hommage à la troupe de comiques les « Monty Python ».
+\end{minipage} \hfill
+\begin{minipage}[c]{.2\linewidth}
+\begin{center}
+\includegraphics[width=.8\textwidth]{monty.jpg}
+%\label{}
+\end{center}
+\end{minipage}
+
+\subsection{À quoi peut servir Python ?}
+
+
+
+
+Python est un langage puissant, relativement facile à apprendre et riche en possibilités. Il est possible d'étendre ses fonctionnalités. On peut aussi appeler des bibliothèques qui aident le développeur à travailler. 
+
+Python permet :
+\begin{itemize}
+\item de réaliser de petits programmes très simples, appelés scripts, chargés d'une mission très précise sur votre ordinateur;
+\item des programmes complets, comme des jeux, des suites bureautiques, des logiciels multimédias, des clients de messagerie…
+\item des projets très complexes, comme des progiciels (ensemble de plusieurs logiciels pouvant fonctionner ensemble, principalement utilisés dans le monde professionnel).
+\end{itemize}
+
+Voici quelques-unes des fonctionnalités offertes par Python et ses bibliothèques :
+\begin{itemize}
+\item créer des interfaces graphiques ;
+\item faire circuler des informations au travers d'un réseau ;
+\item dialoguer d'une façon avancée avec votre système d'exploitation ;
+\item ...
+\end{itemize}
+
+
+Python est un langage de programmation interprété, c'est-à-dire comme on l'a spécifié plus tôt, que les instructions que vous lui envoyez sont « transcrites » en langage machine au fur et à mesure de leur lecture. D'autres langages (comme le C / C++) sont appelés « langages compilés » car, avant de pouvoir les exécuter, un logiciel spécialisé se charge de transformer le code du programme en langage machine. On appelle cette étape la « compilation ». À chaque modification du code, il faut rappeler une étape de compilation.
+
+Les avantages d'un langage interprété sont la simplicité (on ne passe pas par une étape de compilation avant d'exécuter son programme) et la portabilité (un langage tel que Python est censé fonctionner aussi bien sous Windows que sous Linux ou Mac OS, et on ne devrait avoir à effectuer aucun changement dans le code pour le passer d'un système à l'autre). Cela ne veut pas dire que les langages compilés ne sont pas portables, loin de là ! Mais on doit utiliser des compilateurs différents et, d'un système à l'autre, certaines instructions ne sont pas compatibles, voire se comportent différemment.
+
+En contrepartie, un langage compilé se révélera bien plus rapide qu'un langage interprété (la traduction à la volée de votre programme ralentit l'exécution), bien que cette différence tende à se faire de moins en moins sentir au fil des améliorations. De plus, il faudra installer Python sur le système d'exploitation que vous utilisez pour que l'ordinateur puisse comprendre votre code.
+
+
+\subsection{Environnement de développement intégré (IDE)}
+Logiciel permettant
+\begin{itemize}
+\item d'\textbf{écrire} des programmes
+\item de les \textbf{exécuter}
+\item de chercher l'origine d'un bogue (\textbf{débogueur})
+\item de consulter la documentation du langage et des bibliothèques utilisées
+\end{itemize}
+
+La plupart des IDE sont spécialisés à un ou à quelques langages,
+d'autres sont plus généralistes et ouverts sur grand nombre de
+langages.
+
+
+Dans ce cours:
+\begin{itemize}
+\item Langage : \includegraphics[height=1cm]{logo_python.png}
+\item IDE : Pyzo ou IDLE (fourni avec Python)
+\end{itemize}
+
+
+\subsubsection{Console interactive}
+
+On essaie successivement de taper:
+\begin{multicols}{2}
+%\begin{pyBox}
+\begin{lstlisting}
+2 + 3
+a = 2
+a
+a=2
+a      =    2
+   a = 2
+a + a
+b + 1
+b = 1
+b + 1
+b = b + 7
+b = b + 5
+b
+2 ** 5
+2 ** 1000
+"hello"
+"hello" + "world"
+"hello" + " world"
+\end{lstlisting}
+\end{multicols}
+%(démonstration interactive)
+%
+\subsubsection{Éditeur}
+
+Ouverture d'une nouvelle fenêtre d'édition: menu File/New File
+
+On édite le texte suivant:
+\begin{lstlisting}
+print("hello world!")
+x = 42
+\end{lstlisting}
+
+Exécuter ce code: Run/Run Module (ou F5)
+Remarquez que python n'a pas écrit 42:
+
+Lorsqu'il s'exécute, un programme python n'affiche que ce qu'on lui
+demande explicitement d'afficher!
+
+\subsubsection{Débogueur}
+
+Dans l'éditeur on entre le programme suivant:
+\begin{lstlisting}
+x = 231 / 77
+z = 4
+u = x**2 + 3 - z*3
+t = z / u
+print(t)
+\end{lstlisting}
+Exécution (F5 sous Idle ou Ctl+E sous Pyzo): erreur!
+
+Que se passe t-il?
+
+On va regarder pas à pas en lançant le débogueur:
+\begin{center}
+\begin{minipage}[t]{0.45\textwidth}
+\textbf{Pyzo}
+
+\begin{itemize}
+\item Menu \textbf{Shell/ Postmortem : debug from last traceback}
+
+\item Le programme indique la ligne posant problème puis se positionne en la ligne en question pour tester les variables.
+\end{itemize}
+\end{minipage}
+\vline
+\begin{minipage}[t]{0.45\textwidth}
+\textbf{Idle}
+
+\begin{itemize}
+\item Menu Debug/Debugger (de la fenêtre d'interaction): ouvre une fenêtre nommée
+Debug Control. 
+\item Cocher la case \og{}Source\fg{}.
+
+\item dans l'éditeur, exécuter le programme (F5). La fenêtre Debug
+Control montre la ligne qui va être exécutée et la valeur des
+variables avant cette exécution et la ligne en cours d'exécution est
+mise en surbrillance dans la fenêtre d'édition. 
+\item Cliquer sur Step pour
+exécuter cette étape.
+\end{itemize}
+
+\end{minipage}
+\end{center}
+
+
+\subsubsection{Utilisation de python sur son téléphone}
+
+Différents sites proposent des IDE en ligne. Le site \url{http://repl.it} est plutôt performant. Il faut créer un compte (gratuit) et ensuite on dispose d'un interface assez ergonomique se rapprochant d'un IDE.
+
+
 
 \section{Architecture matérielle d'un ordinateur}
+\subsection{Généralités sur le fonctionnement d'un ordinateur.}\label{sec.ordi}
+
+\begin{defi}
+C'est une machine
+\begin{itemize}
+\item Servant à traiter de l'information
+\item Programmable
+\item Universelle
+\end{itemize}
+\end{defi}
+
+\begin{defi}[Universelle] ~\\
+\textbf{Définition informelle :} «~capable de calculer toute fonction exprimable par un
+algorithme~».
+%\end{quote}
+
+\noindent \textbf{Définition mathématique :} «~capable de calculer toute fonction calculable par
+  une machine de Turing~». Une machine de Turing est un dispositif abstrait, que nous ne détaillerons pas ici. 
+\end{defi}
+
+\begin{exemple}[Exemples/conte-exemples]
+\textbf{Exemple ou conte-exemple ?}
+
+\begin{enumerate}
+\item Automobile
+\item Thermostat d'ambiance (mécanique)
+\item Thermostat d'ambiance (électronique)
+\item Téléphone portable (smartphone)
+\item PC de bureau
+\item Lecteur MP3
+\item Box de votre FAI
+\item Métier Jacquard
+\begin{center}
+\includegraphics[width=3cm]{metier-jacquard.jpg}
+\end{center}
+\end{enumerate}
+\end{exemple}
+
+%\begin{prop}[Universalité]
+%\begin{center}
+%\includegraphics[width=3cm]{metier-jacquard.jpg}
+%\end{center}
+%%\begin{minipage}[b]{0.5\linewidth}
+%  Ce métier Jacquard :
+%  \begin{itemize}
+%  \item traite de l'information ;
+%  \item est programmable ;
+%  \item mais n'est pas une machine \emph{universelle} !
+%  \end{itemize}
+%%\end{minipage}
+
+
+
+
+
+
 \subsection{Modèle de Von Neumann}
 
- ouvoir exécuter des algorithmes arbitraires, les ordinateurs actuels sont tous bâtis
+ %ouvoir exécuter des algorithmes arbitraires, 
+Les ordinateurs actuels sont tous bâtis
 autour du même modèle architectural théorique, l’architecture de Von Neumann, même
 si la mise en œuvre pratique est un peu plus complexe.
 
@@ -38,6 +565,46 @@ le bus.
 \end{center}
 \end{minipage}
 %\end{figure}
+
+\begin{figure}[!htb]
+\begin{minipage}{0.6\textwidth}
+Processeur:
+\begin{itemize}
+\item Mémoire réduite à quelques mots appelés registres
+\item Calculs sur les registres par l'Unité Arithmétique et Logique
+\item Accès à la mémoire vive
+\item Unité de contrôle
+\end{itemize}
+
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{center}
+%  \includegraphics[height=5cm,trim=4.5cm 19cm 6.5cm 4.5cm,clip]{unite-controle.pdf}
+ \begin{tikzpicture}[scale=0.8]
+    
+\def \angleinit {125}
+\def \rayon {3cm}
+\def \marge {15}
+%\draw[->, >=latex] (125:3) arc (125:215:3);
+
+\tikzstyle{etape} = [draw, ellipse, fill=blue!10]
+
+\node[etape] at (\angleinit:\rayon) {Lire instruction};
+\node[etape] at ({\angleinit + 90}:\rayon) {Incrémenter PC};
+\node[etape] at ({\angleinit + 180}:\rayon) {Décoder instruction};
+\node[etape] at ({\angleinit + 270}:\rayon) {Exécuter
+  instruction};
+\foreach \s in {0,...,3}
+{
+  \draw[->, >=latex] ({\angleinit + \s * 90 + \marge}:\rayon)
+    arc ({\angleinit + \s * 90 - 360 + \marge}:{\angleinit + ((\s + 1) *
+      90 - 360 - \marge)}:\rayon);
+}
+  \end{tikzpicture}
+\caption{Déroulement schématique des actions effectuées par l'unité de contrôle}
+\end{center}
+\end{minipage}
+\end{figure}
 
 \subsection{La carte mère et ses composants}
 \subsubsection{La carte mère}
@@ -321,217 +888,10 @@ Il s'agit d'une interface audio vidéo totalement numérique permettant de racco
 \end{minipage}
 
 
-\section{Système d'exploitation -- Operating Systems (OS)}
-\subsection{Présentation}
-
-Dans le cadre du modèle de la machine de von Neumann, un seul programme s’exécute. Il s'agit donc du système d'exploitation qui est chargé dès le démarrage.  Ce programme a pour but de gérer les accés aux processeurs et à la mémoire et aux périphériques, ce qui permet
-effectivement que l’ordinateur exécute plusieurs programmes à la fois.
-
-Par ailleurs l'OS permet de manière générale de gérer l'organisation des données sur le disque dur ainsi que leur droit d'accès. Il gère aussi les différentes ressources et sert de garde-fou en cas de tentative de mauvaise utilisation des ressources de l'ordinateur.
-
-Pour finir, l'OS permet à un ou plusieurs utilisateurs de s'identifier leur permettant ainsi d'utiliser un seul ordinateur sans nécessairement partager les données et les programmes. 
 
 
 
-\subsection{Exemples d'OS}
-Il existe deux grandes familles d'OS : Windows et UNIX. UNIX est elle-même une grande famille derrière laquelle on peut retrouver beaucoup de distributions:  GNU/Linux (Debian, Ubuntu, \textit{etc.}), FreeBSD, MacOS, \textit{etc}. Les différences pouvant être mises en avant sont les suivantes:
-\begin{itemize}
-\item sous UNIX, il existe des distributions dont les sources sont libres (modifiable par tous);
-\item sous UNIX, l'accès à un shell, permet de réaliser une multitude de tâche en ligne de commande, ce qui est parfois plus efficace qu'avec la souris;
-\item sous UNIX, la base de logiciels disponibles est centralisée, ce qui peut faciliter la recherche d'un logiciel et son installation;
-\item sous Windows, lest installations de périphériques est souvent plus aisée. 
-\end{itemize}
-
-Les distributions UNIX sont beaucoup plus répandues qu'on peut parfois le penser : un grand nombre de calculateurs et de serveurs sont sous UNIX, les smartphones, tablettes, box internet sont sous UNIX.
-
-
-
-\begin{minipage}[c]{.3\linewidth}
-\begin{center}
-\includegraphics[width=\linewidth]{bureau_win}
-
-\textit{Bureau Windows 10}
-\end{center}
-\end{minipage} \hfill
-\begin{minipage}[c]{.3\linewidth}
-\begin{center}
-\includegraphics[width=\linewidth]{bureau_ubuntu}
-
-\textit{Bureau Ubuntu}
-\end{center}
-\end{minipage} \hfill
-\begin{minipage}[c]{.3\linewidth}
-\begin{center}
-\includegraphics[width=\linewidth]{bureau_mac}
-
-\textit{Bureau MacOS}
-\end{center}
-\end{minipage} 
-
-\subsection{Organisation des fichiers}
-L'organisation des fichiers est totalement différente entre un environnement Windows et un environnement UNIX. 
-En première approximation, sous Windows, les fichiers sont triés d'une part par applications. D'autre part, les fichiers utilisateurs sont stockés dans le dossier C:\textbackslash Users.
-
-Sous UNIX, les fichiers sont triés par type de fichiers puis par applications. D'autre part, les fichiers utilisateurs sont stockés dans le dossier \textbackslash home.
-
-
-\begin{minipage}[c]{.49\linewidth}
-\begin{center}
-\includegraphics[width=.9\linewidth]{archilin.png}
-\textit{Organisation des dossiers sous UNIX}
-\end{center}
-\end{minipage} \hfill
-\begin{minipage}[c]{.49\linewidth}
-
-Quelques dossiers courants sous UNIX:
-\begin{itemize}
-\item \textit{boot} : fichiers permettant le démarrage de Linux;
-\item \textit{etc} : fichiers de configuration;
-\item \textit{home} : répertoires personnels des utilisateurs. On en a déjà parlé un peu avant : c'est dans ce dossier que vous placerez vos fichiers personnels, à la manière du dossier Mes documents de Windows.
-\end{itemize}
-\end{minipage}
-
-\subsection{Droits d’accès}
-
-Les droits d'accès font partie des propriétés d'un fichier. 
-
-Sous UNIX, on peut recenser 3 principaux droits pour un fichier : 
-\begin{itemize}
-\item le droit en lecture (\textit{r -- read}), qui permet à l'utilisateur de lire le contenu du fichier;
-\item le droit en écriture (\textit{w -- write}), qui permet à l'utilisateur d'écrire dans le fichier;
-\item le droit d'exécution (\textit{x -- execute}), qui permet à l'utilisateur d'exécuter le fichier.
-\end{itemize}
-
-Par ailleurs pour un même ordinateur, il peut exister plusieurs utilisateurs. Ces utilisateurs peuvent de plus appartenir à un groupe.
-
-Ainsi il est possible de distribuer des droits à un utilisateur, à un groupe d'utilisateurs ou à tous les utilisateurs.  
-
-\begin{minipage}[c]{.45\linewidth}
-\begin{center}
-\includegraphics[width=.85\textwidth]{droits_win.png}
-\end{center}
-\end{minipage}\hfill
-\begin{minipage}[c]{.45\linewidth}
-\begin{center}
-\includegraphics[width=.8\textwidth]{droits_lin.png}
-$$
--\underbrace{rw-}_{1}\underbrace{r--}_{2}\underbrace{r--}_{3}
-$$
-\begin{itemize}
-\item 1 : droits pour l'utilisateur pessoles;
-\item 2 : droits pour l'utilisateur user;
-\item 3 : droits pour le reste du monde.
-\end{itemize}
-\end{center}
-\end{minipage}
-
-
-
-\subsection{Notions de réseau}
-Les communications Internet se sont développées à partir des années 1990 et ont connu une croissance exponentielle. Le point clé pour permettre de nombreuses communications par réseau internet est d’utiliser des serveurs qui dialoguent entre eux et des clients.
-\subsubsection{Client -- Serveur}
-Deux ordinateurs sont nécessaires pour créer un réseau.
-\begin{defi}[Serveur]
-Un serveur est un ordinateur ou un logiciel permettant de fournir des services à un ou plusieurs ordinateurs clients : serveur de fichiers, serveur de courrier électronique, serveur web…
-\end{defi}
-
-\begin{defi}[Client]
-Un client est un ordinateur ou un logiciel qui demande des services à un serveur. 
-\end{defi}
-
-\begin{exemple}~\\
-
-
-\begin{center}
-\begin{tabular}{|l|l|}
-\hline
-Service installé sur le serveur	& Logiciel installé sur le client utilisant le service \\ \hline
-Serveur WEB Apache	&Navigateur (Chrome, Firefox, Iceweasel, Safari,…) \\ \hline
-Serveur de diffusion streaming VLC serveur	& Client lecteur de flux video : VLC Client\\ \hline
-Serveur de mail : Postfix	&Lecteur de mail : Thunderbird\\ \hline
-\end{tabular}
-\end{center}
-\end{exemple}
-
-Pour les utilisateurs, en général, seul le nom du logiciel « client » est connu.
-
-\subsubsection{Architecture d’un réseau local}
- 	 
-\begin{center}
-\begin{tabular}{p{.47\textwidth}p{.47\textwidth}}
-\begin{center}
-\includegraphics[width=\linewidth]{reseau_01}
-
-Réseau domestique
-\end{center} &
-\begin{center}
-\includegraphics[width=\linewidth]{reseau_02}
-
-Réseau lycéen
-\end{center}
-\end{tabular}
-\end{center}
-
-
-Dans le cas d’un réseau domestique, le serveur (box) est en fait relié à un serveur du fournisseur d’accès, lui-même relié à internet. Dans ce cas, le serveur joue le rôle de routeur. 
-
-Dans un réseau de lycéen (par exemple), le routeur a la particularité de relier un réseau d’ordinateurs à Internet. Il gère aussi la communication entre les ordinateurs du réseau du lycée.
-
-\section{Applications -- Sources et binaires}
-\subsection{Application}
-Une application (ou logiciel) est un fichier que l'on peut exécuter afin de satisfaire un besoin (lire un film, ouvre un fichier pdf, naviguer sur internet...). C'est en général un fichier \textbf{binaire}, c'est à dire qu'en général l'utilisateur ne peut pas savoir comment a été codé le logiciel. Il a été produit par l'éditeur de logiciel via un \textbf{compilateur}.
-
-Pour savoir comment une application est codée, il est nécessaire d'en connaître le \textbf{code source}.  Lorsqu'il s'agit d'un logiciel libre, les sources sont disponibles sur Internet. Lorsqu'on travaille chez un éditeur de logiciel, ce code source est aussi accessible. Dans les autres cas, ce code n'est pas accessible. Dans la majorité des cas, l'utilisateur n'a pas besoin de connaître les sources pour utiliser le logiciel. 
-
-Parmi les codes compilés les connus ont peut nommer le \textbf{C} ou le \textbf{C++}. Le langage \textbf{Python} n'a pas besoin d'être compilé pour être exécuté (en apparence). 
-
-
-
-
-\subsection{Python}
-\begin{minipage}[c]{.79\linewidth}
-
-Python est un langage de programmation, dont la première version est sortie en 1991. Créé par Guido van Rossum, il a voyagé du Macintosh de son créateur, qui travaillait à cette époque au Centrum voor Wiskunde en Informatica aux Pays-Bas, jusqu'à se voir associer une organisation à but non lucratif particulièrement dévouée, la Python Software Foundation, créée en 2001. Ce langage a été baptisé ainsi en hommage à la troupe de comiques les « Monty Python ».
-\end{minipage} \hfill
-\begin{minipage}[c]{.2\linewidth}
-\begin{center}
-\includegraphics[width=.8\textwidth]{monty.jpg}
-%\label{}
-\end{center}
-\end{minipage}
-
-\subsection{À quoi peut servir Python ?}
-
-
-
-
-Python est un langage puissant, relativement facile à apprendre et riche en possibilités. Il est possible d'étendre ses fonctionnalités. On peut aussi appeler des bibliothèques qui aident le développeur à travailler. 
-
-Python permet :
-\begin{itemize}
-\item de réaliser de petits programmes très simples, appelés scripts, chargés d'une mission très précise sur votre ordinateur;
-\item des programmes complets, comme des jeux, des suites bureautiques, des logiciels multimédias, des clients de messagerie…
-\item des projets très complexes, comme des progiciels (ensemble de plusieurs logiciels pouvant fonctionner ensemble, principalement utilisés dans le monde professionnel).
-\end{itemize}
-
-Voici quelques-unes des fonctionnalités offertes par Python et ses bibliothèques :
-\begin{itemize}
-\item créer des interfaces graphiques ;
-\item faire circuler des informations au travers d'un réseau ;
-\item dialoguer d'une façon avancée avec votre système d'exploitation ;
-\item ...
-\end{itemize}
-
-
-Python est un langage de programmation interprété, c'est-à-dire comme on l'a spécifié au que les instructions que vous lui envoyez sont « transcrites » en langage machine au fur et à mesure de leur lecture. D'autres langages (comme le C / C++) sont appelés « langages compilés » car, avant de pouvoir les exécuter, un logiciel spécialisé se charge de transformer le code du programme en langage machine. On appelle cette étape la « compilation ». À chaque modification du code, il faut rappeler une étape de compilation.
-
-Les avantages d'un langage interprété sont la simplicité (on ne passe pas par une étape de compilation avant d'exécuter son programme) et la portabilité (un langage tel que Python est censé fonctionner aussi bien sous Windows que sous Linux ou Mac OS, et on ne devrait avoir à effectuer aucun changement dans le code pour le passer d'un système à l'autre). Cela ne veut pas dire que les langages compilés ne sont pas portables, loin de là ! Mais on doit utiliser des compilateurs différents et, d'un système à l'autre, certaines instructions ne sont pas compatibles, voire se comportent différemment.
-
-En contrepartie, un langage compilé se révélera bien plus rapide qu'un langage interprété (la traduction à la volée de votre programme ralentit l'exécution), bien que cette différence tende à se faire de moins en moins sentir au fil des améliorations. De plus, il faudra installer Python sur le système d'exploitation que vous utilisez pour que l'ordinateur puisse comprendre votre code.
-
-
-
-\newpage
+%\newpage
 
 %
 %\section{Architecture de base d'un ordinateur}
@@ -1537,10 +1897,10 @@ En contrepartie, un langage compilé se révélera bien plus rapide qu'un langag
 %
 %
 %
-%\begin{thebibliography}{2}
-%\bibitem{Tous}{Wack, Conchon, Courant, deFalco, Dowek, Filliatre, Gonnord, Informatique pour tous en classes préparatoires aux grandes écoles, éditions Eyrolles.}
-%\bibitem{zero}{Apprenez à programmer en Python \url{http://www.siteduzero.com/}.}
-%\end{thebibliography}
+\begin{thebibliography}{2}
+\bibitem{Tous}{Wack, Conchon, Courant, deFalco, Dowek, Filliatre, Gonnord, Informatique pour tous en classes préparatoires aux grandes écoles, éditions Eyrolles.}
+\bibitem{zero}{Apprenez à programmer en Python \url{http://www.siteduzero.com/}.}
+\end{thebibliography}
 %
 %\footnotesize
 %
