@@ -497,6 +497,7 @@ algorithme~».
 \begin{exemple}[Exemples/conte-exemples]
 \textbf{Exemple ou conte-exemple ?}
 
+\begin{minipage}{0.4\textwidth}
 \begin{enumerate}
 \item Automobile
 \item Thermostat d'ambiance (mécanique)
@@ -506,10 +507,14 @@ algorithme~».
 \item Lecteur MP3
 \item Box de votre FAI
 \item Métier Jacquard
-\begin{center}
-\includegraphics[width=3cm]{metier-jacquard.jpg}
-\end{center}
 \end{enumerate}
+
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{montage_exemples.jpg}
+\end{center}
+\end{minipage}
 \end{exemple}
 
 %\begin{prop}[Universalité]
@@ -605,6 +610,28 @@ Processeur:
 \end{center}
 \end{minipage}
 \end{figure}
+
+\begin{center}
+\begin{tabular}{p{0.4\textwidth}|p{0.4\textwidth}}
+\textbf{Avantages}
+&
+\textbf{Inconvénients}\\
+\hline
+\begin{itemize}
+\item Simplicité conceptuelle
+\item Souplesse (peut manipuler tout ce qui est représentable
+  numériquement, un programme est une donnée)
+\end{itemize}
+&
+\begin{itemize}
+\item Exécution séquentielle
+\item Goulet d'étranglement
+\item Fragilité (faible robustesse aux erreurs)
+\end{itemize}
+\end{tabular}
+\end{center}
+
+
 
 \subsection{La carte mère et ses composants}
 \subsubsection{La carte mère}
@@ -1900,8 +1927,10 @@ Il s'agit d'une interface audio vidéo totalement numérique permettant de racco
 \begin{thebibliography}{2}
 \bibitem{Tous}{Wack, Conchon, Courant, deFalco, Dowek, Filliatre, Gonnord, Informatique pour tous en classes préparatoires aux grandes écoles, éditions Eyrolles.}
 \bibitem{zero}{Apprenez à programmer en Python \url{http://www.siteduzero.com/}.}
+\bibitem{medevielle}{François Médevielle, Architecture des ordinateurs -- UPSTI}
+\bibitem{beynet}{Patrick Beynet, ISN -- Architectures matérielles -- Architecture des ordinateurs. Lycée Rouvière.}
 \end{thebibliography}
-%
+
 %\footnotesize
 %
 %\begin{thebibliography}{2}
@@ -1921,3 +1950,4 @@ Il s'agit d'une interface audio vidéo totalement numérique permettant de racco
 %\bibitem{ethernet}{\url{http://brain.pan.e-merchant.com/2/4/46000142/l_46000142.jpg}}
 %\bibitem{cm2}{Carte mère. \url{http://serveurfelix.myds.me/~Felix/HTTrack/doku505c.html?id=architecture_pc:architecture_pc:composants}}
 %\bibitem{usb}{\url{http://u.s.b.free.fr/pdf/L_USB_et_sa_norme_v1.pdf}}
+%\end{thebibliography}
