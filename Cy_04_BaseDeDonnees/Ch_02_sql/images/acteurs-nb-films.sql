@@ -1,0 +1,7 @@
+SELECT nom, prenom, COUNT(*) AS nbfilms
+FROM PERSONNE, FILM
+WHERE EXISTS
+ (SELECT * FROM joue
+  WHERE PERSONNE.id=idacteur AND FILM.id=idfilm)
+GROUP BY PERSONNE.id;
+

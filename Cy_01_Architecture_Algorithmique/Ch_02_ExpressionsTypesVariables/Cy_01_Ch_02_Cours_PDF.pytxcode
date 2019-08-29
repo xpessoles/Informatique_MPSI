@@ -1,0 +1,54 @@
+=>PYTHONTEX#pycon#default#default#0#console####cours.tex#28#
+42
+1+4
+=>PYTHONTEX#pycon#default#default#1#console####cours.tex#57#
+type(42)
+type(1.2/3.0)
+=>PYTHONTEX#pycon#default#default#2#console####cours.tex#214#
+L = [1,2,3]
+L[0] = 4
+L
+=>PYTHONTEX#pycon#default#default#3#console####cours.tex#265#
+var  = 1
+=>PYTHONTEX#pycon#default#default#4#console####cours.tex#276#
+x = 42       # x prend la valeur 42.
+x = x + 2	# on additionne à la donnée stockée dans x le nombre 2 et on
+             # stocke le résultat de nouveau dans x
+x            # on accède à la valeur qui est mémorisée dans x.
+44
+=>PYTHONTEX#pycon#default#default#5#console####cours.tex#309#
+a=2
+print(a)
+a=3
+print(a)
+a=[1,2]
+=>PYTHONTEX#pycon#default#default#6#console####cours.tex#317#
+print(a)
+b=a
+a[0]=2
+print(a,b)
+=>PYTHONTEX:SETTINGS#
+version=0.16
+outputdir=pythontex-files-Cy_01_Ch_02_Cours_PDF
+workingdir=.
+workingdirset=false
+gobble=none
+rerun=default
+hashdependencies=default
+makestderr=false
+stderrfilename=full
+keeptemps=none
+pyfuture=default
+pyconfuture=none
+pygments=true
+pygglobal=:GLOBAL||
+fvextfile=-1
+pyconbanner=none
+pyconfilename=stdin
+depythontex=false
+pygfamily=py|python|
+pygfamily=pycon|pycon|
+pygfamily=sympy|python|
+pygfamily=sympycon|pycon|
+pygfamily=pylab|python|
+pygfamily=pylabcon|pycon|

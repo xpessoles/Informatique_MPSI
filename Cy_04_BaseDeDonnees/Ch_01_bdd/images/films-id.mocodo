@@ -1,0 +1,6 @@
+PERSONNE: id, nom, prenom, date_naissance
+JOUE, 0Nacteur PERSONNE, 0Nfilm FILM, 0Nrole PERSONNAGE
+PERSONNAGE: id, nom
+
+REALISE, 0Nrealisateur PERSONNE, 11film FILM
+FILM: id, titre, date

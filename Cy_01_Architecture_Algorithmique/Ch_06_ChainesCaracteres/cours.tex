@@ -1,4 +1,191 @@
-\section{Quelques définitions}
-Informatique
-Algorithmique
-Programmation
+
+\section{Chaînes et type \texttt{str} en \python}
+
+\subsection{Définition}
+
+Pour représenter des textes, on utilise la structure de données de \og chaîne de caractères \fg{} (\emph{string} en anglais). En \python, cela correspond aux objets de type \pyv{str}.
+
+Ces objets sont non-mutables, c'est-à-dire qu'une fois créés, on ne peut pas les modifier. 
+Comme il ne peut y avoir des problèmes d'alias (par exemple, comme pour les listes \python), nous ne détaillerons pas ici leur représentation en mémoire. 
+
+\subsection{Création et lecture}
+
+On définit une chaîne de caractère en entourant ces caractères par des guillemets simples, doubles, ou trois guillemets simples ou doubles. 
+L'utilisation de guillemets simples permet d'utiliser des guillemets doubles dans la chaîne de caractère, et vice-versa.
+\begin{pyconsole}
+'Hallo Welt'
+'It is "Hello World" !'
+"Ja, aber 'not in germany' ..."
+\end{pyconsole}
+
+On peut signaler une tabulation par \pyv{\t} et créer une nouvelle ligne par \pyv{\n}.
+\begin{pyconsole}
+s = "\tL'albatros\nSouvent, pour s'amuser, les hommes d'équipage\n[...]"
+print(s)
+\end{pyconsole}
+
+On accède alors aux caractères d'une chaîne en donnant son indice, comme pour les listes. 
+\begin{pyconsole}
+s[0]
+s[-1]
+\end{pyconsole}
+Remarquons que le tranchage fonctionne similairement aux listes.
+\begin{pyconsole}
+s[12:19]
+s[:11]
+s[36:]
+\end{pyconsole}
+On peut aussi créer une chaîne de caractères à partir de nombres ou de booléens avec la fonction~\pyv{str}.
+\begin{pyconsole}
+str(42)
+str(-3.5)
+str(4==4.)
+\end{pyconsole}
+
+Enfin, rappelons que ce type est non mutable.
+\begin{verbatim}
+>>> s[0] = "a"
+Traceback (most recent call last):
+  File "<pyshell#1>", line 1, in <module>
+    s[0] = "a"
+TypeError: 'str' object does not support item assignment
+\end{verbatim}
+
+\subsection{Opérations sur les chaînes}
+
+Comme pour les listes, on peut concaténer deux chaînes de caractères avec l'opérateur~\pyv{+}.
+\begin{pyconsole}
+'Hello'+'World'
+\end{pyconsole}
+On peut aussi dupliquer une chaîne de caractères plusieurs fois avec l'opérateur~\pyv{*}.
+\begin{pyconsole}
+print('GA-BU-ZO-MEU\n'*5)
+\end{pyconsole}
+La fonction \pyv{len} permet là encore de calculer la longueur d'une liste.
+\begin{pyconsole}
+len(s)
+\end{pyconsole}
+On peut aussi chercher la présence d'un motif dans une chaîne avec \pyv{in}, son absence avec \pyv{not in}
+\begin{pyconsole}
+'Albatros' in s
+'albatros' not in s
+\end{pyconsole}
+
+
+
+\subsection{Chaînes et méthodes}
+De nombreuses méthodes existent sur les chaînes, voici les plus utiles.
+\begin{figure}[!h]
+  \begin{center}
+    \begin{tabular}{|c|c|}
+      \hline
+      Méthode & Description \\
+      \hline
+      \texttt{count(m)}& Compte le nombre d'occurences du motif \texttt{m}, sans chevauchement.\\
+      \hline
+      \texttt{find(m)}& Renvoie la première occurence du motif \texttt{m}.\\
+      \hline
+      \texttt{islower() (et autres)}& Renvoie un booléen indiquant si la chaîne est en minuscules. \\
+      \hline
+      \texttt{join(bout)}& Concatène les éléments de la liste \texttt{bout}, séparés par la chaîne.\\
+      \hline
+      \texttt{lower()}& Met en minuscule la chaîne de caractères.\\
+      \hline
+      \texttt{split(sep)}& Sépare la chaîne selon le séparateur \texttt{sep}\\
+      \hline      
+      \texttt{strip(char)}& Enlève les lettres en début/fin si elles sont dans la chaîne \texttt{char}.\\
+      \hline
+      \texttt{upper()}& Mets en majuscules la chaîne.  \\
+      \hline
+    \end{tabular}
+    \caption{Quelques méthodes sur les chaînes de caractères.}
+    \label{tab.str.methodes}
+  \end{center}
+\end{figure}
+
+\begin{pyconsole}
+s = "    que ; d'espaces ; mes ; amis ! ;   "
+s.count('es')
+s.find('es')
+s.islower()
+'+'.join([str(i) for i in range(14)])
+'HAHAHAHAHA !'.lower()
+s.split(';')
+s.split()
+s.strip()
+s.strip('q; ')
+s.upper()
+\end{pyconsole}
+
+\section{Algorithme : recherche d'un mot dans un texte}
+
+Le seul algorithme sur les chaînes que vous devez pouvoir reproduire est celui de la recherche d'un mot \pyv{m} dans une chaîne de caractères \pyv{s}.
+
+Nous allons écrire un algorithme naïf. On commence par calculer la longueur de \pyv{m}. 
+Ensuite, on parcout séquentiellement la chaîne \pyv{s} en regardant à chaque fois si le mot se trouve au début de l'emplacement considéré.
+
+Cela donne l'écriture suivante.
+\begin{pyblock}
+def recherche(m,s):
+    """Recherche le mot m dans la chaîne s
+       Préconditions : m et s sont des chaînes de caractères"""
+    long_s = len(s) # Longueur de s
+    long_m = len(m) # Longueur de m
+    for i in range(long_s-long_m+1): 
+        # Invariant : m n'a pas été trouvé dans s[0:i+long_m-1]
+        if s[i:i+long_m] == m: # On a trouvé m
+            return True
+    return False
+
+print(recherche('42','Les 7 samouraïs'))
+print(recherche('7','Les 7 samouraïs'))
+\end{pyblock}
+Cela renvoie alors :
+\begin{quote}
+  \printpythontex[verb]
+\end{quote}
+Remarquons que l'on aurait pu exécuter cet algorithme sur une liste \python ...
+
+Nous pouvons aussi remarquer que l'algorithme précédent utilise une tranche, qui est particulière à \python, et que nous ne savons pas vraiment comment se comporte la comparaison de tableaux. 
+On peut ainsi choisir d'expliciter complètement cette partie là comme suit.
+\begin{pyblock}
+def recherche(m,s):
+    """Recherche le mot m dans la chaîne s
+       Préconditions : m et s sont des chaînes de caractères"""
+    long_s = len(s) # Longueur de s
+    long_m = len(m) # Longueur de m
+    for i in range(long_s-long_m+1): 
+        # Invariant : m n'a pas été trouvé dans s[0:i+long_m-1]
+        j = 0
+        while j < long_m and m[j] == s[i+j]:
+            # Invariant : m[:j] == s[i:i+j]
+            j = j+1
+            # Invariant : m[:j] == s[i:i+j]
+        if j == long_m:
+            # Invariant précédent : m == s[i:i+long_m]
+            return True
+    return False
+
+print(recherche('42','Les 7 samouraïs'))
+print(recherche('sam','Les 7 samouraïs'))
+\end{pyblock}
+On vérifie, cela renvoie bien :
+\begin{quote}
+  \printpythontex[verb]
+\end{quote}
+\section{Exercices}
+%\begin{exo}
+  \'Ecrire une fonction \pyv{c_recherche(m,s)} de recherche indiquant si le mot \pyv{m} est dans la chaîne \pyv{s} insensible à la casse (majuscules ou minuscules).
+%\end{exo}
+
+%\begin{exo}
+  \'Ecrire une fonction \pyv{i_recherche(m,s)} de recherche du mot \pyv{m} dans une chaîne \pyv{s}, renvoyant la position de la première occurence du mot dans la chaîne et une erreur si le mot n'est pas dans le texte.
+%\end{exo}
+
+%\begin{exo}
+  \'Ecrire une fonction \pyv{compte(m,s)} comptant le nombre d'occurences du mot \pyv{m} dans une chaîne \pyv{s}, chevauchements compris.
+%\end{exo}
+
+%\begin{exo}
+  \'Ecrire une fonction \pyv{dist_compte(m,s)} comptant le nombre d'occurences du mot \pyv{m} dans une chaîne \pyv{s}, sans chevauchements.
+%\end{exo} 

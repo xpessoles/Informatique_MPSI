@@ -55,6 +55,47 @@
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 
 %----------------------------------------------------------------------------------------
+%	Code PYTHON
+%----------------------------------------------------------------------------------------
+
+%\usepackage[rerun=errors,makestderr=true]{pythontex}
+\usepackage{pythontex}
+\usepackage{listings}
+\lstloadlanguages{Python}
+
+\lstset{language=Python,
+        columns=fullflexible,
+%	  identifierstyle=\sffamily,
+	  basicstyle=\ttfamily,
+	  keywordstyle=\bf,
+	  commentstyle=\normalfont,
+	  numbers=none, numberstyle=\small, numbersep=30pt, %gestion numérotation
+	  showstringspaces=false,%pour cacher le symbole d'espacement dans les chaînes
+	  breaklines=true, %passage à la ligne automatique
+	  prebreak=\mbox{$\swarrow$},
+%	  includerangemarker=false, % pour inclure partiellement des fichiers
+%	  rangeprefix=\#\ 
+	  }
+
+
+\lstset{
+  literate={ö}{{\"o}}1
+           {ä}{{\"a}}1
+           {ü}{{\"u}}1
+           {é}{{\'e}}1
+           {è}{{\`e}}1
+           {ê}{{\^e}}1
+           {à}{{\`a}}1
+           {â}{{\^a}}1
+           {ù}{{\`u}}1
+           {ç}{{\c{c}}}1
+           {î}{{\^{i}}}1
+           {ô}{{\^{o}}}1
+           {É}{{\'{E}}}1
+}
+
+
+%----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY AND INDEX
 %----------------------------------------------------------------------------------------
 
@@ -372,6 +413,7 @@
 \newtheorem{remarqueT}{Remarque}[section]
 \newtheorem{termT}{Terminal\\}[section]
 \newtheorem{pyT}{Python\\}[section]
+\newtheorem{pycT}{Python -- Console}[section]
 \newtheorem{sciT}{Scilab\\}[section]
 \newtheorem{pseudoT}{Pseudo Code\\}[section]
 \newtheorem{sqlT}{SQL\\}[section]
@@ -711,7 +753,8 @@ innerbottommargin=5pt]{sqlBox}
 \newenvironment{titrechapitre}{\begin{chBox}\begin{titrechapitreT}}{\end{titrechapitreT}\end{chBox}}	
 
 \newenvironment{term}{ \begin{termBox}\begin{termT}}{\end{termT}\end{termBox}}
-\newenvironment{py}{ \begin{pyBox}\begin{pyT}}{\end{pyT}\end{pyBox}}
+\newenvironment{xxpyconsole}{ \begin{pyBox}\begin{pycT}}{\end{pycT}\end{pyBox}}
+\newenvironment{xxpy}{ \begin{pyBox}\begin{pyT}}{\end{pyT}\end{pyBox}}
 \newenvironment{sci}{ \begin{sciBox}\begin{sciT}}{\end{sciT}\end{sciBox}}
 \newenvironment{pseudo}{ \begin{pseudoBox}\begin{pseudoT}}{\end{pseudoT}\end{pseudoBox}}
 \newenvironment{envsql}{ \begin{sqlBox}\begin{sqlT}}{\end{sqlT}\end{sqlBox}}

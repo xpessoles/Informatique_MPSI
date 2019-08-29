@@ -1,12 +1,1049 @@
+=>PYTHONTEX#py#default#defaultverb#0#v####ALG-006.tex#7#
+parfait(n)
+=>PYTHONTEX#py#default#defaultverb#1#v####ALG-008.tex#2#
+k
+=>PYTHONTEX#py#default#defaultverb#2#v####ALG-008.tex#3#
+b
+=>PYTHONTEX#py#default#defaultverb#3#v####ALG-008.tex#3#
+k
+=>PYTHONTEX#py#default#defaultverb#4#v####ALG-008.tex#4#
+k
+=>PYTHONTEX#py#default#defaultverb#5#v####ALG-008.tex#23#
+code(b,k)
+=>PYTHONTEX#py#default#defaultverb#6#v####ALG-008.tex#23#
+b
+=>PYTHONTEX#py#default#defaultverb#7#v####ALG-008.tex#23#
+k
+=>PYTHONTEX#py#default#defaultverb#8#v####ALG-008.tex#25#
+decode(c,k)
+=>PYTHONTEX#py#default#defaultverb#9#v####ALG-008.tex#25#
+c
+=>PYTHONTEX#py#default#defaultverb#10#v####ALG-008.tex#25#
+k
+=>PYTHONTEX#py#gobble=0,numbers=left#defaultverb#0#verbatim####ALG-009.tex#50#
+def kNN(L,c,k,d):
+    """k plus proches voisins du point c dans L
+       d : fonction de distance"""
+    v = []
+    for j in range(L) :
+        a = L[j]
+        if len(v) < k :
+            v.append(a)
+        if d(a,c) < d(v[-1],c) :
+            v[-1] = a
+        i = len(v) - 1
+        while i >= 1 and v[i] < v[i-1] :
+            v[i-1],v[i] = v[i],v[i-1]
+            i = i-1
+    return v
+=>PYTHONTEX#py#default#defaultverb#11#v####STR-001.tex#4#
+est_pal(s)
+=>PYTHONTEX#py#default#defaultverb#12#v####STR-001.tex#4#
+s
+=>PYTHONTEX#py#default#defaultverb#13#v####STR-001.tex#4#
+True
+=>PYTHONTEX#py#default#defaultverb#14#v####STR-001.tex#4#
+s
+=>PYTHONTEX#py#default#defaultverb#15#v####STR-001.tex#4#
+False
+=>PYTHONTEX#py#default#defaultverb#16#v####STR-001.tex#6#
+max_pal(s)
+=>PYTHONTEX#py#default#defaultverb#17#v####STR-001.tex#6#
+s
+=>PYTHONTEX#py#default#defaultverb#18#v####STR-001.tex#6#
+p
+=>PYTHONTEX#py#default#defaultverb#19#v####STR-001.tex#6#
+p
+=>PYTHONTEX#py#default#defaultverb#20#verbatim####COM-002.tex#10#
+def u(n):
+    """u_n, n : entier naturel"""
+    v = 42
+    # Inv : v = u_0
+    for k in range(n):
+        # Inv : v = u_k
+        v = 15091 * v % 64007
+        # Inv : v = 15091*u_k % 64007 = u_k+1
+    # Inv : au dernier tour, k = n-1, donc v = u_n
+    return v
+
+def S(n):
+    """u_n, n : entier naturel"""
+    s = u(0)
+    # Inv : s = S_0
+    for k in range(n):
+        # Inv : s = S_k
+        s = s + u(k+1)
+        # Inv : v = S_k+u_k+1 = S_k+1
+    # Inv : au dernier tour, k = n-1, donc s = S_n
+    return s
+=>PYTHONTEX#py#default#defaultverb#21#verbatim####COM-003.tex#6#
+def u(n):
+    """u_n, n : entier naturel"""
+    v = 2
+    # Inv : v = u_0
+    for k in range(n):
+        # Inv : v = u_k
+        v = v*v
+        # Inv : v = u_k**2 = u_k+1
+    # Inv : au dernier tour,
+    # k = n-1, donc v = u_n
+    return v
+=>PYTHONTEX#py#default#defaultverb#22#verbatim####COM-003.tex#21#
+import timeit
+
+REPEAT=3
+
+def duree(f, x):
+  """Calcule le temps mis par Python pour
+  calculer f(x).   Cette fonction effectue
+  en fait le calcul de f(x) REPEAT fois et
+  garde la valeur la plus petite (l'idée est
+  d'éliminer les éventuelles perturbations
+  provoquées par d'autres processus
+  tournant sur la machine)"""
+  t = timeit.Timer(stmt=lambda : f(x))
+  time = min(t.repeat(REPEAT, number=1))
+  return time
+=>PYTHONTEX#py#default#defaultverb#23#verbatim####COM-004.tex#2#
+def mystere(t):
+    """t : tableau d'entiers"""
+    m = 0
+    for i in range(len(t)):
+        for j in range(i+1,len(t)):
+            if t[j] - t [i] > m :
+                 m = t[j]-t[i]
+    return m
+=>PYTHONTEX#py#default#defaultverb#24#verbatim####COM-005.tex#2#
+def mystere(u,v):
+    """u,v : tableaux d'entiers"""
+    m = 0
+    p,q = len(u),len(v)
+    for i in range(p) :
+        for a in range(q) :
+	    k = 0
+            while i+k < p and a+k < q and u[i+k] == v[a+k] :
+                k = k+1
+            if k > m :
+                m = k
+    return m
+=>PYTHONTEX#py#default#defaultverb#25#verbatim####COM-007.tex#9#
+from numpy import array, zeros
+=>PYTHONTEX#py#default#defaultverb#26#verbatim####EQD-003.tex#108#
+R = 1E-2 # m, rayon minimum du bouchon de révolution
+H = 4.5*1E-2 # m, hauteur du bouchon
+rho_eau = 1000 # kg / m**3 masse volumique de l'eau
+rho_b = 240 # kg / m**3, masse volumique du liège
+g = 9.81 # m / s**2, accélération de la pesanteur en
+Cx = 1 # Coefficient de trainée aérodynamique
+N = 1000 # Nombre de trapèzes pour les calculs d'intégrales
+=>PYTHONTEX#py#default#defaultverb#27#v####EQD-003.tex#118#
+T(f,a,b,N)
+=>PYTHONTEX#py#default#defaultverb#28#v####EQD-003.tex#120#
+volume_immerge(z)
+=>PYTHONTEX#py#default#defaultverb#29#v####EQD-003.tex#124#
+Fv(z,zp)
+=>PYTHONTEX#py#default#defaultverb#30#v####EQD-003.tex#146#
+F(Z,t)
+=>PYTHONTEX#py#default#defaultverb#31#v####EQD-003.tex#149#
+euler(F, tmin, tmax, Z0, h)
+=>PYTHONTEX#py#default#defaultverb#32#v####FIC-001.tex#1#
+resume(nom_de_fichier)
+=>PYTHONTEX#py#default#defaultverb#33#v####FIC-001.tex#1#
+nom_de_fichier
+=>PYTHONTEX#py#default#defaultverb#34#v####FIC-001.tex#1#
+(L,m,c)
+=>PYTHONTEX#py#default#defaultverb#35#v####FIC-001.tex#1#
+nom_de_fichier
+=>PYTHONTEX#py#default#defaultverb#36#v####FIC-001.tex#3#
+L
+=>PYTHONTEX#py#default#defaultverb#37#v####FIC-001.tex#4#
+m
+=>PYTHONTEX#py#default#defaultverb#38#v####FIC-001.tex#5#
+c
+=>PYTHONTEX#py#default#defaultverb#39#verbatim####FIC-005.tex#48#
+def filtrage_passe_bas(freq,t,signal):
+    tau = 1/freq # Coupure du filtre
+    K=1
+    res=[signal[0]]
+    for i in range(1,len(signal)):
+        h=t[i]-t[i-1]
+        res.append((h*K*signal[i]+tau*res[-1])/(h+tau))
+    return res
+=>PYTHONTEX#py#default#defaultverb#40#verbatim####FIC-005.tex#89#
+def filtrage_moyenne(signal,fenetre):
+    filtrageg =signal[0:fenetre-1]
+    for i in range(fenetre-1,len(signal)):
+        s = sum(signal[i-fenetre+1:i+1])/fenetre
+        filtrageg=np.concatenate([filtrageg,np.array([s])])
+    return filtrageg
+=>PYTHONTEX#py#default#defaultverb#41#verbatim####FIC-005.tex#160#
+pip install folium
+=>PYTHONTEX#py#default#defaultverb#42#verbatim####FIC-005.tex#166#
+import folium
+=>PYTHONTEX#py#default#defaultverb#43#verbatim####FIC-005.tex#172#
+macarte = folium.Map(location=[lat,long], zoom_start=z)
+=>PYTHONTEX#py#default#defaultverb#44#verbatim####FIC-005.tex#180#
+folium.PolyLine(points).add_to(macarte)
+=>PYTHONTEX#py#default#defaultverb#45#v####NBR-000.tex#1#
+enigme()
+=>PYTHONTEX#py#default#defaultverb#46#verbatim####NBR-001.tex#2#
+def mystere():
+    a,b,n = 1,1.,0
+    while a==b:
+        a,b,n = 2*a,2*b,n+1
+    return n
+=>PYTHONTEX#py#default#defaultverb#47#verbatim####NBR-002.tex#2#
+def mystere():
+    a,b,n = 1,1.,0
+    while a==b:
+        a,b,n = 2*a+1,2*b+1,n+1
+    return n
+=>PYTHONTEX#py#default#defaultverb#48#verbatim####PDY-000.tex#40#
+def pyramide(alpha,n):
+    p = []
+    x = alpha
+    for i in range(n):
+        l = []
+        for j in range(i+1) :
+            y = x % 10
+            l.append(y)
+            x = (15091 * x) % 64007
+        p.append(l)
+    return p
+=>PYTHONTEX#py#default#defaultverb#49#v####PYB-000.tex#2#
+int
+=>PYTHONTEX#py#default#defaultverb#50#v####PYB-000.tex#5#
+4+2
+=>PYTHONTEX#py#default#defaultverb#51#v####PYB-000.tex#6#
+25-3
+=>PYTHONTEX#py#default#defaultverb#52#v####PYB-000.tex#7#
+-5+1
+=>PYTHONTEX#py#default#defaultverb#53#v####PYB-000.tex#8#
+117*0
+=>PYTHONTEX#py#default#defaultverb#54#v####PYB-000.tex#9#
+6*7-1
+=>PYTHONTEX#py#default#defaultverb#55#v####PYB-000.tex#10#
+52*(3-5)
+=>PYTHONTEX#py#default#defaultverb#56#v####PYB-000.tex#11#
+5*(-2)
+=>PYTHONTEX#py#default#defaultverb#57#v####PYB-000.tex#12#
+22/(16-2*8)
+=>PYTHONTEX#py#default#defaultverb#58#v####PYB-000.tex#13#
+42/6
+=>PYTHONTEX#py#default#defaultverb#59#v####PYB-000.tex#14#
+18/7
+=>PYTHONTEX#py#default#defaultverb#60#v####PYB-000.tex#15#
+(447+3*6)/5
+=>PYTHONTEX#py#default#defaultverb#61#v####PYB-000.tex#16#
+0/0
+=>PYTHONTEX#py#default#defaultverb#62#v####PYB-000.tex#38#
+int
+=>PYTHONTEX#py#default#defaultverb#63#v####PYB-001.tex#19#
+int
+=>PYTHONTEX#py#default#defaultverb#64#v####PYB-002.tex#5#
+4.3+2
+=>PYTHONTEX#py#default#defaultverb#65#v####PYB-002.tex#6#
+2.5-7.3
+=>PYTHONTEX#py#default#defaultverb#66#v####PYB-002.tex#7#
+42+4.
+=>PYTHONTEX#py#default#defaultverb#67#v####PYB-002.tex#8#
+42+4
+=>PYTHONTEX#py#default#defaultverb#68#v####PYB-002.tex#9#
+42.+4
+=>PYTHONTEX#py#default#defaultverb#69#v####PYB-002.tex#10#
+12*0.
+=>PYTHONTEX#py#default#defaultverb#70#v####PYB-002.tex#11#
+11.7*0
+=>PYTHONTEX#py#default#defaultverb#71#v####PYB-002.tex#12#
+2,22/(1.6-2*0.8)
+=>PYTHONTEX#py#default#defaultverb#72#v####PYB-002.tex#13#
+42/6
+=>PYTHONTEX#py#default#defaultverb#73#v####PYB-002.tex#14#
+1,8/7
+=>PYTHONTEX#py#default#defaultverb#74#v####PYB-002.tex#15#
+(447+3*6)/5
+=>PYTHONTEX#py#default#defaultverb#75#v####PYB-002.tex#16#
+0/0
+=>PYTHONTEX#py#default#defaultverb#76#v####PYB-003.tex#2#
+sqrt
+=>PYTHONTEX#py#default#defaultverb#77#v####PYB-003.tex#2#
+/
+=>PYTHONTEX#py#default#defaultverb#78#v####PYB-003.tex#12#
+math
+=>PYTHONTEX#py#default#defaultverb#79#verbatim####PYB-003.tex#14#
+  from math import sqrt, log, exp, sin, cos, tan, pi, e
+=>PYTHONTEX#py#default#defaultverb#80#v####PYB-004.tex#6#
+8.5 / 2.1
+=>PYTHONTEX#py#default#defaultverb#81#v####PYB-004.tex#7#
+int(8.5) / int(2.1)
+=>PYTHONTEX#py#default#defaultverb#82#v####PYB-004.tex#8#
+int(8.5 / 2.1)
+=>PYTHONTEX#py#default#defaultverb#83#v####PYB-004.tex#16#
+float(8 * 2)
+=>PYTHONTEX#py#default#defaultverb#84#v####PYB-004.tex#17#
+8 * 2
+=>PYTHONTEX#py#default#defaultverb#85#v####PYB-004.tex#18#
+8. * 2.
+=>PYTHONTEX#py#default#defaultverb#86#v####PYB-004.tex#26#
+1.7 + 1.3
+=>PYTHONTEX#py#default#defaultverb#87#v####PYB-004.tex#27#
+2 - 1
+=>PYTHONTEX#py#default#defaultverb#88#v####PYB-004.tex#28#
+2. - 1
+=>PYTHONTEX#py#default#defaultverb#89#v####PYB-004.tex#29#
+2 - 1.
+=>PYTHONTEX#py#default#defaultverb#90#v####PYB-004.tex#30#
+(2 - 1).
+=>PYTHONTEX#py#default#defaultverb#91#v####PYB-004.tex#31#
+.5 + .5
+=>PYTHONTEX#py#default#defaultverb#92#v####PYB-004.tex#32#
+4 / (9 - 3**2)
+=>PYTHONTEX#py#default#defaultverb#93#v####PYB-004.tex#33#
+4 / (9. - 3**2)
+=>PYTHONTEX#py#default#defaultverb#94#v####PYB-005.tex#6#
+0 == 42
+=>PYTHONTEX#py#default#defaultverb#95#v####PYB-005.tex#7#
+1 = 1
+=>PYTHONTEX#py#default#defaultverb#96#v####PYB-005.tex#8#
+3 == 3.
+=>PYTHONTEX#py#default#defaultverb#97#v####PYB-005.tex#9#
+0 != 1
+=>PYTHONTEX#py#default#defaultverb#98#v####PYB-005.tex#10#
+0 < 1
+=>PYTHONTEX#py#default#defaultverb#99#v####PYB-005.tex#11#
+4. >= 4
+=>PYTHONTEX#py#default#defaultverb#100#v####PYB-005.tex#12#
+0 !< 1
+=>PYTHONTEX#py#default#defaultverb#101#v####PYB-005.tex#13#
+2*True + False
+=>PYTHONTEX#py#default#defaultverb#102#v####PYB-005.tex#14#
+-1 <= True
+=>PYTHONTEX#py#default#defaultverb#103#v####PYB-005.tex#15#
+1 == True
+=>PYTHONTEX#py#default#defaultverb#104#v####PYB-005.tex#16#
+False != 0.
+=>PYTHONTEX#py#default#defaultverb#105#v####PYB-005.tex#17#
+True and False
+=>PYTHONTEX#py#default#defaultverb#106#v####PYB-005.tex#18#
+True or False
+=>PYTHONTEX#py#default#defaultverb#107#v####PYB-005.tex#19#
+True or True
+=>PYTHONTEX#py#default#defaultverb#108#v####PYB-005.tex#20#
+(2 == 3-1) or (1/0 == 5)
+=>PYTHONTEX#py#default#defaultverb#109#v####PYB-005.tex#21#
+(1/0 == 5) or (2 == 3-1)
+=>PYTHONTEX#py#default#defaultverb#110#v####PYB-005.tex#22#
+True or True and False
+=>PYTHONTEX#py#default#defaultverb#111#v####PYB-005.tex#23#
+False or True and False
+=>PYTHONTEX#py#default#defaultverb#112#v####PYB-005.tex#24#
+not (1 == 1 or 4 == 5)
+=>PYTHONTEX#py#default#defaultverb#113#v####PYB-005.tex#25#
+(not 1 == 1) or 4 == 5
+=>PYTHONTEX#py#default#defaultverb#114#v####PYB-005.tex#26#
+not True or True
+=>PYTHONTEX#py#default#defaultverb#115#verbatim####PYB-006.tex#3#
+3*2
+print(2*3.)
+17*1.27
+=>PYTHONTEX#py#default#defaultverb#116#v####PYB-100.tex#6#
+(1,2)
+=>PYTHONTEX#py#default#defaultverb#117#v####PYB-100.tex#7#
+(1)
+=>PYTHONTEX#py#default#defaultverb#118#v####PYB-100.tex#8#
+(1,)
+=>PYTHONTEX#py#default#defaultverb#119#v####PYB-100.tex#9#
+(,)
+=>PYTHONTEX#py#default#defaultverb#120#v####PYB-100.tex#10#
+()
+=>PYTHONTEX#py#default#defaultverb#121#v####PYB-100.tex#11#
+()+()
+=>PYTHONTEX#py#default#defaultverb#122#v####PYB-100.tex#12#
+()+() == ()
+=>PYTHONTEX#py#default#defaultverb#123#v####PYB-100.tex#13#
+(1,2)+3
+=>PYTHONTEX#py#default#defaultverb#124#v####PYB-100.tex#14#
+(1,2)+(3)
+=>PYTHONTEX#py#default#defaultverb#125#v####PYB-100.tex#15#
+(1,2)+(3,)
+=>PYTHONTEX#py#default#defaultverb#126#v####PYB-100.tex#16#
+(1,2)+(3,4,5)
+=>PYTHONTEX#py#default#defaultverb#127#v####PYB-100.tex#17#
+len((1,7,2,"zzz",[]))
+=>PYTHONTEX#py#default#defaultverb#128#v####PYB-100.tex#18#
+len(())
+=>PYTHONTEX#py#default#defaultverb#129#v####PYB-100.tex#19#
+len(("a","bc")+("cde",""))
+=>PYTHONTEX#py#default#defaultverb#130#verbatim####PYB-101.tex#6#
+t = (2,"abra",9,6*9,22)
+print(t)
+t[0]
+t[-1]
+t[1]
+t[1] = "cadabra"
+=>PYTHONTEX#py#default#defaultverb#131#verbatim####PYB-101.tex#15#
+res = (45,5)
+x,y = res
+(x,y) == x,y
+(x,y) == (x,y)
+print x
+print(y)
+x,y = y,x
+print(y)
+=>PYTHONTEX#py#default#defaultverb#132#verbatim####PYB-101.tex#26#
+v = 7
+ex = (-1,5,2,"","abra",8,3,v)
+5 in ex
+abra in ex
+(2 in ex) and ("abr" in ex)
+v in ex
+=>PYTHONTEX#py#default#defaultverb#133#v####PYB-102.tex#6#
+"abba"
+=>PYTHONTEX#py#default#defaultverb#134#v####PYB-102.tex#7#
+abba
+=>PYTHONTEX#py#default#defaultverb#135#v####PYB-102.tex#8#
+""
+=>PYTHONTEX#py#default#defaultverb#136#v####PYB-102.tex#9#
+"" == " "
+=>PYTHONTEX#py#default#defaultverb#137#v####PYB-102.tex#10#
+""+""
+=>PYTHONTEX#py#default#defaultverb#138#v####PYB-102.tex#11#
+""+"" == ""
+=>PYTHONTEX#py#default#defaultverb#139#v####PYB-102.tex#12#
+"May"+" "+"04th"
+=>PYTHONTEX#py#default#defaultverb#140#v####PYB-102.tex#13#
+"12"+3
+=>PYTHONTEX#py#default#defaultverb#141#v####PYB-102.tex#14#
+"12"+"trois"
+=>PYTHONTEX#py#default#defaultverb#142#v####PYB-102.tex#15#
+len("abracadabra")
+=>PYTHONTEX#py#default#defaultverb#143#v####PYB-102.tex#16#
+len("")
+=>PYTHONTEX#py#default#defaultverb#144#v####PYB-102.tex#17#
+len("lamartin"+"2015")
+=>PYTHONTEX#py#default#defaultverb#145#verbatim####PYB-103.tex#6#
+t = "oh oui youpi !"
+print(t)
+t[0]
+t[-1]
+t[1]
+t[2]
+t[1] = "o"
+=>PYTHONTEX#py#default#defaultverb#146#verbatim####PYB-103.tex#16#
+ex = "abdefgh"
+"a" in ex
+a in ex
+"def" in ex
+"adf" in ex
+=>PYTHONTEX#py#default#defaultverb#147#v####PYB-104.tex#6#
+[1,2,3,"a"]
+=>PYTHONTEX#py#default#defaultverb#148#v####PYB-104.tex#7#
+123a
+=>PYTHONTEX#py#default#defaultverb#149#v####PYB-104.tex#8#
+[]
+=>PYTHONTEX#py#default#defaultverb#150#v####PYB-104.tex#9#
+[]+[]
+=>PYTHONTEX#py#default#defaultverb#151#v####PYB-104.tex#10#
+[]+[] == []
+=>PYTHONTEX#py#default#defaultverb#152#v####PYB-104.tex#11#
+[1,2] + [5,7,9]
+=>PYTHONTEX#py#default#defaultverb#153#v####PYB-104.tex#12#
+[0,0]+[0]
+=>PYTHONTEX#py#default#defaultverb#154#v####PYB-104.tex#13#
+len(["a","b"])
+=>PYTHONTEX#py#default#defaultverb#155#v####PYB-104.tex#14#
+len([])
+=>PYTHONTEX#py#default#defaultverb#156#v####PYB-104.tex#15#
+len([[]])
+=>PYTHONTEX#py#default#defaultverb#157#v####PYB-104.tex#16#
+len([[[]]])
+=>PYTHONTEX#py#default#defaultverb#158#v####PYB-104.tex#17#
+len([0,0]+[1])
+=>PYTHONTEX#py#default#defaultverb#159#verbatim####PYB-105.tex#6#
+t = [1,2,3,4,5,6]
+u = ["a","b","c","d"]
+print(t+u)
+t[0]
+t[-1]
+z = t[3]
+print(z)
+t.append(7)
+print(t)
+=>PYTHONTEX#py#default#defaultverb#160#verbatim####PYB-105.tex#18#
+ex = ["sin","cos","tan","log","exp"]
+"log" in ex
+log in ex
+"l" in ex
+z = ex.pop()
+print(z)
+z in ex
+print(ex)
+=>PYTHONTEX#py#default#defaultverb#161#verbatim####PYB-105.tex#29#
+  u = [1,2,3,4,5,6]
+  L = u
+  u = [1,2,3,42,5,6]
+  print(L)
+=>PYTHONTEX#py#default#defaultverb#162#verbatim####PYB-105.tex#36#
+  u = [1,2,3,4,5,6]
+  L = u
+  u[3] = 42
+  print(L)
+=>PYTHONTEX#py#default#defaultverb#163#verbatim####PYB-106.tex#3#
+[i for i in range(10)]
+[compt**2 for compt in range(7)]
+[j+1 for j in range(-2,8)]
+=>PYTHONTEX#py#default#defaultverb#164#v####PYB-107.tex#3#
+v
+=>PYTHONTEX#py#default#defaultverb#165#v####PYB-107.tex#3#
+[2,5,3,-1,7,2,1]
+=>PYTHONTEX#py#default#defaultverb#166#v####PYB-107.tex#4#
+L
+=>PYTHONTEX#py#default#defaultverb#167#v####PYB-107.tex#6#
+v
+=>PYTHONTEX#py#default#defaultverb#168#v####PYB-107.tex#6#
+n
+=>PYTHONTEX#py#default#defaultverb#169#v####PYB-107.tex#6#
+L
+=>PYTHONTEX#py#default#defaultverb#170#v####PYB-107.tex#6#
+m
+=>PYTHONTEX#py#default#defaultverb#171#v####PYB-107.tex#7#
+v[0]
+=>PYTHONTEX#py#default#defaultverb#172#v####PYB-107.tex#7#
+v[2]
+=>PYTHONTEX#py#default#defaultverb#173#v####PYB-107.tex#7#
+v[n]
+=>PYTHONTEX#py#default#defaultverb#174#v####PYB-107.tex#7#
+v[n-1]
+=>PYTHONTEX#py#default#defaultverb#175#v####PYB-107.tex#7#
+v[-1]
+=>PYTHONTEX#py#default#defaultverb#176#v####PYB-107.tex#7#
+v[-2]
+=>PYTHONTEX#py#default#defaultverb#177#v####PYB-107.tex#8#
+v
+=>PYTHONTEX#py#default#defaultverb#178#v####PYB-107.tex#9#
+v[1:3]
+=>PYTHONTEX#py#default#defaultverb#179#v####PYB-107.tex#9#
+v
+=>PYTHONTEX#py#default#defaultverb#180#v####PYB-107.tex#10#
+v[1] = [0,0,0]
+=>PYTHONTEX#py#default#defaultverb#181#v####PYB-107.tex#10#
+v
+=>PYTHONTEX#py#default#defaultverb#182#v####PYB-200.tex#3#
+var
+=>PYTHONTEX#py#default#defaultverb#183#v####PYB-200.tex#3#
+a
+=>PYTHONTEX#py#default#defaultverb#184#v####PYB-200.tex#3#
+a
+=>PYTHONTEX#py#default#defaultverb#185#v####PYB-200.tex#3#
+var
+=>PYTHONTEX#py#default#defaultverb#186#v####PYB-200.tex#7#
+ArthurDent
+=>PYTHONTEX#py#default#defaultverb#187#v####PYB-200.tex#7#
+42
+=>PYTHONTEX#py#default#defaultverb#188#v####PYB-200.tex#8#
+4
+=>PYTHONTEX#py#default#defaultverb#189#v####PYB-200.tex#8#
+0.
+=>PYTHONTEX#py#default#defaultverb#190#v####PYB-200.tex#9#
+L
+=>PYTHONTEX#py#default#defaultverb#191#v####PYB-200.tex#9#
+[]
+=>PYTHONTEX#py#default#defaultverb#192#v####PYB-200.tex#10#
+list
+=>PYTHONTEX#py#default#defaultverb#193#v####PYB-200.tex#10#
+[1,2,3]
+=>PYTHONTEX#py#default#defaultverb#194#v####PYB-200.tex#11#
+int
+=>PYTHONTEX#py#default#defaultverb#195#v####PYB-200.tex#11#
+5
+=>PYTHONTEX#py#default#defaultverb#196#v####PYB-200.tex#12#
+s
+=>PYTHONTEX#py#default#defaultverb#197#v####PYB-200.tex#12#
+""
+=>PYTHONTEX#py#default#defaultverb#198#v####PYB-200.tex#13#
+True
+=>PYTHONTEX#py#default#defaultverb#199#v####PYB-200.tex#13#
+1
+=>PYTHONTEX#py#default#defaultverb#200#v####PYB-200.tex#14#
+ok
+=>PYTHONTEX#py#default#defaultverb#201#v####PYB-200.tex#14#
+ok
+=>PYTHONTEX#py#default#defaultverb#202#v####PYB-200.tex#15#
+x
+=>PYTHONTEX#py#default#defaultverb#203#v####PYB-200.tex#15#
+"x"
+=>PYTHONTEX#py#default#defaultverb#204#v####PYB-200.tex#16#
+a
+=>PYTHONTEX#py#default#defaultverb#205#v####PYB-200.tex#16#
+1<0
+=>PYTHONTEX#py#default#defaultverb#206#v####PYB-200.tex#17#
+lam
+=>PYTHONTEX#py#default#defaultverb#207#v####PYB-200.tex#17#
+1/0
+=>PYTHONTEX#py#default#defaultverb#208#v####PYB-200.tex#18#
+or
+=>PYTHONTEX#py#default#defaultverb#209#v####PYB-200.tex#18#
+"xor"
+=>PYTHONTEX#py#default#defaultverb#210#v####PYB-201.tex#2#
+a
+=>PYTHONTEX#py#default#defaultverb#211#v####PYB-201.tex#2#
+-1.
+=>PYTHONTEX#py#default#defaultverb#212#v####PYB-201.tex#2#
+b
+=>PYTHONTEX#py#default#defaultverb#213#v####PYB-201.tex#2#
+5
+=>PYTHONTEX#py#default#defaultverb#214#v####PYB-201.tex#7#
+a * a
+=>PYTHONTEX#py#default#defaultverb#215#v####PYB-201.tex#8#
+a ** a
+=>PYTHONTEX#py#default#defaultverb#216#v####PYB-201.tex#9#
+a ** a == a
+=>PYTHONTEX#py#default#defaultverb#217#v####PYB-201.tex#10#
+a * b
+=>PYTHONTEX#py#default#defaultverb#218#v####PYB-201.tex#11#
+a+b == 5
+=>PYTHONTEX#py#default#defaultverb#219#v####PYB-201.tex#12#
+a+6>=b
+=>PYTHONTEX#py#default#defaultverb#220#v####PYB-201.tex#13#
+b<100 | a**2==-1
+=>PYTHONTEX#py#default#defaultverb#221#v####PYB-201.tex#14#
+b-3
+=>PYTHONTEX#py#default#defaultverb#222#v####PYB-202.tex#2#
+a
+=>PYTHONTEX#py#default#defaultverb#223#v####PYB-202.tex#2#
+5
+=>PYTHONTEX#py#default#defaultverb#224#v####PYB-202.tex#2#
+b
+=>PYTHONTEX#py#default#defaultverb#225#v####PYB-202.tex#2#
+0
+=>PYTHONTEX#py#default#defaultverb#226#verbatim####PYB-202.tex#5#
+a*b
+x = a**b + a
+print(x)
+print(y)
+z = x
+x = 5
+print(z)
+a = a+a**b
+print(a)
+=>PYTHONTEX#py#default#defaultverb#227#v####PYB-203.tex#2#
+a
+=>PYTHONTEX#py#default#defaultverb#228#v####PYB-203.tex#2#
+b
+=>PYTHONTEX#py#default#defaultverb#229#v####PYB-203.tex#2#
+c
+=>PYTHONTEX#py#default#defaultverb#230#v####PYB-203.tex#2#
+d
+=>PYTHONTEX#py#default#defaultverb#231#v####PYB-203.tex#4#
+tuple
+=>PYTHONTEX#py#default#defaultverb#232#v####PYB-203.tex#6#
+a
+=>PYTHONTEX#py#default#defaultverb#233#v####PYB-203.tex#6#
+b
+=>PYTHONTEX#py#default#defaultverb#234#v####PYB-203.tex#7#
+b
+=>PYTHONTEX#py#default#defaultverb#235#v####PYB-203.tex#7#
+a
+=>PYTHONTEX#py#default#defaultverb#236#v####PYB-203.tex#7#
+a
+=>PYTHONTEX#py#default#defaultverb#237#v####PYB-203.tex#7#
+c
+=>PYTHONTEX#py#default#defaultverb#238#v####PYB-203.tex#7#
+c
+=>PYTHONTEX#py#default#defaultverb#239#v####PYB-203.tex#7#
+b
+=>PYTHONTEX#py#default#defaultverb#240#v####PYB-203.tex#8#
+a
+=>PYTHONTEX#py#default#defaultverb#241#v####PYB-203.tex#8#
+d
+=>PYTHONTEX#py#default#defaultverb#242#v####PYB-203.tex#8#
+d
+=>PYTHONTEX#py#default#defaultverb#243#v####PYB-203.tex#8#
+c
+=>PYTHONTEX#py#default#defaultverb#244#v####PYB-203.tex#8#
+c
+=>PYTHONTEX#py#default#defaultverb#245#v####PYB-203.tex#8#
+b
+=>PYTHONTEX#py#default#defaultverb#246#v####PYB-203.tex#8#
+b
+=>PYTHONTEX#py#default#defaultverb#247#v####PYB-203.tex#8#
+a
+=>PYTHONTEX#py#default#defaultverb#248#v####PYB-203.tex#10#
+tuple
+=>PYTHONTEX#py#default#defaultverb#249#v####PYB-204.tex#3#
+mon_age
+=>PYTHONTEX#py#default#defaultverb#250#verbatim####PYB-204.tex#6#
+mon-age = 18
+2013_mon_age = 18
+True = 18
+=>PYTHONTEX#py#default#defaultverb#251#verbatim####PYB-204.tex#12#
+age = 5
+age = Age + 14
+=>PYTHONTEX#py#default#defaultverb#252#verbatim####PYB-300.tex#5#
+def split_modulo(n):
+  """A vous de dire ce que fait cette fonction !"""
+  return (n%2,n%3,n%5)
+=>PYTHONTEX#py#default#defaultverb#253#v####PYB-301.tex#1#
+moy_extr(L)
+=>PYTHONTEX#py#default#defaultverb#254#v####PYB-301.tex#1#
+L
+=>PYTHONTEX#py#default#defaultverb#255#v####PYB-301.tex#1#
+L
+=>PYTHONTEX#py#default#defaultverb#256#v####PYB-302.tex#2#
+norme
+=>PYTHONTEX#py#default#defaultverb#257#v####PYB-303.tex#2#
+lettre
+=>PYTHONTEX#py#default#defaultverb#258#v####PYB-303.tex#2#
+i
+=>PYTHONTEX#py#default#defaultverb#259#v####PYB-303.tex#2#
+i
+=>PYTHONTEX#py#default#defaultverb#260#v####PYB-304.tex#2#
+carres
+=>PYTHONTEX#py#default#defaultverb#261#v####PYB-304.tex#2#
+n
+=>PYTHONTEX#py#default#defaultverb#262#v####PYB-304.tex#2#
+n
+=>PYTHONTEX#py#default#defaultverb#263#v####PYB-305.tex#3#
+incr_sans_effet_de_bord
+=>PYTHONTEX#py#default#defaultverb#264#v####PYB-305.tex#4#
+incr_avec_effet_de_bord
+=>PYTHONTEX#py#default#defaultverb#265#v####PYB-305.tex#4#
+return None
+=>PYTHONTEX#py#default#defaultverb#266#v####PYB-306.tex#1#
+appartient(a,c,r)
+=>PYTHONTEX#py#default#defaultverb#267#v####PYB-306.tex#3#
+a
+=>PYTHONTEX#py#default#defaultverb#268#v####PYB-306.tex#4#
+c
+=>PYTHONTEX#py#default#defaultverb#269#v####PYB-306.tex#5#
+r
+=>PYTHONTEX#py#default#defaultverb#270#v####PYB-306.tex#7#
+a
+=>PYTHONTEX#py#default#defaultverb#271#v####PYB-306.tex#7#
+c
+=>PYTHONTEX#py#default#defaultverb#272#v####PYB-306.tex#7#
+r
+=>PYTHONTEX#py#default#defaultverb#273#v####PYB-400.tex#1#
+t
+=>PYTHONTEX#py#default#defaultverb#274#v####PYB-400.tex#1#
+True
+=>PYTHONTEX#py#default#defaultverb#275#v####PYB-400.tex#1#
+False
+=>PYTHONTEX#py#default#defaultverb#276#verbatim####PYB-400.tex#3#
+x = 0
+y = 5
+t = False
+if x>=1:
+t = True
+if y <= 6:
+t = True
+=>PYTHONTEX#py#default#defaultverb#277#verbatim####PYB-401.tex#2#
+from random import randrange
+n = randrange(100) # Un entier aléatoire entre 0 et 99
+if n <= 10:
+    print("Trop petit")
+else:
+    if n >= 50:
+        print("Trop grand")
+    else:
+        print("Juste comme il faut")
+=>PYTHONTEX#py#default#defaultverb#278#v####PYB-402.tex#3#
+neg(b)
+=>PYTHONTEX#py#default#defaultverb#279#v####PYB-402.tex#3#
+b
+=>PYTHONTEX#py#default#defaultverb#280#v####PYB-402.tex#3#
+not
+=>PYTHONTEX#py#default#defaultverb#281#v####PYB-402.tex#4#
+ou(a,b)
+=>PYTHONTEX#py#default#defaultverb#282#v####PYB-402.tex#4#
+a
+=>PYTHONTEX#py#default#defaultverb#283#v####PYB-402.tex#4#
+b
+=>PYTHONTEX#py#default#defaultverb#284#v####PYB-402.tex#4#
+not
+=>PYTHONTEX#py#default#defaultverb#285#v####PYB-402.tex#4#
+or
+=>PYTHONTEX#py#default#defaultverb#286#v####PYB-402.tex#4#
+and
+=>PYTHONTEX#py#default#defaultverb#287#v####PYB-402.tex#5#
+et(a,b)
+=>PYTHONTEX#py#default#defaultverb#288#v####PYB-402.tex#5#
+a
+=>PYTHONTEX#py#default#defaultverb#289#v####PYB-402.tex#5#
+b
+=>PYTHONTEX#py#default#defaultverb#290#v####PYB-402.tex#5#
+not
+=>PYTHONTEX#py#default#defaultverb#291#v####PYB-402.tex#5#
+or
+=>PYTHONTEX#py#default#defaultverb#292#v####PYB-402.tex#5#
+and
+=>PYTHONTEX#py#default#defaultverb#293#verbatim####PYB-403.tex#3#
+from random import randrange
+L = [randrange(100) for i in range(100)] # 100 valeurs entre 0 et 99.
+m = 50
+for x in L:
+if x <= m:
+p = x
+print(p)
+=>PYTHONTEX#py#default#defaultverb#294#verbatim####PYB-404.tex#3#
+def inv(n):
+    """Somme des inverses des n premiers entiers naturels non nuls"""
+    s = 0
+    for k in range(n):
+        x = 1/k
+    s = s+x
+    return s
+=>PYTHONTEX#py#default#defaultverb#295#verbatim####PYB-405.tex#3#
+from random import randrange
+n = randrange(1000) # Un entier entre 0 et 999
+L = [randrange(100) for i in range(n+1)] # n+1 valeurs entre 0 et 99.
+p = 0
+for x in L:
+    if x <= 10:
+        p = p + x**2
+=>PYTHONTEX#py#default#defaultverb#296#verbatim####PYB-405.tex#13#
+from random import randrange
+n = randrange(1000) # Un entier entre 0 et 999
+L = [randrange(100) for i in range(n+1)] # n+1 valeurs entre 0 et 99.
+p = 0
+for i in range(n+1):
+    if L[i] <= 10:
+        p = p + i**2
+=>PYTHONTEX#py#default#defaultverb#297#verbatim####PYB-407.tex#3#
+a = 1
+while a>0:
+    a = a+1
+=>PYTHONTEX#py#default#defaultverb#298#verbatim####PYB-408.tex#4#
+def sqrt_int(n):
+    """Renvoie la partie entière de la racine carrée de n"""
+    s = 0
+    while s**2 <= n:
+        s = s+1
+        s = s-1
+    return s
+=>PYTHONTEX#py#default#defaultverb#299#v####PYB-409.tex#2#
+nb_exos()
+=>PYTHONTEX#py#default#defaultverb#300#verbatim####PYB-410.tex#2#
+def cesar(k):
+    """?????"""
+    alphabet = "abcdefghijklmnopqrstuvxyz"
+    s = ""
+    for i in range(26):
+        s = s + alphabet[i+k % 26]
+    return s
+=>PYTHONTEX#py#default#defaultverb#301#v####PYB-500.tex#1#
+racine(n)
+=>PYTHONTEX#py#default#defaultverb#302#v####PYB-500.tex#1#
+n
+=>PYTHONTEX#py#default#defaultverb#303#v####PYB-501.tex#3#
+a
+=>PYTHONTEX#py#default#defaultverb#304#v####PYB-501.tex#3#
+b
+=>PYTHONTEX#py#default#defaultverb#305#v####PYB-501.tex#3#
+x
+=>PYTHONTEX#py#default#defaultverb#306#v####PYB-501.tex#5#
+touche(a,b,x)
+=>PYTHONTEX#py#default#defaultverb#307#v####PYB-502.tex#10#
+reste_a_payer(p, t,  m, d)
+=>PYTHONTEX#py#default#defaultverb#308#v####PYB-502.tex#20#
+somme_totale_payee(p, t, m,   d)
+=>PYTHONTEX#py#default#defaultverb#309#v####PYB-502.tex#22#
+cout_total(p, t, m, d)
+=>PYTHONTEX#py#default#defaultverb#310#v####PYB-503.tex#5#
+duree_mensualite(p,t,m)
+=>PYTHONTEX#py#default#defaultverb#311#v####PYB-504.tex#1#
+comb(p,n)
+=>PYTHONTEX#py#default#defaultverb#312#v####PYB-505.tex#4#
+fib(n)
+=>PYTHONTEX#py#default#defaultverb#313#v####PYB-506.tex#7#
+f(n)
+=>PYTHONTEX#py#default#defaultverb#314#v####PYB-506.tex#14#
+f
+=>PYTHONTEX#py#default#defaultverb#315#v####PYB-506.tex#16#
+f(10**6)
+=>PYTHONTEX#py#default#defaultverb#316#v####PYB-507.tex#1#
+somme1(n)
+=>PYTHONTEX#py#default#defaultverb#317#v####PYB-507.tex#1#
+somme2(n)
+=>PYTHONTEX#py#default#defaultverb#318#v####PYB-507.tex#2#
+n
+=>PYTHONTEX#py#default#defaultverb#319#v####PYB-508.tex#5#
+valeur_u(n,u0)
+=>PYTHONTEX#py#default#defaultverb#320#v####PYB-508.tex#5#
+n
+=>PYTHONTEX#py#default#defaultverb#321#v####PYB-508.tex#5#
+u0
+=>PYTHONTEX#py#default#defaultverb#322#v####PYB-508.tex#7#
+approche_u(eps,u0)
+=>PYTHONTEX#py#default#defaultverb#323#v####PYB-508.tex#7#
+eps
+=>PYTHONTEX#py#default#defaultverb#324#v####PYB-508.tex#7#
+u0
+=>PYTHONTEX#py#default#defaultverb#325#v####PYB-509.tex#1#
+comb(n,p)
+=>PYTHONTEX#py#default#defaultverb#326#v####PYB-509.tex#5#
+comb
+=>PYTHONTEX#py#default#defaultverb#327#v####PYB-513.tex#1#
+somme_chiffres(n)
+=>PYTHONTEX#py#default#defaultverb#328#v####PYB-513.tex#1#
+n
+=>PYTHONTEX#py#default#defaultverb#329#v####PYB-513.tex#1#
+n
+=>PYTHONTEX#py#default#defaultverb#330#verbatim####PYB-516.tex#2#
+def mystere(L) :
+    """Précondition : L est une liste de nombres"""
+    x,n,i = L[0],len(L),1
+    while i<n and x > L[i] :
+        L[i-1],L[i] = L[i],L[i-1]
+        i = i+1
+    return None
+=>PYTHONTEX#py#default#defaultverb#331#v####PYB-517.tex#12#
+k
+=>PYTHONTEX#py#default#defaultverb#332#v####PYB-517.tex#12#
+p
+=>PYTHONTEX#py#default#defaultverb#333#v####PYB-517.tex#12#
+mystere(a,b)
+=>PYTHONTEX#py#default#defaultverb#334#v####PYB-517.tex#14#
+a
+=>PYTHONTEX#py#default#defaultverb#335#v####PYB-517.tex#14#
+b
+=>PYTHONTEX#py#default#defaultverb#336#v####PYB-517.tex#18#
+mystere(a,b)
+=>PYTHONTEX#py#default#defaultverb#337#v####PYB-517.tex#22#
+mystere(a,b)
+=>PYTHONTEX#py#default#defaultverb#338#v####PYB-517.tex#26#
+mystere(a,b)
+=>PYTHONTEX#py#default#defaultverb#339#v####TAB-003.tex#1#
+pascal(n)
+=>PYTHONTEX#py#default#defaultverb#340#v####TAB-003.tex#1#
+n
+=>PYTHONTEX#py#default#defaultverb#341#v####TAB-003.tex#2#
+n
+=>PYTHONTEX#py#default#defaultverb#342#v####TAB-006.tex#14#
+est_croissant(t)
+=>PYTHONTEX#py#default#defaultverb#343#v####TAB-006.tex#14#
+t
+=>PYTHONTEX#py#default#defaultverb#344#v####TAB-006.tex#63#
+t = [1,5,3,2]
+=>PYTHONTEX#py#default#defaultverb#345#v####TAB-006.tex#63#
+t
+=>PYTHONTEX#py#default#defaultverb#346#v####TAB-006.tex#63#
+[0,0,0,0]
+=>PYTHONTEX#py#default#defaultverb#347#v####TAB-006.tex#63#
+[]
+=>PYTHONTEX#py#default#defaultverb#348#v####TAB-006.tex#63#
+[1,0,0,1]
+=>PYTHONTEX#py#default#defaultverb#349#v####TAB-006.tex#63#
+[1,2]
+=>PYTHONTEX#py#default#defaultverb#350#v####TAB-006.tex#63#
+[0,1,1,1]
+=>PYTHONTEX#py#default#defaultverb#351#v####TAB-006.tex#63#
+[5,3,2]
+=>PYTHONTEX#py#default#defaultverb#352#verbatim####TAB-006.tex#74#
+def binaire(k,n):
+    """Renvoie le tableau de n bits écrivant k en binaire
+    Précondition : 0 <= k <= 2**n -1 """
+    L = [0]*n
+    p = k
+    for i in range(n):
+        L[n-1-i] = p % 2
+        p = p // 2
+    return L
+=>PYTHONTEX#py#default#defaultverb#353#v####TAB-006.tex#99#
+longueur(e)
+=>PYTHONTEX#py#default#defaultverb#354#v####TAB-006.tex#99#
+e
+=>PYTHONTEX#py#default#defaultverb#355#v####TAB-006.tex#99#
+e
+=>PYTHONTEX#py#default#defaultverb#356#v####TAB-006.tex#103#
+extrait(t,e)
+=>PYTHONTEX#py#default#defaultverb#357#v####TAB-006.tex#103#
+t
+=>PYTHONTEX#py#default#defaultverb#358#v####TAB-006.tex#103#
+e
+=>PYTHONTEX#py#default#defaultverb#359#v####TAB-006.tex#103#
+t
+=>PYTHONTEX#py#default#defaultverb#360#v####TAB-006.tex#103#
+e
+=>PYTHONTEX#py#default#defaultverb#361#v####TAB-006.tex#107#
+stc_exhaustif(t)
+=>PYTHONTEX#py#default#defaultverb#362#v####TAB-006.tex#107#
+t
+=>PYTHONTEX#py#default#defaultverb#363#v####TAB-006.tex#129#
+stc_dynamique(t)
+=>PYTHONTEX#py#default#defaultverb#364#v####TAB-006.tex#129#
+t
+=>PYTHONTEX#py#default#defaultverb#365#v####TAB-011.tex#9#
+Kaprekar(n)
+=>PYTHONTEX#py#default#defaultverb#366#v####TAB-011.tex#9#
+n
+=>PYTHONTEX#py#default#defaultverb#367#v####TAB-011.tex#12#
+Kaprekar(6384)
+=>PYTHONTEX#py#default#defaultverb#368#v####TAB-011.tex#12#
+[6384, 5175, 5994, 5355, 1998, 8082, 8532, 6174]
+=>PYTHONTEX#py#default#defaultverb#369#v####TAB-011.tex#15#
+sort
+=>PYTHONTEX#py#default#defaultverb#370#v####TAB-012.tex#17#
+mediane(t)
+=>PYTHONTEX#py#default#defaultverb#371#v####TAB-012.tex#17#
+t
+=>PYTHONTEX#py#default#defaultverb#372#v####TAB-012.tex#17#
+t
+=>PYTHONTEX#py#default#defaultverb#373#v####TAB-012.tex#24#
+t
+=>PYTHONTEX#py#default#defaultverb#374#v####TAB-012.tex#24#
+t
+=>PYTHONTEX#py#default#defaultverb#375#v####TAB-013.tex#1#
+miroir(t)
+=>PYTHONTEX#py#default#defaultverb#376#v####TAB-013.tex#1#
+t
+=>PYTHONTEX#py#default#defaultverb#377#v####TAB-013.tex#4#
+t = [5,2,6,3,7]
+=>PYTHONTEX#py#default#defaultverb#378#v####TAB-013.tex#4#
+miroir(t)
+=>PYTHONTEX#py#default#defaultverb#379#v####TAB-013.tex#4#
+[7,3,6,2,5]
+=>PYTHONTEX#py#default#defaultverb#380#v####TAB-014.tex#1#
+doublon(t)
+=>PYTHONTEX#py#default#defaultverb#381#v####TAB-014.tex#1#
+t
+=>PYTHONTEX#py#default#defaultverb#382#v####TAB-014.tex#1#
+t
+=>PYTHONTEX#py#default#defaultverb#383#v####TAB-014.tex#1#
+t
+=>PYTHONTEX#py#default#defaultverb#384#v####TAB-015.tex#5#
+record(t,k)
+=>PYTHONTEX#py#default#defaultverb#385#v####TAB-015.tex#5#
+t
+=>PYTHONTEX#py#default#defaultverb#386#v####TAB-015.tex#5#
+k
+=>PYTHONTEX#py#default#defaultverb#387#v####TAB-015.tex#5#
+True
+=>PYTHONTEX#py#default#defaultverb#388#v####TAB-015.tex#5#
+t
+=>PYTHONTEX#py#default#defaultverb#389#v####TAB-015.tex#5#
+k
+=>PYTHONTEX#py#default#defaultverb#390#v####TAB-015.tex#5#
+False
+=>PYTHONTEX#py#default#defaultverb#391#v####TAB-015.tex#7#
+nb_records(t)
+=>PYTHONTEX#py#default#defaultverb#392#v####TAB-015.tex#7#
+t
+=>PYTHONTEX#py#default#defaultverb#393#v####TAB-015.tex#7#
+t
+=>PYTHONTEX#py#default#defaultverb#394#v####TAB-016.tex#4#
+crible(p)
+=>PYTHONTEX#py#default#defaultverb#395#v####TAB-016.tex#4#
+p
 =>PYTHONTEX:SETTINGS#
 version=0.16
 outputdir=pythontex-files-Banque_Exercices_PDF
 workingdir=.
 workingdirset=false
 gobble=none
-rerun=errors
+rerun=default
 hashdependencies=default
-makestderr=true
+makestderr=false
 stderrfilename=full
 keeptemps=none
 pyfuture=default

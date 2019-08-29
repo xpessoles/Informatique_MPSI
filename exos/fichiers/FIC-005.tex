@@ -1,7 +1,7 @@
-\section{Analyse préliminaire : filtrage numérique}
+\section*{Analyse préliminaire : filtrage numérique}
 
 
-\subsection{Filtre numérique passe bas du premier ordre}
+\subsection*{Filtre numérique passe bas du premier ordre}
 Soit un filtre linéaire du premier ordre. Son équation différentielle est de la forme :
 $$
 s(t)+\tau \dfrac{\text{d} s(t) }{\text{d}t} = K e(t)
@@ -56,7 +56,7 @@ def filtrage_passe_bas(freq,t,signal):
     return res
 \end{pyverbatim}
 
-\subsection{Filtrage numérique par moyenne glissante}
+\subsection*{Filtrage numérique par moyenne glissante}
 Une autre solution pour lisser une courbe est de réaliser une moyenne glissante. Si on réalise ce filtrage en temps réel, cela signifie qu'un point lissé à l'échantillon $n$ est la moyenne des $n-1$ échantillons précédents et de l'élément en cours. 
 
 Il faut donc attendre l'acquisition de $n-1$ échantillons avant de disposer de la courbe.
@@ -95,18 +95,18 @@ def filtrage_moyenne(signal,fenetre):
     return filtrageg
 \end{pyverbatim}
 
-\subsection{Références} 
+\subsection*{Références} 
 \begin{itemize}
 \item Cours de Xavier Pessoles support de cours de  PSI* La Martinière Monplaisir.
 \item Patrick Beynet, \textit{Supports de cours de TSI 2}, Lycée Rouvière, Toulon.
 \item David Crochet (créer à partir de KmPlot), CC-BY-SA-3.0, via Wikimedia Commons \url{https://upload.wikimedia.org/wikipedia/commons/6/6f/Fourier_d\%27un_carr\%C3\%A9.svg}.
 \end{itemize}
 
-\section{Analyse des performances d'un cycliste}
+\section*{Analyse des performances d'un cycliste}
 
-\subsection{Analyse d'un fichier gpx}
+\subsection*{Analyse d'un fichier gpx}
 
-\subsubsection{Lecture du fichier}
+\subsubsection*{Lecture du fichier}
 
  
 \question{} Ecrire un programme permettant de savoir si un mot se trouve dans une chaine de caractère.
@@ -147,7 +147,7 @@ Dans ce problème on pourra travailler sur un des deux fichiers gpx donné sur l
 
 \question{} Ecrire un programme permettant de stocker sous la forme de 4 tableaux nommés $tp$, $lat$, $long$ et $lat$ représentant respectivement pour chaque point de mesure le temps en $s$ par rapport à l'instant initial, la latitude en $^{\circ}$, la longitude en $^{\circ}$ ainsi que l'altitude par rapport au niveau de la mer en $m$.
 
-\subsection{Superposition du tracé sur une carte}
+\subsection*{Superposition du tracé sur une carte}
 
 Pour des traces petites (comme un parcours cycliste) on peu assimiler les longitude et latitude à des coordonnées cartésiennes et il n'est donc pas nécessaire de réaliser des projections cartographiques.
 
@@ -188,7 +188,7 @@ La méthode "save" appliqué à l'objet "macarte" et prenant en argument une cha
 \question{} mettre en oeuvre les fonctions du module "$folium$" pour créer une page HTML superposant la trace GPS sur une carte avec un centrage et un niveau d'agrandissement satisfaisant. Vous pourrez visualiser la page créée en l'ouvrant un navigateur internet (Firefox, Google Chrome, etc...)
 
 
-\subsubsection{Traitement du fichier}
+\subsubsection*{Traitement du fichier}
 
 On donne l'expression de la vitesse et de l'accélération en coordonnées sphérique d'un point matériel M dans son mouvement par rapport au référentiel terrestre $R_0$ : 
 
@@ -230,8 +230,8 @@ avec $R$ le rayon de la terre supposé constant et égal à $6 371km$
 
 
 
-\subsection{Modélisation des performances mécaniques}
-\subsubsection{Modélisation de la puissance}
+\subsection*{Modélisation des performances mécaniques}
+\subsubsection*{Modélisation de la puissance}
 
 En considérant l'ensemble (cycliste+velo) comme un solide à masse ponctuelle (cela revient à négliger les effets d'inertie de la rotation des roues) on peut estimer la puissance que le cycliste doit développer en mouvement ($P_c$) à l'aide du théorème de l'énergie cinétique : 
 
@@ -248,7 +248,7 @@ P_c=P_{inertie}+P_{aero}+P_{Pes}+P_{roul}
 
 On se placera dans le référentiel terrestre supposé galiléen ($R_0$). Le cycliste ayant réalisé l'activité possède une masse $M=70kg$. On prendra l'accélération de la pesanteur $g=9,81m\cdot s^{-2}$.
 
-\subsubsection{Puissance due à la résistance au roulement}
+\subsubsection*{Puissance due à la résistance au roulement}
 
 \begin{figure}[!htb]
 \begin{minipage}{0.5\textwidth}
@@ -272,7 +272,7 @@ Avec,
 
 \question{} Déterminer une fonction $P_{roul}$ qui prend en argument la masse d'un cycliste, un vecteur V comprenant la norme de la vitesse de déplacement du cycliste ($V=\Vert \overrightarrow{V}(M/R_0)\Vert$) associé à une trace GPX, la pression dans les pneus et qui renvoie la puissance instantanée de roulement.
 
-\subsubsection{Puissance due aux effets d'inertie}
+\subsubsection*{Puissance due aux effets d'inertie}
 
 La puissance due aux effets d'inertie peut s'estimer de la façon suivante : 
 
@@ -282,7 +282,7 @@ P_{inertie}=M\cdot V\cdot \frac{dV}{dt}
 
 \question{} Déterminer une fonction $Pinertie$ prenant en arguments la masse d'un cycliste, un vecteur V comprenant la norme de la vitesse de déplacement du cycliste ($\Vert \overrightarrow{V}(M/R_0)\Vert$) associé à une trace GPX, la pression dans les pneus et qui renvoie la puissance instantanée de roulement.
 
-\subsubsection{Puissance aéronautique}
+\subsubsection*{Puissance aéronautique}
 
 
 \begin{figure}[!htb]
@@ -311,7 +311,7 @@ P_{vent}=\dfrac{1}{2}\rho\cdot A_p\cdot C_d\cdot V_v^2\cdot \overrightarrow{u}_v
 
 \question{} Déterminer une fonction $Paero$ prenant en arguments, la vitesse du vent ($Vv$),sa direction ($\alpha_v$), le produit $C_d\times A_p$, un vecteur V comprenant les composantes de la vitesse de déplacement du cycliste ($V(M/R_0)$) en coordonnées sphériques associées à une trace GPX et renvoyant l'estimation de la puissance aérodynamique instantanée.  
 
-\subsubsection{Puissance due aux effets de pesanteur}
+\subsubsection*{Puissance due aux effets de pesanteur}
 
 La puissance de pesanteur va dépendre du dénivelé qui correspond à la variation de la pente en fonction de la distance parcouru.
 
@@ -331,9 +331,9 @@ P_{pes}=M\cdot g \cdot \sin\left[\arctan\left(\frac{dr(t)}{dx}\right)\right]\cdo
 
 \question{} Déterminer une fonction $Ppes$ prenant en arguments, la masse du cycliste, la coordonnées $r(t)$, un vecteur V comprenant la norme de la vitesse de déplacement du cycliste ($\Vert \overrightarrow{V}(M/R_0)\Vert$) associé à une trace GPX et renvoyant l'estimation de la puissance de pesanteur instantanée.  
 
-\subsection{Puissance totale et profile de puissance record}
+\subsection*{Puissance totale et profile de puissance record}
 
-\subsubsection{Puissance totale}
+\subsubsection*{Puissance totale}
 
 \question{} A l'aide des questions précédentes tracer en fonction du temps les différentes puissances instantanées. Estimer la puissance totale instantanée que doit fournir le cycliste (Pc) et la superposer sur ce graphe.
 
@@ -348,7 +348,7 @@ E=\displaystyle{\int_{t=0}^{t_f}P_c(t')dt'}
 \question{} Mettre en oeuvre la méthode des trapèze pour calculer l'énergie totale consommée par le cycliste.
 
 
-\subsubsection{Profile de puissance record}
+\subsubsection*{Profile de puissance record}
 
 
 
@@ -375,9 +375,9 @@ Le profile de puissance record (PPR) est un indicateur de performance intéressa
 
 \question{} A partir de l'estimation de la puissance instantanée précédente déterminer le PPR.
 
-%\section{Analyse d'une base de données de cyclistes}
+%\section*{Analyse d'une base de données de cyclistes}
 %
-%\subsection{Définition des données}
+%\subsection*{Définition des données}
 %
 %La base de données étudiée comporte 3 tables : 
 %\begin{itemize}
@@ -465,4 +465,4 @@ Le profile de puissance record (PPR) est un indicateur de performance intéressa
 %
 %
 %
-%\subsection{Analyse des données}
+%\subsection*{Analyse des données}

@@ -1,0 +1,10 @@
+SELECT * 
+FROM PERSONNE 
+WHERE datenaissance >= '1950-01-01'
+
+UNION 
+
+SELECT *
+FROM PERSONNE
+WHERE id <=4
+;

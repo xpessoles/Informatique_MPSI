@@ -13,7 +13,7 @@ Chaque élément de ce tableau est donc un tableau de longeur $n$, dont tous les
 Cette même matrice $M$ sera représentée de manière creuse en ne décrivant que ses cases non vides par un tableau de triplets \texttt{(i,j,x)}, où \texttt{x} est l'élément de $M$ situé sur la $i\ieme$ ligne et la $j\ieme$ colonne. 
 On pourra supposer que les éléments non nuls de $M$ sont ainsi décrits ligne par ligne. 
 
-\begin{ex}
+\begin{exemple}
   La matrice $\begin{pmatrix} 1&0&5 \\ 0&-2&0 \\ 0&0&0 \end{pmatrix}$ sera représentée classiquement par le tableau 
 \begin{verbatim}
 [ [1,0,5] , [0,-2,0] , [0,0,0] ]
@@ -22,7 +22,7 @@ et de manière creuse par le tableau
 \begin{verbatim}
 [ (0,0,1) , (0,2,5) , (1,1,-2) ].
 \end{verbatim}
-\end{ex}
+\end{exemple}
 
 \question\ \'Ecrire une fonction \texttt{add(M,N)} prenant en argument deux représentations classiques \texttt{M} et \texttt{N} de deux matrices $M$ et $N$ (carrées, de même ordre) et renvoyant la représentation classique de $M+N$. 
 On prendra soin d'écrire une fonction \og optimale \fg\ en terme de complexité, spatiale et temporelle. 

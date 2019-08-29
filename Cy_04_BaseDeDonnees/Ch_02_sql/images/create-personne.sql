@@ -1,0 +1,6 @@
+CREATE TABLE PERSONNE (
+  id INTEGER,
+  nom VARCHAR(50) NOT NULL,
+  prenom VARCHAR(50) NOT NULL,
+  datenaissance DATE,
+  PRIMARY KEY(id));

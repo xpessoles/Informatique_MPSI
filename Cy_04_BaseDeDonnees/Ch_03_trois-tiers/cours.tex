@@ -1,4 +1,467 @@
-\section{Quelques définitions}
-Informatique
-Algorithmique
-Programmation
+\section{Résumé des épisodes précédents}
+
+On a déjà vu :
+\begin{itemize}
+\item un modèle conceptuel de données (MCD) ;
+\item un modèle logique de données (MLD) ;
+\item (une partie du) langage SQL.
+% \item des rudiments d'algèbre relationnelle.
+\end{itemize}
+
+
+\section{Architecture client-serveur}
+\subsection{Principe}
+
+L'accès à une base de données SQLite se fait \textbf{localement} à la machine par le frontal (front-end)
+  interactif en mode texte \texttt{sqlite3}.
+  C'est une situation \textbf{atypique}.
+%\clearslide{}
+Situation typique :
+\begin{itemize}
+\item la base de données tourne sur une machine
+  (\texttt{mabd.example.org}), appelée \emph{serveur} ;
+\item on la consulte/modifie depuis une autre machine
+  (par exemple \texttt{monpc.example.org}), dite \emph{cliente} avec un
+  logiciel, dit \emph{client}.
+\end{itemize}
+
+D'où le terme : architecture client-serveur.
+
+Typiquement, on a 
+\begin{itemize}
+\item un (voire quelques) serveurs ;
+\item plusieurs (voire de nombreux) clients.
+\end{itemize}
+
+%\clearslide{}
+
+\subsection{Remarque culturelle}
+L'architecture client-serveur est omniprésente aujourd'hui,
+pas seulement pour les bases de données.
+
+\begin{exemple}
+\begin{description}
+\item[Web] Pour la consultation de pages hypertextes (protocole
+  HTTP).
+\item[Messagerie] Courrier électronique (POP, IMAP, SMTP).
+\item[DHCP] Pour se faire attribuer une IP par sa box.
+\item[DNS] Pour trouver l'IP d'une machine dont on connaît le
+  nom.
+\item[Temps] Pour mettre à l'heure son ordinateur (NTP).
+\item[Systèmes de fichiers] Accès à des fichiers distants (SMB, NFS).
+\end{description}
+\end{exemple}
+%\clearslide{}
+
+\subsection{Problèmes soulevés}
+
+Le passage en réseau complique tout:
+
+Et si...
+\begin{description}
+\item[(Sécurité)] un méchant veut écrire n'importe quoi dans la base?
+\item[(Sûreté)] le réseau plante au milieu d'une modification?
+\item[(Concurrence)] deux personnes modifient en même temps la base?
+\end{description}
+
+\begin{rem}
+  On notera le différence entre sûreté et sécurité (selon l'absence ou la présence d'un adversaire).
+\end{rem}
+ 
+%\clearslide{}
+Quelques solutions que l'on peut mettre en {\oe}uvre.
+\begin{description}
+\item[Sécurité :] Contrôle d'accès
+\item[Sûreté/Concurrence :] Gestion de transactions.
+\end{description}
+
+La sécurité est  difficile à assurer, mais on a une idée de ce que
+c'est.
+
+%\clearslide{}
+
+\subsection{Notion de transaction}
+
+ \begin{defi}[Transaction]
+   Une transaction est une séquence de commandes SQL à exécuter, sur laquelle on garantit les propriétés  ACID :
+\begin{itemize}
+\item \textbf{A}tomicité ;
+\item \textbf{C}ohérence ;
+\item \textbf{I}solation ;
+\item \textbf{D}urabilité.
+\end{itemize}
+%\clearslide{}
+ \end{defi}
+
+%\clearslide{}
+
+\subsubsection{Atomicité}
+\begin{defi}[Atomicité]
+  Une transaction échoue en entier ou réussit en entier
+\end{defi}
+
+\begin{exemple}
+  On enlève $100$ euros d'un compte bancaire pour les ajouter à
+un autre. En cas de problème sur la deuxième opération, on veut
+éviter que la première soit enregistrée.
+\end{exemple}
+
+%\clearslide{}
+\subsubsection{Cohérence}
+
+\begin{defi}[Cohérence]
+  À la fin d'une transaction, on doit avoir une base
+cohérente.
+\end{defi}
+
+\begin{exemple}
+  On ne veut pas supprimer une personne de notre base
+cinématographique si la table des films y fait référence.
+\end{exemple}
+
+
+%\clearslide{}
+\subsubsection{Isolation}
+\begin{defi}[Isolation]
+  Les états intermédiaires de la base durant une
+transaction sont invisibles à tout autre utilisateur de la base.
+\end{defi}
+
+
+
+%\clearslide{}
+\begin{exemple}
+   Sur un système de réservation de places de spectacles, vous
+avez une place au balcon, vous la changez ensuite pour une place dans
+l'orchestre.
+
+Deux scénarios à éviter:
+\begin{enumerate}
+\item Vous libérez la place, un autre client réserve les deux places
+  restantes et vous n'avez plus de place!
+\item Vous prenez la place orchestre, un autre client vient, constate
+  qu'il n'y a plus de place disponible, vous libérez la place balcon
+  et une place reste invendue!
+\end{enumerate}
+\end{exemple}
+
+%\clearslide{}
+
+Autrement dit : le système doit garantir que l'exécution
+\emph{parallèle} (simultanée) de
+deux transactions se passe comme si les deux transactions avaient eu
+lieu de façon \emph{séquentielle} (l'une après l'autre).
+
+%\clearslide{}
+\subsubsection{Durabilité}
+
+\begin{defi}[Durabilité]
+  Une fois que la transaction a été acceptée, elle reste enregistrée
+même si un problème survient.
+\end{defi}
+
+\begin{exemple}
+  On vous confirme votre achat d'un billet de train (par le
+web), une coupure électrique a lieu à la SNCF. Avez-vous perdu $100$
+euros?
+\end{exemple}
+
+%\clearslide{}
+\subsubsection{Les SGBD sont ACID}
+
+Les SGBD:
+\begin{itemize}
+\item comportent une notion de transaction;
+\item permettent de valider la transaction en cours (\textit{commit})
+\item ou de l'annuler (\textit{rollback});
+\end{itemize}
+
+%\clearslide{}
+Les SGBD garantissent les propriétés ACID à condition:
+\begin{itemize}
+\item d'une mise en \oe{}uvre correcte sur le plan logiciel (en
+  particulier utilisation correcte des transaction);
+\item d'une mise en \oe{}uvre correcte sur le plan matériel;
+\item sous des conditions opérationnelles raisonnables (coupure
+  électrique ok, bombe atomique ko).
+\end{itemize}
+
+\subsection{Résumé: client-serveur}
+Le passage en réseau soulève des problèmes:
+\begin{description}
+\item[de sécurité] qu'on sait à peu près résoudre;
+\item[de concurrence] pour lequel on utilise des transactions.
+\end{description}
+
+Mais une architecture client SQL/serveur SQL ne répond en général pas à tous les
+besoins, c'est pourquoi on l'étend en une architecture dite 3-tiers.
+
+%\clearslide{}
+\section{Architecture 3-tiers}
+
+Attention : en matière de bases de données, \og{}tiers\fg{} ne signifie
+pas $1/3$ mais \og{}couche\fg{}.
+On peut donc avoir des architecture 4-tiers.
+
+%\clearslide{}
+\subsection{Motivations}
+Besoins pour une application classique utilisant une BD:
+\begin{itemize}
+\item Être utilisable par des gens réfractaires à SQL ordinaires;
+\item Gérer la logique de l'application (par ex.
+  valider un paiement bancaire);
+\item Gérer les données.
+\end{itemize}
+
+%\clearslide{}
+Ces besoins conduisent à une structuration en trois couches:
+\begin{enumerate}
+\item Couche présentation: l'interface utilisateur;
+\item Couche logique (ou applicative, ou métier): gère la logique de
+  l'application (par ex. déclencher l'envoi d'un bien acheté
+  après paiement);
+\item Couche accès aux données.
+\end{enumerate}
+%\clearslide{}
+
+\subsection{En pratique}
+On trouvera:
+\begin{enumerate}
+\item Un (logiciel) client graphique (interface graphique);
+\item Un serveur applicatif;
+\item Un serveur de base de données.
+\end{enumerate}
+
+Le serveur applicatif répond aux requêtes du client en consultant le
+serveur de base de données.
+
+%\clearslide{}
+Le client et les serveurs peuvent être ou non sur la même machine. En
+général:
+\begin{enumerate}
+\item Le client est sur un ordinateur de bureau;
+\item Les deux serveurs sont sur une même machine puissante;
+\item On met les serveurs sur des machines différentes si le travail à
+  fournir est trop important pour une seule machine.
+\end{enumerate}
+
+%\clearslide{}
+\subsection{Problème}
+
+Programmer une interface graphique est très long et coûteux:
+\begin{itemize}
+\item Parce que c'est difficile à tester automatiquement;
+\item Parce qu'il y a une grande variété de machines
+  clientes;
+\item Parce que programmer une interface graphique sur l'OS le plus
+  répandu (MS-Windows) est un cauchemar (sans comparaison
+  avec son concurrent principal);
+\end{itemize}
+Et de plus, c'est compliqué à \emph{déployer} (il faut l'installer sur chaque
+machine).
+%\clearslide{}
+\subsection{Un peu d'histoire}
+
+\begin{description}
+\item[1993] Invention d'un système de documentation hypertexte appelé
+  \textit{world wide web}. Permet de distribuer des documents qui
+  peuvent avoir des liens vers d'autres documents distribués de la
+  même façon.
+\item[1995 (env.)] Extensions au protocole pour permettre d'interagir
+  avec le serveur et non juste de lire des documents.
+\end{description}
+
+%\clearslide{}
+\subsection{Le client graphique universel}
+
+Le navigateur web est devenu le client graphique universel:
+
+\begin{itemize}
+\item Disponible sur toutes les plates-formes;
+\item Déjà installé sur toutes les machines de bureau.
+\end{itemize}
+
+\subsection{Applications web}
+Nom donné aux applications dont l'interface est le navigateur web.
+
+Évolution à mentionner:
+\begin{itemize}
+\item Le navigateur web ne connaît rien à l'application;
+\item Donc il faut lui dire quelles données présenter et comment:
+  ça s'ajouter au travail du serveur applicatif.
+\end{itemize}
+
+Défaut des applications web: souvent moins réactives que des vraies
+applications. Mais ça s'améliore nettement.
+
+%\clearslide{}
+Technologies les plus souvent utilisées: LAMP
+\begin{description}
+\item[Linux] pour l'OS;
+\item[Apache] comme serveur Web;
+\item[PHP] langage spécialisé pour les applications web (utilisé en
+  conjonction avec Apache);
+\item[MySQL] comme serveur de base de données.
+\end{description}
+(s'ajoute une technologie aujourd'hui incontournable: Javascript)
+%\clearslide{}
+
+\section{Accès à une BD depuis Python}
+
+% Projet: réalisation d'une application}
+
+% But: réaliser une application permettant de consulter (voire de
+% modifier) une base de données.
+
+Cadre:
+\begin{itemize}
+\item on décrit la façon de faire avec SQLite;
+\item avec un SGBD, c'est similaire côté Python;
+\item la difficulté avec un SGBD: installer et configurer le SGBD.
+\end{itemize}
+
+\subsection{SQLite et python}
+
+Module standard pour l'utilisation de sqlite3:
+\begin{pyverbatim}
+import sqlite3
+\end{pyverbatim}
+%\clearslide{}
+
+\subsubsection{Connexion et création d'un curseur}
+On se connecte à la base de données. En général, on donne le nom de la
+machine où est le serveur de base de données mais pour SQLite, on
+donne juste le nom du fichier:
+\begin{pyverbatim}
+conn = sqlite3.connect('films.db')
+\end{pyverbatim}
+
+On crée ensuite un curseur (objet servant à traiter les réponses de la
+base):
+\begin{pyverbatim}
+c = conn.cursor()  
+\end{pyverbatim}
+
+%\clearslide{}
+\subsubsection{Exécution de requêtes}
+On peut alors exécuter des requêtes:
+\begin{pyverbatim}
+c.execute("""SELECT * FROM PERSONNE
+  WHERE prenom = 'Clint'""")
+\end{pyverbatim}
+
+Attention: \lstinline{c.execute} ne retourne pas la réponse mais
+demande juste à la base de données de calculer la réponse.
+%\clearslide{}
+
+\subsubsection{Récupération des résultats}
+
+On peut ensuite récupérer la réponse, ligne par ligne:
+\begin{pyverbatim}
+>>> c.fetchone()
+(3, u'Eastwood', u'Clint', u'1930-05-31')
+>>> c.fetchone()
+>>>
+\end{pyverbatim}
+(retourne \lstinline{None} quand toutes les lignes ont été
+retournées).
+
+%\clearslide{}
+Ou en une seule fois:
+{\small
+\begin{pyverbatim}
+>>> c.execute("""SELECT * FROM PERSONNE""")
+<sqlite3.Cursor object at 0x7f7ff6f375e0>
+>>> c.fetchall()
+[(1, u'Kubrick', u'Stanley', u'1928-07-26'),
+ (2, u'Spielberg', u'Steven', u'1946-12-18'),
+ (3, u'Eastwood', u'Clint', u'1930-05-31'),
+ (4, u'Cumberbatch', u'Benedict', u'1976-07-19'), 
+ (5, u'Freeman', u'Martin', u'1971-09-08'), 
+ (6, u'Leone', u'Sergio', u'1929-01-03'),
+ (7, u'McGuigan', u'Paul', u'1963-09-19'), 
+ (8, u'Sellers', u'Peter', u'1925-09-08')]
+\end{pyverbatim}
+}
+
+%\clearslide{}
+On peut aussi itérer sur le curseur:
+
+{\small
+\begin{pyverbatim}
+  >>> c.execute("""SELECT * FROM PERSONNE""")
+<sqlite3.Cursor object at 0x7f7ff6f375e0>
+>>> for r in c: 
+      print r
+    
+(1, u'Kubrick', u'Stanley', u'1928-07-26')
+(2, u'Spielberg', u'Steven', u'1946-12-18')
+(3, u'Eastwood', u'Clint', u'1930-05-31')
+(4, u'Cumberbatch', u'Benedict', u'1976-07-19')
+(5, u'Freeman', u'Martin', u'1971-09-08')
+(6, u'Leone', u'Sergio', u'1929-01-03')
+(7, u'McGuigan', u'Paul', u'1963-09-19')
+(8, u'Sellers', u'Peter', u'1925-09-08')
+>>> 
+\end{pyverbatim}
+}
+%\clearslide{}
+
+\subsubsection{Transactions}
+Si on a effectué des modifications, on peut les valider avec
+\begin{pyverbatim}
+conn.commit()
+\end{pyverbatim}
+ou les annuler avec
+\begin{pyverbatim}
+conn.rollback()  
+\end{pyverbatim}
+
+Quand on a terminé, on peut fermer la connexion. Penser à valider les
+changements auparavant s'il y en a!
+\begin{lstlisting}
+conn.close()
+\end{lstlisting}
+
+\subsubsection{Requêtes paramétrées}
+
+Comment écrire une fonction prenant en argument un curseur et la clé
+primaire d'une personne et retournant l'enregistrement ayant cette clé
+primaire?
+
+La méthode \lstinline{execute} accepte un second argument qui est
+un $n$-uplet de paramètres. Les \og{}\texttt{?}\fg{} dans la requête
+seront alors remplacés par les valeurs données:
+\begin{pyverbatim}
+def personne(c, id):
+  p = (id, ) # le 1-uplet des paramètres
+  req = """SELECT * FROM PERSONNE WHERE id = ?"""
+  c.execute(req, p)
+  r = c.fetchall()
+  assert len(r) == 1 # id est une clé primaire
+  return r[0]
+\end{pyverbatim}
+
+%\clearslide{}
+Pourquoi pas {\small 
+\lstinline{"""SELECT * FROM PERSONNE WHERE id = """ + str(id)}
+}?
+
+Réponse : et si l'on avait mis 
+\begin{verbatim}
+id = "1;DROP TABLE PERSONNE;"
+\end{verbatim}
+
+Problème de sécurité \textbf{N\up{o}~1} des applications web;
+\begin{itemize}
+\item attaques par injection de code SQL
+(cf
+\url{http://xkcd.com/327/});
+\item nombre de victimes: supérieur à $10^{8}$:
+  \begin{description}
+  \item[Fév. 2002] 200 000 numéros de cartes de crédit exposés;
+  \item[Août 2009] vol de 130 millions de numéros de cartes de crédit;
+  \item[Déc 2009] vol de 32 millions de mots de passe de Rockyou;
+  \item[Juin 2011] vol d'un milion de mots de passe chez Sony.
+  \end{description}
+\end{itemize}
