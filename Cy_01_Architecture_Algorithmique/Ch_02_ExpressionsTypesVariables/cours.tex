@@ -229,8 +229,8 @@ cohérent : \textbf{bool('True')} renvoie \texttt{True}, mais \texttt{int('2.3')
 erreur.\\
 
 Il est également possible de passer d'un type composé à un autre grâce aux fonctions \texttt{str}, 
-\texttt{tuple} et \texttt{list} : \texttt{str( (1,'a',[1,2]) )} renvoie \texttt{``(1,'a',[1,2])''}, 
-\texttt{tuple( [1,2,3] )} renvoie \texttt{(1,2,3)} et \texttt{list('Coucou ?')} renvoie 
+\texttt{tuple} et \texttt{list} : \texttt{str((1,'a',[1,2]))} renvoie \texttt{''(1,'a',[1,2])''}, 
+\texttt{tuple([1,2,3] )} renvoie \texttt{(1,2,3)} et \texttt{list('Coucou ?')} renvoie 
 \texttt{['C', 'o', 'u', 'c', 'o', 'u', ' ', '?']}.
 
 
@@ -295,13 +295,35 @@ des tuples. Ainsi : \texttt{a,b = (1,2)} affecte la valeur 1 à \texttt{a} et la
 
 
 \begin{rem}
-En Python, le \textbf{typage} des variables est \textbf{dynamique}. Cela signifie que lorsqu'on affecte une valeur à une variable, Python reconnait automatiquement le type de la valeur. Ce n'est pas le cas de tous les langages de programmation.
+En Python, le \textbf{typage} des variables est \textbf{dynamique}. Cela signifie que lorsqu'on affecte une valeur à une variable, Python reconnaît automatiquement le type de la valeur. Ce n'est pas le cas de tous les langages de programmation.
 Par exemple, le \texttt{C} n'est pas typé dynamiquement. Il faut alors déclarer une variable avec un type, puis affecter la valeur. 
 
 \end{rem}
 \subsection{Notion d'adressage}
 
-En Python, le passage des variables se fait par \textbf{référence}. C'est-à-dire que lorsqu'on manipule une variable (qu'on l'envoie à une foncition par exemple), on ne donne pas comme argument la valeur de la fonction, mais son adresse mémoire. Pour les types non mutables (entiers, flottants, chaîne de caractères, tuples), le passage par référence ne pose pas de problèmes. 
+En Python, le passage des variables se fait par \textbf{référence}. C'est-à-dire que lorsqu'on manipule une variable (qu'on l'envoie à une fonction par exemple), on ne donne pas comme argument la valeur de la fonction, mais son adresse mémoire. Pour les types non mutables (entiers, flottants, chaîne de caractères, tuples), le passage par référence ne pose pas de problèmes. Pour les types mutables (listes), le passage par référence peut conduire à des résultats << inattendus >> notamment lors de la copie de listes. 
+
+
+\begin{xxpyconsole}~\\ \vspace{-.5cm}
+\begin{multicols}{2}
+\begin{pyconsole}
+a=2
+print(a)
+a=3
+print(a)
+a=[1,2]
+\end{pyconsole}
+
+\begin{pyconsole}
+print(a)
+b=a
+a[0]=2
+print(a,b)
+\end{pyconsole}
+\end{multicols}
+Ici l'affectation \texttt{b=a} ne crée pas une nouvelle liste \texttt{b}. On crée juste une nouvelle variable \texttt{b} qui a la même adresse mémoire que \texttt{a}. Ainsi en modifiant \texttt{a}, on modifie \texttt{b}. 
+\end{xxpyconsole}
+
 
 
 \section{Fonctions}
@@ -374,8 +396,6 @@ Reprenons l'exemple de la conversion
 
 \begin{description}
  \item[1er cas.] 
-\
-
 \texttt{DefFonction} 
 \begin{tabular}{|l}
 				\textbf{conversion}(h,m,s)\\

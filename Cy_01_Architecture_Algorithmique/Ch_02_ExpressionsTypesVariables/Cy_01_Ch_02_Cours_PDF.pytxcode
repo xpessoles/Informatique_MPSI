@@ -16,6 +16,17 @@ x = x + 2	# on additionne à la donnée stockée dans x le nombre 2 et on
              # stocke le résultat de nouveau dans x
 x            # on accède à la valeur qui est mémorisée dans x.
 44
+=>PYTHONTEX#pycon#default#default#5#console####cours.tex#309#
+a=2
+print(a)
+a=3
+print(a)
+a=[1,2]
+=>PYTHONTEX#pycon#default#default#6#console####cours.tex#317#
+print(a)
+b=a
+a[0]=2
+print(a,b)
 =>PYTHONTEX:SETTINGS#
 version=0.16
 outputdir=pythontex-files-Cy_01_Ch_02_Cours_PDF
