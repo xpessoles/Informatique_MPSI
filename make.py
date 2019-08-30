@@ -327,4 +327,11 @@ for tp in info_tp:
     genere_entete(rep,tp,'tp')
     genere_support(rep,tp,'tp')
     
+    
+#Commande compilation 
+#pdflatex Cy_01_livret_Ch_02.tex
+#ythontex Cy_01_livret_Ch_02.tex
+#pdflatex Cy_01_livret_Ch_02.tex
+
+    
 
