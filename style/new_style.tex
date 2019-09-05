@@ -919,6 +919,11 @@ addtohook={%
 
 \usepackage{textcomp}
 
+\newcounter{thequestion}
+\newcommand{\question}[1]{{\stepcounter{thequestion}\bf Q \arabic{thequestion} : #1}}
+
+\newcommand{\p}[1]{\left( #1\right)}
+
 % Définition des booleéns
 \newif\iffiche
 \newif\ifprof

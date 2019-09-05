@@ -128,11 +128,11 @@ def genere_fichiers_tex(info_activite,type_activite):
         os.system('cp style'+sep+'Cy_i_Ch_j_Cours.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_Cours.tex')
         os.system('cp style'+sep+'Cy_i_Ch_j_Cours_PDF.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_Cours_PDF.tex')
         os.system('cp style'+sep+'Cy_i_livret_Ch_j.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_livret_Ch_'+str(num_activite)+'.tex')
-        os.system('cp style'+sep+'Cy_i_Ch_j_TD_j.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_TD_0'+str(num_activite)+'.tex')
+        os.system('cp style'+sep+'Cy_i_Ch_j_TD_j.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_TD_'+str(num_activite)+'.tex')
         # print(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex')
-        changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_Cours_PDF.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex}')
-        changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_livret_Ch_'+str(num_activite)+'.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours.tex}')
-        changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_livret_Ch_'+str(num_activite)+'.tex','\\input{Cy_01_Ch_01_TD_01.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_TD_0'+str(num_activite)+'.tex}')
+        changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_Cours_PDF.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_Cours.tex}')
+        changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_livret_Ch_'+str(num_activite)+'.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_Cours.tex}')
+        changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_livret_Ch_'+str(num_activite)+'.tex','\\input{Cy_01_Ch_01_TD_01.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_TD_'+str(num_activite)+'.tex}')
     elif type_activite=='tp':
         num_chapitre=ref_cours.split(';')[0].split('-')[1]
         if int(num_chapitre)<10 and len(num_chapitre)<2:
@@ -291,8 +291,12 @@ def genere_support(rep,info_activite,type_activite):
         rep_activite=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite+sep+'tp.tex'
     with open(rep_activite,'w',encoding='utf-8') as f:
         if len(supports)>0:
+            f.write('\\section{Applications}\n')
             for support in supports.split(';'):
                 if type_activite=='cours':
+                    exo,source=trouve_exo_source(support)
+                    f.write('\\subsection{'+exo+'}\n')
+                    f.write('\\setcounter{thequestion}{0}\n')
                     f.write('\\input{'+'../../exos/'+support+'}\n')
                 elif type_activite=='tp':
                     f.write('\\input{'+'../../../exos/'+support+'}\n')
@@ -334,6 +338,8 @@ def genere_pdf(file,rep):
     file_abrege=file.split('.')[0].split('/')[-1]
     print(file_abrege,rep)
     os.chdir(rep)
+    os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pythontex '+file_abrege+'.tex')
+    os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pdflatex '+file_abrege+'.tex')
     os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pythontex '+file_abrege+'.tex')
     os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pdflatex '+file_abrege+'.tex')
     os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pythontex '+file_abrege+'.tex')
