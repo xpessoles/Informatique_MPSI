@@ -1,0 +1,27 @@
+%%%% Paramétrage du cours %%%%
+\def\xxactivite{TD}
+\def\xxauteur{\textsl{Émilien Durif -- Xavier Pessoles}}
+
+%\fichefalse
+%\proftrue
+%\tdfalse
+%\courstrue
+
+
+\iflivret
+\input{../../style/pagegarde_info}
+\else
+\input{../../style/pagegarde_info}
+\fi
+\setlength{\columnseprule}{.1pt}
+
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\iflivret
+\input{td.tex}
+\fi
+
+
+
