@@ -2,6 +2,8 @@
 \def\xxactivite{ \ifprof TP -- Corrigé  \else  TP \fi} 
 \def\xxauteur{\textsl{Émilien Durif \\ Xavier Pessoles}}
 
+
+
 \def\xxnumchapitre{1}
 \def\xxchapitre{Architecture matérielle et logicielle et Introduction à l'algorithmique}
 \def\xxnomchapitre{Architecture matérielle et logicielle et Introduction à l'algorithmique}
@@ -24,6 +26,9 @@
 %\includegraphics[width=.6\linewidth]{fig_00}
 }%figues de la page de garde
 
+\def\xxYCartouche{-2.25cm}
+\def\xxYongletGarde{.7cm}
+\def\xxYOnget{.9cm}
 
 \iflivret
 \input{../../style/new_pagegarde}
@@ -51,8 +56,14 @@
 %\newcommand{\question}{\textbf{QUESTION}}
 %
 \begin{multicols}{2}
-\newcommand{\xxexo}{ALG-000}
-\input{banque}
+%\newcommand{\xxexo}{ALG-000}
+%\input{banque}
+
+\section*{python bases}
+\newcommand{\xxexo}{PYB-000.tex} 
+\subsection*{\xxexo} 
+\graphicspath{{../../exos/python_bases/PYB-000/}}
+\input{../../exos/python_bases/\xxexo} 
 
 %\renewcommand{\xxexo}{COM-002} 
 %\subsection*{\xxexo} 
