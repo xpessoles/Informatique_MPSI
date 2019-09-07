@@ -2,8 +2,10 @@
 Décrire ce que fait cette suite d'instructions. 
 \begin{pyverbatim}
 from random import randrange
-n = randrange(1000) # Un entier entre 0 et 999
-L = [randrange(100) for i in range(n+1)] # n+1 valeurs entre 0 et 99.
+# Un entier entre 0 et 999
+n = randrange(1000) 
+# n+1 valeurs entre 0 et 99.
+L = [randrange(100) for i in range(n+1)] 
 p = 0
 for x in L:
     if x <= 10:
@@ -12,8 +14,10 @@ for x in L:
 Et celle-ci ? 
 \begin{pyverbatim}
 from random import randrange
-n = randrange(1000) # Un entier entre 0 et 999
-L = [randrange(100) for i in range(n+1)] # n+1 valeurs entre 0 et 99.
+# Un entier entre 0 et 999
+n = randrange(1000) 
+# n+1 valeurs entre 0 et 99.
+L = [randrange(100) for i in range(n+1)] 
 p = 0
 for i in range(n+1):
     if L[i] <= 10:
