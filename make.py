@@ -15,6 +15,8 @@ path=r"progression_2019_2020_IPT_MPSI.xlsx"#chemin de la progression
 path_classe=''
 path_site='site'#Chemin pour exporter les pdf vers site
 
+# os.chdir(os.system('pwd'))
+
 #Separateur de dossier
 if platform.system()=='Windows':
     sep='\\'
@@ -336,8 +338,15 @@ def trouver_file_tex(activite,type_activite):
 def genere_pdf(file,rep):
     '''genere le pdf avec le fichier complet et incomplet'''
     file_abrege=file.split('.')[0].split('/')[-1]
-    print(file_abrege,rep)
     os.chdir(rep)
+    os.system('rm *.aux')
+    os.system('rm *.log')
+    os.system('rm *.out')
+    os.system('rm *.toc')
+    os.system('rm *.pytxcode')
+    os.system('rm *.nav')
+    os.system('rm *.snm')
+    os.system('rm *.pdf')
     os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pythontex '+file_abrege+'.tex')
     os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pdflatex '+file_abrege+'.tex')
     os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pythontex '+file_abrege+'.tex')
