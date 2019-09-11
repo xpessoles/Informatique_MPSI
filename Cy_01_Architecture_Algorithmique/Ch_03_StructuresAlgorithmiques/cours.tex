@@ -313,24 +313,16 @@ def max3 (a, b, c) :
 
 Écrivons un programme pour saluer la classe (disons les 8 premiers
 élèves) :
-\begin{pyconsole}
+\begin{lstlisting}
 print('Bonjour Baptiste')
-
-print('Bonjour Lisa')
-
-print('Bonjour Pierrick')
-
-print('Bonjour Louise-Eugénie')
-
-print('Bonjour Qâsim')
-
-print('Bonjour Lorenzo')
-
-print('Bonjour Arthur')
-
-print('Bonjour Ylies')
-
-\end{pyconsole}
+%print('Bonjour Lisa')
+%print('Bonjour Pierrick')
+%print('Bonjour Louise-Eugénie')
+%print('Bonjour Qasim')
+%print('Bonjour Lorenzo')
+%print('Bonjour Arthur')
+%print('Bonjour Ylies')
+\end{lstlisting}
 
 Mais combien de travail faut-il faire si :
 
@@ -511,21 +503,21 @@ dans vos algorithmes.\\
 Par exemple :
 
 
-\begin{pyverbatim}
+\begin{lstlisting}
 x = 5			# x = u_0 (initialisation)
 for k in range(20): 	
     # x = u_k (invariant en entrée de boucle)
     x = 2 * x - k - 3	
     # x = u_{k+1} (invariant en sortie de boucle)	
 # après la boucle for, k vaut 19, et x vaut donc u_{20}.
-\end{pyverbatim}
+\end{lstlisting}
   
 
 
 \subsection{Un exemple : test de primalité} 
 
   On veut tester si un entier \pyv{n} est premier:
-\begin{pyverbatim}
+\begin{lstlisting}
 def est_premier(n):
     """ Renvoie True si n est premier, False sinon
         Préconditon : n est un entier."""
@@ -536,7 +528,7 @@ def est_premier(n):
             b = False
     # b <=> n premier
     return b
-\end{pyverbatim}
+\end{lstlisting}
 
 Remarque: les derniers tours de boucle sont inutiles dès que la
 variable \pyv{b} a été mise à \pyv{False}. Les éxécuter tout de même est une perte de temps. Il 
@@ -692,13 +684,13 @@ Donnons ces invariant et variant pour l'algorithme de l'exemple \textbf{\ref{ex-
 pouvons malheureusement pas le faire pour l'exemple \textbf{\ref{ex-syracuse}}, puisque comme son 
 nom l'indique, la conjecture de Syracuse n'a jamais été demontrée) :\\
 
-\begin{pyverbatim}
-n = 1
-s = 1           # s = somme des i de 1 à n
-while s < 11 :  # invariant : s = somme des i de 1 à n
-    n = n + 1
-    s = s + n   # variant : s, qui est entier et strictement croissant
-\end{pyverbatim}
+%\begin{pyconsole}
+%n = 1
+%s = 1           # s = somme des i de 1 à n
+%while s < 11 :  # invariant : s = somme des i de 1 à n
+%    n = n + 1
+%    s = s + n   # variant : s, qui est entier et strictement croissant
+%\end{pyconsole}
 
 %\begin{exo}
 %Démontrer cet algorithme.

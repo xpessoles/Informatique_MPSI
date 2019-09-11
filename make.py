@@ -14,6 +14,7 @@ f=open('log.txt','w')
 path=r"progression_2019_2020_IPT_MPSI.xlsx"#chemin de la progression
 path_classe=''
 path_site='site'#Chemin pour exporter les pdf vers site
+path_ref=os.popen('pwd').readlines()[0].strip()
 
 # os.chdir(os.system('pwd'))
 
@@ -357,7 +358,8 @@ def genere_pdf(file,rep,type_activite):
     os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pdflatex '+file_abrege+'.tex')
     os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pythontex '+file_abrege+'.tex')
     # os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pdflatex '+file)
-    # os.system('mv '+file_abrege+'.pdf '+file.split('.')[0]+'_complet.pdf')
+    #pdb.set_trace()
+    os.system('cp '+file_abrege+'.pdf '+path_ref+sep+path_site+sep+file_abrege+'.pdf')
     # os.system('cp '+file.split('.')[0]+'_complet.pdf '+path_site+sep+file_abrege+'_complet.pdf ')
     # 
   
@@ -384,10 +386,15 @@ for tp in info_tp:
     #print(trouver_file_tex(tp,'tp'))
     
     
-activite=info_tp[1]
+# activite=info_tp[1]
+# rep=trouver_repertoire(activite)
+# file=trouver_file_tex(activite,'tp')
+# genere_pdf(file,rep,'tp')
+
+activite=info_cours[2]
 rep=trouver_repertoire(activite)
-file=trouver_file_tex(activite,'tp')
-genere_pdf(file,rep,'tp')
+file=trouver_file_tex(activite,'cours')
+genere_pdf(file,rep,'cours')
 
 
     
