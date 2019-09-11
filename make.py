@@ -4,7 +4,7 @@
 import numpy as np
 import xlrd
 import datetime
-import os, glob, platform
+import os, glob, platform,pdb
 
 Mois=['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Décembre']
 
@@ -335,10 +335,14 @@ def trouver_file_tex(activite,type_activite):
     return file_tex
     
     
-def genere_pdf(file,rep):
+def genere_pdf(file,rep,type_activite):
     '''genere le pdf avec le fichier complet et incomplet'''
     file_abrege=file.split('.')[0].split('/')[-1]
-    os.chdir(rep)
+    if type_activite=='cours':
+        rep_activite=rep
+    elif type_activite=='tp':
+        rep_activite=rep+sep+file_abrege.split('_pdf')[0]
+    os.chdir(rep_activite)
     os.system('rm *.aux')
     os.system('rm *.log')
     os.system('rm *.out')
@@ -380,10 +384,10 @@ for tp in info_tp:
     #print(trouver_file_tex(tp,'tp'))
     
     
-activite=info_cours[1]
+activite=info_tp[1]
 rep=trouver_repertoire(activite)
-file=trouver_file_tex(activite,'cours')
-genere_pdf(file,rep)
+file=trouver_file_tex(activite,'tp')
+genere_pdf(file,rep,'tp')
 
 
     
