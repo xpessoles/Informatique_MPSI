@@ -253,10 +253,15 @@ def genere_entete(rep,info_activite,type_activite):
                         texte_entete+='\\item '+code_competence[k]+' : '+nom_court[k]+'\n'
                 elif '%Infos sur les supports' in ligne:
                     texte_entete+='%Infos sur les supports\n'
+                    texte_1='\\def\\xxtitreexo{'
+                    texte_2='\\def\\xxsourceexo{\\hspace{.2cm} \\footnotesize{'
                     for support in supports.split(';'):
                         exo,source=trouve_exo_source(support)
-                        texte_entete+='\\def\\xxtitreexo{'+exo+'}\n'
-                        texte_entete+='\\def\\xxsourceexo{\\hspace{.2cm} \\footnotesize{'+source+'}}\n'
+                        #texte_1+=exo+'\n'
+                        texte_2+=source+'\n'
+                    texte_1+=name_activite+'}\n'
+                    texte_2+='}}\n'
+                    texte_entete+=texte_1+texte_2
                 else: 
                     texte_entete+=ligne
         f.write(texte_entete)
@@ -294,7 +299,11 @@ def genere_support(rep,info_activite,type_activite):
         rep_activite=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite+sep+'tp.tex'
     with open(rep_activite,'w',encoding='utf-8') as f:
         if len(supports)>0:
-            f.write('\\section{Applications}\n')
+            if type_activite=='cours':
+                f.write('\\section{Applications}\n')
+            if type_activite=='tp':
+                f.write('\\setcounter{section}{'+str(int(num_activite)-1)+'}\n')
+                f.write('\\section{TP '+num_activite+'}\n')
             for support in supports.split(';'):
                 if type_activite=='cours':
                     exo,source=trouve_exo_source(support)
@@ -302,6 +311,8 @@ def genere_support(rep,info_activite,type_activite):
                     f.write('\\setcounter{thequestion}{0}\n')
                     f.write('\\input{'+'../../exos/'+support+'}\n')
                 elif type_activite=='tp':
+                    exo,source=trouve_exo_source(support)
+                    f.write('\\subsection{'+exo+'}\n')
                     f.write('\\input{'+'../../../exos/'+support+'}\n')
         else:
             f.write('\n')
