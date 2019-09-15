@@ -8,11 +8,11 @@
 \question{Ouvrir votre IDE, écrire la fonction suivante dans un fichier, l'enregistrer, taper \emph{run} (F5) puis utiliser la fonction dans l'interpréteur interactif. 
 Décrire ensuite précisément ce que réalise cette fonction.}
 
-\begin{pyverbatim}
+\begin{lstlisting}
 def split_modulo(n):
   """A vous de dire ce que fait cette fonction !"""
   return (n%2,n%3,n%5)
-\end{pyverbatim}
+\end{lstlisting}
 
 \question{\'Ecrire une fonction \pyv{norme} qui prend en argument un vecteur de $\R^2$ donnée par ses coordonnées et renvoie sa norme euclidienne. 
 Vous devrez spécifier clairement le type de l'argument à l'utilisateur via la \emph{docstring}.}
@@ -22,36 +22,36 @@ Vous devrez spécifier clairement le type de l'argument à l'utilisateur via la 
 \question{\'Ecrire une fonction \pyv{carres} qui prend en argument un entier naturel \pyv{n} et qui renvoie la liste des \pyv{n} premiers carrés d'entiers, en commençant par $0$.}
 
 
-\question {Les expressions suivantes sont-elles équivalentes ?}
-
-
-  \begin{enumerate}[label=\emph{\alph*)}]
-    \item \pyv{8.5 / 2.1}
-    \item \pyv{int(8.5) / int(2.1)}
-    \item \pyv{int(8.5 / 2.1)}
-  \end{enumerate}
-
-
-\question {Et celles-ci ?}
-  \begin{enumerate}[label=\emph{\alph*)}]
-    \item \pyv{float(8 * 2)}
-    \item \pyv{8 * 2}
-    \item \pyv{8. * 2.}
-  \end{enumerate}
-
-
-\question {Prévoir la valeur des expressions suivantes puis vérifier cela (avec IDLE).}
-
-\begin{multicols}{2}
-  \begin{enumerate}[label=\emph{\alph*)}]
-    \item \pyv{1.7 + 1.3}
-    \item \pyv{2 - 1}
-    \item \pyv{2. - 1}
-    \item \pyv{2 - 1.}
-    \item \pyv{(2 - 1).}
-    \item \pyv{.5 + .5}
-    \item \pyv{4 / (9 - 3**2)}
-    \item \pyv{4 / (9. - 3**2)}
-  \end{enumerate}
-\end{multicols}
+%\question {Les expressions suivantes sont-elles équivalentes ?}
+%
+%
+%  \begin{enumerate}[label=\emph{\alph*)}]
+%    \item \pyv{8.5 / 2.1}
+%    \item \pyv{int(8.5) / int(2.1)}
+%    \item \pyv{int(8.5 / 2.1)}
+%  \end{enumerate}
+%
+%
+%\question {Et celles-ci ?}
+%  \begin{enumerate}[label=\emph{\alph*)}]
+%    \item \pyv{float(8 * 2)}
+%    \item \pyv{8 * 2}
+%    \item \pyv{8. * 2.}
+%  \end{enumerate}
+%
+%
+%\question {Prévoir la valeur des expressions suivantes puis vérifier cela (avec IDLE).}
+%
+%\begin{multicols}{2}
+%  \begin{enumerate}[label=\emph{\alph*)}]
+%    \item \pyv{1.7 + 1.3}
+%    \item \pyv{2 - 1}
+%    \item \pyv{2. - 1}
+%    \item \pyv{2 - 1.}
+%    \item \pyv{(2 - 1).}
+%    \item \pyv{.5 + .5}
+%    \item \pyv{4 / (9 - 3**2)}
+%    \item \pyv{4 / (9. - 3**2)}
+%  \end{enumerate}
+%\end{multicols}
 

@@ -1,40 +1,5 @@
-\subsection{Consignes}
-\begin{enumerate}
-\item  \textbf{Lisez attentivement  tout l'énoncé
-    avant de commencer.}
-% \item Commencez la séance en créant un dossier au nom du TP dans le répertoire dédié à l'informatique de votre compte. 
-\item Après la séance, vous devez rédiger un compte-rendu de TP et
-l'envoyer au format électronique à votre enseignant.
-\item Le seul format accepté pour l'envoi d'un texte de compte-rendu est le
-format PDF. Votre fichier s'appellera impérativement \texttt{tp02\_kleim\_durif.pdf}, où \og \texttt{kleim}\fg\ et \og \texttt{durif}\fg\ sont à remplacer par les noms des membres du binôme. 
-\item Ce TP est à faire en binôme, vous ne rendrez donc qu'un compte-rendu pour deux.
-\item Vous préciserez en préambule de votre compte-rendu les noms des membres du binôme ainsi que le système d'exploitation sur lequel vous avez travaillé. 
-\item Ayez toujours un crayon et un papier sous la main. Quand vous réfléchissez à une question, utilisez-les !
-\item Vous devez être autonome. Ainsi, avant de poser une question à l'enseignant, merci de commencer par :
-\begin{itemize}
-  \item relire l'énoncé du TP (beaucoup de réponses se trouvent dedans) ;
-  \item relire les passages du cours\footnote{Dans le cas fort 
-improbable où vous ne vous en souviendriez pas.} relatifs à votre problème ;
-  \item effectuer une recherche dans l'aide disponible sur votre ordinateur (ou sur internet) concernant votre question.
-\end{itemize}
-  Il est alors raisonnable d'appeler votre enseignant pour lui demander des explications ou une confirmation !
-\end{enumerate}
 
-%Le but de ce TP est de vous faire de manipuler un système d'exploitation par lignes de commandes, puis de prendre en main \python{}.
-%
-%{\bf Attention :} les étudiants travaillant sous Unix (Linux et MacOS) répondront d'abord aux questions des parties \ref{tp02:sec:unix1} et \ref{tp02:sec:unix2}, ceux travaillant sous Windows répondront d'abord aux questions des parties \ref{tp02:sec:win1} et \ref{tp02:sec:win2}. Tous les étudiants finiront par répondre aux questions de la partie~\ref{tp02:sec:python}. 
-%
-%Pour les manipulations de fichier, vous utiliserez le code source du logiciel
-%\python{}, que vous pourrez trouver dans le dossiers groupes. à l'adresse suivante (où \texttt{X} 
-%est à remplacer par \texttt{1} ou \texttt{2})  :
-%\begin{center}
-%  $\sim$\texttt{/groupes/mpsX/données/TP02/cpython-4243df51fe43}
-%\end{center}
-
-
-\subsection{Prise en main élémentaire de \python{}.} \label{tp02:sec:python}
-
-Lancer IDLE (via un terminal, n'oubliez pas l'autocomplétion, ou le menu). Un \emph{interpréteur de commandes}, ou \texttt{shell}, s'affiche. 
+Lancer PYZO ou IDLE. Un \emph{interpréteur de commandes}, ou \texttt{shell}, s'affiche. 
 Le symbole \texttt{>}\texttt{>}\texttt{>} signifie que \python{} attend vos instructions. 
 
 Sitôt une instruction tapée et validée (par la touche \og Entrée \fg{}), le \texttt{shell} effectue le calcul demandé puis affiche un résultat, ou un message d'erreur. 
@@ -148,7 +113,7 @@ Que se passe-t-il ? Qu'est-ce que cela signifie ?
 
 Nous avons vu comment utiliser des fonctions et des bibliothèques. Nous pouvons bien entendu créer nos propres fonctions (et bibliothèques). 
 
-Dans IDLE, ouvrir un nouveau fichier (CTRL+N ou File / New file). L'enregistrer (CTRL + S ou File / Save) sous le nom \texttt{TP02.py}. 
+Dans PYZO ou IDLE, ouvrir un nouveau fichier (CTRL+N ou File / New file). L'enregistrer (CTRL + S ou File / Save) sous le nom \texttt{TP02.py}. 
 
 \medskip{}
 
@@ -160,7 +125,7 @@ def somme(n) :
     Precondition : n entier naturel"""
     return n*(n+1) // 2 
 \end{lstlisting}
-Enregistrer puis appuyer sur la touche F5 ou (Run / Run Module).
+Enregistrer puis appuyer sur la touche Crtl+MAJ+E (sous PYZO) ou F5 (sous IDLE).
 Le \emph{shell} doit s'afficher. 
 Taper dans le \emph{shell} les instructions suivantes. 
 \begin{lstlisting}

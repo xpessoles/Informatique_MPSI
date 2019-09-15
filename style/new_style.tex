@@ -924,6 +924,9 @@ addtohook={%
 \newcounter{thequestion}
 \newcommand{\question}[1]{{\stepcounter{thequestion}\bf Q \arabic{thequestion} : #1}}
 
+\newcounter{cptactivite}
+\newcommand{\activite}[1]{{\stepcounter{cptactivite}\bf \vspace{0.5cm}{\color{ocre}\begin{Large}Activité \arabic{cptactivite} : \end{Large}} \begin{large}#1\end{large}\vspace{0.5cm}}}
+
 \newcommand{\p}[1]{\left( #1\right)}
 
 % Définition des booleéns

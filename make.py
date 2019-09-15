@@ -301,9 +301,9 @@ def genere_support(rep,info_activite,type_activite):
         if len(supports)>0:
             if type_activite=='cours':
                 f.write('\\section{Applications}\n')
-            if type_activite=='tp':
-                f.write('\\setcounter{section}{'+str(int(num_activite)-1)+'}\n')
-                f.write('\\section{TP '+num_activite+'}\n')
+            # if type_activite=='tp':
+            #     f.write('\\setcounter{section}{'+str(int(num_activite)-1)+'}\n')
+            #     f.write('\\section{TP '+num_activite+'}\n')
             for support in supports.split(';'):
                 if type_activite=='cours':
                     exo,source=trouve_exo_source(support)
@@ -312,7 +312,8 @@ def genere_support(rep,info_activite,type_activite):
                     f.write('\\input{'+'../../exos/'+support+'}\n')
                 elif type_activite=='tp':
                     exo,source=trouve_exo_source(support)
-                    f.write('\\subsection{'+exo+'}\n')
+                    if 'consignes' not in support:
+                        f.write('\n\n\\activite{'+exo+'}\n\n')
                     f.write('\\input{'+'../../../exos/'+support+'}\n')
         else:
             f.write('\n')
