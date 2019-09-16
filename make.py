@@ -398,15 +398,15 @@ for tp in info_tp:
     #print(trouver_file_tex(tp,'tp'))
     
     
-activite=info_tp[1]
-rep=trouver_repertoire(activite)
-file=trouver_file_tex(activite,'tp')
-genere_pdf(file,rep,'tp')
-
-# activite=info_cours[2]
+# activite=info_tp[1]
 # rep=trouver_repertoire(activite)
-# file=trouver_file_tex(activite,'cours')
-# genere_pdf(file,rep,'cours')
+# file=trouver_file_tex(activite,'tp')
+# genere_pdf(file,rep,'tp')
+
+activite=info_cours[1]
+rep=trouver_repertoire(activite)
+file=trouver_file_tex(activite,'cours')
+genere_pdf(file,rep,'cours')
 
 
     
