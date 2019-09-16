@@ -403,7 +403,7 @@ for tp in info_tp:
 # file=trouver_file_tex(activite,'tp')
 # genere_pdf(file,rep,'tp')
 
-activite=info_cours[1]
+activite=info_cours[2]
 rep=trouver_repertoire(activite)
 file=trouver_file_tex(activite,'cours')
 genere_pdf(file,rep,'cours')

@@ -315,13 +315,13 @@ def max3 (a, b, c) :
 élèves) :
 \begin{lstlisting}
 print('Bonjour Baptiste')
-%print('Bonjour Lisa')
-%print('Bonjour Pierrick')
-%print('Bonjour Louise-Eugénie')
-%print('Bonjour Qasim')
-%print('Bonjour Lorenzo')
-%print('Bonjour Arthur')
-%print('Bonjour Ylies')
+print('Bonjour Lisa')
+print('Bonjour Pierrick')
+print('Bonjour Louise-Eugénie')
+print('Bonjour Qasim')
+print('Bonjour Lorenzo')
+print('Bonjour Arthur')
+print('Bonjour Ylies')
 \end{lstlisting}
 
 Mais combien de travail faut-il faire si :
@@ -483,85 +483,88 @@ for k in range(20):
 x
 \end{pyconsole}
 % Résultat obtenu : $1048600$.\\
-Mais est-ce bien $u_{20}$ ?
 
-\subsection{Les invariants de boucle}
+\begin{rem}
+Mais est-ce bien $u_{20}$ ? Pour cela on pourra montrer par récurrence que $x=u_k$ à l'entrée de la boucle et $x=u_{k+1}$ à la sortie de la boucle. C'est la notion \textbf{d'invariant de boucle} que l'on détaillera dans un chapitre ultérieur.
+\end{rem}
 
-Un \textbf{invariant de boucle} est une proposition vérifiée à chaque tour d'une boucle. Plus 
-précisément, on distingue les invariants d'\textbf{entrée de boucle} et ceux de \textbf{sortie de 
-boucle}. C'est en fait une proposition de récurrence, qui doit être vrai au début de la première 
-boucle, puis se propager de tour de boucle en tour de boucle, jusqu'au dernier.\\
-Les invariants de boucles ont essentiellement deux intérêts :
-\begin{enumerate}
- \item \textbf{Démontrer} l'algorithme, grâce au principe de récurrence ;
- \item Répondre à notre question précédente : où commencer et où finir une boucle ?
-\end{enumerate}
+%\subsection{Les invariants de boucle}
+%
+%Un \textbf{invariant de boucle} est une proposition vérifiée à chaque tour d'une boucle. Plus 
+%précisément, on distingue les invariants d'\textbf{entrée de boucle} et ceux de \textbf{sortie de 
+%boucle}. C'est en fait une proposition de récurrence, qui doit être vrai au début de la première 
+%boucle, puis se propager de tour de boucle en tour de boucle, jusqu'au dernier.\\
+%Les invariants de boucles ont essentiellement deux intérêts :
+%\begin{enumerate}
+% \item \textbf{Démontrer} l'algorithme, grâce au principe de récurrence ;
+% \item Répondre à notre question précédente : où commencer et où finir une boucle ?
+%\end{enumerate}
+%
+%Il est \textbf{fortement conseillé} de toujours indiquer les invariants de boucle en commentaire 
+%dans vos algorithmes.\\ 
+%
+%Par exemple :
+%
+%
+%\begin{lstlisting}
+%x = 5			# x = u_0 (initialisation)
+%for k in range(20): 	
+%    # x = u_k (invariant en entrée de boucle)
+%    x = 2 * x - k - 3	
+%    # x = u_{k+1} (invariant en sortie de boucle)	
+%# après la boucle for, k vaut 19, et x vaut donc u_{20}.
+%\end{lstlisting}
+%  
 
-Il est \textbf{fortement conseillé} de toujours indiquer les invariants de boucle en commentaire 
-dans vos algorithmes.\\ 
 
-Par exemple :
-
-
-\begin{lstlisting}
-x = 5			# x = u_0 (initialisation)
-for k in range(20): 	
-    # x = u_k (invariant en entrée de boucle)
-    x = 2 * x - k - 3	
-    # x = u_{k+1} (invariant en sortie de boucle)	
-# après la boucle for, k vaut 19, et x vaut donc u_{20}.
-\end{lstlisting}
-  
-
-
-\subsection{Un exemple : test de primalité} 
-
-  On veut tester si un entier \pyv{n} est premier:
-\begin{lstlisting}
-def est_premier(n):
-    """ Renvoie True si n est premier, False sinon
-        Préconditon : n est un entier."""
-    b = True
-    for d in range(2,n):
-        # b => n non divisible par 2, 3, ..., d-1.
-        if n % d == 0:
-            b = False
-    # b <=> n premier
-    return b
-\end{lstlisting}
-
-Remarque: les derniers tours de boucle sont inutiles dès que la
-variable \pyv{b} a été mise à \pyv{False}. Les éxécuter tout de même est une perte de temps. Il 
-existe plusieurs possibilités pour améliorer cela~:
-
-L'instruction \pyv{break} :
-\begin{pyverbatim}
-def est_premier(n):
-    """ Renvoie True si n est premier, False sinon
-        Préconditon : n est un entier."""
-    b = True
-    for d in range(2,n):
-        # b => n pas divisible par 2, 3, ..., d-1.
-        if n % d == 0:
-            b = False
-            break
-    # b <=> n est premier
-    return b
-\end{pyverbatim}
-
-L'utilisation d'un \pyv{return} en milieu de boucle, à favoriser en Python{} pour 
-une question de style et d'élégance~:
-
-\begin{pyverbatim}
-def est_premier(n):
-    """ Renvoie True si n est premier, False sinon
-        Préconditon : n est un entier."""
-    for d in range(2,n):
-        # n n'est pas divisible par 2, 3, ..., d-1.
-        if n % d == 0:
-            return False
-    return True
-\end{pyverbatim}
+%\subsection{Un exemple : test de primalité} 
+%
+%  On veut tester si un entier \pyv{n} est premier:
+%\begin{lstlisting}
+%def est_premier(n):
+%    """ Renvoie True si n est premier, False sinon
+%        Préconditon : n est un entier."""
+%    b = True
+%    for d in range(2,n):
+%        # b => n non divisible par 2, 3, ..., d-1.
+%        if n % d == 0:
+%            b = False
+%    # b <=> n premier
+%    return b
+%\end{lstlisting}
+%
+%Remarque: les derniers tours de boucle sont inutiles dès que la
+%variable \pyv{b} a été mise à \pyv{False}. Les éxécuter tout de même est une perte de temps. Il 
+%existe plusieurs possibilités pour améliorer cela~:
+%
+%L'instruction \pyv{break} :
+%\begin{pyverbatim}
+%def est_premier(n):
+%    """ Renvoie True si n est premier, False sinon
+%        Préconditon : n est un entier."""
+%    b = True
+%    for d in range(2,n):
+%        # b => n pas divisible par 2, 3, ..., d-1.
+%        if n % d == 0:
+%            b = False
+%            break
+%    # b <=> n est premier
+%    return b
+%\end{pyverbatim}
+%
+%L'utilisation d'un \pyv{return} en milieu de boucle, à favoriser en Python{} pour 
+%une question de style et d'élégance~:
+%
+%\begin{pyverbatim}
+%def est_premier(n):
+%    """ Renvoie True si n est premier, False sinon
+%        Préconditon : n est un entier."""
+%    for d in range(2,n):
+%        # n n'est pas divisible par 2, 3, ..., d-1.
+%        if n % d == 0:
+%            return False
+%    return True
+%\end{pyverbatim}
 
 \section{Boucles indéfinies ou conditionnelles}
 
@@ -670,19 +673,25 @@ def syracuse(n):
 \end{pyverbatim}
 %\end{ex}
 
-Comme pour les boucles définies, nous sommes confrontés à un problème : comment démontrer un 
+\begin{rem}
+\begin{itemize}
+\item Comme pour les boucles définies, nous sommes confrontés à un problème : comment démontrer un 
 algorithme reposant sur une boucle indéfinie ? Pour cela, nous utilisons encore les invariants de 
-boucle, afin de prouver qu'après la boucle, le résultat est bien celui voulu.\\
-Mais avant même cela, il y a un point épineux : la boucle \textbf{while} va-t-elle vraiment se 
-finir ? Il faut démontrer ce que l'on appelle la \textbf{terminaison} de l'algorithme. C'est là que 
-réside le danger des boucles \textbf{while} : si elles sont mal écrites, la condition de la boucle 
-ne devient jamais fausse, et la boucle est infinie.\\
-Pour montrer la terminaison d'un algorithme, on utilise cette fois un \textbf{variant} de boucle. 
-Il consiste à mettre en avant une variable dont la valeur est modifiée au cours des tours de 
-boucle, de telle sorte que cette modification finisse par rendre fausse la condition de la boucle.\\
-Donnons ces invariant et variant pour l'algorithme de l'exemple \textbf{\ref{ex-suite}} (nous ne 
-pouvons malheureusement pas le faire pour l'exemple \textbf{\ref{ex-syracuse}}, puisque comme son 
-nom l'indique, la conjecture de Syracuse n'a jamais été demontrée) :\\
+boucle, afin de prouver qu'après la boucle, le résultat est bien celui voulu.
+\item Pour montrer que la boucle \textbf{while} va réellement se finir on utilisera un \textbf{variant} de boucle. Cette notion sera également détaillée dans un chapitre ultérieur. Dans un premier temps nous retiendrons que généralement il faudra s'assurer que la condition contenu dans la boucle \textbf{while} sera généralement une suite d'entiers strictement croissante ou décroissante.
+\end{itemize}
+\\
+%Mais avant même cela, il y a un point épineux : la boucle \textbf{while} va-t-elle vraiment se 
+%finir ? Il faut démontrer ce que l'on appelle la \textbf{terminaison} de l'algorithme. C'est là que 
+%réside le danger des boucles \textbf{while} : si elles sont mal écrites, la condition de la boucle 
+%ne devient jamais fausse, et la boucle est infinie.\\
+%Pour montrer la terminaison d'un algorithme, on utilise cette fois un \textbf{variant} de boucle. 
+%Il consiste à mettre en avant une variable dont la valeur est modifiée au cours des tours de 
+%boucle, de telle sorte que cette modification finisse par rendre fausse la condition de la boucle.\\
+%Donnons ces invariant et variant pour l'algorithme de l'exemple \textbf{\ref{ex-suite}} (nous ne 
+%pouvons malheureusement pas le faire pour l'exemple \textbf{\ref{ex-syracuse}}, puisque comme son 
+%nom l'indique, la conjecture de Syracuse n'a jamais été demontrée) :\\
+\end{rem}
 
 %\begin{pyconsole}
 %n = 1
