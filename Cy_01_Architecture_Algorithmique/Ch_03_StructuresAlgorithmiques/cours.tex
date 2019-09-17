@@ -662,7 +662,7 @@ $f^{k}(n)=1$.
 Voici un algorithme calculant, pour tout $n$ donné, le plus petit
 entier $k$ vérifiant $f^{k}(n) = 1$ :
 
-\begin{pyverbatim}
+\begin{lstlisting}
 def f(n):
     """Fonction de Syracuse.
     Précondition : n est un entier strictement positif"""
@@ -680,7 +680,7 @@ def syracuse(n):
         x = f(x)
         k = k + 1
     return k
-\end{pyverbatim}
+\end{lstlisting}
 
 %\end{ex}
 
@@ -718,7 +718,7 @@ boucle, afin de prouver qu'après la boucle, le résultat est bien celui voulu.
 %\end{exo}
 
 
-\subsection{Exercices}
+%\subsection{Exercices}
 %
 %\begin{exo}
 % Calculer $2^9$ à l'aide d'une boucle itérative.
