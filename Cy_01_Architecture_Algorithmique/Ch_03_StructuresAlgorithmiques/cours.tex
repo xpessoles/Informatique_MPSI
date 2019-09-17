@@ -8,8 +8,8 @@ Ainsi, l'instruction conditionnelle a pour objet
 d'intervenir dans le choix de l'instruction suivante en fonction d'une expression booléenne qu'on 
 désignera par \textbf{condition} : 
 
-\vspace{1cm}
-
+%\vspace{1cm}
+\begin{center}
 \fbox{\begin{minipage}{12cm}
 
 \begin{center}
@@ -31,16 +31,17 @@ signifie que
 \end{center}
 
 \begin{itemize}
-\item \textbf{si} la condition est vérifiée (expression booléenne=\texttt{True}) 
+\item \textbf{Si} la condition est vérifiée (expression booléenne=\texttt{True}) 
 
-\textbf{alors} le programme exécute les instructions du bloc 1
+\textbf{alors} le programme exécute les instructions du bloc 1;
 
 \item \textbf{si} la condition n'est pas vérifiée (expression booléenne=\texttt{False})
 
-\textbf{alors }le programme exécute les instructions du bloc 2
+\textbf{alors }le programme exécute les instructions du bloc 2.
 \end{itemize}
 \end{minipage}}
 
+\end{center}
 %\newpage
 
 
@@ -58,7 +59,7 @@ else :
  \begin{itemize}
  \item \textbf{Si} et \textbf{Sinon} se traduisent par \texttt{if} et \texttt{else}. 
  
- \item \textbf{alors} se traduit par \og \textbf{:} \fg\ en bout de ligne et une indentation de toutes les 
+ \item \textbf{Alors} se traduit par \og \textbf{:} \fg\ en bout de ligne et une indentation de toutes les 
 lignes du bloc 1.
  
  \item \textbf{Fin-du-Si} se traduit par un retour à la ligne sans indentation. 
@@ -107,7 +108,9 @@ on a besoin des \textbf{opérateurs de comparaison} (inférieur strict, supérie
 (non, et, ou).
 
 %\begin{exs}
+\newpage
 
+\begin{multicols}{2}
 \begin{itemize}
 
 \item Calcul du carré d'un nombre positif. 
@@ -119,6 +122,9 @@ if x >= 0 :
 
 car
 \end{pyconsole}
+
+\vfill\null
+\columnbreak 
 
 \item Comprenez-vous le message d'erreur ? 
 
@@ -141,7 +147,9 @@ if x>= 0 :
 carr
 \end{pyconsole} 
 
-
+\end{itemize}
+\end{multicols}
+\begin{itemize}
 
 \item Condition avec un \og et \fg{}. 
 
@@ -164,7 +172,9 @@ if x >= -1 and x<= 1 :
 On peut se trouver face à un problème qui se scinde en plus de deux cas (par exemple, dans le cas 
 des équations du second degré, on teste si le discriminant est strictement positif, nul ou 
 strictement négatif).
-Dans ce cas, voici comment procéder : 
+Dans ce cas, voici comment procéder.
+
+\begin{center}
 
 
 \fbox{\begin{minipage}{15cm}
@@ -194,24 +204,26 @@ signifie que
 \end{center}
 
 \begin{itemize}
-\item \textbf{si} la condition 1 est vérifiée (expression booléenne=\textit{True}) 
+\item \textbf{Si} la condition 1 est vérifiée (expression booléenne=\textit{True}) 
 
-\textbf{alors} le programme exécute les instructions du bloc 1
+\textbf{alors} le programme exécute les instructions du bloc 1.
 
-\item \textbf{si} la condition 1 n'est pas vérifiée (expression booléenne=\textit{False}) mais que 
+\item \textbf{Si} la condition 1 n'est pas vérifiée (expression booléenne=\textit{False}) mais que 
 la condition 2 est vérifiée
 
-\textbf{alors} le programme exécute les instructions du bloc 2
+\textbf{alors} le programme exécute les instructions du bloc 2.
 
-\item \textbf{si} les conditions 1 et 2 ne sont pas vérifiées  mais que la condition 3 est vérifiée
+\item \textbf{Si} les conditions 1 et 2 ne sont pas vérifiées  mais que la condition 3 est vérifiée
 
 \textbf{alors} le programme exécute les instructions du bloc 3...
 
-\item \textbf{si} aucune condition n'est vérifiée
+\item \textbf{Si} aucune condition n'est vérifiée
 
-\textbf{alors} le programme exécute les instructions du bloc final
+\textbf{alors} le programme exécute les instructions du bloc final.
 \end{itemize}
 \end{minipage}}
+
+\end{center}
 
 \vspace{0.5cm}
 \begin{rem}\label{rem-filtre}
@@ -222,18 +234,18 @@ suivantes.
 Ainsi, les séquences d'instructions :\\
 
 \begin{tabular}{|l}
- x <- 3 \\
-\textbf{Si} x > 6\\
+ $x \leftarrow$ 3 \\
+\textbf{Si} $x >$ 6\\
 \hspace{0.7cm}
 \begin{tabular}{l}
-\textbf{alors} renvoyer x + 2\\
-\textbf{sinon si} x > 4\\
+\textbf{alors} renvoyer $x + 2$\\
+\textbf{sinon si} $x > 4$\\
 \hspace{0.7cm}
 \begin{tabular}{l}
-\hspace{7ex}\textbf{alors} renvoyer x + 4\\
-\hspace{7ex}\textbf{sinon si} x > 2\\
-\hspace{14ex}\textbf{alors} renvoyer x + 6\\
-\hspace{14ex}\textbf{sinon} renvoyer x
+\hspace{7ex}\textbf{alors} renvoyer $x + 4$\\
+\hspace{7ex}\textbf{sinon si}$ x > 2$\\
+\hspace{14ex}\textbf{alors} renvoyer $x + 6$\\
+\hspace{14ex}\textbf{sinon} renvoyer $x$
 \end{tabular}\\
 \end{tabular}\\
 \textbf{Fin-du-Si}
@@ -242,18 +254,18 @@ Ainsi, les séquences d'instructions :\\
 et \\
 
 \begin{tabular}{|l}
- x <- 3\\
-\textbf{Si} x > 6\\
+ $x \leftarrow 3$\\
+\textbf{Si} $x > 6$\\
 \hspace{0.7cm}
 \begin{tabular}{l}
-\textbf{alors} renvoyer x + 2\\
-\textbf{sinon si} x > 2\\
+\textbf{alors} renvoyer $x + 2$\\
+\textbf{sinon si} $x > 2$\\
 \hspace{0.7cm}
 \begin{tabular}{l}
-\hspace{7ex}\textbf{alors} renvoyer x + 6\\
-\hspace{7ex}\textbf{sinon si} x > 4\\
-\hspace{14ex}\textbf{alors} renvoyer x + 4\\
-\hspace{14ex}\textbf{sinon} renvoyer x
+\hspace{7ex}\textbf{alors} renvoyer $x + 6$\\
+\hspace{7ex}\textbf{sinon si} $x > 4$\\
+\hspace{14ex}\textbf{alors} renvoyer $x + 4$\\
+\hspace{14ex}\textbf{sinon} renvoyer $x$
 \end{tabular}\\
 \end{tabular}\\
 \textbf{Fin-du-Si}
@@ -267,27 +279,29 @@ ne renvoient pas la même chose.
 
 \subsection{Syntaxe en Python}
 
-\begin{lstlisting}
+\begin{pyverbatim}
  if condition 1 :
-	bloc d'instructions 1
+	bloc d instructions 1
  elif condition 2 :
-	bloc d'instructions 2
+	bloc d instructions 2
  elif condition 3 :
-	bloc d'instructions 3
+	bloc d instructions 3
 .
 .
 .
  else :
 	bloc final
-\end{lstlisting}
+\end{pyverbatim}
 
 \begin{itemize}
  \item \textbf{Sinon si} se traduit par \texttt{elif}. 
 \end{itemize}
 
 %\begin{exo}
+\begin{exemple}
 Écrire les deux séquences d'instructions de la remarque \textbf{\ref{rem-filtre}} en Python, et 
 constater que l'on obtient bien deux résultats différents.
+\end{exemple}
 %\end{exo}
 
 %\begin{ex}
@@ -304,7 +318,7 @@ def max3 (a, b, c) :
         return a
 \end{pyverbatim}
 
-%\end{ex}
+%\end{ex} 
 
 
 \section{Boucles définies}
@@ -313,7 +327,7 @@ def max3 (a, b, c) :
 
 Écrivons un programme pour saluer la classe (disons les 8 premiers
 élèves) :
-\begin{lstlisting}
+\begin{pyverbatim}
 print('Bonjour Baptiste')
 print('Bonjour Lisa')
 print('Bonjour Pierrick')
@@ -322,13 +336,13 @@ print('Bonjour Qasim')
 print('Bonjour Lorenzo')
 print('Bonjour Arthur')
 print('Bonjour Ylies')
-\end{lstlisting}
+\end{pyverbatim}
 
 Mais combien de travail faut-il faire si :
 
 \begin{itemize}
-\item On veut dire bonsoir et non bonjour?
-\item On veut dire «Baptiste, comment vas-tu? \textit{etc.}» et non
+\item on veut dire bonsoir et non bonjour?
+\item on veut dire «Baptiste, comment vas-tu? \textit{etc.}» et non
   «Bonjour Baptiste, \textit{etc.}» ?
 \end{itemize}
 
@@ -341,11 +355,8 @@ Et s'il y a 500 élèves ?
 informatique consistant à éviter la redondance de code au travers de l'ensemble d'une application 
 afin de faciliter la maintenance, le test, le débogage et les évolutions de cette dernière.\\
 La philosophie DRY est explicitée par la phrase suivante :\\
-
-\begin{quote}
-  «Dans un système, toute connaissance doit avoir une représentation
-   unique, non-ambiguë, faisant autorité ».
-\end{quote}
+  \textit{«Dans un système, toute connaissance doit avoir une représentation
+   unique, non-ambiguë, faisant autorité ».}
 
 Ici le programme devrait:
 \begin{itemize}
@@ -357,17 +368,17 @@ Ici le programme devrait:
 
 Nous avons déjà vu comment définir une liste :
 
-\begin{lstlisting}
+\begin{pyverbatim}
 prenoms = [ 'Baptiste', 'Lisa', 'Pierrick',\
 'Louise-Eugénie', 'Qâsim', 'Lorenzo', 'Arthur', 'Ylies' ]
-\end{lstlisting}
+\end{pyverbatim}
 
 Il faut maintenant s'occuper des deux points suivants : définir le traitement à effectuer sur 
 chacun de ces 
 prénoms, et l'\textbf{itérer}. Pour cela nous allons utiliser une \textbf{boucle itérative 
 définie}, autrement dit nous allons \textbf{répéter} l'application d'une même séquences
 d'instructions 
-sur une liste \textbf{définie à l'avance} :\\
+sur une liste \textbf{définie à l'avance}.
 
 
 \fbox{\begin{minipage}{12cm}
@@ -398,10 +409,10 @@ le programme exécute les instructions du bloc b.
 
 \subsection{Syntaxe en Python}
 
-\begin{lstlisting}
+\begin{pyverbatim}
 for variable in liste :
     instructions
-\end{lstlisting}
+\end{pyverbatim}
 
 Ici encore, la ligne contenant le mot-clé \textbf{for} doit se finir par un \og \textbf{:} \fg\ et les 
 instructions du bloc doivent être indentées. La fin de la boucle est marquée par un retour à la 
@@ -410,26 +421,26 @@ ligne non indenté.\\
 Maintenant que la liste \texttt{prenoms} est définie, dire bonjour à nos huit élèves s'écrit ainsi :
 
 
-\begin{lstlisting}
+\begin{pyverbatim}
 for x in prenoms:
     print('Bonjour ' + x)
-\end{lstlisting}
+\end{pyverbatim}
 
 
 \subsection{Autre problème ...}
-On souhaite calculer $u_{20}$ où $u$ est la suite définie par
-
-\begin{align*}
-  u_{0} & = 5\\
-  \forall n\in\N\ u_{n+1} &= 2u_{n}- n - 3\\
-\end{align*}
+On souhaite calculer $u_{20}$ où $u$ est la suite définie par $\left\{
+\begin{array} {l}
+  u_{0}  = 5\\
+  \forall n\in\N\ u_{n+1} = 2u_{n}- n - 3 \end{array}
+  \right.
+$.
 
 Il y a deux approches possibles :
 
 \begin{enumerate}
-\item Résoudre ça mathématiquement, c'est-à-dire déterminer une expression de $u_n$ en fonction de 
+\item résoudre le problème mathématiquement, c'est-à-dire déterminer une expression de $u_n$ en fonction de 
 $n$, avant de faire une application numérique.
-\item  Calculer de proche en proche $u_1$, $u_2$, $u_3$,$u_4\ \cdots$ et enfin $u_{20}$.
+\item  calculer de proche en proche $u_1$, $u_2$, $u_3$,$u_4\ \cdots$ et enfin $u_{20}$.
 \end{enumerate}
 
 La première méthode est la meilleure si on sait faire.\\
@@ -441,11 +452,11 @@ On peut proposer un algorithme du type :\\
 
 
 \begin{tabular}{|l}
- x <- 5\\
+ $x \leftarrow5$\\
 \textbf{Pour} k \textbf{de} 0 \textbf{à} \emph{???} \textbf{répéter}\\
 \hspace{0.7cm}
 \begin{tabular}{l}
-x <- 2x - k -3\\
+$x \leftarrow 2x - k -3$\\
 \end{tabular}\\
 \textbf{Fin-de-la-boucle}
 \end{tabular}\\
@@ -611,10 +622,10 @@ signifie que
 \subsection{Syntaxe en Python}
 
 
-\begin{lstlisting}
+\begin{pyverbatim}
 while condition :
     instructions
-\end{lstlisting}
+\end{pyverbatim}
 
 
 
@@ -651,7 +662,6 @@ $f^{k}(n)=1$.
 Voici un algorithme calculant, pour tout $n$ donné, le plus petit
 entier $k$ vérifiant $f^{k}(n) = 1$ :
 
-
 \begin{pyverbatim}
 def f(n):
     """Fonction de Syracuse.
@@ -662,7 +672,7 @@ def f(n):
         return 3 * n + 1
         
 def syracuse(n):
-    """Renvoie le premier entier k tel que  f^k(n) = 0.
+    """Renvoie le premier entier k tel que  f\^k(n) = 0.
     Précondition : n est un entier strictement positif"""
     x = n
     k = 0
@@ -671,7 +681,9 @@ def syracuse(n):
         k = k + 1
     return k
 \end{pyverbatim}
+
 %\end{ex}
+
 
 \begin{rem}
 \begin{itemize}
