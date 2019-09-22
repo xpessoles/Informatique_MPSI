@@ -3,7 +3,7 @@
 En python, il existe de nombreuses manières de produire des graphiques. 
 Pour ce faire, nous allons utiliser la bibliothèque \texttt{matplotlib.pyplot}. 
 
-Une bibliothèque est un regroupement de fonctions, livrées directement avec \python\ ou écrites par un tiers.
+Une bibliothèque est un regroupement de fonctions, livrées directement avec Python\ ou écrites par un tiers.
 Nous allons en utiliser plusieurs cette année : 
 \begin{itemize}
   \item \texttt{math}, pour utiliser des fonctions mathématiques de base ; 
@@ -14,20 +14,20 @@ Nous allons en utiliser plusieurs cette année :
   \item \texttt{numpy}, pour utiliser des outils de calcul vectoriel ; 
   \item et donc \texttt{matplotlib.pyplot}, pour avoir des outils de tracé graphique. 
 \end{itemize}
-Certaines de ces bibliothèques sont toujours disponibles avec \python, comme les bibliothèques \texttt{math} et \texttt{random}, elles font partie de la bibliothèque standard. 
+Certaines de ces bibliothèques sont toujours disponibles avec Python, comme les bibliothèques \texttt{math} et \texttt{random}, elles font partie de la bibliothèque standard. 
 D'autres doivent être installées séparément, comme la bibliothèque \texttt{matplotlib.pyplot}, notamment. 
 
 On charge une bibliothèque avec le mot clef \pyv{import}. Il existe plusieurs manières de charger une bibliothèque. Prenons l'exemple de la bibliothèque \texttt{math}.
 
 On peut d'abord charger l'intégralité de la bibliothèque.
-\begin{ex}~
+\begin{exemple}~
 \begin{pyconsole}
 import math
 math.sqrt(2)
 \end{pyconsole}
-\end{ex}
+\end{exemple}
 Remarquez qu'il est alors obligatoire de rappeler de quelle bibliothèque vient chaque commande (plusieurs bibliothèques peuvent proposer des implémentations différentes d'une même fonction).
-\begin{ex}
+\begin{exemple}
 La fonction \texttt{exp} du module \texttt{math} ne s'applique qu'à des nombres flottants, alors que celle de \texttt{numpy} peut s'appliquer à des vecteurs (cette structure sera détaillée ultérieurement). 
 \begin{pyconsole}
 import numpy
@@ -35,28 +35,28 @@ math.exp(1)
 numpy.exp(1)
 numpy.exp([1,2,3])
 \end{pyconsole}
-\end{ex}
+\end{exemple}
 On peut donner un alias à une bibliothèque avec le mot clef \pyv{as}, afin de pouvoir l'utiliser rapidement. 
-\begin{ex}~
+\begin{exemple}~
 \begin{pyconsole}
 import math as m
 m.pi
 \end{pyconsole}
-\end{ex}
+\end{exemple}
 On peut aussi décider de n'importer que certaines fonctions d'une bibliothèque, avec le mot clef \pyv{from}. Dans ce cas, on peut utiliser la fonction importée sans préfixe. 
-\begin{ex}~
+\begin{exemple}~
 \begin{pyconsole}
 from math import log
 log(2)
 \end{pyconsole}
-\end{ex}
+\end{exemple}
 On peut aussi importer toutes les fonctions d'un coup de cette manière, en utilisant le joker \texttt{*}.
-\begin{ex}~
+\begin{exemple}~
 \begin{pyconsole}
 from math import *
 tan(pi/4)
 \end{pyconsole}
-\end{ex}
+\end{exemple}
 
 \section{Matplotlib.pyplot}
 
@@ -64,7 +64,7 @@ La bibliothèque \texttt{matplotlib.pyplot} fournit des outils de tracés graphi
 On essaiera toujours de l'utiliser de la manière suivante. 
 \begin{enumerate}
   \item Appeler la fonction \texttt{clf()} (pour \emph{clean figure}) pour effacer la figure précédente, et donc en commencer une nouvelle. 
-  \item Tracer des courbes, nuages de points, en appelant (éventuellement plusieurs fois) la fonction \texttt{plot()}. On remarquera que rien n'est ici affiché : seul un objet est créé par \python. 
+  \item Tracer des courbes, nuages de points, en appelant (éventuellement plusieurs fois) la fonction \texttt{plot()}. On remarquera que rien n'est ici affiché : seul un objet est créé par Python. 
   \item Éventuellement, paramétrer le graphique (axes, titre, légendes \emph{etc.}) en utilisant les fonctions adéquates. 
   \item Afficher le graphique avec la fonction \texttt{show()} ou, mieux, le sauvegarder avec la fonction \texttt{savefig()}. On dispose alors d'une image (différents formats possibles). 
 \end{enumerate}
@@ -75,7 +75,7 @@ Cette fonction peut-être utilisée de nombreuses manières différentes, pour o
 détaillerons pas toutes ici. 
 L'idée générale est de lui donner en argument deux tableaux de nombres, décrivant respectivement les abscisses et les ordonnées des points à tracer. 
 Sans autre option, ces points sont reliés par des segments bleus, en traits pleins. 
-\begin{ex}
+\begin{exemple}
   Le code suivant produit la figure~\ref{fig:ex_base_01}.
 % Fichier ex_base_01.py
 \begin{pyverbatim}
@@ -88,16 +88,20 @@ plt.clf()
 plt.plot(x,y)
 plt.savefig("ex_base_01.png")
 \end{pyverbatim}
+
+
 \begin{figure}[!h]
   \begin{center}
-    \includegraphics[scale = 0.5]{ex_base_01}
-    \caption{Style standard}
+  \begin{tabular}{c}
+    \includegraphics[scale = 0.5]{ex_base_01} \\
+    \end{tabular}
+  \caption{Style standard}
     \label{fig:ex_base_01}
   \end{center}
 \end{figure}
-\end{ex}
+\end{exemple}%\end{document}
 Les options graphiques permettent notamment de modifier le type de segment (pointillés, sans segment), d'afficher ou non un marqueur au niveau de chaque point et de changer la couleur de ces objets. 
-\begin{ex}
+\begin{exemple}
   Le code suivant produit la figure~\ref{fig:ex_base_02}.
 % Fichier ex_base_02.py
 \begin{pyverbatim}
@@ -122,10 +126,10 @@ On remarquera que cette figure aurait aussi pu être obtenue par la commande sui
 \begin{pyverbatim}
 plt.plot(x,y,marker='o',color='r',linestyle='--')
 \end{pyverbatim}
-\end{ex}
+\end{exemple}
 
 On peut enfin appeler plusieurs fois la fonction \texttt{plot} successivement. Les tracés sont alors superposés. 
-\begin{ex}
+\begin{exemple}
   Le code suivant produit la figure~\ref{fig:ex_base_03}.
 % Fichier ex_base_03.py
 \begin{pyverbatim}
@@ -146,7 +150,7 @@ plt.savefig("ex_base_03.png")
     \label{fig:ex_base_03}
   \end{center}
 \end{figure}
-\end{ex}
+\end{exemple}
 \begin{rem}
   Il n'est pas réellement possible de tracer des courbes lisses, mais seulement des lignes brisées et des nuages de 
 points. 
@@ -189,24 +193,24 @@ L'argument donné est une chaîne de caractères et la couleur par défaut est l
     \caption{Couleurs prédéfinies dans \texttt{matplotlib}.}
   \end{center}
 \end{table}
-\begin{ex}
+\begin{exemple}
   Pour tracer une courbe en magenta, on écrira la commande suivante.
 \begin{pyverbatim}
 plt.plot(x,y,color = 'm')
 \end{pyverbatim}
-\end{ex}
+\end{exemple}
 
 \subsection{Étiquette (option \texttt{label})}
 
 On peut adjoindre à un tracé une chaîne de caractères (son étiquette), qui pourra notamment être utilisée dans les légendes. 
-Les parties entres deux symboles \$ sont interprétées comme du code \LaTeX{} (attention, en \python, le caractère \textbackslash\ se code par le caractère \texttt{'\textbackslash\textbackslash'}). 
+Les parties entres deux symboles \$ sont interprétées comme du code \Latex (attention, en Python, le caractère \textbackslash\ se code par le caractère \texttt{'\textbackslash\textbackslash'}). 
 Par défaut, il n'y a pas d'étiquette.
-\begin{ex}
+\begin{exemple}
   Pour donner le nom \og $\arccos(t)$ \fg\ à la courbe, on écrira la commande suivante.
 \begin{pyverbatim}
 plt.plot(x,y,label = '$\\arccos(t)$')
 \end{pyverbatim}
-\end{ex}
+\end{exemple}
 \subsection{Type de ligne (option \texttt{linestyle})}
 
 On peut spécifier plusieurs types de lignes, qui seront utilisés pour tracer les segments reliant les points donnés en argument. 
@@ -233,24 +237,24 @@ L'argument donné est une chaîne de caractères et, par défaut, la ligne est t
   \end{center}
 \end{table}
 
-\begin{ex}
+\begin{exemple}
   Pour tracer une courbe en pointillés, on écrira la commande suivante.
 \begin{pyverbatim}
 plt.plot(x,y,linestyle = ':')
 \end{pyverbatim}
-\end{ex}
+\end{exemple}
 
 \subsection{Épaisseur des lignes (option \texttt{linewidth})}
 
 On peut régler l'épaisseur des lignes reliant les points.
 L'argument donné est un flottant, qui vaut 1 par défaut. 
 
-\begin{ex}
+\begin{exemple}
   Pour tracer une courbe dont le trait est deux fois plus épais que la normale, on écrira la commande suivante.
 \begin{pyverbatim}
 plt.plot(x,y,linewidth = 2)
 \end{pyverbatim}
-\end{ex}
+\end{exemple}
 
 \subsection{Type de point (option \texttt{marker})}
 
@@ -290,12 +294,12 @@ L'argument donné est une chaîne de caractères et, par défaut, les points ne 
   \end{center}
 \end{table}
 
-\begin{ex}
+\begin{exemple}
   Pour placer des carrés à l'emplacement des points indiqués, on écrira la commande suivante.
 \begin{pyverbatim}
 plt.plot(x,y,marker = 's')
 \end{pyverbatim}
-\end{ex}
+\end{exemple}
 
 \begin{rem}
   Les options \texttt{markeredgecolor}, \texttt{markeredgwidth}, \texttt{markerfacecolor} et \texttt{markersize} permettent de paramétrer plus finement l'apparence des points. 
@@ -332,7 +336,7 @@ La fonction \texttt{errorbar()} permet de tracer un graphe avec des barres d'err
 Pour tracer une fonction, on trace en fait des cordes de cette fonction, à partir d'une subdivision de l'intervalle considéré. 
 La fonction \texttt{linespace()} de la bibliothèque \texttt{numpy} permet de créer automatiquement de telles subdivisions, avec un nombre de points à régler manuellement. 
 
-\begin{ex}
+\begin{exemple}
 Pour tracer le graphe de la fonction $x\mapsto x^3$ sur $[0,1]$ avec une subdivision en 3 segments, donc en utilisant 
 4 points, on peut utiliser le code suivant, qui donne la figure~\ref{fig:ex_numpy_01}.
 % Code du fichier ex_numpy_01.py
@@ -380,7 +384,7 @@ plt.savefig('ex_numpy_01.png')
     \label{fig:ex_numpy_02}
   \end{center}
 \end{figure}  
-\end{ex}
+\end{exemple}
 
 
 \section{Exemple avancé}
