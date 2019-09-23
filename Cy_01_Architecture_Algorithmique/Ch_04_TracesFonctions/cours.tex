@@ -90,16 +90,17 @@ plt.savefig("ex_base_01.png")
 \end{pyverbatim}
 
 
-\begin{figure}[!h]
+%\begin{figure}[!h]
   \begin{center}
   \begin{tabular}{c}
     \includegraphics[scale = 0.5]{ex_base_01} \\
     \end{tabular}
-  \caption{Style standard}
+  \captionof{figure}{Style standard}
     \label{fig:ex_base_01}
   \end{center}
-\end{figure}
-\end{exemple}%\end{document}
+%\end{figure}
+\end{exemple}
+
 Les options graphiques permettent notamment de modifier le type de segment (pointillés, sans segment), d'afficher ou non un marqueur au niveau de chaque point et de changer la couleur de ces objets. 
 \begin{exemple}
   Le code suivant produit la figure~\ref{fig:ex_base_02}.
@@ -114,13 +115,13 @@ plt.clf()
 plt.plot(x,y,'or--')
 plt.savefig("ex_base_02.png")
 \end{pyverbatim}
-\begin{figure}[!h]
+%\begin{figure}[!h]
   \begin{center}
     \includegraphics[scale = 0.5]{ex_base_02}
-    \caption{Points marqués, ligne coupée, couleur rouge.}
+    \captionof{figure}{Points marqués, ligne coupée, couleur rouge.}
     \label{fig:ex_base_02}
   \end{center}
-\end{figure}
+%\end{figure}
 On remarquera que cette figure aurait aussi pu être obtenue par la commande suivante, plus explicite mais moins concise. 
 % Fichier ex_base_02.py
 \begin{pyverbatim}
@@ -143,13 +144,13 @@ plt.plot(x,y,'or')
 plt.plot([1,4],[1,4])
 plt.savefig("ex_base_03.png")
 \end{pyverbatim}
-\begin{figure}[!h]
+%\begin{figure}[!h]
   \begin{center}
     \includegraphics[scale = 0.5]{ex_base_03}
-    \caption{Supperposition de deux tracés}
+    \captionof{figure}{Supperposition de deux tracés}
     \label{fig:ex_base_03}
   \end{center}
-\end{figure}
+%\end{figure}
 \end{exemple}
 \begin{rem}
   Il n'est pas réellement possible de tracer des courbes lisses, mais seulement des lignes brisées et des nuages de 
@@ -202,8 +203,9 @@ plt.plot(x,y,color = 'm')
 
 \subsection{Étiquette (option \texttt{label})}
 
+
 On peut adjoindre à un tracé une chaîne de caractères (son étiquette), qui pourra notamment être utilisée dans les légendes. 
-Les parties entres deux symboles \$ sont interprétées comme du code \Latex (attention, en Python, le caractère \textbackslash\ se code par le caractère \texttt{'\textbackslash\textbackslash'}). 
+Les parties entres deux symboles \$ sont interprétées comme du code LaTeX  (attention, en Python, le caractère \textbackslash\ se code par le caractère \texttt{'\textbackslash\textbackslash'}). 
 Par défaut, il n'y a pas d'étiquette.
 \begin{exemple}
   Pour donner le nom \og $\arccos(t)$ \fg\ à la courbe, on écrira la commande suivante.
@@ -354,13 +356,13 @@ plt.ylabel('$t^3$')
 plt.savefig('ex_numpy_01.png')
 \end{pyverbatim}
 
-\begin{figure}[!h]
+%\begin{figure}[!h]
   \begin{center}
     \includegraphics[scale = 0.5]{ex_numpy_01}
-    \caption{Subdivision en 3 segments}
+    \captionof{figure}{Subdivision en 3 segments}
     \label{fig:ex_numpy_01}
   \end{center}
-\end{figure}  
+%\end{figure}  
 Pour obtenir une courbe plus lisse, on peut utiliser une subdivision plus fine. Par exemple, avec 100 segments, et donc 101 points, on peut utiliser le code suivant, qui donne la figure~\ref{fig:ex_numpy_02}.
 % Code du fichier ex_numpy_01.py
 \begin{pyverbatim}
@@ -377,13 +379,13 @@ plt.ylabel('$t^3$')
 plt.savefig('ex_numpy_01.png')
 \end{pyverbatim}
 
-\begin{figure}[!h]
+%\begin{figure}[!h]
   \begin{center}
     \includegraphics[scale = 0.5]{ex_numpy_02}
-    \caption{Subdivision en 100 segments}
+    \captionof{figure}{Subdivision en 100 segments}
     \label{fig:ex_numpy_02}
   \end{center}
-\end{figure}  
+%\end{figure}  
 \end{exemple}
 
 
@@ -391,7 +393,7 @@ plt.savefig('ex_numpy_01.png')
 
 Le code suivant permet de tracer les graphes des fonction $\arccos$ et $\arcsin$, dans la figure~\ref{fig:ex_avance}.
 % Code du fichier ex_avance.py
-\begin{pyverbatim}
+\begin{lstlisting}
 import matplotlib.pyplot as plt
 import math as m
 from numpy import linspace
@@ -410,7 +412,7 @@ plt.xlabel('$t$')
 plt.legend(loc=0)
 plt.axes()
 plt.savefig('ex_avance.png')
-\end{pyverbatim}
+\end{lstlisting}
 
 \begin{figure}[!h]
   \begin{center}
