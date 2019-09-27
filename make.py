@@ -142,9 +142,15 @@ def genere_fichiers_tex(info_activite,type_activite):
             num_chapitre='0'+num_chapitre
         if os.path.exists(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite)==False:
             os.mkdir(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite)
+            #TP : enonce
         os.system('cp style'+sep+'Cy_i_Ch_j_TP_k.tex '+rep+'/Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'.tex')
         os.system('cp style'+sep+'Cy_i_Ch_j_TP_k_pdf.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'_pdf.tex')
         changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'_pdf.tex','\\input{Cy_01_Ch_01_TP_01}','\\input{Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'.tex}')
+            #TP : corrige
+        os.system('cp style'+sep+'Cy_i_Ch_j_TP_k.tex '+rep+'/Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'-cor.tex')
+        os.system('cp style'+sep+'Cy_i_Ch_j_TP_k_pdf.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'_pdf-cor.tex')
+        changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'_pdf-cor.tex','\\input{Cy_01_Ch_01_TP_01}','\\input{Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'-cor.tex}')
+        changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'-cor.tex','\\input{tp.tex}','\\input{tp-cor.tex}')
     
 def changer_ligne(fichier,ancienne_ligne,nouvelle_ligne):
     with open(fichier,'r',encoding='utf-8') as f:
@@ -297,6 +303,7 @@ def genere_support(rep,info_activite,type_activite):
         # print(num_activite,rep_activite,supports)
     elif type_activite=='tp':
         rep_activite=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite+sep+'tp.tex'
+        rep_activite_cor=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite+sep+'tp-cor.tex'
     with open(rep_activite,'w',encoding='utf-8') as f:
         if len(supports)>0:
             if type_activite=='cours':
@@ -304,6 +311,8 @@ def genere_support(rep,info_activite,type_activite):
             # if type_activite=='tp':
             #     f.write('\\setcounter{section}{'+str(int(num_activite)-1)+'}\n')
             #     f.write('\\section{TP '+num_activite+'}\n')
+            if type_activite=='tp':
+                f2=open(rep_activite_cor,'w',encoding='utf-8')
             for support in supports.split(';'):
                 if type_activite=='cours':
                     exo,source=trouve_exo_source(support)
@@ -312,11 +321,20 @@ def genere_support(rep,info_activite,type_activite):
                     f.write('\\input{'+'../../exos/'+support+'}\n')
                 elif type_activite=='tp':
                     exo,source=trouve_exo_source(support)
+                    support_cor=support.split('.tex')[0]+'-cor.tex'
                     if 'consignes' not in support:
                         f.write('\n\n\\activite{'+exo+'}\n\n')
+                        f2.write('\n\n\\activite{'+exo+'}\n\n')
+                    else:   
+                        f.write('\n\n\\textbf{Consignes}\n\n')
+                    if os.path.exists('exos/'+support_cor):
+                        f2.write('\\input{'+'../../../exos/'+support_cor+'}\n')
                     f.write('\\input{'+'../../../exos/'+support+'}\n')
+            if type_activite=='tp':
+                f2.close()
         else:
             f.write('\n')
+        
     return None
 
 # type_activite='tp'
@@ -346,7 +364,13 @@ def trouver_file_tex(activite,type_activite):
             num_chap='0'+num_chap
         file_tex=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+num_chap+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+num_chap+'_TP_'+num_activite+'_pdf.tex'
     return file_tex
-    
+
+def compile_tex_python(file_abrege):
+    os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pythontex '+file_abrege+'.tex')
+    os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pdflatex '+file_abrege+'.tex')
+    os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pythontex '+file_abrege+'.tex')
+    os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pdflatex '+file_abrege+'.tex')
+    os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pythontex '+file_abrege+'.tex')
     
 def genere_pdf(file,rep,type_activite):
     '''genere le pdf avec le fichier complet et incomplet'''
@@ -364,14 +388,14 @@ def genere_pdf(file,rep,type_activite):
     os.system('rm *.nav')
     os.system('rm *.snm')
     os.system('rm *.pdf')
-    os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pythontex '+file_abrege+'.tex')
-    os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pdflatex '+file_abrege+'.tex')
-    os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pythontex '+file_abrege+'.tex')
-    os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pdflatex '+file_abrege+'.tex')
-    os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pythontex '+file_abrege+'.tex')
+    compile_tex_python(file_abrege)
+    if type_activite=='tp':
+        compile_tex_python(file_abrege+'-cor')
     # os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pdflatex '+file)
     #pdb.set_trace()
     os.system('cp '+file_abrege+'.pdf '+path_ref+sep+path_site+sep+file_abrege+'.pdf')
+    if type_activite=='tp':
+        os.system('cp '+file_abrege+'-cor.pdf '+path_ref+sep+path_site+sep+file_abrege+'-cor.pdf')
     # os.system('cp '+file.split('.')[0]+'_complet.pdf '+path_site+sep+file_abrege+'_complet.pdf ')
     # 
   

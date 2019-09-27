@@ -1,4 +1,38 @@
-\begin{lstlisting}
+def pgcd(m,n):
+    """
+    Retourne le PGCD de deux nombres entiers en utilisant l'algorythme d'Euclide
+    m > n
+    Keywords arguments :
+    m : nombre entier
+    n: nombre entier
+    """
+    x,y=m,n
+    r=0
+    while y!=0:
+        r = x%y
+        x=y
+        y=r
+    return x
+
+def pgcd_python(m,n):
+    """
+    Retourne le PGCD avec "plus de style" (voirfractions.py)
+    """
+    while n:
+        m, n = n, m%n
+    return m
+
+# Détermination du PGCD avec Python 
+from fractions import gcd
+#print(gcd(a,b))
+
+
+
+
+
+## Algorithme du rendu de monnaie
+## Attention : on pourra vérifier que travailler avec des flottants n'est pas
+## une bonne idée ... avec les approximations, le client peut perdre 1 centime ...
 def rendre_monnaie(cout,somme_client):
     """
     Retourne un dictionnaire contenant le type de billets
@@ -44,9 +78,8 @@ def rendre_monnaie(cout,somme_client):
         if dico_monnaie[elements]!=0:
             print(elements+" : "+str(dico_monnaie[elements]))
     return dico_monnaie
-\end{lstlisting}
 
-\begin{lstlisting}       
+         
 def nb_billets(montant,valeur):
     """
     Calcule le nombre de billets ou de pièce à rendre pour un
@@ -56,9 +89,7 @@ def nb_billets(montant,valeur):
     valuer : valeur de la pièce ou du billet
     """
     return montant//valeur
-\end{lstlisting}
 
-\begin{lstlisting}
 def rendre_monnaie_entier(cout,somme_client):
     """
     On travaille ici avec des nombres entiers
@@ -106,11 +137,14 @@ def rendre_monnaie_entier(cout,somme_client):
         if dico_monnaie[elements]!=0:
             print(elements+" : "+str(dico_monnaie[elements]))
     return dico_monnaie
-\end{lstlisting}
 
-\begin{lstlisting}
+
+
 rendre_monnaie(23.32,30)
 print()
 rendre_monnaie_entier(23.32,30)
-\end{lstlisting}
 
+
+
+
+    

@@ -1,0 +1,44 @@
+%%%% Paramétrage du cours %%%%
+\def\xxactivite{\ifprof TP -- Corrigé  \else  TP \fi}
+\def\xxauteur{\textsl{Émilien Durif -- Xavier Pessoles}}
+
+%\fichefalse
+%\proftrue
+%\tdfalse
+%\courstrue
+
+\input{info_entete}
+
+
+\def\xxfigures{
+%\includegraphics[width=.6\linewidth]{fig_00}
+}%figues de la page de garde
+
+
+\iflivret
+\input{../../../style/pagegarde_info}
+\else
+\input{../../../style/pagegarde_info}
+\fi
+\setlength{\columnseprule}{.1pt}
+
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\ifprof
+\vspace{5.5cm}
+\else
+\vspace{5.5cm}
+\fi
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{exo}{0}
+\vspace{3cm}
+\input{tp-cor.tex}
+
+
+
