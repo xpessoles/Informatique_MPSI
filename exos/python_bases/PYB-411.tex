@@ -1,0 +1,39 @@
+\question{Indenter de deux manières différentes la suite d'instructions suivante afin que la variable \pyv{t} contienne \pyv{True} pour une indentation, puis \pyv{False} pour l'autre. }
+%Le tester avec IDLE.
+\begin{pyverbatim}
+x = 0
+y = 5
+t = False
+if x>=1:
+t = True
+if y <= 6:
+t = True
+\end{pyverbatim}
+
+\question{Réécrire la suite d'instructions suivante de manière plus appropriée.}
+\begin{pyverbatim}
+from random import randrange
+# Un entier aléatoire entre 0 et 99
+n = randrange(100) 
+if n <= 10:
+    print("Trop petit")
+else:
+    if n >= 50:
+        print("Trop grand")
+    else:
+        print("Juste comme il faut")
+\end{pyverbatim}
+
+
+\question{Que fait la fonction suivante ? La corriger pour qu'elle coïncide avec le but annoncé. }
+
+\begin{pyverbatim}
+def inv(n):
+    """Somme des inverses des n premiers 
+       entiers naturels non nuls"""
+    s = 0
+    for k in range(n):
+        x = 1/k
+    s = s+x
+    return s
+\end{pyverbatim}
