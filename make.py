@@ -245,6 +245,8 @@ def genere_entete(rep,info_activite,type_activite):
                 elif '\\lstinputpath{}' in ligne:
                     texte_entete+='\\lstinputpath{'
                     for support in supports.split(';'):
+                        if support[:1]=='F:':
+                            support=support[2:]
                         texte_entete+='{'+chemin_relatif+'exos/'+support+'/}'
                     texte_entete+='}\n'
                 elif '\\graphicspath{{../../style/png/}{images/}' in ligne:
@@ -320,10 +322,15 @@ def genere_support(rep,info_activite,type_activite):
                     f.write('\\setcounter{thequestion}{0}\n')
                     f.write('\\input{'+'../../exos/'+support+'}\n')
                 elif type_activite=='tp':
+                    if support[:2]=='F:':
+                        support=support[2:]
+                        prefixe_activite=' (Facultative) '
+                    else:
+                        prefixe_activite=''
                     exo,source=trouve_exo_source(support)
                     support_cor=support.split('.tex')[0]+'-cor.tex'
                     if 'consignes' not in support:
-                        f.write('\n\n\\activite{'+exo+'}\n\n')
+                        f.write('\n\n\\activite{'+prefixe_activite+exo+'}\n\n')
                         f2.write('\n\n\\activite{'+exo+'}\n\n')
                     else:   
                         f.write('\n\n\\textbf{Consignes}\n\n')

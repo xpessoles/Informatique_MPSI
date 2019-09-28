@@ -1,31 +1,31 @@
-def pgcd(m,n):
-    """
-    Retourne le PGCD de deux nombres entiers en utilisant l'algorythme d'Euclide
-    m > n
-    Keywords arguments :
-    m : nombre entier
-    n: nombre entier
-    """
-    x,y=m,n
-    r=0
-    while y!=0:
-        r = x%y
-        x=y
-        y=r
-    return x
-
-def pgcd_python(m,n):
-    """
-    Retourne le PGCD avec "plus de style" (voirfractions.py)
-    """
-    while n:
-        m, n = n, m%n
-    return m
-
-# Détermination du PGCD avec Python 
-from fractions import gcd
-#print(gcd(a,b))
-
+# def pgcd(m,n):
+#     """
+#     Retourne le PGCD de deux nombres entiers en utilisant l'algorythme d'Euclide
+#     m > n
+#     Keywords arguments :
+#     m : nombre entier
+#     n: nombre entier
+#     """
+#     x,y=m,n
+#     r=0
+#     while y!=0:
+#         r = x%y
+#         x=y
+#         y=r
+#     return x
+# 
+# def pgcd_python(m,n):
+#     """
+#     Retourne le PGCD avec "plus de style" (voirfractions.py)
+#     """
+#     while n:
+#         m, n = n, m%n
+#     return m
+# 
+# # Détermination du PGCD avec Python 
+# from fractions import gcd
+# #print(gcd(a,b))
+# 
 
 
 
