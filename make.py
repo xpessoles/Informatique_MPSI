@@ -407,6 +407,11 @@ def genere_pdf(file,rep,type_activite):
     # os.system('cp '+file.split('.')[0]+'_complet.pdf '+path_site+sep+file_abrege+'_complet.pdf ')
     # 
   
+def impr_2_page(activite,type_activite):
+    file=trouver_file_tex(activite,type_activite)
+    instr='/Library/TeX/texbin/pdfjam --batch --nup 2x1 --suffix 2up --landscape --outfile . '+file
+    print('cd '+path_site)
+    print(instr)
   #######
 #Programme Principal
 #######
