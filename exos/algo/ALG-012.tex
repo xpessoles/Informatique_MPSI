@@ -16,18 +16,45 @@ La machine dispose de billets de 20€, 10€ et 5€ ainsi que des pièces de 2
 
 On se propose donc de concevoir un algorithme qui demande à l'utilisateur du programme la somme totale à payer ainsi que le montant donné par l'acheteur. L'algorithme doit alors afficher quels sont les billets et les pièces à rendre par le vendeur. 
 
+%\question{}Créer une liste {valeurs} contenant toutes les valeurs des billets ou pièces.
+
+%\question{}
+%Pour un montant d'achat donné et pour une somme donnée par le client, proposer un algorithme en pseudo code permettant de rendre le minimum de monnaie au client. Cet algorithme devra détailler la somme à rendre (nombre de pièces et nombre de billets).
 
 \question{}
-\textit{Pour un montant d'achat donné et pour une somme donnée par le client, proposer un algorithme en pseudo code permettant de rendre le minimum de monnaie au client. Cet algorithme devra détailler la somme à rendre (nombre de pièces et nombre de billets).}
+Justifier le fait d'utiliser une structure de liste pour gérer les valeurs des billets ou des pièces. La mettre en place et la nommer \pyv{valeurs}.
+
 
 \question{}
-\textit{Quelle structure de donnée est-il possible d'utiliser pour gérer les valeurs des billets ou des pièces ?}
+Ecrire une fonction \pyv{rendre_monnaie(cout,somme_client,valeurs)} prenant en arguments deux flottants \pyv{cout} et \pyv{somme_client} représentant le coût d'un produit et la somme donnée par le client en € ainsi que \pyv{valeurs}. Cette fonction renverra une liste \pyv{nombre_billets} qui donnera pour chaque terme de \pyv{valeurs} le nombre de pièces et/ou billets à rendre.
 
-\question{}
-\textit{Quel type de variable est il préférable d'utiliser pour décompter l'argent ? Pourquoi ?}
+\question{} Créer une fonction \pyv{afficher_rendu_monnaie(cout,somme_client,valeurs)} permettant d'afficher le nombre de pièces et billets à rendre comme l'exemple ci-dessous.
 
-\question{}
-\textit{Implémenter cet algorithme dans Python.}
+\begin{center}
+\begin{lstlisting}
+afficher_rendu_monnaie(15.99,17.5,valeurs)
 
-\question{}
-\textit{Vérifier sur plusieurs cas que l'algorithme fonctionne.}
+0 : billet de 20 euros
+0 : billet de 10 euros
+0 : billet de 5 euros
+0 : pièce de 2 euros
+1 : pièce de 1 euros
+1 : pièce de 50 centimes
+0 : pièce de 20 centimes
+0 : pièce de 10 centimes
+0 : pièce de 5 centimes
+0 : pièce de 2 centimes
+1 : pièce de 1 centimes
+\end{lstlisting}
+\end{center}
+
+
+
+%\question{}
+%Quel type de variable est il préférable d'utiliser pour décompter l'argent ? Pourquoi ?
+%
+%\question{}
+%Implémenter cet algorithme dans Python.
+%
+%\question{}
+%Vérifier sur plusieurs cas que l'algorithme fonctionne.

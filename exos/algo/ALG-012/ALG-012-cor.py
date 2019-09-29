@@ -33,26 +33,45 @@
 ## Algorithme du rendu de monnaie
 ## Attention : on pourra vérifier que travailler avec des flottants n'est pas
 ## une bonne idée ... avec les approximations, le client peut perdre 1 centime ...
-def rendre_monnaie_emilien(cout,somme_client):
-    """
-    Retourne un dictionnaire contenant le type de billets
-    ou pièces à rendre ainsi que le nombre de chacun d'entre eux
+
+valeurs=[20,10,5,2,1,0.5,0.2,0.1,0.05,0.02,0.01]
+
+valeurs2=[]
+for v in valeurs:
+    valeurs2.append(v*100)
     
+valeurs=[2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1]
+
+def rendre_monnaie(cout,somme_client,valeurs):
+    """
+    Retourne une liste nombre_billets donnant le nombre de billets ou pièce à rendre selon le type de billet ou pièce
     Keywords arguments :
     cout : somme à payer
     somme_client : argent donné par le client
     """
-    dico_monnaie={}
+    nombre_billets=[0]*len(valeurs)
     montant_a_rendre = somme_client - cout
-    if montant_a_rendre < 0:
-        print("Le client doit ajouter au moins :"+str(montant_a_rendre*(-1)))
-        return dico_monnaie 
+    k=0#Indice du billet dans la liste valeur
+    while montant_a_rendre>0:
+        nombre_billets[k]=montant_a_rendre//valeurs[k]
+        montant_a_rendre-=nombre_billets[k]*valeurs[k]
+        k+=1
+    return nombre_billets
 
-    #Liste des différentes valeurs
-    valeurs=[20,10,5,2,1,0.5,0.2,0.1,0.05,0.02,0.01]
+            
+def afficher_rendu_monnaie(cout,somme_client,valeurs):
+    cout=100*cout
+    somme_client=100*somme_client
+    nombre_billets=rendre_monnaie(cout,somme_client,valeurs)
+    for k in range(len(nombre_billets)):
+        if valeurs[k]>200:
+            print(str(int(nombre_billets[k]))+' : billet de '+str(int(valeurs[k]/100))+' euros')
+        elif valeurs[k]>=100:
+            print(str(int(nombre_billets[k]))+' : pièce de '+str(int(valeurs[k]/100))+' euros')
+        else:
+            print(str(int(nombre_billets[k]))+' : pièce de '+str(int(valeurs[k]))+' centimes')
 
-
-def rendre_monnaie(cout,somme_client):
+def rendre_monnaie_dico(cout,somme_client):
     """
     Retourne un dictionnaire contenant le type de billets
     ou pièces à rendre ainsi que le nombre de chacun d'entre eux
@@ -159,9 +178,13 @@ def rendre_monnaie_entier(cout,somme_client):
 
 
 
-rendre_monnaie(23.32,30)
-print()
-rendre_monnaie_entier(23.32,30)
+# rendre_monnaie_dico(23.32,30)
+# print()
+# rendre_monnaie_entier(23.32,30)
+
+
+afficher_rendu_monnaie(15.99,17.5,valeurs)
+
 
 
 

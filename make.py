@@ -151,6 +151,7 @@ def genere_fichiers_tex(info_activite,type_activite):
         os.system('cp style'+sep+'Cy_i_Ch_j_TP_k_pdf.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'_pdf-cor.tex')
         changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'_pdf-cor.tex','\\input{Cy_01_Ch_01_TP_01}','\\input{Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'-cor.tex}')
         changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'-cor.tex','\\input{tp.tex}','\\input{tp-cor.tex}')
+        changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'_pdf-cor.tex','\\corrigefalse','\\corrigetrue')
     
 def changer_ligne(fichier,ancienne_ligne,nouvelle_ligne):
     with open(fichier,'r',encoding='utf-8') as f:
