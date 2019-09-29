@@ -33,6 +33,25 @@
 ## Algorithme du rendu de monnaie
 ## Attention : on pourra vérifier que travailler avec des flottants n'est pas
 ## une bonne idée ... avec les approximations, le client peut perdre 1 centime ...
+def rendre_monnaie_emilien(cout,somme_client):
+    """
+    Retourne un dictionnaire contenant le type de billets
+    ou pièces à rendre ainsi que le nombre de chacun d'entre eux
+    
+    Keywords arguments :
+    cout : somme à payer
+    somme_client : argent donné par le client
+    """
+    dico_monnaie={}
+    montant_a_rendre = somme_client - cout
+    if montant_a_rendre < 0:
+        print("Le client doit ajouter au moins :"+str(montant_a_rendre*(-1)))
+        return dico_monnaie 
+
+    #Liste des différentes valeurs
+    valeurs=[20,10,5,2,1,0.5,0.2,0.1,0.05,0.02,0.01]
+
+
 def rendre_monnaie(cout,somme_client):
     """
     Retourne un dictionnaire contenant le type de billets
