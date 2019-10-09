@@ -435,7 +435,7 @@ for tp in info_tp:
     #print(trouver_file_tex(tp,'tp'))
     
     
-activite=info_tp[2]
+activite=info_tp[3]
 rep=trouver_repertoire(activite)
 file=trouver_file_tex(activite,'tp')
 genere_pdf(file,rep,'tp')
