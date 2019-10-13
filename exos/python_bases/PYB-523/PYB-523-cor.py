@@ -1,5 +1,3 @@
-\question{}
-\begin{lstlisting}
 def reste_a_payer(p,t,m,d):
     """p = montant du pret en euros
        t = taux mensuel
@@ -11,11 +9,7 @@ def reste_a_payer(p,t,m,d):
         # Inv : dette est dû au début du mois
         dette = dette*(1+t)-m
     return dette
- \end{lstlisting}  
-    
-\question{}    
- 
- \begin{lstlisting}   
+  
 def somme_totale_payee(p,t,m,d):
     """p = montant du pret
        t = taux
@@ -23,11 +17,7 @@ def somme_totale_payee(p,t,m,d):
        d = duree en annees
        Calcule le montant total paye"""
     return reste_a_payer(p,t,m,d) + 12*d*m
- \end{lstlisting}      
-\question{}
 
-
-\begin{lstlisting}
 def cout_total(p,t,m,d):
     """p = montant du pret
        t = taux
@@ -35,11 +25,7 @@ def cout_total(p,t,m,d):
        d = duree en annees
        Calcule le cout total du credit"""
     return somme_totale_payee(p,t,m,d) - p
-\end{lstlisting}
 
-\question{}
-
-\begin{lstlisting}
 def duree_mensualite(p,t,m):
     """Durée du prêt
        p = montant prêté
@@ -48,19 +34,12 @@ def duree_mensualite(p,t,m):
     emprunt = p
     d = 0
     while (1+t)*emprunt >= m:
+        print(emprunt)
         # Inv : emprunt est dû au début du mois d
         d = d+1
         emprunt = (1+t)*emprunt-m
     return d
-\end{lstlisting}
-
-\question{}
-
-Si la mensualité est trop petite la dette augmentera plus vite que le capital restant du diminuera et ainsi la condition de la boucle conditionnelle ne sera jamais vérifiée et la boucle tournera à l'infini.
-
-\question{}
-
-\begin{lstlisting}
+    
 import matplotlib.pyplot as plt    
 def tracer_mensualite(p,t,m):
     """Trace
@@ -82,19 +61,13 @@ def tracer_mensualite(p,t,m):
     plt.clf()
     plt.plot(mois,capital_rd)
     plt.xlabel('Mensualité')
-    plt.ylabel('capital restant du')
+    plt.ylabel('capital restant dû')
+    plt.grid()
     plt.savefig('capital_restant_du.png')
     plt.clf()
     plt.plot(mois,interets,'b')
     plt.xlabel('Mensualité')
     plt.ylabel('Intérêts')
+    plt.grid()
     plt.savefig('interets.png')
-\end{lstlisting}
 
-\begin{center}
-\begin{tabular}{cc}
-\includegraphics[width=0.5\textwidth]{capital_restant_du.png}
-&
-\includegraphics[width=0.5\textwidth]{interets.png}
-\end{tabular}
-\end{center}

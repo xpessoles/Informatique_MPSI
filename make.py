@@ -13,7 +13,7 @@ f=open('log.txt','w')
 
 path=r"progression_2019_2020_IPT_MPSI.xlsx"#chemin de la progression
 path_classe=''
-path_site='site'#Chemin pour exporter les pdf vers site
+path_site='site_info_mpsi'#Chemin pour exporter les pdf vers site
 path_ref=os.popen('pwd').readlines()[0].strip()
 
 # os.chdir(os.system('pwd'))
@@ -316,6 +316,7 @@ def genere_support(rep,info_activite,type_activite):
             #     f.write('\\section{TP '+num_activite+'}\n')
             if type_activite=='tp':
                 f2=open(rep_activite_cor,'w',encoding='utf-8')
+                f2.write('\n\\begin{huge}\n Proposition de corrigé\n\\end{huge}\n')
             for support in supports.split(';'):
                 if type_activite=='cours':
                     exo,source=trouve_exo_source(support)
@@ -412,6 +413,42 @@ def impr_2_page(activite,type_activite):
     instr='/Library/TeX/texbin/pdfjam --batch --nup 2x1 --suffix 2up --landscape --outfile . '+file
     print('cd '+path_site)
     print(instr)
+    
+def lire_planning_ds(path):
+    """a partir d'une feuille excel correspondant à la progression  des ds renvoie une liste de tuple donnant des colles : (date,cycle,numero,nom du cycle,nom du document, supports d'application pour le ds)"""
+    #Ouverture de la progression excel
+    classeur=xlrd.open_workbook(path)
+    feuilles=classeur.sheet_names()
+    
+    #Ouverture de la feuille du semanier
+    info_ds=[]
+    col_data=2#Numero des colonnes des donnees
+    #Gestion des ds
+    for f in feuilles:
+        fs=classeur.sheet_by_name('Planning DS')
+        # if cl=='PSI':
+        #     tpl=colles_psi
+        # if cl=='PSIET':
+        #     tpl=colles_psiet
+        # if cl=='PT':
+        #     tpl=colles_pt
+        # if cl=='PTSI':
+        #     tpl=colles_ptsi
+        k=1
+        num_ds=1
+        while fs.cell_value(k,0)!='fin':
+            titre=fs.cell_value(k+0,col_data)
+            supports=fs.cell_value(k+1,col_data)
+            theme=fs.cell_value(k+2,col_data)
+            date_ds=fs.cell_value(k+3,col_data)
+            if num_ds<10:
+                num_ds_str='0'+str(num_ds)
+            else:
+                num_ds_str=str(num_ds)
+            info_ds.append((num_ds_str,titre,supports,theme,date_ds))
+            num_ds+=1
+            k+=4
+    return info_ds
   #######
 #Programme Principal
 #######
@@ -433,12 +470,19 @@ for tp in info_tp:
     genere_entete(rep,tp,'tp')
     genere_support(rep,tp,'tp')
     #print(trouver_file_tex(tp,'tp'))
+
+info_ds=lire_planning_ds(path)   
+for ds in info_ds:
+    (num_ds_str,titre,supports,theme,date_ds)=ds
+    rep='DS/DS'+num_ds_str
+    if os.path.exists(rep)==False:
+        os.mkdir(rep)
     
     
-activite=info_tp[3]
-rep=trouver_repertoire(activite)
-file=trouver_file_tex(activite,'tp')
-genere_pdf(file,rep,'tp')
+# activite=info_tp[3]
+# rep=trouver_repertoire(activite)
+# file=trouver_file_tex(activite,'tp')
+# genere_pdf(file,rep,'tp')
 
 # activite=info_cours[3]
 # rep=trouver_repertoire(activite)
