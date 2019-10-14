@@ -29,7 +29,11 @@ else:
 ####
 
 
-
+def convdate(date0):
+    d0=datetime.date(1900,1,1)
+    date=d0+datetime.timedelta(days=(date0-2))
+    date=str(date.day)+' '+Mois[date.month-1]+' '+str(date.year)
+    return date
 
 
 def lire_semanier(path):
@@ -113,7 +117,7 @@ def trouver_repertoire(info_activite):
     if int(num_activite)<10 and len(num_activite)<2:
         num_activite='0'+str(num_activite)
     for r in os.listdir():
-        if 'Cy_0'+str(n_cycle) in r:
+        if 'Cy_0'+str(n_cycle) in r and '.pdf' not in r:
             rep_cycle=r
             for r1 in os.listdir(rep_cycle+'/'):
                 if 'Ch_'+str(num_activite) in r1:
@@ -123,10 +127,14 @@ def trouver_repertoire(info_activite):
     
 def genere_fichiers_tex(info_activite,type_activite):
     '''Genere le fichier .tex à partir de l'activite donne et du bon repertoire'''
-    (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
-    rep=trouver_repertoire(info_activite)
-    if int(num_activite)<10 and len(num_activite)<2:
-        num_activite='0'+num_activite
+    if type_activite=='ds':
+        (num_ds_str,titre,supports,chapitres,cycles,date_ds)=ds
+        rep='DS/DS'+num_ds_str
+    else:
+        (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
+        rep=trouver_repertoire(info_activite)
+        if int(num_activite)<10 and len(num_activite)<2:
+            num_activite='0'+num_activite
     if type_activite=='cours':
         os.system('cp style'+sep+'Cy_i_Ch_j_Cours.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_Cours.tex')
         os.system('cp style'+sep+'Cy_i_Ch_j_Cours_PDF.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_Cours_PDF.tex')
@@ -152,6 +160,19 @@ def genere_fichiers_tex(info_activite,type_activite):
         changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'_pdf-cor.tex','\\input{Cy_01_Ch_01_TP_01}','\\input{Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'-cor.tex}')
         changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'-cor.tex','\\input{tp.tex}','\\input{tp-cor.tex}')
         changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'_pdf-cor.tex','\\corrigefalse','\\corrigetrue')
+        #DS
+    elif type_activite=='ds':
+        os.system('cp style'+sep+'DSk.tex '+rep+sep+'DS'+num_ds_str+'.tex')
+        os.system('cp style'+sep+'DSk_pdf.tex '+rep+sep+'DS'+num_ds_str+'_pdf.tex')
+        changer_ligne(rep+sep+'DS'+num_ds_str+'_pdf.tex','\\input{Cy_01_Ch_01_TP_01}','\\input{DS'+num_ds_str+'.tex}')
+            #DS : corrige
+        os.system('cp style'+sep+'DSk.tex '+rep+sep+'DS'+num_ds_str+'-cor.tex')
+        os.system('cp style'+sep+'DSk_pdf.tex '+rep+sep+'DS'+num_ds_str+'_pdf-cor.tex')
+        changer_ligne(rep+sep+'DS'+num_ds_str+'_pdf-cor.tex','\\input{Cy_01_Ch_01_TP_01}','\\input{DS'+num_ds_str+'-cor.tex}')
+        changer_ligne(rep+sep+'DS'+num_ds_str+'_pdf-cor.tex','\\corrigefalse','\\corrigetrue')
+        changer_ligne(rep+sep+'DS'+num_ds_str+'-cor.tex','\\input{ds.tex}','\\input{ds-cor.tex}')
+        # changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'-cor.tex','\\input{tp.tex}','\\input{tp-cor.tex}')
+        # changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'_pdf-cor.tex','\\corrigefalse','\\corrigetrue')
     
 def changer_ligne(fichier,ancienne_ligne,nouvelle_ligne):
     with open(fichier,'r',encoding='utf-8') as f:
@@ -196,13 +217,25 @@ def trouve_exo_source(support):
 
 def genere_entete(rep,info_activite,type_activite):
     """A partir du cours dont le chemin est donne par rep la fonction genere l'entete donnant toutes infos permettant de generer l'entete du cours."""
-    (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
+    if type_activite=='ds':
+        (num_ds_str,name_activite,supports,ref_cours,n_cycle,date)=info_activite
+        num_activite=num_ds_str
+        competences=''
+        n_cycle=str(int(n_cycle))
+        name_cycle='Cycle'+str(int(n_cycle))
+        num_chapitre=trouver_chapitre(ref_cours)
+        date=convdate(date)
+        figures=''
+    else:
+        (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
     #competences=competences.split(';')
-    num_chapitre=trouver_chapitre(ref_cours)
+        num_chapitre=trouver_chapitre(ref_cours)
     if type_activite=='cours':
         chemin_relatif='../../'
-    if type_activite=='tp':
+    elif type_activite=='tp':
         chemin_relatif='../../../'
+    elif type_activite=='ds':
+        chemin_relatif='../../'
     if type_activite=='cours':
         file_entete=rep+sep+'info_entete.tex'
         if os.path.exists(rep+sep+'cours/'):
@@ -219,6 +252,8 @@ def genere_entete(rep,info_activite,type_activite):
             os.system('mkdir '+rep+sep+'images/')
     elif type_activite=='tp':
         file_entete=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite+sep+'info_entete.tex'
+    elif type_activite=='ds':
+        file_entete=rep+sep+'info_entete.tex'
     else:
         print("mauvais choix d'activite")
     with open(file_entete,'w',encoding='utf-8') as f:
@@ -257,9 +292,12 @@ def genere_entete(rep,info_activite,type_activite):
                     texte_entete+='}\n'
                 elif '\\begin{itemize}[label=\\ding{112},font=\\color{ocre}]' in ligne:
                     texte_entete+='\\begin{itemize}[label=\\ding{112},font=\\color{ocre}]\n'
-                    code_competence,nom_long,nom_court=trouver_texte_competence(competences,path)
-                    for k in range(len(code_competence)):
-                        texte_entete+='\\item '+code_competence[k]+' : '+nom_court[k]+'\n'
+                    if competences=='':
+                        texte_entete+='\\item\n'
+                    else:
+                        code_competence,nom_long,nom_court=trouver_texte_competence(competences,path)
+                        for k in range(len(code_competence)):
+                            texte_entete+='\\item '+code_competence[k]+' : '+nom_court[k]+'\n'
                 elif '%Infos sur les supports' in ligne:
                     texte_entete+='%Infos sur les supports\n'
                     texte_1='\\def\\xxtitreexo{'
@@ -298,15 +336,33 @@ def trouver_texte_competence(competences,path):
         
 def genere_support(rep,info_activite,type_activite):
     '''A partir d'une activite genere le fichier support'''
-    (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
-    rep=trouver_repertoire(info_activite) 
-    num_chapitre=trouver_chapitre(ref_cours)
+    if type_activite=='cours':
+        chemin_relatif='../../'
+    elif type_activite=='tp':
+        chemin_relatif='../../../'
+    elif type_activite=='ds':
+        chemin_relatif='../../'
+    if type_activite=='ds':
+        (num_ds_str,name_activite,supports,ref_cours,n_cycle,date)=info_activite
+        num_activite=num_ds_str
+        competences=''
+        name_cycle=n_cycle
+        num_chapitre=trouver_chapitre(ref_cours)
+        date=convdate(date)
+        figures=''
+    else:
+        (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=info_activite
+        rep=trouver_repertoire(info_activite) 
+        num_chapitre=trouver_chapitre(ref_cours)
     if type_activite=='cours':
         rep_activite=rep+sep+'td.tex'
         # print(num_activite,rep_activite,supports)
     elif type_activite=='tp':
         rep_activite=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite+sep+'tp.tex'
         rep_activite_cor=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite+sep+'tp-cor.tex'
+    elif type_activite=='ds':
+        rep_activite=rep+sep+'ds.tex'
+        rep_activite_cor=rep+sep+'ds-cor.tex'
     with open(rep_activite,'w',encoding='utf-8') as f:
         if len(supports)>0:
             if type_activite=='cours':
@@ -314,7 +370,7 @@ def genere_support(rep,info_activite,type_activite):
             # if type_activite=='tp':
             #     f.write('\\setcounter{section}{'+str(int(num_activite)-1)+'}\n')
             #     f.write('\\section{TP '+num_activite+'}\n')
-            if type_activite=='tp':
+            if type_activite=='tp' or type_activite=='ds':
                 f2=open(rep_activite_cor,'w',encoding='utf-8')
                 f2.write('\n\\begin{huge}\n Proposition de corrigé\n\\end{huge}\n')
             for support in supports.split(';'):
@@ -323,7 +379,7 @@ def genere_support(rep,info_activite,type_activite):
                     f.write('\\subsection{'+exo+'}\n')
                     f.write('\\setcounter{thequestion}{0}\n')
                     f.write('\\input{'+'../../exos/'+support+'}\n')
-                elif type_activite=='tp':
+                elif type_activite=='tp' or type_activite=='ds':
                     if support[:2]=='F:':
                         support=support[2:]
                         prefixe_activite=' (Facultative) '
@@ -331,14 +387,18 @@ def genere_support(rep,info_activite,type_activite):
                         prefixe_activite=''
                     exo,source=trouve_exo_source(support)
                     support_cor=support.split('.tex')[0]+'-cor.tex'
+                    if type_activite=='tp':
+                        type_support='activite'
+                    elif type_activite=='ds':
+                        type_support='exo'
                     if 'consignes' not in support:
-                        f.write('\n\n\\activite{'+prefixe_activite+exo+'}\n\n')
-                        f2.write('\n\n\\activite{'+exo+'}\n\n')
+                        f.write('\n\n\\'+type_support+'{'+prefixe_activite+exo+'}\n\n')
+                        f2.write('\n\n\\'+type_support+'{'+exo+'}\n\n')
                     else:   
                         f.write('\n\n\\textbf{Consignes}\n\n')
                     if os.path.exists('exos/'+support_cor):
-                        f2.write('\\input{'+'../../../exos/'+support_cor+'}\n')
-                    f.write('\\input{'+'../../../exos/'+support+'}\n')
+                        f2.write('\\input{'+chemin_relatif+'exos/'+support_cor+'}\n')
+                    f.write('\\input{'+chemin_relatif+'exos/'+support+'}\n')
             if type_activite=='tp':
                 f2.close()
         else:
@@ -388,6 +448,9 @@ def genere_pdf(file,rep,type_activite):
         rep_activite=rep
     elif type_activite=='tp':
         rep_activite=rep+sep+file_abrege.split('_pdf')[0]
+    elif type_activite=='ds':
+        rep_activite=rep
+        file_abrege+='_pdf'
     os.chdir(rep_activite)
     os.system('rm *.aux')
     os.system('rm *.log')
@@ -398,20 +461,24 @@ def genere_pdf(file,rep,type_activite):
     os.system('rm *.snm')
     os.system('rm *.pdf')
     compile_tex_python(file_abrege)
-    if type_activite=='tp':
+    if type_activite=='tp'or type_activite=='ds':
         compile_tex_python(file_abrege+'-cor')
     # os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pdflatex '+file)
     #pdb.set_trace()
     os.system('cp '+file_abrege+'.pdf '+path_ref+sep+path_site+sep+file_abrege+'.pdf')
-    if type_activite=='tp':
+    if type_activite=='tp' or type_activite=='ds':
         os.system('cp '+file_abrege+'-cor.pdf '+path_ref+sep+path_site+sep+file_abrege+'-cor.pdf')
     # os.system('cp '+file.split('.')[0]+'_complet.pdf '+path_site+sep+file_abrege+'_complet.pdf ')
     # 
   
 def impr_2_page(activite,type_activite):
+    os.chdir(path_ref)
+    #pdb.set_trace()
     file=trouver_file_tex(activite,type_activite)
+    file=file.split('/')[-1]
+    file=file.split('.tex')[-2]+'-cor.pdf'
     instr='/Library/TeX/texbin/pdfjam --batch --nup 2x1 --suffix 2up --landscape --outfile . '+file
-    print('cd '+path_site)
+    print('cd '+path_ref+sep+path_site)
     print(instr)
     
 def lire_planning_ds(path):
@@ -426,28 +493,22 @@ def lire_planning_ds(path):
     #Gestion des ds
     for f in feuilles:
         fs=classeur.sheet_by_name('Planning DS')
-        # if cl=='PSI':
-        #     tpl=colles_psi
-        # if cl=='PSIET':
-        #     tpl=colles_psiet
-        # if cl=='PT':
-        #     tpl=colles_pt
-        # if cl=='PTSI':
-        #     tpl=colles_ptsi
         k=1
         num_ds=1
         while fs.cell_value(k,0)!='fin':
             titre=fs.cell_value(k+0,col_data)
             supports=fs.cell_value(k+1,col_data)
-            theme=fs.cell_value(k+2,col_data)
-            date_ds=fs.cell_value(k+3,col_data)
+            #pdb.set_trace()
+            chapitres=fs.cell_value(k+2,col_data)
+            cycles=fs.cell_value(k+3,col_data)
+            date_ds=fs.cell_value(k+4,col_data)
             if num_ds<10:
                 num_ds_str='0'+str(num_ds)
             else:
                 num_ds_str=str(num_ds)
-            info_ds.append((num_ds_str,titre,supports,theme,date_ds))
+            info_ds.append((num_ds_str,titre,supports,chapitres,cycles,date_ds))
             num_ds+=1
-            k+=4
+            k+=5
     return info_ds
   #######
 #Programme Principal
@@ -473,21 +534,33 @@ for tp in info_tp:
 
 info_ds=lire_planning_ds(path)   
 for ds in info_ds:
-    (num_ds_str,titre,supports,theme,date_ds)=ds
+    (num_ds_str,titre,supports,chapitres,cycles,date_ds)=ds
     rep='DS/DS'+num_ds_str
     if os.path.exists(rep)==False:
         os.mkdir(rep)
+    genere_fichiers_tex(ds,'ds')
+    genere_entete(rep,ds,'ds')
+    genere_support(rep,ds,'ds')
+    
     
     
 # activite=info_tp[3]
-# rep=trouver_repertoire(activite)
-# file=trouver_file_tex(activite,'tp')
-# genere_pdf(file,rep,'tp')
+# # rep=trouver_repertoire(activite)
+# # file=trouver_file_tex(activite,'tp')
+# # genere_pdf(file,rep,'tp')
+# impr_2_page(activite,'tp')
 
-# activite=info_cours[3]
-# rep=trouver_repertoire(activite)
-# file=trouver_file_tex(activite,'cours')
-# genere_pdf(file,rep,'cours')
+activite=info_cours[4]
+rep=trouver_repertoire(activite)
+file=trouver_file_tex(activite,'cours')
+genere_pdf(file,rep,'cours')
+
+# activite=info_ds[1]
+# num_ds_str=activite[0]
+# rep='DS/DS'+num_ds_str
+# file=rep+sep+'DS'+num_ds_str+'.tex'
+# genere_pdf(file,rep,'ds')
+#impr_2_page(activite,'tp')
 
 
     
@@ -496,5 +569,5 @@ for ds in info_ds:
 #ythontex Cy_01_livret_Ch_02.tex
 #pdflatex Cy_01_livret_Ch_02.tex
 
-    
+os.chdir(path_ref)
 

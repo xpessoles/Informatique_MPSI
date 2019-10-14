@@ -39,6 +39,7 @@
 \usepackage{verbatim}
 \usepackage{tikz}
 \usepackage{caption}
+\usepackage{ulem}
 
 %----------------------------------------------------------------------------------------
 %	FONTS
@@ -930,6 +931,9 @@ addtohook={%
 \newcounter{cptactivite}
 \newcommand{\activite}[1]{{\stepcounter{cptactivite}\bf \vspace{0.5cm}{\color{ocre}\begin{Large}Activité \arabic{cptactivite} : \end{Large}} \begin{large}#1\end{large}\vspace{0.5cm}}}
 
+\newcounter{cptexo}
+\newcommand{\exo}[1]{{\stepcounter{cptexo}\bf \vspace{0.5cm}{\color{ocre}\begin{Large}Exercice \arabic{cptexo} : \end{Large}} \begin{large}#1\end{large}\vspace{0.5cm}}}
+
 \newcommand{\p}[1]{\left( #1\right)}
 
 % Définition des booleéns
@@ -944,6 +948,7 @@ addtohook={%
 \newif\iflivret
 \newif\ifTP
 \newif\ifcorrige
+\newif\ifDS
 
 
 

@@ -363,3 +363,99 @@
 \fi
 
 
+%%%%%%%% PAGE DE GARDE DS
+\ifDS
+\begin{tikzpicture}[remember picture,overlay]
+\node at (current page.north west)
+{\begin{tikzpicture}[remember picture,overlay]
+\draw[anchor=west] (-2cm,-2.25cm) node [line width=2pt,rounded corners=15pt,draw=ocre,fill=white,fill opacity=0.6,inner sep=40pt]{\strut\makebox[22cm]{}};
+\draw[anchor=west] (1cm,-2.25cm) node {\huge\sffamily\bfseries\color{black} %
+\begin{minipage}{1cm}
+\rotatebox{90}{\LARGE\sffamily\textsc{\color{ocre}\textbf{Cycle \xxnumpartie}}}
+\end{minipage} \hfill
+\begin{minipage}[c]{14cm}
+\begin{titrepartie}
+\begin{flushright}
+\renewcommand{\baselinestretch}{1.1} 
+\large\sffamily\textsc{\textbf{\xxpartie} \\} 
+
+\vspace{.2cm}
+
+\normalsize\sffamily\textsc{\textbf{DS \xxnumactivite}}
+\renewcommand{\baselinestretch}{1} 
+\end{flushright}
+\end{titrepartie}
+\end{minipage} \hfill
+\begin{minipage}[c]{3.5cm}
+{\large\sffamily\textsc{\textbf{\color{ocre} \discipline}}}
+\end{minipage} 
+ };
+\end{tikzpicture}};
+\end{tikzpicture}
+
+% BANDEAU EXO
+\iflivret % SI LIVRET
+\begin{tikzpicture}[remember picture,overlay]
+\draw[anchor=west] (-2cm,-3.3cm) node {\huge\sffamily\bfseries\color{black} %
+\begin{minipage}{5cm}
+\begin{center}
+\LARGE\sffamily\color{ocre}\textbf{\textsc{\xxactivite}}
+
+\begin{center}
+\xxfigures
+\end{center}
+
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{12cm}
+\begin{titrechapitre}
+\renewcommand{\baselinestretch}{1.1} 
+\large\sffamily\textbf{\textsc{\xxtitreexo}}
+
+\small\sffamily{\textbf{\textit{\color{black!70}\xxsourceexo}}}
+\vspace{.5cm}
+
+\renewcommand{\baselinestretch}{1} 
+\normalsize\normalfont
+%\xxcompetences
+\end{titrechapitre}
+\end{minipage}};
+\end{tikzpicture}
+\else % ELSE NOT LIVRET
+\begin{tikzpicture}[remember picture,overlay]
+\draw[anchor=west] (-2cm,-4.5cm) node {\huge\sffamily\bfseries\color{black} %
+\begin{minipage}{5cm}
+\begin{center}
+\LARGE\sffamily\color{ocre}\textbf{\textsc{\xxactivite \xxnumactivite}}
+
+\begin{center}
+\xxfigures
+\end{center}
+
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{12cm}
+\begin{titrechapitre}
+\renewcommand{\baselinestretch}{1.1} 
+\large\sffamily\textbf{\textsc{\xxtitreexo}}
+
+\small\sffamily{\textbf{\textit{\color{black!70}\xxsourceexo}}}
+\vspace{.5cm}
+
+\renewcommand{\baselinestretch}{1} 
+\normalsize\normalfont
+%\ifcorrige
+%\else
+%\vspace{-1cm}
+%\xxcompetences
+%\fi
+\end{titrechapitre}
+\end{minipage}};
+\end{tikzpicture}
+
+\fi
+
+\else   % FIN IF DS
+\fi
+
+

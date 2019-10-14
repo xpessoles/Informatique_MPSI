@@ -66,7 +66,7 @@ IndexError: list index out of range
 \end{pyverbatim}
 
 Les indices appartiennent à $\ii{0,\texttt{len(t)}}$.
-\clearslide{}
+%\clearslide{}
 Mais on peut aussi compter les éléments à partir de la fin, en utilisant des indices négatifs !
 \begin{pyconsole}
 t[-1] # dernier élément
@@ -174,8 +174,8 @@ Les autres méthodes disponibles sont rassemblées dans le tableau~\ref{tab.list
   \caption{Méthodes applicables aux listes.}
   \label{tab.list.methodes}
 \end{figure}
-
-\clearslide{}
+%
+%%%\clearslide{}
 \subsection{Tranchage}
 
 On peut directement accéder à une sous-liste Python (ou tranche ---\emph{slice} en anglais--- 
@@ -226,11 +226,12 @@ confronté.\\
 
 
 Commençons par un exemple où tout se passe intuitivement :
-\begin{pyconsole}
+\begin{lstlisting}
 x = 3
 y = x
 x = 42
-\end{pyconsole}
+\end{lstlisting}
+
 Que vaut alors \pyv{y} ? 
 \begin{pyconsole}
 y
@@ -385,13 +386,14 @@ print(maxi([-5,2,9,-6,3]))
 
 Cela renvoie alors :
 \begin{quote}
-  \printpythontex[verb]
+\printpythontex[verb]
+%  \pyv{9}
 \end{quote}
 
 Dans de nombreux autres langages de programmation, on ne parcourt pas directement les éléments d'un 
 tableau mais leurs indices. On écrira
 quelque chose ressemblant plutôt à ceci. 
-\begin{pyverbatim}
+\begin{pyblock}
 def maxi(t):
     """Renvoie le plus grand élément de t.
        Précondition : t est un tableau non vide"""
@@ -401,7 +403,7 @@ def maxi(t):
         if t[i] > m:
             m = t[i] # On a trouvé plus grand, on met à jour m
     return m
-\end{pyverbatim}
+\end{pyblock}
 En \python, c'est moins élégant que l'autre solution.
 
 \subsubsection{Obtenir l'indice du maximum}
@@ -431,7 +433,7 @@ Cela renvoie alors :
 \end{quote}
 
 Cependant, les vrais pythonistes écriraient plutôt ceci. 
-\begin{pyverbatim}
+\begin{lstlisting}
 def indicemaxi(t):
     """Renvoie l'indice du plus grand élément de t.
        Précondition : t est un tableau non vide"""
@@ -441,9 +443,9 @@ def indicemaxi(t):
         if x > t[im]:
             im = i # On a trouvé plus grand, on met à jour im
     return im
-\end{pyverbatim}
+\end{lstlisting}
 
-\clearslide{}
+%%%\clearslide{}
 \subsection{Recherche séquentielle d'un élément dans un tableau}
 
 On veut écrire une fonction \pyv{appartient(t,e)} retournant un booléen disant si un
@@ -468,12 +470,12 @@ print(appartient(8,t))
 \end{pyblock}
 Cela renvoie alors :
 \begin{quote}
-  \printpythontex[verb]
+\printpythontex[verb]
 \end{quote}
 On peut aussi vouloir obtenir l'indice de la première occurence de cet élément.
 On peut alors modifier la fonction précédente pour parcourir le tableau par ses indices, s'arrêter 
 dès que l'on trouve l'élément et renvoyer \pyv{None} sinon.
-\begin{pyverbatim}
+\begin{lstlisting}
 def ind_appartient(e,t):
     """Renvoie l'indice de la première occurence de e dans t,
        None si e n'est pas dans t
@@ -483,7 +485,7 @@ def ind_appartient(e,t):
         if t[i] == e:
             return i # On a trouvé e à l'indice i
     return None
-\end{pyverbatim}
+\end{lstlisting}
 
 \subsection{Recherche dichotomique dans un tableau trié}
 
@@ -496,7 +498,7 @@ Si ce pivot est plus grand que ce que l'on cherche, on sait qu'il faut chercher 
 
 Pour faire cela, on va garder en mémoire une tranche de notre tableau, que l'on va affiner par dichotomie. 
 
-\begin{pyblock}
+\begin{lstlisting}
 def appartient_dicho(e,t):
     """Renvoie un booléen indiquant si e est dans t
        Préconditions : t est un tableau de nombres trié par ordre croissant
@@ -504,8 +506,6 @@ def appartient_dicho(e,t):
     g = 0 # Limite gauche de la tranche où l'on recherche e
     d = len(t)-1 # Limite droite de la tranche où l'on recherche e
     while g <= d: # La tranche où l'on cherche e n'est pas vide
-        # Invariant : si e est dans t, t[g] <= e <= t[d]
-        # Variant : d-g est strictement décroissant
         m = (g+d)//2 # Milieu de la tranche où l'on recherche e
         pivot = t[m] 
         if e == pivot: # On a trouvé e
@@ -519,49 +519,53 @@ def appartient_dicho(e,t):
 t = [i**2 for i in range(101)]
 print(appartient_dicho(11,t))
 print(appartient_dicho(81,t))
-\end{pyblock}
+\end{lstlisting}
 Cela renvoie alors :
 \begin{quote}
-  \printpythontex[verb]
+%\printpythontex[verb]
+\pyv{False}
+\pyv{True}
 \end{quote}
+
+
 On remarquera que, si la tableau \pyv{t} (trié) est de taille $n$, alors la recherche dichotomique effectuera de l'ordre de $\ln(n)$ opérations (comparaisons de flottants, additions et divisions d'entiers, affectations etc.).
 On dira que l'on effectue $O(\ln n)$ opérations.
 C'est bien mieux que le pire des cas de la recherche séquentielle, qui nécessite $O(n)$ opérations \og en moyenne \fg{} (si l'élément recherché est répartie aléatoirement et uniformément dans le tableau) ainsi que dans le pire des cas.
-\section{Exercices}
-
-%\begin{exo}
-    Écrire une fonction \pyv{maxi_double(M)} prenant en argument une matrice de nombres \pyv{M} (représentée comme liste de listes) et renvoyant le maximum de \pyv{M}?
-%\end{exo}
-
-
-%\begin{exo}
-  \'Ecrire une fonction \pyv{liste_imax(t)} renvoyant la liste des indices où le maximum de \pyv{t} est atteint.
-%\end{exo}
-
-
-%\begin{exo}
-  \'Ecrire une fonction \pyv{indice(x, t)} renvoyant un indice
-\pyv{i} tel que \pyv{t[i]==x} si \pyv{x} apparaît dans le tableau \pyv{t} et $-1$ sinon.
-%\end{exo}
-
-%\begin{exo}
-  \'Ecrire une fonction \pyv{tous_les_indices(e,t)} renvoyant la liste de tous les indices des occurences de \pyv{e} dans le tableau \pyv{t}.
-%\end{exo}
-
-%\begin{exo}
-  Écrire une fonction \pyv{compte(e,t)} renvoyant le nombre d'occurences de \pyv{e} dans le tableau \pyv{t}.
-%\end{exo}
-
-%\begin{exo}
-  \'Ecrire une fonction \pyv{ind_appartient_dicho(e,t)} renvoyant l'indice d'une occurence de \pyv{e} dans le tableau \pyv{t} (\pyv{None} si \pyv{e} n'est pas dans \pyv{t}), en supposant que \pyv{t} est trié par ordre croissant.
-%\end{exo}
-
-
-%\begin{exo}
-  \'Ecrire une fonction \pyv{dec_appartient_dicho(e,t)} renvoyant un booléen indiquant si \pyv{e} est dans le tableau \pyv{t}, en supposant que \pyv{t} est trié par ordre décroissant.
-%\end{exo}
-
-%\begin{exo}
-  Écrire une fonction \pyv{compte(e,t)} comptant le nombre d'occurences de l'élément \pyv{e} dans le tableau \texttt{t}.
-%\end{exo}
+%%\section{Exercices}
+%
+%%%\begin{exo}
+%%    Écrire une fonction \pyv{maxi_double(M)} prenant en argument une matrice de nombres \pyv{M} (représentée comme liste de listes) et renvoyant le maximum de \pyv{M}?
+%%%\end{exo}
+%%
+%%
+%%%\begin{exo}
+%%  \'Ecrire une fonction \pyv{liste_imax(t)} renvoyant la liste des indices où le maximum de \pyv{t} est atteint.
+%%%\end{exo}
+%
+%
+%%\begin{exo}
+%  \'Ecrire une fonction \pyv{indice(x, t)} renvoyant un indice
+%\pyv{i} tel que \pyv{t[i]==x} si \pyv{x} apparaît dans le tableau \pyv{t} et $-1$ sinon.
+%%\end{exo}
+%
+%%\begin{exo}
+%  \'Ecrire une fonction \pyv{tous_les_indices(e,t)} renvoyant la liste de tous les indices des occurences de \pyv{e} dans le tableau \pyv{t}.
+%%\end{exo}
+%
+%%\begin{exo}
+%  Écrire une fonction \pyv{compte(e,t)} renvoyant le nombre d'occurences de \pyv{e} dans le tableau \pyv{t}.
+%%\end{exo}
+%
+%%\begin{exo}
+%  \'Ecrire une fonction \pyv{ind_appartient_dicho(e,t)} renvoyant l'indice d'une occurence de \pyv{e} dans le tableau \pyv{t} (\pyv{None} si \pyv{e} n'est pas dans \pyv{t}), en supposant que \pyv{t} est trié par ordre croissant.
+%%\end{exo}
+%
+%
+%%\begin{exo}
+%  \'Ecrire une fonction \pyv{dec_appartient_dicho(e,t)} renvoyant un booléen indiquant si \pyv{e} est dans le tableau \pyv{t}, en supposant que \pyv{t} est trié par ordre décroissant.
+%%\end{exo}
+%
+%%\begin{exo}
+%  Écrire une fonction \pyv{compte(e,t)} comptant le nombre d'occurences de l'élément \pyv{e} dans le tableau \texttt{t}.
+%%\end{exo}
 
