@@ -1,0 +1,14 @@
+\question{On exécute l'instruction \pyv{fonction(0.1)}. À chaque itération, donner la valeur de $i$ et de $x$.}
+
+\begin{pycode}
+def fonction(x) :
+    y=0.3
+    i=0
+    while x!=y and i <100:
+        x=x+0.1
+        i=i+1
+        print('i='+str(i)+' x='+str(x)+'\n')
+    return i
+
+fonction(0.1)
+\end{pycode}
