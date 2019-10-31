@@ -1,0 +1,50 @@
+On donne la \pyv{fonctionMystere(n)} définie comme suit.
+\begin{xxpy}~\\
+\vspace{-1cm}
+\begin{pyverbatim}
+def fonctionMystere(n) :
+    if n==0 or n==1:
+         return 1
+    else :
+        res = 1
+    for i in range (2,n+1) :
+        res = res * i
+    return res
+\end{pyverbatim}
+\end{xxpy}
+
+
+\question{Si $n=5$ quelles sont les valeurs que va prendre la variable \pyv{i} ? }
+
+\begin{pycode}
+def fonctionMystere(n) :
+    if n==0 or n==1:
+         return 1
+    else :
+        res = 1
+    for i in range (2,n+1) :
+        res = res * i
+    return res
+
+print('fonctionMystere(5) renvoie '+str(fonctionMystere(5))+'\n')
+\end{pycode}
+
+\question{Si $n=4$ donner les valeurs successives que vont prendre les variables \pyv{i} et \pyv{res}  lorsqu'on exécute l'algorithme. }
+
+\begin{pycode}
+def fonctionMystere(n) :
+    if n==0 or n==1:
+         return 1
+    else :
+        res = 1
+    for i in range (2,n+1) :
+        res = res * i
+        print('i='+str(i)+' res='+str(res)+'\n')
+    return res
+
+fonctionMystere(4)
+\end{pycode}
+
+\question{Que retourne le fonction \pyv{fonctionMystere} ?}
+
+\pyv{fonctionMystere} renvoie le factoriel
