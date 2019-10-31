@@ -493,22 +493,22 @@ def lire_planning_ds(path):
     #Gestion des ds
     for f in feuilles:
         fs=classeur.sheet_by_name('Planning DS')
-        k=1
-        num_ds=1
-        while fs.cell_value(k,0)!='fin':
-            titre=fs.cell_value(k+0,col_data)
-            supports=fs.cell_value(k+1,col_data)
-            #pdb.set_trace()
-            chapitres=fs.cell_value(k+2,col_data)
-            cycles=fs.cell_value(k+3,col_data)
-            date_ds=fs.cell_value(k+4,col_data)
-            if num_ds<10:
-                num_ds_str='0'+str(num_ds)
-            else:
-                num_ds_str=str(num_ds)
-            info_ds.append((num_ds_str,titre,supports,chapitres,cycles,date_ds))
-            num_ds+=1
-            k+=5
+    k=1
+    num_ds=1
+    while fs.cell_value(k,0)!='fin':
+        titre=fs.cell_value(k+0,col_data)
+        supports=fs.cell_value(k+1,col_data)
+        #pdb.set_trace()
+        chapitres=fs.cell_value(k+2,col_data)
+        cycles=fs.cell_value(k+3,col_data)
+        date_ds=fs.cell_value(k+4,col_data)
+        if num_ds<10:
+            num_ds_str='0'+str(num_ds)
+        else:
+            num_ds_str=str(num_ds)
+        info_ds.append((num_ds_str,titre,supports,chapitres,cycles,date_ds))
+        num_ds+=1
+        k+=5
     return info_ds
   #######
 #Programme Principal
@@ -555,7 +555,7 @@ for ds in info_ds:
 # file=trouver_file_tex(activite,'cours')
 # genere_pdf(file,rep,'cours')
 
-activite=info_ds[1]
+activite=info_ds[0]
 num_ds_str=activite[0]
 rep='DS/DS'+num_ds_str
 file=rep+sep+'DS'+num_ds_str+'.tex'
