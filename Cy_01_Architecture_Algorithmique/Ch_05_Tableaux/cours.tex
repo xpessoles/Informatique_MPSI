@@ -4,7 +4,7 @@
 \subsection{Deux structures de données en informatique.}
 
 Les données manipulées en informatique sont organisées, que ce soit dans la mémoire où dans la manière d'y accéder, de les manipuler. 
-Une telle organisation porte le nom de \emph{structure de données}, en voici deux grandes.  
+Une telle organisation porte le nom de \textbf{structure de données}, en voici deux grandes.  
 
 \begin{description}
   \item[Tableau] Les données sont stockées dans des cases contigües de la mémoire de l'ordinateur, chaque emplacement étant souvent indicé par un entier. 
@@ -22,21 +22,21 @@ mais de chaque emplacement on pointe l'emplacement suivant.
 
 Les objets de type \pyv{list} en Python sont des tableaux : c'est une 
 dénomination fâcheuse car, partout ailleurs en informatique, le terme
-\emph{liste} désigne en fait une liste chaînée. Prenez donc
-l'habitude de dire \og tableau\fg, ou \og liste Pythonfg\ et non \og liste\fg\ quand vous parlez de cette
+\textbf{liste} désigne en fait une liste chaînée. Prenez donc
+l'habitude de dire \og tableau\fg, ou \og liste Python \fg\ et non \og liste\fg\ quand vous parlez de cette
 structure.
 
 Cependant, il y a une raison à cette dénomination : ces tableaux en Python possèdent presque 
 la propriété des listes, dans le sens où l'ajout d'un nouvel élément se fait en temps constant 
-\emph{amorti}. Cela signifie que la plupart de ces ajouts se font en temps constants car en fait 
+\textbf{amorti}. Cela signifie que la plupart de ces ajouts se font en temps constants car en fait 
 Python a \og gardé des cellules en réserve\fg, mais parfois l'ajout d'un élément force la création 
 d'un nouveau tableau avec plus de cellules de réserve, et la copie de l'ancien tableau dans le 
 nouveau. Cette opération est coûteuse, mais elle 
 est rare. En moyenne, chaque ajout à un coût constant.
 
-On parle alors de \emph{tableaux dynamiques}.
+On parle alors de \textbf{tableaux dynamiques}.
 
-
+\begin{multicols}{2}
 Pour créer un tableau on peut le donner en extension.
 
 \begin{pyconsole}
@@ -58,12 +58,12 @@ u[9]
 \end{pyconsole}
 
 Attention à utiliser un indice existant !
-\begin{pyverbatim}
+\begin{pyconsole}
 >>> t[3]
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-IndexError: list index out of range
-\end{pyverbatim}
+\end{pyconsole}
+%Traceback (most recent call last):
+%  File "<stdin>", line 1, in <module>
+%IndexError: list index out of range
 
 Les indices appartiennent à $\ii{0,\texttt{len(t)}}$.
 %\clearslide{}
@@ -83,7 +83,10 @@ Traceback (most recent call last):
 IndexError: list index out of range
 \end{pyverbatim}
 
-Enfin, il y a une liste Python particulière : la liste vide \pyv{[]}
+Enfin, il y a une liste Python particulière : la liste vide~\pyv{[]}.
+
+\end{multicols}
+
 
 \subsection{Opérations usuelles}
 
@@ -114,7 +117,7 @@ On peut aussi tester l'appartenance d'un élément dans une liste Python avec \p
 [] in [[]]
 \end{pyconsole}
 
-Enfin, on peut recopier plusieurs fois un \emph{même} tableau avec l'opérateur \pyv{*}.
+Enfin, on peut recopier plusieurs fois un \textbf{même} tableau avec l'opérateur \pyv{*}.
 
 \begin{pyconsole}
 4*t
@@ -122,9 +125,11 @@ t*4
 \end{pyconsole}
 
 
+
+
 \subsubsection{Un peu de méthodes}
-Python est un langage \emph{orienté objet} : en \python, tout est un \emph{objet}, et ces objets 
-sont regroupées en \emph{classes}. Une \emph{méthode} est une fonction qui s'applique aux objets 
+Python est un langage \textbf{orienté objet} : en \python, tout est un \textbf{objet}, et ces objets 
+sont regroupées en \textbf{classes}. Une \textbf{méthode} est une fonction qui s'applique aux objets 
 d'une classe particulière. Si \texttt{method} est une méthode de la classe \texttt{c}, et si 
 \texttt{a} est un objet de cette classe, alors on applique \texttt{method} à \texttt{a} avec la 
 syntaxe suivante : \texttt{a.method()}, les parenthèses pouvant contenir des paramètres.\\
@@ -145,7 +150,7 @@ x
 \end{pyconsole}
 
 Les autres méthodes disponibles sont rassemblées dans le tableau~\ref{tab.list.methodes}. Elles ne sont pas exigibles.
-\begin{figure}[!h]
+%\begin{figure}[!h]
   \begin{center}
     \begin{tabular}{|c|c|}
       \hline 
@@ -170,15 +175,15 @@ Les autres méthodes disponibles sont rassemblées dans le tableau~\ref{tab.list
       \texttt{reverse()} & Renverse la liste \\
       \hline
     \end{tabular}
-  \end{center}
-  \caption{Méthodes applicables aux listes.}
+    \captionof{table}{Méthodes applicables aux listes.}
   \label{tab.list.methodes}
-\end{figure}
+  \end{center}
+
 %
 %%%\clearslide{}
 \subsection{Tranchage}
 
-On peut directement accéder à une sous-liste Python (ou tranche ---\emph{slice} en anglais--- 
+On peut directement accéder à une sous-liste Python (ou tranche ---\textbf{slice} en anglais--- 
 c'est-à-dire bloc de cases consécutives) d'une liste, c'est ce que l'on appelle le tranchage 
 (\textit{slicing}).
 
@@ -190,6 +195,7 @@ On utilise les  syntaxes
   \item \pyv{u[:]} pour accéder à la tranche complète (toute la liste \pyv{u}) ;
   \item \pyv{u[i:j:p]} pour accéder à la tranche de la liste \pyv{u} allant des indices \pyv{i} à \pyv{j-1}, par pas de \pyv{p}.
 \end{itemize}
+
 \begin{pyconsole}
 u
 u[2:5]
@@ -220,17 +226,17 @@ utiliser les possibilités de la bibliothèque de calcul numérique \pyv{numpy}.
 \section{Alias}
 
 Parfois, lorsque l'on manipule des tableaux, on observe un phénomène étrange qui laisse pantois : 
-c'est l'\emph{aliasing}. C'est une notion assez subtile, mais qu'il est bon de connaître pour 
+c'est l'\textbf{aliasing}. C'est une notion assez subtile, mais qu'il est bon de connaître pour 
 éviter les problèmes qui en découlent, ou au moins avoir une parade lorsqu'on s'y trouve 
 confronté.\\
 
 
 Commençons par un exemple où tout se passe intuitivement :
-\begin{lstlisting}
+\begin{pyconsole}
 x = 3
 y = x
 x = 42
-\end{lstlisting}
+\end{pyconsole}
 
 Que vaut alors \pyv{y} ? 
 \begin{pyconsole}
@@ -249,22 +255,22 @@ y
 \end{pyconsole}
 Tâchons de donner une explication à ce phénomène.
 \begin{itemize}
-  \item Pour les objets de type \emph{non mutable} (on ne peut pas les modifier, comme les types 
+  \item Pour les objets de type \textbf{non mutable} (on ne peut pas les modifier, comme les types 
   \pyv{int}, \pyv{float}, \pyv{bool}, \pyv{str}, \pyv{tuple}), une instruction du type \pyv{x = y} 
 crée une nouvelle variable : la variable \pyv{x} pointe vers une case contenant la valeur de 
-\pyv{y}, et l'on dit que \pyv{x} et \pyv{y} sont des \emph{alias} de cette valeur. Réattribuer à 
+\pyv{y}, et l'on dit que \pyv{x} et \pyv{y} sont des \textbf{alias} de cette valeur. Réattribuer à 
 \pyv{x} ou \pyv{y} une nouvelle valeur casse cet alias : les deux variables ne pointent plus vers la 
 même valeur.
-  \item Pour les objets de type \emph{mutable}, les choses sont plus compliquées : on peut modifier 
+  \item Pour les objets de type \textbf{mutable}, les choses sont plus compliquées : on peut modifier 
 leur contenu sans les réassigner. C'est le cas des listes \python. Après une instruction du type 
 \pyv{x = y} , les variables \pyv{x} et \pyv{y} pointent vers le même objet : ce sont des 
-\emph{alias} de cet objet là aussi. Mais si l'on modifie le contenu de \pyv{x}, sans réaffecter 
+\textbf{alias} de cet objet là aussi. Mais si l'on modifie le contenu de \pyv{x}, sans réaffecter 
 \pyv{x}, l'alias n'est pas cassé et l'on modifie à la fois \pyv{x} et \pyv{y}.
 \end{itemize}
 
 La fonction \pyv{id()}, qui affiche pour chaque objet son \og numéro d'identité\fg, permet de 
 mettre cela en évidence :
-
+\begin{multicols}{2}
 \begin{pyconsole}
 x = 3
 y = x
@@ -273,7 +279,7 @@ x = 42
 id(x),id(y)
 \end{pyconsole}
 
-et
+%et
 
 \begin{pyconsole}
 x = [0]*5
@@ -283,6 +289,7 @@ x[0] = 42
 id(x),id(y)
 \end{pyconsole}
 
+\end{multicols}
 Si l'on veut que \pyv{x} et \pyv{y} ne soient plus des alias, on pourra plutôt utiliser la méthode 
 \pyv{copy()}.
 
@@ -317,9 +324,9 @@ au programme de l'informatique tronc commun.
   \begin{equation*}
     \sigma^2(t) = \dfrac{1}{n} \sum_{k=0}^{n-1} \p{t_k - \bar{t}}^2 = \p{\dfrac{1}{n} \sum_{k=0}^{n-1} t_k^2} - \p{\bar{t}}^2. 
   \end{equation*}
-  On réalise cela de manière naïve. Exécutons donc le script suivant
+  On réalise cela de manière naïve. Exécutons donc le script suivant.
 
-\begin{pyblock}
+\begin{pyverbatim}
 def moyenne(t):
     """Calcule la moyenne de t
        Précondition : t est un tableau de nombres non vide"""
@@ -328,7 +335,9 @@ def moyenne(t):
         # Invariant : s == somme des éléments de t avant x
         s = s + x 
     return s/len(t)
-    
+\end{pyverbatim}
+
+\begin{pyverbatim}
 def variance(t):
     """Renvoie la variance de t
        Précondition : t est un tableau de nombres non vide"""
@@ -341,11 +350,13 @@ def variance(t):
 t = [i for i in range(101)]
 print(moyenne(t))
 print(variance(t))
-\end{pyblock}
-Cela renvoie alors :
-\begin{quote}
-  \printpythontex[verb]
-\end{quote}
+\end{pyverbatim}
+
+
+%Cela renvoie alors :
+%\begin{quote}
+%  \printpythontex[verb]
+%\end{quote}
 
 
 Une solution plus naturelle dans d'autres langages (mais pas \python) pour calculer la moyenne, 
@@ -370,7 +381,7 @@ def moyenne(t):
 \subsubsection{Obtenir la valeur du maximum}
 
 On cherche à obtenir le maximum d'un tableau de nombres. Pour cela, on balaie séquentiellement le tableau en se souvenant du plus grand nombre déjà rencontré. 
-\begin{pyblock}
+\begin{pyverbatim}
 def maxi(t):
     """Renvoie le plus grand élément de t.
        Précondition : t est un tableau non vide"""
@@ -382,7 +393,7 @@ def maxi(t):
     return m
 
 print(maxi([-5,2,9,-6,3]))
-\end{pyblock}
+\end{pyverbatim}
 
 Cela renvoie alors :
 \begin{quote}
@@ -393,7 +404,7 @@ Cela renvoie alors :
 Dans de nombreux autres langages de programmation, on ne parcourt pas directement les éléments d'un 
 tableau mais leurs indices. On écrira
 quelque chose ressemblant plutôt à ceci. 
-\begin{pyblock}
+\begin{pyverbatim}
 def maxi(t):
     """Renvoie le plus grand élément de t.
        Précondition : t est un tableau non vide"""
@@ -403,7 +414,7 @@ def maxi(t):
         if t[i] > m:
             m = t[i] # On a trouvé plus grand, on met à jour m
     return m
-\end{pyblock}
+\end{pyverbatim}
 En \python, c'est moins élégant que l'autre solution.
 
 \subsubsection{Obtenir l'indice du maximum}
@@ -413,7 +424,7 @@ On reprend la même idée que précédemment en parcourant le tableau par ses in
 en mémoire l'indice du plus grand élément déjà trouvé.
 
 Dans la plupart des langages, on écrira le script suivant.
-\begin{pyblock}
+\begin{pyverbatim}
 def indicemaxi(t):
     """Renvoie l'indice du plus grand élément de t.
        Précondition : t est un tableau non vide"""
@@ -425,7 +436,7 @@ def indicemaxi(t):
     return im
     
 print(indicemaxi([5,-1,10,3]))
-\end{pyblock}
+\end{pyverbatim}
 
 Cela renvoie alors :
 \begin{quote}
@@ -454,7 +465,7 @@ On veut écrire une fonction \pyv{appartient(t,e)} retournant un booléen disant
 Pour cela, on parcourt séquentiellement le tableau en s'arrêtant dès qu'on le trouve. Si on a épuisé 
 le tableau sans le trouver, on renvoie \pyv{False}. 
 On écrit alors le script suivant.
-\begin{pyblock}
+\begin{pyverbatim}
 def appartient(e, t):
     """Renvoie un booléen disant si e appartient à t
        Précondition : t est un tableau"""
@@ -467,7 +478,7 @@ def appartient(e, t):
 t = [i**3 for i in range(10)]
 print(appartient(3,t))
 print(appartient(8,t))
-\end{pyblock}
+\end{pyverbatim}
 Cela renvoie alors :
 \begin{quote}
 \printpythontex[verb]
@@ -475,7 +486,7 @@ Cela renvoie alors :
 On peut aussi vouloir obtenir l'indice de la première occurence de cet élément.
 On peut alors modifier la fonction précédente pour parcourir le tableau par ses indices, s'arrêter 
 dès que l'on trouve l'élément et renvoyer \pyv{None} sinon.
-\begin{lstlisting}
+\begin{pyverbatim}
 def ind_appartient(e,t):
     """Renvoie l'indice de la première occurence de e dans t,
        None si e n'est pas dans t
@@ -485,20 +496,20 @@ def ind_appartient(e,t):
         if t[i] == e:
             return i # On a trouvé e à l'indice i
     return None
-\end{lstlisting}
+\end{pyverbatim}
 
 \subsection{Recherche dichotomique dans un tableau trié}
 
 Dans le problème précédent de recherche d'un élément séquentiellement dans un tableau, on risque de parcourir intégralement le tableau si ce l'élément se trouve à la fin du tableau. 
 Cependant, si le tableau est trié, on peut éviter ceci. 
 
-On suppose donc que l'on cherche un élément dans un tableau préalablement \emph{trié par ordre croissant}. On regarde alors l'élément \og au milieu du tableau \fg{}, ce que l'on pourrait appeler un  \emph{pivot}. 
+On suppose donc que l'on cherche un élément dans un tableau préalablement \textbf{trié par ordre croissant}. On regarde alors l'élément \og au milieu du tableau \fg{}, ce que l'on pourrait appeler un  \textbf{pivot}. 
 Si ce pivot est plus petit que ce que l'on cherche, on sait qu'il faut chercher à droite du pivot. 
 Si ce pivot est plus grand que ce que l'on cherche, on sait qu'il faut chercher à gauche du pivot. 
 
 Pour faire cela, on va garder en mémoire une tranche de notre tableau, que l'on va affiner par dichotomie. 
 
-\begin{lstlisting}
+\begin{pyverbatim}
 def appartient_dicho(e,t):
     """Renvoie un booléen indiquant si e est dans t
        Préconditions : t est un tableau de nombres trié par ordre croissant
@@ -519,7 +530,7 @@ def appartient_dicho(e,t):
 t = [i**2 for i in range(101)]
 print(appartient_dicho(11,t))
 print(appartient_dicho(81,t))
-\end{lstlisting}
+\end{pyverbatim}
 Cela renvoie alors :
 \begin{quote}
 %\printpythontex[verb]
