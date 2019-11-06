@@ -544,23 +544,23 @@ for ds in info_ds:
     
     
     
-# activite=info_tp[3]
-# # rep=trouver_repertoire(activite)
-# # file=trouver_file_tex(activite,'tp')
-# # genere_pdf(file,rep,'tp')
-# impr_2_page(activite,'tp')
+activite=info_tp[4]
+rep=trouver_repertoire(activite)
+file=trouver_file_tex(activite,'tp')
+genere_pdf(file,rep,'tp')
+impr_2_page(activite,'tp')
 
 # activite=info_cours[4]
 # rep=trouver_repertoire(activite)
 # file=trouver_file_tex(activite,'cours')
 # genere_pdf(file,rep,'cours')
 
-activite=info_ds[0]
-num_ds_str=activite[0]
-rep='DS/DS'+num_ds_str
-file=rep+sep+'DS'+num_ds_str+'.tex'
-genere_pdf(file,rep,'ds')
-#impr_2_page(activite,'tp')
+# activite=info_ds[0]
+# num_ds_str=activite[0]
+# rep='DS/DS'+num_ds_str
+# file=rep+sep+'DS'+num_ds_str+'.tex'
+# genere_pdf(file,rep,'ds')
+# #impr_2_page(activite,'tp')
 
 
     
