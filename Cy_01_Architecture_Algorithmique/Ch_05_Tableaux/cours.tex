@@ -164,7 +164,7 @@ Les autres méthodes disponibles sont rassemblées dans le tableau~\ref{tab.list
       \hline
       \texttt{remove(x)} & Supprime la première occurence de \texttt{x} (erreur si impossible)\\
       \hline
-      \texttt{pop([i])} & Supprime l'élément en position \texttt{i} (si vide, le dernier) \\
+      \texttt{pop(i)} & Supprime l'élément en position \texttt{i} (si vide, le dernier) \\
       \hline 
       \texttt{index(x)} & Renvoie l'indice de la première occurence de \texttt{x} (erreur si impossible)\\
       \hline
@@ -268,6 +268,8 @@ leur contenu sans les réassigner. C'est le cas des listes \python. Après une i
 \pyv{x}, l'alias n'est pas cassé et l'on modifie à la fois \pyv{x} et \pyv{y}.
 \end{itemize}
 
+
+
 La fonction \pyv{id()}, qui affiche pour chaque objet son \og numéro d'identité\fg, permet de 
 mettre cela en évidence :
 \begin{multicols}{2}
@@ -307,7 +309,7 @@ x[:]} ou encore \pyv{y = x+[]}.
 Cependant, en insérant des tableaux dans d'autres tableaux, on a une notion de \og profondeur\fg. Les 
 techniques données ci-dessus ne permettent de rompre un alias qu'au niveau de l'enveloppe externe. 
 Il existe la fonction \pyv{deepcopy} de la bibliothèque \pyv{copy}, qui effectue une copie totale 
-d'un objet, en profondeur comme son nom l'indique. Cela dit il est peu probable que nous en ayions 
+d'un objet, en profondeur comme son nom l'indique. Cela dit il est peu probable que nous en ayons 
 besoin.
 
 \section{Algorithmes}
@@ -317,14 +319,12 @@ au programme de l'informatique tronc commun.
 
 \subsection{Calcul de la moyenne et de la variance.}
   Pour un tableau de nombres $t = [t_0,\dots,t_{n-1}]$ de longueur $n$, on voudra souvent calculer sa moyenne 
-  \begin{equation*}
-    \bar{t} = \dfrac{1}{n} \sum_{k=0}^{n-1} t_k 
-  \end{equation*}
-  ainsi que sa variance 
-  \begin{equation*}
-    \sigma^2(t) = \dfrac{1}{n} \sum_{k=0}^{n-1} \p{t_k - \bar{t}}^2 = \p{\dfrac{1}{n} \sum_{k=0}^{n-1} t_k^2} - \p{\bar{t}}^2. 
-  \end{equation*}
+$   \bar{t} = \dfrac{1}{n} \sum_{k=0}^{n-1} t_k   $   ainsi que sa variance $
+    \sigma^2(t) = \dfrac{1}{n} \sum_{k=0}^{n-1} \p{t_k - \bar{t}}^2 = \p{\dfrac{1}{n} \sum_{k=0}^{n-1} t_k^2} - \p{\bar{t}}^2$.
+    
   On réalise cela de manière naïve. Exécutons donc le script suivant.
+
+
 
 \begin{pyverbatim}
 def moyenne(t):
@@ -337,7 +337,7 @@ def moyenne(t):
     return s/len(t)
 \end{pyverbatim}
 
-\begin{pyverbatim}
+\begin{lstlisting}
 def variance(t):
     """Renvoie la variance de t
        Précondition : t est un tableau de nombres non vide"""
@@ -350,7 +350,7 @@ def variance(t):
 t = [i for i in range(101)]
 print(moyenne(t))
 print(variance(t))
-\end{pyverbatim}
+\end{lstlisting}
 
 
 %Cela renvoie alors :
@@ -395,11 +395,11 @@ def maxi(t):
 print(maxi([-5,2,9,-6,3]))
 \end{pyverbatim}
 
+
 Cela renvoie alors :
-\begin{quote}
-\printpythontex[verb]
-%  \pyv{9}
-\end{quote}
+\begin{pyverbatim}
+9
+\end{pyverbatim}
 
 Dans de nombreux autres langages de programmation, on ne parcourt pas directement les éléments d'un 
 tableau mais leurs indices. On écrira
@@ -415,16 +415,19 @@ def maxi(t):
             m = t[i] # On a trouvé plus grand, on met à jour m
     return m
 \end{pyverbatim}
-En \python, c'est moins élégant que l'autre solution.
+En Python, c'est moins élégant que l'autre solution.
+
+
 
 \subsubsection{Obtenir l'indice du maximum}
 On veut maintenant écrire une fonction \pyv{indicemaxi} donnant l'indice d'un plus grand élément d'un tableau, passé en argument.
+
 
 On reprend la même idée que précédemment en parcourant le tableau par ses indices. On garde alors 
 en mémoire l'indice du plus grand élément déjà trouvé.
 
 Dans la plupart des langages, on écrira le script suivant.
-\begin{pyverbatim}
+\begin{lstlisting}
 def indicemaxi(t):
     """Renvoie l'indice du plus grand élément de t.
        Précondition : t est un tableau non vide"""
@@ -436,12 +439,12 @@ def indicemaxi(t):
     return im
     
 print(indicemaxi([5,-1,10,3]))
-\end{pyverbatim}
+\end{lstlisting}
 
-Cela renvoie alors :
-\begin{quote}
-  \printpythontex[verb]
-\end{quote}
+Cela renvoie alors \pyv{2}.
+%\begin{quote}
+%  \printpythontex[verb]
+%\end{quote}
 
 Cependant, les vrais pythonistes écriraient plutôt ceci. 
 \begin{lstlisting}
@@ -455,6 +458,8 @@ def indicemaxi(t):
             im = i # On a trouvé plus grand, on met à jour im
     return im
 \end{lstlisting}
+
+
 
 %%%\clearslide{}
 \subsection{Recherche séquentielle d'un élément dans un tableau}
@@ -480,15 +485,14 @@ print(appartient(3,t))
 print(appartient(8,t))
 \end{pyverbatim}
 Cela renvoie alors :
-\begin{quote}
-\printpythontex[verb]
-\end{quote}
-On peut aussi vouloir obtenir l'indice de la première occurence de cet élément.
+\pyv{False} puis \pyv{True}.
+
+On peut aussi vouloir obtenir l'indice de la première occurrence de cet élément.
 On peut alors modifier la fonction précédente pour parcourir le tableau par ses indices, s'arrêter 
 dès que l'on trouve l'élément et renvoyer \pyv{None} sinon.
-\begin{pyverbatim}
+\begin{lstlisting}
 def ind_appartient(e,t):
-    """Renvoie l'indice de la première occurence de e dans t,
+    """Renvoie l'indice de la première occurrence de e dans t,
        None si e n'est pas dans t
        Précondition : t est un tableau"""
     for i in len(t):
@@ -496,7 +500,8 @@ def ind_appartient(e,t):
         if t[i] == e:
             return i # On a trouvé e à l'indice i
     return None
-\end{pyverbatim}
+\end{lstlisting}
+
 
 \subsection{Recherche dichotomique dans un tableau trié}
 
