@@ -51,14 +51,14 @@ def triangle(t):
         return 2*x - 3 
 \end{pyverbatim}
 \question{}
-\begin{pyverbatim}
+\begin{lstlisting}
 def sp_triangle(n,t):
     """Renvoie la somme partielle C_n de la série de Fourier associée au créneau"""
     S = 0
     for p in range(n+1) : 
         S = S + cos((2*p+1)*pi*t)/(2*p+1)**2
-    return S*8/pi**2
-\end{pyverbatim}
+    return S*8/pi**2 
+\end{lstlisting}
 \question{}
 \begin{lstlisting}
 def fourier_triangle(nom_de_fichier):

@@ -372,7 +372,7 @@ def genere_support(rep,info_activite,type_activite):
             #     f.write('\\section{TP '+num_activite+'}\n')
             if type_activite=='tp' or type_activite=='ds':
                 f2=open(rep_activite_cor,'w',encoding='utf-8')
-                f2.write('\n\\vspace{-3.5cm}\n\\begin{huge}\n Proposition de corrigé\n\\end{huge}\n')
+                f2.write('\n\\vspace{0.1cm}\n\\begin{huge}\n Proposition de corrigé\n\\end{huge}\n')
             for support in supports.split(';'):
                 if type_activite=='cours':
                     exo,source=trouve_exo_source(support)
