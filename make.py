@@ -474,6 +474,17 @@ def genere_pdf(file,rep,type_activite):
         os.system('cp '+file_abrege+'-cor.pdf '+path_ref+sep+path_site+sep+file_abrege+'-cor.pdf')
     elif type_activite=='ds':
         os.system('mv '+file_abrege+'-cor.pdf '+path_site_ds+sep+file_abrege+'-cor.pdf')
+        os.system('rm *.aux')
+        os.system('rm *.log')
+        os.system('rm *.out')
+        os.system('rm *.toc')
+        os.system('rm *.pytxcode')
+        os.system('rm *.nav')
+        os.system('rm *.snm')
+        os.system('rm *.pdf')
+        os.system('rm *.idx')
+        os.system('rm *.bcf')
+        os.system('rm *.xml')
     # os.system('cp '+file.split('.')[0]+'_complet.pdf '+path_site+sep+file_abrege+'_complet.pdf ')
     # 
   
