@@ -14,6 +14,7 @@ f=open('log.txt','w')
 path=r"progression_2019_2020_IPT_MPSI.xlsx"#chemin de la progression
 path_classe=''
 path_site='site_info_mpsi'#Chemin pour exporter les pdf vers site
+path_site_ds='/Users/emiliendurif/Dropbox/cpge/ipt_mpsi_ds'#Chemin pour exporter les pdf vers site
 path_ref=os.popen('pwd').readlines()[0].strip()
 
 # os.chdir(os.system('pwd'))
@@ -465,9 +466,14 @@ def genere_pdf(file,rep,type_activite):
         compile_tex_python(file_abrege+'-cor')
     # os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pdflatex '+file)
     #pdb.set_trace()
-    os.system('cp '+file_abrege+'.pdf '+path_ref+sep+path_site+sep+file_abrege+'.pdf')
-    if type_activite=='tp' or type_activite=='ds':
+    if type_activite=='ds':
+        os.system('mv '+file_abrege+'.pdf '+path_site_ds+sep+file_abrege+'.pdf')
+    else:
+        os.system('cp '+file_abrege+'.pdf '+path_ref+sep+path_site+sep+file_abrege+'.pdf')
+    if type_activite=='tp':
         os.system('cp '+file_abrege+'-cor.pdf '+path_ref+sep+path_site+sep+file_abrege+'-cor.pdf')
+    elif type_activite=='ds':
+        os.system('mv '+file_abrege+'-cor.pdf '+path_site_ds+sep+file_abrege+'-cor.pdf')
     # os.system('cp '+file.split('.')[0]+'_complet.pdf '+path_site+sep+file_abrege+'_complet.pdf ')
     # 
   
@@ -544,23 +550,23 @@ for ds in info_ds:
     
     
     
-activite=info_tp[4]
-rep=trouver_repertoire(activite)
-file=trouver_file_tex(activite,'tp')
-genere_pdf(file,rep,'tp')
-impr_2_page(activite,'tp')
+# activite=info_tp[4]
+# rep=trouver_repertoire(activite)
+# file=trouver_file_tex(activite,'tp')
+# genere_pdf(file,rep,'tp')
+# impr_2_page(activite,'tp')
 
-# activite=info_cours[4]
+# activite=info_cours[5]
 # rep=trouver_repertoire(activite)
 # file=trouver_file_tex(activite,'cours')
 # genere_pdf(file,rep,'cours')
 
-# activite=info_ds[0]
-# num_ds_str=activite[0]
-# rep='DS/DS'+num_ds_str
-# file=rep+sep+'DS'+num_ds_str+'.tex'
-# genere_pdf(file,rep,'ds')
-# #impr_2_page(activite,'tp')
+activite=info_ds[1]
+num_ds_str=activite[0]
+rep='DS/DS'+num_ds_str
+file=rep+sep+'DS'+num_ds_str+'.tex'
+genere_pdf(file,rep,'ds')
+#impr_2_page(activite,'tp')
 
 
     
