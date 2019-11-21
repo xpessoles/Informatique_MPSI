@@ -572,7 +572,7 @@ for ds in info_ds:
 # file=trouver_file_tex(activite,'cours')
 # genere_pdf(file,rep,'cours')
 
-activite=info_ds[1]
+activite=info_ds[2]
 num_ds_str=activite[0]
 rep='DS/DS'+num_ds_str
 file=rep+sep+'DS'+num_ds_str+'.tex'
