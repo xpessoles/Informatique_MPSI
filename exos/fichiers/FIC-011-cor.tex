@@ -1,0 +1,23 @@
+\question{} Que fait chacune des méthodes  \pyv{read()}, \pyv{readline()} et \pyv{readlines()} ? Quels sont les types des valeurs que chacune des ces fonctions renvoient ? 
+
+La méthode read lit un caractère depuis la position courante, renvoie une chaine.
+
+La méthode readline lit le reste de la ligne depuis la position courante, renvoie une chaine.
+
+La méthode readlines lit toutes les lignes depuis la position courante, renvoie une liste de chaines.
+
+\question{} Que représentent les symboles \texttt{\textbackslash t} et \texttt{\textbackslash n} ?
+
+Ce sont les caractères \og tabulation\fg{} et \og nouvelle ligne\fg{} .
+
+
+\question{} \'Ecrire une fonction \python\ \pyv{carac(nom_de_fichier)} qui renvoie un tableau contenant le nombre de caractères de chaque ligne du fichier \pyv{nom_de_fichier}, retour chariot exclu. 
+
+\begin{pyverbatim}
+def carac(nom_de_fichier):
+    """Renvoie une liste contenant le nombre de caractères 
+       de chaque ligne de nom_de_fichier"""
+    with open(nom_de_fichier,'r',) as f:
+        lignes = f.readlines()
+    return [len(x.strip('\n')) for x in lignes]
+\end{pyverbatim}

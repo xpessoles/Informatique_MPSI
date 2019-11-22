@@ -314,7 +314,7 @@ On part du tableur suivant (voir figure~\ref{07:tab:moyennes_matieres}), qui con
 %\clearslide{}
 
 En enregistrant ce ficher au format CSV (pour \emph{Comma-Separated Values}), on obtient le fichier \texttt{moyennes\_matieres.csv} suivant. 
-\begin{verbatim}
+\begin{lstlisting}
 Matière;Maths;Physique;Lettres;Anglais;Informatique;SII
 Coefficient;8;7;4;3;2;2
 Laura;8,15;9,84;11;5,5;10,64;7,16
@@ -323,7 +323,7 @@ Solène;7,08;8,53;10;7,4;9,66;10,06
 Donovan;12,33;11,97;12,17;10,3;16,25;15,98
 Élodie;7,93;9,49;10,5;6,8;10,26;9,31
 Ugo;12,43;13,28;10,33;11,2;17,38;12,11
-\end{verbatim}
+\end{lstlisting}
 
 %\clearslide{}
 
@@ -389,14 +389,14 @@ for e in T :
     e.append(moy)
 \end{pyverbatim}
 À la fin de ce traitement, voici l'état de la variable \pyv{T}.
-\begin{pyverbatim}
+\begin{lstlisting}
 [['Laura', 8.15, 9.84, 11.0, 5.5, 10.64, 7.16, 8.853076923076923], 
  ['Clémentine', 8.93, 11.6, 12.33, 11.4, 11.16, 10.04, 10.713846153846152], 
  ['Solène', 7.08, 8.53, 10.0, 7.4, 9.66, 10.06, 8.38423076923077], 
  ['Donovan', 12.33, 11.97, 12.17, 10.3, 16.25, 15.98, 12.55653846153846], 
  ['Élodie', 7.93, 9.49, 10.5, 6.8, 10.26, 9.31, 8.900384615384617], 
  ['Ugo', 12.43, 13.28, 10.33, 11.2, 17.38, 12.11, 12.549999999999999]]
-\end{pyverbatim}
+\end{lstlisting}
 
 %\clearslide{}
 Il ne reste plus qu'à écrire les valeurs calculées dans un tableau, comme suit. 
@@ -407,7 +407,7 @@ with open("moyennes_ponderees.csv","w") as f :
         f.write('\n'+';'.join([str(e[0]),str(e[-1])]))
 \end{pyverbatim}
 Le contenu du fichier \texttt{moyennes\_ponderees.csv} est le suivant. 
-\begin{verbatim}
+\begin{lstlisting}
 Prénoms;Moyennes pondérées
 Laura;8.853076923076923
 Clémentine;10.713846153846152
@@ -415,7 +415,7 @@ Solène;8.38423076923077
 Donovan;12.55653846153846
 Élodie;8.900384615384617
 Ugo;12.549999999999999
-\end{verbatim}
+\end{lstlisting}
 %\clearslide{}
 Dans un tableur, on lit cela (voir figure~\ref{07:tab:moyennes_ponderees}).
 \begin{figure}[h!]
@@ -425,7 +425,8 @@ Dans un tableur, on lit cela (voir figure~\ref{07:tab:moyennes_ponderees}).
     \caption{Tableau des moyennes pondérées.}
     \label{07:tab:moyennes_ponderees}
 \end{figure}
-\section{Exercices.}
+
+%\section{Exercices.}
 
 %\begin{exo}
 %  \input{FIC-006}
