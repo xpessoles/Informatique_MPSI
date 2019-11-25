@@ -12,7 +12,7 @@ partir du milieu du XXe siècle et touche aujourd'hui de nombreuses
 disciplines, allant des mathématiques à l'économie en passant par la
 physique et la géologie.
 
-
+\setcounter{section}{1}
 \subsection{Choix d'un modèle}\label{choix-dun-moduxe8le}
 
 
@@ -26,60 +26,66 @@ adjacentes ?
 \begin{figure}[!htb]
 \begin{center}
 \includegraphics[width=0.8\textwidth]{illustration_perco.jpg}
+\caption{deux exemples de grilles $10\times10$ ; la percolation
+n'est possible que dans le second cas (les cases ouvertes sont les cases
+blanches)}
 \end{center}
 \end{figure}
 
 
-%Figure 1 -- \emph{deux exemples de grilles} 10 10 \emph{; la percolation
-%n'est possible que dans le second cas (les cases ouvertes sont les cases
-%blanches).}
-%
-%On conçoit aisément que la réussite ou non de la percolation dépend
-%beaucoup de \emph{p} : plus celle-ci est grande, plus les chances de
-%réussite sont importantes. Nous auront l'occasion d'observer l'existence
-%pour de grandes valeurs de \emph{n} d'un seuil critique
-%\emph{p}\textsubscript{0} au delà duquel la percolation a toutes les
-%chances de réussir et en deçà duquel la percolation échoue presque à
-%chaque fois.
-%\end{quote}
-%
-%\section{Création et visualisation de la
-%grille}\label{cruxe9ation-et-visualisation-de-la-grille}
-%
-%\begin{quote}
-%Les deux modules essentiels dont nous aurons besoin sont les modules
-%numpy (manipulation de tableaux bi-dimensionnels) et mathplotlib.pyplot
-%(graphisme), qu'il convient d'importer :
-%
-%Nous aurons aussi besoin de la fonction rand du module numpy.random
-%(fonction qui retourne un nombre pseudo- aléatoire de l'intervalle
-%{[}0\emph{,} 1{[}) et accessoirement de la fonction ListedColormap du
-%module matplotlib.colors (pour choisir l'échelle chromatique à utiliser
-%pour la représentation graphique). Ces deux fonctions seront importées
-%directement, puisque nous n'aurons pas besoin des modules entiers :
-%
-%La grille de percolation sera représentée par le type np.array. La
-%fonction np.zeros((n, p)) renvoie un tableau de \emph{n} lignes et
-%\emph{p} colonnes contenant dans chacune de ses cases le nombre flottant
-%0.0. Une fois un tableau tab créé, la case d'indice (\emph{i, j}) est
-%référencée indifféremment par tab{[}i{]}{[}j{]} ou par tab{[}i, j{]} et
-%peut être lue et modifiée (comme d'habitude, les indices débutent à 0).
-%Enfin, on notera que si tab est un tableau, l'attribut tab.shape
-%retourne le couple (\emph{n, p}) de ses dimensions verticale et
-%horizontale (le nombre de lignes et de colonnes, tab étant vu comme une
-%matrice).
-%
-%1. 
-%
-%Dans la suite de ce document, on représentera une grille de percolation
-%par un tableau \emph{n n}, les cases fermées contenant le nombre
-%flottant 0.0 et les cases ouvertes le nombre flottant 1.0.
-%
-%Question 1. Définir une fonction creation\_grille(p, n) à deux
-%paramètres : un nombre réel \emph{p} (qu'on supposera dans l'intervalle
-%{[}0\emph{,} 1{[}) et un entier naturel \emph{n}, qui renvoie un tableau
-%\emph{n n} dans lequel chaque case sera ouverte avec la probabilité
-%\emph{p} et fermée sinon.
+
+
+On conçoit aisément que la réussite ou non de la percolation dépend
+beaucoup de $p$ : plus celle-ci est grande, plus les chances de
+réussite sont importantes. Nous auront l'occasion d'observer l'existence
+pour de grandes valeurs de \emph{n} d'un seuil critique
+$p_0$ au delà duquel la percolation a toutes les
+chances de réussir et en deçà duquel la percolation échoue presque à
+chaque fois.
+
+\subsection{Création et visualisation de la grille}\label{cruxe9ation-et-visualisation-de-la-grille}
+
+Les deux modules essentiels dont nous aurons besoin sont les modules
+\pyv{numpy} (manipulation de tableaux bi-dimensionnels) et \pyv{mathplotlib.pyplot}
+(graphisme), qu'il convient d'importer :
+
+\begin{lstlisting}
+import numpy as np
+import matplotlib.pyplot as plt
+\end{lstlisting}
+
+Nous aurons aussi besoin de la fonction rand du module \pyv{numpy.random}
+(fonction qui retourne un nombre pseudo- aléatoire de l'intervalle
+$\left[0,1\right[$ et accessoirement de la fonction \pyv{ListedColormap} du
+module \pyv{matplotlib.colors} (pour choisir l'échelle chromatique à utiliser
+pour la représentation graphique). Ces deux fonctions seront importées
+directement, puisque nous n'aurons pas besoin des modules entiers :
+
+\begin{lstlisting}
+from numpy.random import rand
+from matplotlib.colors import ListedColormap
+\end{lstlisting}
+
+La grille de percolation sera représentée par le type \pyv{np.array}. La
+fonction \pyv{np.zeros((n, p))} renvoie un tableau de \emph{n} lignes et
+\emph{p} colonnes contenant dans chacune de ses cases le nombre flottant
+0.0. Une fois un tableau \pyv{tab} créé, la case d'indice (\emph{i, j}) est
+référencée indifféremment par \pyv{tab[i][j]} ou par \pyv{tab[i][j]} et
+peut être lue et modifiée (comme d'habitude, les indices débutent à 0).
+Enfin, on notera que si tab est un tableau, l'attribut \pyv{tab.shape}
+retourne le couple $(n, p)$ de ses dimensions verticale et
+horizontale (le nombre de lignes et de colonnes, \pyv{tab} étant vu comme une
+matrice).
+
+Dans la suite de ce document, on représentera une grille de percolation
+par un tableau $n\times n$, les cases fermées contenant le nombre
+flottant $0.0$ et les cases ouvertes le nombre flottant $1.0$.
+
+\question{Définir une fonction \python, \pyv{creationgrille(p, n)} à deux
+paramètres : un nombre réel \emph{p} (qu'on supposera dans l'intervalle
+$[0,1[$ et un entier naturel \emph{n}, qui renvoie un tableau
+$(n,n)$ dans lequel chaque case sera ouverte avec la probabilité
+$p$ et fermée sinon.}
 %
 %Pour visualiser simplement la grille, nous allons utiliser la fonction
 %plt.matshow : appliquée à un tableau, celle-ci présente ce dernier sous

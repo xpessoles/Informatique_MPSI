@@ -1,0 +1,61 @@
+
+
+
+\question{}
+
+\begin{center}
+\begin{lstlisting}
+mess="la metamorphose"
+alphabet="abcdefghijklmnopqrstuvwxyz"
+mess=""
+\end{lstlisting}
+\end{center}
+
+
+
+
+
+\question{}
+
+
+\begin{center}
+\begin{lstlisting}
+def cryptage_cesar(mess,n):
+    code=""
+    for i in range(len(mess)):
+        if mess[i].isalpha():
+            ind=alphabet.index(mess[i])
+            newind=(ind+n)%26
+            code=code+alphabet[newind]
+        else:
+            code=code+mess[i]
+    return code
+\end{lstlisting}
+\end{center}
+
+\question{}
+
+\begin{center}
+\begin{lstlisting}
+def decryptage_cesar(code):
+    for n in range(26):
+        decrypt_mess=""
+        for i in range(len(code)):
+            if code[i].isalpha():
+                ind=alphabet.index(code[i])
+                newind=(ind-n)%26
+                decrypt_mess=decrypt_mess+alphabet[newind]
+            else:
+                decrypt_mess=decrypt_mess+code[i]
+        print(decrypt_mess," avec n= ",n)
+\end{lstlisting}
+\end{center}
+
+
+\question{}
+
+
+On trouve avec $n=12$:  "le prochain devoir sera un sujet de modelisation".
+
+
+
