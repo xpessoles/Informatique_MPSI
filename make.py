@@ -302,7 +302,7 @@ def genere_entete(rep,info_activite,type_activite):
                 elif '%Infos sur les supports' in ligne:
                     texte_entete+='%Infos sur les supports\n'
                     texte_1='\\def\\xxtitreexo{'
-                    texte_2='\\def\\xxsourceexo{\\hspace{.2cm} \\footnotesize{\textbf{Sources}'
+                    texte_2='\\def\\xxsourceexo{\\hspace{.2cm} \\footnotesize{\\textbf{Sources}'
                     n_exo=1
                     for support in supports.split(';'):
                         exo,source=trouve_exo_source(support)
