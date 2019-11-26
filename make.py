@@ -302,11 +302,16 @@ def genere_entete(rep,info_activite,type_activite):
                 elif '%Infos sur les supports' in ligne:
                     texte_entete+='%Infos sur les supports\n'
                     texte_1='\\def\\xxtitreexo{'
-                    texte_2='\\def\\xxsourceexo{\\hspace{.2cm} \\footnotesize{'
+                    texte_2='\\def\\xxsourceexo{\\hspace{.2cm} \\footnotesize{\textbf{Sources}'
+                    n_exo=1
                     for support in supports.split(';'):
                         exo,source=trouve_exo_source(support)
                         #texte_1+=exo+'\n'
-                        texte_2+=source+'\n'
+                        if source!='':
+                            texte_2+='exercice '+str(n_exo)+' : '+source+'\n'
+                        else:
+                            texte_2+=source+'\n'
+                        n_exo+=1
                     texte_1+=name_activite+'}\n'
                     texte_2+='}}\n'
                     texte_entete+=texte_1+texte_2

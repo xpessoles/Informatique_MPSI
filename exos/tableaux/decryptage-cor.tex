@@ -57,5 +57,55 @@ def decryptage_cesar(code):
 
 On trouve avec $n=12$:  "le prochain devoir sera un sujet de modelisation".
 
+\question{}
+
+\begin{center}
+\begin{lstlisting}
+global alphabet,N,cle,L
+alphabet= "abcdefghijklmnopqrstuvwxyz"
+N=len(alphabet)
+cle="roue"
+L=len(cle)
+
+
+def code_vigenere(ch):
+    code=""
+    for i in range(len(ch)):
+        d=i
+        while d>L-1:
+            d=d-L
+        index=alphabet.index(ch[i])+alphabet.index(cle[d])
+        if index>N-1:
+            index=index-N
+        j=alphabet[index]
+        code=code+j
+    return code
+\end{lstlisting}
+\end{center}
+
+\question{}
+
+\begin{center}
+\begin{lstlisting}
+def decode_vigenere(ch):
+    decode=""
+    for i in range(len(ch)):
+        d=i
+        while d>L-1:
+            d=d-L
+        index=alphabet.index(ch[i])-alphabet.index(cle[d])
+        if index<0:
+            index=index+N
+        j=alphabet[index]
+        decode=decode+j
+    return(decode)
+\end{lstlisting}
+\end{center}
+
+\question{}
+
+Le chiffre de Vigenère est une amélioration de la méthode de César, son principal intérêt réside dans l'utilisation non pas d'un, mais de 26 alphabets  décalés pour chiffrer un message que l'on retrouve dans le carré de Vigenère (d'où l'appellation polyalphabétique). Il est ainsi bien plus difficile à casser que celui de César, on passe d'une clé sous la forme d'un nombre entier de $d\in\left[1,25\right]$ à une clé sous la forme d'une chaine de caractère de longueur inconnue. Toutefois 300 ans après sa création plusieurs techniques permettant de caser cette méthode de chiffrement ont été développées.
+
+
 
 
