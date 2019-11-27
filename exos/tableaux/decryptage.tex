@@ -55,7 +55,7 @@ Par exemple en choisissant un décalage de 3, le A devient le D, le B devient le
 %
 %\question{Pouvez-vous déchiffrer ce message secret intercepté dans un couloir du lycée : {\em << xq bdaotmuz pqhaud eqdm gz egvqf pq yapqxuemfuaz >>}. Quelle est la faiblesse de ce type de code ?}
 
-\question{Quelle est la faiblesse de ce type de code ?}
+\question{Quelle est la faiblesse de ce type de code ? Proposer en deux lignes une méthode permettant de déterminer (casser) la clé.} 
 
 
 
@@ -102,7 +102,35 @@ Ainsi le chiffrement du mot \og anticonstitutionnellement\fg~ avec la clé \og r
 
 La méthode de chiffrement par lecture de la table est une méthode adaptée \og aux humains\fg, ainsi on réfléchira à l'implémentation d'un algorithme plus efficace en s'aidant de l'exemple.
 
-\question{Écrire une fonction \texttt{code\_vigenere(ch,cle)} ayant pour paramètre d'entrée une chaîne de caractères \texttt{ch}, la clé \texttt{ch} et pour résultat la chaîne \texttt{ch} codée : \texttt{chcode}.}
+On dispose de la variable \pyv{alphabet= "abcdefghijklmnopqrstuvwxyz"}. 
+
+On donne le bloc d'instruction suivant : 
+
+\begin{pyverbatim}
+alphabet= "abcdefghijklmnopqrstuvwxyz"
+for i in range(26):
+    alphabet = alphabet[1:]+alphabet[:1]
+    print (alphabet)
+\end{pyverbatim}
+
+\question{Combien de lignes seront affichées ? Quelles seront les deux premières lignes affichées  ?}
+
+\question{Écrire la fonction \pyv{def generer_table()->list :} qui retourne la table de Vigenère sous la forme d'une liste de listes.}
+Le résultat sera de la forme suivante :
+\footnotesize{
+\begin{pyverbatim}
+[['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p' , 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'], 
+['b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'a'],
+ ... ]
+\end{pyverbatim}
+}
+
+\question{Écrire la fonction \pyv{def generer_cle(mot:str,cle:str)->list } qui retourne la ligne << clé >> de la table \Ref{TabVig}.}
+Le résultat sera de la forme suivante :
+
+
+
+\question{Écrire une fonction étant spécifier ainsi : \pyv{code_vigenere(ch:str, cle:str) -> str } où la chaîne renvoyée correspond à la chaîne codée avec la clé \texttt{cle}.}
 
 \question{Écrire une fonction \texttt{decode\_vigenere(chcode,cle)} ayant pour paramètre d'entrée une chaîne de caractères \texttt{chcode}, la clé \texttt{ch} et pour résultat la chaîne \texttt{chcode} décodée : \texttt{chdecode}.}
 
