@@ -1,4 +1,5 @@
 
+
 \setcounter{section}{1}
 
 \subsection{Indication sur les méthodes associées aux chaînes de caractères}
@@ -24,29 +25,37 @@ Les attributs suivants s'appliquent à des variables de type de chaîne de carac
 
 
 
-Le \textbf{cryptage de César} est un des tout premier code de cryptage qui ait existé. 
+Le \textbf{chiffrement de César} est un des tout premier code de chiffrement qui ait existé. 
 
 La méthode est simple : il suffit de décaler toutes les lettres de l'alphabet du même nombre de lettres. 
 
 
 
-Par exemple en choisissant un décalage de 3, le A devient le D, le B devient le E, le C devient le F et ainsi de suite. Pour la fin de l'alphabet, il suffit de revenir au début : le W devient Z, le X devient A, le Y devient B et le Z devient C. Ainsi un message comme "la metamorphose" devient par décalage d'une lettre "mb nfubnpsqiptf", ce qui est incompréhensible pour le non initié.
+Par exemple en choisissant un décalage de 3, le A devient le D, le B devient le E, le C devient le F et ainsi de suite. Pour la fin de l'alphabet, il suffit de revenir au début : le W devient Z, le X devient A, le Y devient B et le Z devient C. Ainsi un message comme << la metamorphose >> devient par décalage d'une lettre << mb nfubnpsqiptf >>, ce qui est incompréhensible pour le non initié.
 
 
-\question{Avec des instructions python, définir trois chaînes de caractères nommées \textit{alphabet}, \textit{mess} et \textit{code} contenant respectivement les caractères de l'alphabet, un message à crypter (exemple "la metamorphose") et le message crypté (vide initialement). On se limitera à des lettres minuscules non accentuées. Les autres caractères (espaces, chiffres...) seront gardés tels quels (non cryptés).}
-
-
-
-
-
-\question{En utilisant les fonctionnalités découvertes dans la première partie, établir un algorithme permettant de crypter un message par le code de César, pour un décalage $n$ donné. Pour cela, mettre en place une boucle sur les caractères de la chaîne \textit{mess} et remplacer chaque lettre de \textit{mess} par la $n^{ieme}$ lettre suivante. Coder cet algorithme en Python et le tester sur le message "la metamorphose" avec une valeur de \textit{n=3}.}
-
-
-\question{Proposer ensuite l'algorithme de décryptage qui affiche le message crypté en clair, en supposant que $n$ est inconnue. L'utilisateur choisira parmi les décryptages proposés celui qui a du sens ! Ecrire en langage python cet algorithme.}
+\question{Avec des instructions python, définir trois chaînes de caractères nommées \textit{alphabet}, \textit{mess} et \textit{code} contenant respectivement les caractères de l'alphabet, un message à chiffrer (exemple << la metamorphose >>) et le message crypté (vide initialement). On se limitera à des lettres minuscules non accentuées. Les autres caractères (espaces, chiffres...) seront gardés tels quels (non chiffrés).}
 
 
 
-\question{Pouvez-vous décrypter ce message secret intercepté dans un couloir du lycée : {\em "xq bdaotmuz pqhaud eqdm gz egvqf pq yapqxuemfuaz"}. Quelle est la faiblesse de ce type de code ?}
+\question{Comment est codé le message << franz >> avec une valeur de décalage $n=3$ ?}
+
+\question{Écrire une fonction \pyv{def decalage(c:str, n:int) -> str:} permettant de renvoyer un caractère chiffrer avec le chiffrement de César.}
+
+\question{En utilisant les fonctionnalités découvertes dans la première partie, établir un algorithme permettant de chiffrer un message par le code de César, pour un décalage $n$ donné. La fonction aura la signature suivante :
+\pyv{def chiffrement_cesar(mess:str, n:int) -> str:}. }
+
+
+
+
+\question{Proposer ensuite l'algorithme de déchiffrement qui affiche le message chiffré en clair, en supposant que $n$ est inconnu. L'utilisateur choisira parmi les déchiffrements proposés celui qui a du sens ! La fonction aura la signature suivante :
+\pyv{def decryptage_cesar(code:str) -> None:}.}
+
+
+%
+%\question{Pouvez-vous déchiffrer ce message secret intercepté dans un couloir du lycée : {\em << xq bdaotmuz pqhaud eqdm gz egvqf pq yapqxuemfuaz >>}. Quelle est la faiblesse de ce type de code ?}
+
+\question{Quelle est la faiblesse de ce type de code ?}
 
 
 
@@ -54,11 +63,11 @@ Par exemple en choisissant un décalage de 3, le A devient le D, le B devient le
 
 \begin{figure}[!htb]
 \begin{minipage}{0.5\textwidth}
-On étudie maintenant la méthode de chiffrement de Vigenère. Pour comprendre le système de chiffrement, on commence par créer la table  Vigenère : on recopie $26$ fois l'alphabet en ligne, et à chaque saut de ligne on décale d'une lettre vers la droite comme sur la figure \ref{fig:vigenere}.
+On étudie maintenant la méthode de chiffrement de Vigenère. Pour comprendre le système de chiffrement, on commence par créer la table  Vigenère : on recopie $26$ fois l'alphabet en ligne et à chaque saut de ligne on décale d'une lettre vers la droite comme sur la figure \ref{fig:vigenere}.
 
-Cet algorithme fonctionne à l'aide d'une clé de chiffrement : une chaine de caractère (typiquement un mot).
+Cet algorithme fonctionne à l'aide d'une clé de chiffrement : une chaîne de caractère (typiquement un mot).
 
-Prenons un exemple, mettons que l'on veuille coder \og anticonstitutionnellement\fg~avec la clé \og roue\fg~. Pour ce faire, on crée le tableau présenté table \ref{TabVig} dont la première ligne contient le message à coder, et la deuxième la clé répétée autant de fois que nécessaire pour atteindre la longeur du texte à coder. On fait alors une lecture colonne par colonne de ce tableau et dans chaque colonne :
+Prenons un exemple, mettons que l'on veuille coder \og anticonstitutionnellement\fg~avec la clé \og roue\fg~. Pour ce faire, on crée le tableau présenté table \ref{TabVig} dont la première ligne contient le message à coder, et la deuxième la clé répétée autant de fois que nécessaire pour atteindre la longueur du texte à coder. On fait alors une lecture colonne par colonne de ce tableau et dans chaque colonne :
 \begin{enumerate}
 \item la première ligne donne l'abscisse dans la table de la lettre à coder;
 \item la deuxième donne l'ordonnée dans la table de la lettre à coder;
