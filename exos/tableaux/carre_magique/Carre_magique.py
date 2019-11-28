@@ -2,11 +2,12 @@ from copy import *
 def Carre_vide(n):
     if n%2==0:
         print("Erreur n doit être impair")
+        return None
     else:
         carre=[]
         for i in range(n):
             carre.append([0]*n)
-    return carre
+        return carre
 
 def Remplir_carre(carre):
     n=len(carre)
@@ -20,7 +21,7 @@ def Remplir_carre(carre):
         else:
             x,y=(x-1)%n,(y-1)%n
     return carre_magique
-    
+
 def Verif_carre(carre_magique):
     n=len(carre)
     dens=int(n*(n**2 + 1)/2)

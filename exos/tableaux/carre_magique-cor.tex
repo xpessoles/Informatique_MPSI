@@ -24,11 +24,12 @@ On vérifie les trois propriétés d'un carré magique avec La somme de chaque c
 def Carre_vide(n):
     if n%2==0:
         print("Erreur n doit être impair")
+        return None
     else:
         carre=[]
         for i in range(n):
             carre.append([0]*n)
-    return carre
+        return carre
 \end{lstlisting}
 
 
