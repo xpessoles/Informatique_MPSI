@@ -345,7 +345,7 @@ On peut donc écrire la fonction suivante.
 
 \begin{lstlisting}
 def conv_b2(p):
- """Convertit l'entier p en base 2 (renvoie une chaine)"""
+ """Convertit l'entier p en base 2 (renvoie une chaîne)"""
     x = p
     s = ""
     while x > 1 :
@@ -387,49 +387,80 @@ $\underline{a_{n}a_{n-1}\ldots a_{1}a_{0}}_{2}$, \emph{i.e.}
 $\displaystyle\sum_{k=0}^{n}a_{k}2^{k}$.
 
 On peut effectuer le calcul naïvement, en pensant bien à calculer les puissances de proche en proche. 
-%\begin{pyconsole}
-%def calc_b2_naif(s):
-%    """Renvoie l'entier p represente en binaire par s"""
-%    p = 0
-%    x = 1 ## 2**0
-%    for i in range(len(s)):
-%        # Invariant : p = s[len(s)-i:]
-%        p = p+int(s[len(s)-i-1])*x
-%        x = 2*x
-%    return p
-%
-%print(0==calc_b2_naif("0"))
-%print(1==calc_b2_naif("1"))
-%print(42==calc_b2_naif("101010"))
-%\end{pyconsole}
-%Cela renvoie alors :
-%\begin{quote}
-%  \printpythontex[verb]
-%\end{quote}
+
+\begin{lstlisting}
+def calc_b2_naif(s):
+    """Renvoie l'entier p représente en binaire par s"""
+    p = 0
+    x = 1 ## 2**0
+    for i in range(len(s)):
+        p = p+int(s[len(s)-i-1])*x
+        x = 2*x
+    return p
+
+print(0==calc_b2_naif("0"))
+print(1==calc_b2_naif("1"))
+print(42==calc_b2_naif("101010"))
+\end{lstlisting}
+
+
+Cela renvoie alors :
+\begin{quote}
+\begin{pycode}
+def calc_b2_naif(s):
+    p = 0
+    x = 1 ## 2**0
+    for i in range(len(s)):
+        # Invariant : p = s[len(s)-i:]
+        p = p+int(s[len(s)-i-1])*x
+        x = 2*x
+    return p
+
+print(0==calc_b2_naif("0"))
+print("\n")
+print(1==calc_b2_naif("1"))
+print("\n")
+print(42==calc_b2_naif("101010"))
+\end{pycode}
+\end{quote}
 
 On peut faire mieux en mettant en {\oe}uvre l'algorithme de Horner. Il suffit de remarquer que 
 \begin{equation*}
   p = \sum_{k=0}^{n}a_{k}2^{k} = a_0 + 2\p{\sum_{k=1}^{n}a_{k}2^{k-1}} = a_0 + 2\p{a_1+2\p{a_2 + 2\p{\ldots + 2a_n}}}
 \end{equation*}
 
-%\begin{pyconsole}
-%def calc_b2_horner(s):
-%    """Renvoie l'entier p represente en binaire par s"""
-%    p = int(s[0])
-%    for i in range(1,len(s)):
-%        p = int(s[i])+2*p
-%    return p
-%    
-%print(0==calc_b2_naif("0"))
-%print(1==calc_b2_naif("1"))
-%print(42==calc_b2_naif("101010"))
-%\end{pyconsole}
-%Cela renvoie alors :
-%\begin{quote}
-%  \printpythontex[verb]
-%\end{quote}
+\begin{lstlisting}
+def calc_b2_horner(s):
+    """Renvoie l'entier p représente en binaire par s"""
+    p = int(s[0])
+    for i in range(1,len(s)):
+        p = int(s[i])+2*p
+    return p
+    
+print(0==calc_b2_naif("0"))
+print(1==calc_b2_naif("1"))
+print(42==calc_b2_naif("101010"))
+\end{lstlisting}
 
-\subsubsection{Remarques}
+
+Cela renvoie alors :
+\begin{quote}
+\begin{pycode}
+def calc_b2_horner(s):
+    p = int(s[0])
+    for i in range(1,len(s)):
+        p = int(s[i])+2*p
+    return p
+    
+print(0==calc_b2_naif("0"))
+print("\n")
+print(1==calc_b2_naif("1"))
+print("\n")
+print(42==calc_b2_naif("101010"))
+\end{pycode}
+\end{quote}
+
+\begin{rem}
 \begin{enumerate}
 \item S'ils sont bien mis en œuvre, ces algorithmes de conversion demandent
 un temps de calcul de l'ordre de $n$ opérations pour un nombre de $n$ chiffres
@@ -441,6 +472,7 @@ un temps de calcul de l'ordre de $n$ opérations pour un nombre de $n$ chiffres
   algorithmes permettent de convertir entre la base $2$ et votre base
   habituelle. 
 \end{enumerate}
+\end{rem}
 
 \section{Représentation des entiers sur ordinateur}
 \subsection{Cadre}
@@ -929,12 +961,12 @@ On peut aussi trouver des cas où \pyv{Delta} est nul avec le polynôme
 qui s'annule au moins sur deux flottants, dont l'un n'est pas supposé
 être une racine...
 
-\section{Exercices}
-
-%\begin{exo}
-%    \input{NBR-003}
-%\end{exo}
-
+%\section{Exercices}
+%
+%%\begin{exo}
+%%    \input{NBR-003}
+%%\end{exo}
+%
 
 \section{Annexe : représentation détaillé des entiers}
 
@@ -947,7 +979,7 @@ Ainsi, $a_0$ est le reste de la division euclidienne de $p$ par $2$ et, si $p\ne
 
 On peut donc écrire la fonction suivante.
 
-\begin{pyconsole}
+\begin{lstlisting}
 def conv_b2(p):
     """Convertit l'entier p en base 2 (renvoie une chaine)"""
     x = p # On copie p
@@ -960,7 +992,22 @@ def conv_b2(p):
     return str(x)+s
 
 print('0='+conv_b2(0)+' et 1='+conv_b2(1)+' et 42='+conv_b2(42))
-\end{pyconsole}
+\end{lstlisting}
+
+
+\begin{pycode}
+def conv_b2(p):
+    x = p # On copie p
+    s = ""
+    i=0
+    while x > 1 : 
+        s = str(x%2) + s
+        x = x // 2
+        i=i+1
+    return str(x)+s
+
+print('0='+conv_b2(0)+' et 1='+conv_b2(1)+' et 42='+conv_b2(42))
+\end{pycode}
 \begin{itemize}
 \item \textbf{Invariant : } $p=x+s$, avec : 
 \begin{itemize}
@@ -1162,7 +1209,7 @@ Soit $(p,q)\in\ii{2^{n-1}-1,2^{n-1}}$.
 \end{enumerate}
 
 
-\section{Annexe : Octal et hexadécimal en informatique}
+\subsection{Annexe : Octal et hexadécimal en informatique}
 
 \begin{enumerate}
 \item Représenter des données par une succession de chiffres binaires

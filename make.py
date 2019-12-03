@@ -554,15 +554,15 @@ for tp in info_tp:
     genere_support(rep,tp,'tp')
     #print(trouver_file_tex(tp,'tp'))
 
-info_ds=lire_planning_ds(path)   
-for ds in info_ds:
-    (num_ds_str,titre,supports,chapitres,cycles,date_ds)=ds
-    rep='DS/DS'+num_ds_str
-    if os.path.exists(rep)==False:
-        os.mkdir(rep)
-    genere_fichiers_tex(ds,'ds')
-    genere_entete(rep,ds,'ds')
-    genere_support(rep,ds,'ds')
+# info_ds=lire_planning_ds(path)   
+# for ds in info_ds:
+#     (num_ds_str,titre,supports,chapitres,cycles,date_ds)=ds
+#     rep='DS/DS'+num_ds_str
+#     if os.path.exists(rep)==False:
+#         os.mkdir(rep)
+#     genere_fichiers_tex(ds,'ds')
+#     genere_entete(rep,ds,'ds')
+#     genere_support(rep,ds,'ds')
     
     
     
