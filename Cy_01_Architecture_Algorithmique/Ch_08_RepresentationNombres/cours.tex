@@ -341,21 +341,36 @@ Ainsi, $a_0$ est le reste de la division euclidienne de $p$ par $2$ et, si $p\ne
 
 On peut donc écrire la fonction suivante.
 
-\begin{pyblock}
+
+
+\begin{lstlisting}
 def conv_b2(p):
-    """Convertit l'entier p en base 2 (renvoie une chaîne)"""
-    x = p # On copie p
+ """Convertit l'entier p en base 2 (renvoie une chaine)"""
+    x = p
     s = ""
-    while x > 1 : 
+    while x > 1 :
         s = str(x%2) + s
         x = x // 2
     return str(x)+s
 
 print('0='+conv_b2(0)+' et 1='+conv_b2(1)+' et 42='+conv_b2(42))
-\end{pyblock}
+\end{lstlisting}
+
+
+
 Cela renvoie alors :
 \begin{quote}
-  \printpythontex[verb]
+\begin{pycode}
+def conv_b2(p):
+    x = p
+    s = ""
+    while x > 1 :
+        s = str(x%2) + s
+        x = x // 2
+    return str(x)+s
+
+print('0='+conv_b2(0)+' et 1='+conv_b2(1)+' et 42='+conv_b2(42))
+\end{pycode}
 \end{quote}
 
 
@@ -372,47 +387,47 @@ $\underline{a_{n}a_{n-1}\ldots a_{1}a_{0}}_{2}$, \emph{i.e.}
 $\displaystyle\sum_{k=0}^{n}a_{k}2^{k}$.
 
 On peut effectuer le calcul naïvement, en pensant bien à calculer les puissances de proche en proche. 
-\begin{pyblock}
-def calc_b2_naif(s):
-    """Renvoie l'entier p représenté en binaire par s"""
-    p = 0
-    x = 1 ## 2**0
-    for i in range(len(s)):
-        # Invariant : p = s[len(s)-i:]
-        p = p+int(s[len(s)-i-1])*x
-        x = 2*x
-    return p
-
-print(0==calc_b2_naif("0"))
-print(1==calc_b2_naif("1"))
-print(42==calc_b2_naif("101010"))
-\end{pyblock}
-Cela renvoie alors :
-\begin{quote}
-  \printpythontex[verb]
-\end{quote}
+%\begin{pyconsole}
+%def calc_b2_naif(s):
+%    """Renvoie l'entier p represente en binaire par s"""
+%    p = 0
+%    x = 1 ## 2**0
+%    for i in range(len(s)):
+%        # Invariant : p = s[len(s)-i:]
+%        p = p+int(s[len(s)-i-1])*x
+%        x = 2*x
+%    return p
+%
+%print(0==calc_b2_naif("0"))
+%print(1==calc_b2_naif("1"))
+%print(42==calc_b2_naif("101010"))
+%\end{pyconsole}
+%Cela renvoie alors :
+%\begin{quote}
+%  \printpythontex[verb]
+%\end{quote}
 
 On peut faire mieux en mettant en {\oe}uvre l'algorithme de Horner. Il suffit de remarquer que 
 \begin{equation*}
   p = \sum_{k=0}^{n}a_{k}2^{k} = a_0 + 2\p{\sum_{k=1}^{n}a_{k}2^{k-1}} = a_0 + 2\p{a_1+2\p{a_2 + 2\p{\ldots + 2a_n}}}
 \end{equation*}
 
-\begin{pyblock}
-def calc_b2_horner(s):
-    """Renvoie l'entier p représenté en binaire par s"""
-    p = int(s[0])
-    for i in range(1,len(s)):
-        p = int(s[i])+2*p
-    return p
-    
-print(0==calc_b2_naif("0"))
-print(1==calc_b2_naif("1"))
-print(42==calc_b2_naif("101010"))
-\end{pyblock}
-Cela renvoie alors :
-\begin{quote}
-  \printpythontex[verb]
-\end{quote}
+%\begin{pyconsole}
+%def calc_b2_horner(s):
+%    """Renvoie l'entier p represente en binaire par s"""
+%    p = int(s[0])
+%    for i in range(1,len(s)):
+%        p = int(s[i])+2*p
+%    return p
+%    
+%print(0==calc_b2_naif("0"))
+%print(1==calc_b2_naif("1"))
+%print(42==calc_b2_naif("101010"))
+%\end{pyconsole}
+%Cela renvoie alors :
+%\begin{quote}
+%  \printpythontex[verb]
+%\end{quote}
 
 \subsubsection{Remarques}
 \begin{enumerate}
@@ -452,11 +467,11 @@ Sur un processeur $n$ bits, un registre du processeur a $n$ bits et peut
     trace en est généralement gardée dans un autre registre du
     processeur.}
 
-\begin{ex}
+\begin{exemple}
   Après addition de $\bin{1111\,0000\,1111\,0000}$ et
   $\bin{0011\,0011\,0011\,0011}$ sur $16$ bits, le registre résultat contient :
   $\bin{0010\,0100\,0010\,0011}$.
-\end{ex}
+\end{exemple}
    
 \subsection{Entiers relatifs}
 
@@ -466,12 +481,12 @@ On veut maintenant pouvoir travailler avec des entiers relatifs et notamment les
 
 Première possibilité de codage d'un entier relatif sur $n$ bits : on utilise $n-1$ bits pour la valeur absolue et
 $1$ bit pour le signe.
-\begin{ex}
+\begin{exemple}
 \begin{itemize}
 \item[\textbullet] On représente $-4$ par $\bin{1000\,0000\,0000\,0100}$.
 \item[\textbullet] On représente $4$ par $\bin{0000\,0000\,0000\,0100}$.
 \end{itemize}  
-\end{ex}
+\end{exemple}
 
 Mais cela a deux inconvénients majeurs.
 \begin{enumerate}
@@ -494,7 +509,7 @@ C'est donc la \emph{représentation en complément à deux} qui est le plus souv
 \begin{rem}
   L'addition d'entiers relatifs (on dit aussi \emph{signés}) sera correcte modulo $2^{n}$ et utilisera les mêmes circuits que l'addition d'entiers naturels.
 \end{rem}
-\begin{ex}
+\begin{exemple}
 \begin{itemize}
 \item[\textbullet] $-5$ est codé par $-5 \mmod 2^{16} = 65531 =
   \bin{1111\,1111\,1111\,1011}$.
@@ -505,8 +520,8 @@ C'est donc la \emph{représentation en complément à deux} qui est le plus souv
     \bin{1111\,1111\,1111\,1110} = 65534 = 2^{16}-2 = -2 \mmod 65536
   \end{equation*}
 \end{itemize}
-\end{ex}
-\begin{ex}
+\end{exemple}
+\begin{exemple}
 \begin{itemize}
 \item[\textbullet] $-4$ est codé par $-4 \mmod 2^{16} = 65532 =
   \bin{1111\,1111\,1111\,1100}$.
@@ -517,7 +532,7 @@ C'est donc la \emph{représentation en complément à deux} qui est le plus souv
    \bin{0000\,0000\,0000\,0010} = 2 = 2 \mmod 65536
   \end{equation*}
 \end{itemize}
-\end{ex}
+\end{exemple}
 
 \subsubsection{Soustraction d'entiers relatifs}
 
@@ -605,7 +620,7 @@ On utilise plutôt l'idée de la notation scientifique des nombres. Un nombre es
 \item[\textbullet] $e$: entier (relatif) appartenant à une plage de valeurs fixée. C'est \emph{l'exposant}.
 \end{itemize}
 %\clearslide{}
-\begin{ex}
+\begin{exemple}
   Sur une  calculatrice HP48SX (d'après tests personnels) :
 \begin{itemize}
 \item[\textbullet] la mantisse $m$ a $11$ chiffres après la virgule,
@@ -620,7 +635,7 @@ Cela permet de représenter :
 \end{itemize}
 avec seulement $12$ chiffres décimaux, un signe et trois chiffres pour
 l'exposant. 
-\end{ex}
+\end{exemple}
 
 \subsection{Virgule flottante en binaire}
 
@@ -637,10 +652,10 @@ On a alors l'équivalent de la notion de nombre décimal, dans la base $2$.
     \Z$ et $k\in \N$.
 \end{defi}
 %\clearslide{}
-\begin{ex}
+\begin{exemple}
 En décimal le nombre $12345 / 10^{3}$ s'écrit $12,345$.
-\end{ex}
-\begin{ex}
+\end{exemple}
+\begin{exemple}
 En binaire, le nombre $\dfrac{\bin{10101011}}{\bin{10}^{\bin{101}}}$ s'écrit
 $\bin{101,01011}$. Il vaut $\dfrac{171}{2^5}= 5,34375$.
 
@@ -649,7 +664,7 @@ Autre façon de calculer:
   \bin{101,01011} =2^2+ 0\times 2^1+2^0 + \dfrac{0}{2} + \dfrac{1}{2^2} + \dfrac{0}{2^3} + \dfrac{1}{2^4} + \dfrac{1}{2^5}= 5 + \frac{1}{2^{2}} + \frac{1}{2^{4}}
   +\frac{1}{2^{5}}
 \end{equation*}
-\end{ex}
+\end{exemple}
 %\clearslide{}
 
 Un nombre sera donc représenté en virgule flottante en base $2$ sous la forme $s\times m \times 2^{e}$, avec $(s,m,e)$ comme suit.
@@ -734,7 +749,7 @@ Les nombres dénormalisés ne respectent pas la convention de la notation scient
 
 Avec Python, on peut accéder à la représentation d'un nombre flottant par la méthode \pyv{.hex()}. Attention, le nombre est écrit en hexadécimal. 
 
-\begin{ex}
+\begin{exemple}
   Avec \pyv{5.5}. 
 \begin{pyconsole}
 5.5.hex()
@@ -751,7 +766,7 @@ Le regroupement indiqué par les accolades donne l'écriture hexadécimale
 \begin{equation*}
   1,6000000000000.
 \end{equation*}
-\end{ex}
+\end{exemple}
 
 
 \subsection{Problèmes de précision}
@@ -765,14 +780,14 @@ On rencontre différents types de problèmes de précision.
 
 \subsubsection{Problèmes liés aux arrondis}
 Supposons que l'on veuille effectuer des calculs avec des chiffres décimaux n'ayant que deux chiffres après la virgule.
-\begin{ex}
+\begin{exemple}
 Pour la multiplication:
 $1,23\times 1,56 = 1,9188$
-\end{ex}
-\begin{ex}
+\end{exemple}
+\begin{exemple}
 Pour l'addition:
 $1,23\times 10^{3} + 4,56\times 10^{0} = 1,23456\times 10^{3}$
-\end{ex}
+\end{exemple}
 Pour garder deux chiffres après la virgule, on arrondit le résultat et l'on introduit donc une erreur d'approximation.
 
 Ce problème se pose en décimal, comme en binaire !
@@ -783,14 +798,14 @@ Ce problème se pose en décimal, comme en binaire !
 \textbf{Attention:}
 Les représentations binaires et décimales partagent les \emph{mêmes} problèmes d'arrondis. 
 Cependant, on crée des erreurs d'arrondis lors du \emph{passage} d'une représentation à l'autre.
-\begin{ex}
+\begin{exemple}
 En Python, on rentrera dans la console des nombres en écriture décimale mais le calcul interne se fera en binaire. Cela donne la chose suivante.
 \begin{pyconsole}
 0.1+0.2 == 0.3
 0.1+0.2
 0.1+0.2-0.3
 \end{pyconsole}
-\end{ex}
+\end{exemple}
 
 
 \begin{center}
@@ -800,7 +815,7 @@ En Python, on rentrera dans la console des nombres en écriture décimale mais l
 %\clearslide{}
 \subsubsection{Origine de ce problème}
 
-\begin{thm}
+\begin{theoremeT}
 Soit $p/q$ un nombre rationnel écrit sous forme irréductible, c'est-à-dire avec $p$
 et $q$ entiers, premiers entre eux et $q>0$. Alors :
 \begin{enumerate}
@@ -810,7 +825,7 @@ et $q$ entiers, premiers entre eux et $q>0$. Alors :
 \item $p/q$ est un nombre dyadique si et seulement
   si $q$ est de la forme $2^{\alpha}$ où $\alpha\in \N$.
 \end{enumerate}
-\end{thm}
+\end{theoremeT}
 
 %\clearslide{}
 Ainsi, $\frac{1}{10}$ n'est pas un nombre dyadique.  En écriture décimale, 
@@ -874,9 +889,9 @@ D'où le résultat final de l'ordre de $6\times 10^{-17}$ :
 \vspace{0.5cm}
 
  La seule possibilité parfois raisonnable est  le \og test de petitesse\fg.
-\begin{ex}
+\begin{exemple}
   On peut tester \pyv{abs(x)< epsilon} avec \pyv{epsilon = 1e-6}.
-\end{ex}
+\end{exemple}
 
  La question qui se pose alors est : quelle valeur de \pyv{epsilon} choisir? Il n'y a pas de réponse universelle,  cela dépend du problème étudié \ldots{}
 
@@ -885,9 +900,9 @@ De même, on se méfiera des tests du type \pyv{x<y} ou \pyv{x<=y}.
 
 %\clearslide{}
 
-\begin{ex}
+\begin{exemple}
   
-\end{ex}
+\end{exemple}
  Construisons une équation du second degré.
 
 \begin{pyconsole}
@@ -932,9 +947,9 @@ Ainsi, $a_0$ est le reste de la division euclidienne de $p$ par $2$ et, si $p\ne
 
 On peut donc écrire la fonction suivante.
 
-\begin{pyblock}
+\begin{pyconsole}
 def conv_b2(p):
-    """Convertit l'entier p en base 2 (renvoie une chaîne)"""
+    """Convertit l'entier p en base 2 (renvoie une chaine)"""
     x = p # On copie p
     s = ""
     i=0
@@ -945,7 +960,7 @@ def conv_b2(p):
     return str(x)+s
 
 print('0='+conv_b2(0)+' et 1='+conv_b2(1)+' et 42='+conv_b2(42))
-\end{pyblock}
+\end{pyconsole}
 \begin{itemize}
 \item \textbf{Invariant : } $p=x+s$, avec : 
 \begin{itemize}
