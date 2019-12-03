@@ -970,7 +970,7 @@ qui s'annule au moins sur deux flottants, dont l'un n'est pas supposé
 
 \section{Annexe : représentation détaillé des entiers}
 
-\subsection{Conversion d'un entier en base 2}
+\subsection*{Conversion d'un entier en base 2}
 \sloppy
 On s'intéresse à la démonstration de l'algorithme de converion par divisions successives.
 Si $p = \underline{a_n\dots a_0}_{~2}$, alors 
@@ -1033,7 +1033,7 @@ x=\displaystyle{\sum_{k=i+1}^n a_k2^{k-(i+1)}}\leq 1
 obtenue pour $i=n$ donc à la fin de la boucle $x=a_n$ et $s=\underline{a_{n-1}\dots a_1a_0}_2$, il faut donc bien ajouter $a_n$ à $s$.
 \end{itemize}
 
-\subsection{Somme de naturels}
+\subsection*{Somme de naturels}
 \sloppy
 
 Dans un processeur $n$ bits:
@@ -1075,9 +1075,9 @@ Remarques pour $(p,q)\in \ii{0,2^{n}}^{2}$:
   \item $p+_{n}q = p+q$ si $p+q< 2^{n}$.
   \item $p+_{n}q = p+q - 2^{n}$ si $p+q \geq 2^{n}$.
   \end{enumerate}
-\subsection{Entiers relatifs}
+\subsection*{Entiers relatifs}
 
-\subsubsection{Avec signe et valeur absolue}
+\subsubsection*{Avec signe et valeur absolue}
 Première possibilité: $n-1$ bits pour la valeur absolue et
 $1$ bit pour le signe, par ex.:
 \begin{itemize}
@@ -1096,7 +1096,7 @@ Inconvénients:
 Représentation quasiment jamais utilisée pour les nombres
 \emph{entiers} d'un processeur.
 %\clearslide{}
-\subsubsection{Complément à deux}
+\subsubsection*{Complément à deux}
 Idée géniale:
 \begin{enumerate}
 \item L'addition d'entiers naturels sur le processeur n'est pas
@@ -1162,7 +1162,7 @@ Intérêt du complément à deux: Pour calculer une addition, on utilise
 exactement les mêmes circuits électroniques que pour des entiers non
 signés!
 
-\subsubsection{Calcul de la représentation en complément à deux}
+\subsubsection*{Calcul de la représentation en complément à deux}
 
 \begin{description}
 \item[Définition] \emph{Complément à un sur $n$ bits de
@@ -1194,7 +1194,7 @@ Exemple (sur $16$ bits):
 \item Que vaut l'entier signé $\underline{1111\,1111\,1111\,1000}$?
 \end{enumerate}
 
-\subsubsection{Soustraction}
+\subsubsection*{Soustraction}
 
 Soit $(p,q)\in\ii{2^{n-1}-1,2^{n-1}}$.
 \begin{description}
@@ -1209,7 +1209,7 @@ Soit $(p,q)\in\ii{2^{n-1}-1,2^{n-1}}$.
 \end{enumerate}
 
 
-\subsection{Annexe : Octal et hexadécimal en informatique}
+\subsection*{Octal et hexadécimal en informatique}
 
 \begin{enumerate}
 \item Représenter des données par une succession de chiffres binaires
