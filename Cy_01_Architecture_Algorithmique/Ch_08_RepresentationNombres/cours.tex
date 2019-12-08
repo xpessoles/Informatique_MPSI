@@ -64,103 +64,103 @@ On peut choisir une autre base.
 \`A chaque fois, le principe est identique : on change juste $B$ dans l'écriture précédente.
 
 %\clearslide{}
-\subsection{Un premier exemple : la base huit (octale)}
+%\subsection{Un premier exemple : la base huit (octale)}
+%
+%En pratique, on ne l'utilisera pas ...
+%
+%On a besoin de huit symboles pour représenter les huit chiffres (représentant les nombres de zéro inclus à huit exclu). On prendra naturellement $0$, \ldots{}, $7$.
+%Pour compter, on regroupe les unités par huitaine puis par
+%  huitaines de huitaines, etc. On note les nombres sur le même principe que l'écriture décimale :
+%$\oct{2735}$ représente cinq unités plus trois huitaines
+%plus sept huitaines de huitaines, plus deux huitaines de huitaines de
+%huitaines (soit $1501$, exprimé ici en base 10 !).
+%
+%De manière générale, avec $B=8$ et $n\in\N$,
+%$$\displaystyle\underline{a_{n}a_{n-1}\ldots a_{1}a_{0}}_{~B} =
+%\sum_{k=0}^{n}a_{k}B^{k},~ \textrm{ et }~\forall k \in \iif{0;n},~ a_k\in\ii{0;B}.$$ 
+%
+%Vous remarquerez la forte similitude avec la formule précédente ...
+%
+%Comptons en octal:
+%
+%\begin{minipage}[t]{0.18\linewidth}
+%\begin{align*}
+%\oct{0} &= 0\\
+%\oct{1} &= 1\\
+%\oct{2} &= 2\\
+%\oct{3} &= 3\\
+%\oct{4} &= 4\\
+%\oct{5} &= 5\\
+%\oct{6} &= 6\\
+%\oct{7} &= 7\\
+%\end{align*}
+%\end{minipage}
+%\begin{minipage}[t]{0.18\linewidth}
+%\begin{align*}
+%\oct{10} &= 8\\
+%\oct{11} &= 9\\
+%\oct{12} &= 10\\
+%\oct{13} &= 11\\
+%\oct{14} &= 12\\
+%\oct{15} &= 13\\
+%\oct{16} &= 14\\
+%\oct{17} &= 15\\
+%\end{align*}
+%\end{minipage}
+%\begin{minipage}[t]{0.18\linewidth}
+%\begin{align*}  
+%\oct{20} &= 16\\
+%\oct{21} &= 17\\
+%\oct{22} &= 18\\
+%\oct{23} &= 19\\
+%\oct{24} &= 20\\
+%\oct{25} &= 21\\
+%\oct{26} &= 22\\
+%\oct{27} &= 23\\
+%\end{align*}
+%\end{minipage}
+%\begin{minipage}[t]{0.18\linewidth}
+%\begin{align*}
+%\oct{30} &= 24\\
+%\oct{40} &= 32\\
+%\oct{50} &= 40\\
+%\oct{60} &= 48\\
+%\oct{70} &= 56\\
+%\end{align*}
+%\end{minipage}
+%\begin{minipage}[t]{0.18\linewidth}
+%  \begin{align*}
+%\oct{100} &= 64\\
+%\oct{200} &= 128\\
+%\oct{1\,000} &= 512\\
+%\oct{10\,000} &= 4096\\
+%\oct{100\,000} &= 32768\\
+%\end{align*}
+%\end{minipage}
+%
+%%\clearslide{}
+%\begin{minipage}[c]{.48\linewidth}
+%\begin{center}
+%  \input{images/table-add-8.tex}\\
+%  Table d'addition en octal
+%\end{center}
+%\end{minipage} \hfill
+%\begin{minipage}[c]{.48\linewidth}
+%\begin{center}
+%  \input{images/table-mul-8.tex}\\
+%  Table de multiplication en octal
+%\end{center}
+%\end{minipage}
+%
+%%\clearslide{}
+%Comment faire une addition de nombres à plusieurs chiffres?
+%
+%Exactement comme en base 10, mais en utilisant la table d'addition de
+%la base 8.
+%
+%Pour la multiplication: aussi.
 
-En pratique, on ne l'utilisera pas ...
-
-On a besoin de huit symboles pour représenter les huit chiffres (représentant les nombres de zéro inclus à huit exclu). On prendra naturellement $0$, \ldots{}, $7$.
-Pour compter, on regroupe les unités par huitaine puis par
-  huitaines de huitaines, etc. On note les nombres sur le même principe que l'écriture décimale :
-$\oct{2735}$ représente cinq unités plus trois huitaines
-plus sept huitaines de huitaines, plus deux huitaines de huitaines de
-huitaines (soit $1501$, exprimé ici en base 10 !).
-
-De manière générale, avec $B=8$ et $n\in\N$,
-$$\displaystyle\underline{a_{n}a_{n-1}\ldots a_{1}a_{0}}_{~B} =
-\sum_{k=0}^{n}a_{k}B^{k},~ \textrm{ et }~\forall k \in \iif{0;n},~ a_k\in\ii{0;B}.$$ 
-
-Vous remarquerez la forte similitude avec la formule précédente ...
-
-Comptons en octal:
-
-\begin{minipage}[t]{0.18\linewidth}
-\begin{align*}
-\oct{0} &= 0\\
-\oct{1} &= 1\\
-\oct{2} &= 2\\
-\oct{3} &= 3\\
-\oct{4} &= 4\\
-\oct{5} &= 5\\
-\oct{6} &= 6\\
-\oct{7} &= 7\\
-\end{align*}
-\end{minipage}
-\begin{minipage}[t]{0.18\linewidth}
-\begin{align*}
-\oct{10} &= 8\\
-\oct{11} &= 9\\
-\oct{12} &= 10\\
-\oct{13} &= 11\\
-\oct{14} &= 12\\
-\oct{15} &= 13\\
-\oct{16} &= 14\\
-\oct{17} &= 15\\
-\end{align*}
-\end{minipage}
-\begin{minipage}[t]{0.18\linewidth}
-\begin{align*}  
-\oct{20} &= 16\\
-\oct{21} &= 17\\
-\oct{22} &= 18\\
-\oct{23} &= 19\\
-\oct{24} &= 20\\
-\oct{25} &= 21\\
-\oct{26} &= 22\\
-\oct{27} &= 23\\
-\end{align*}
-\end{minipage}
-\begin{minipage}[t]{0.18\linewidth}
-\begin{align*}
-\oct{30} &= 24\\
-\oct{40} &= 32\\
-\oct{50} &= 40\\
-\oct{60} &= 48\\
-\oct{70} &= 56\\
-\end{align*}
-\end{minipage}
-\begin{minipage}[t]{0.18\linewidth}
-  \begin{align*}
-\oct{100} &= 64\\
-\oct{200} &= 128\\
-\oct{1\,000} &= 512\\
-\oct{10\,000} &= 4096\\
-\oct{100\,000} &= 32768\\
-\end{align*}
-\end{minipage}
-
-%\clearslide{}
-\begin{minipage}[c]{.48\linewidth}
-\begin{center}
-  \input{images/table-add-8.tex}\\
-  Table d'addition en octal
-\end{center}
-\end{minipage} \hfill
-\begin{minipage}[c]{.48\linewidth}
-\begin{center}
-  \input{images/table-mul-8.tex}\\
-  Table de multiplication en octal
-\end{center}
-\end{minipage}
-
-%\clearslide{}
-Comment faire une addition de nombres à plusieurs chiffres?
-
-Exactement comme en base 10, mais en utilisant la table d'addition de
-la base 8.
-
-Pour la multiplication: aussi.
-
-\subsection{Une base (plus) utile : la base seize (hexadécimale)}
+\subsection{La base seize (hexadécimale)}
 
 On reprend le même principe que précédemment, avec $B = 16$ (on forme des paquets de $16$ etc.). Mais cette fois on manque de chiffres pour représenter les nombres de zéro inclus à
 seize exclu (il en manque six).
@@ -254,19 +254,19 @@ On peut alors se mettre à compter en hexadécimal !
 \end{minipage}
 %\clearslide{}
 
-
-\begin{center}
-  \tiny{}
-  \input{images/table-add-16.tex}\\
-  Table d'addition en hexadécimal
-\end{center}
-
-%\clearslide{}
-\begin{center}
-  \tiny{}
-  \input{images/table-mul-16.tex}\\
-  Table de multiplication en hexadécimal
-\end{center}
+%
+%\begin{center}
+%  \tiny{}
+%  \input{images/table-add-16.tex}\\
+%  Table d'addition en hexadécimal
+%\end{center}
+%
+%%\clearslide{}
+%\begin{center}
+%  \tiny{}
+%  \input{images/table-mul-16.tex}\\
+%  Table de multiplication en hexadécimal
+%\end{center}
 
 
 %\clearslide{}
@@ -464,7 +464,7 @@ print(42==calc_b2_naif("101010"))
 \begin{enumerate}
 \item S'ils sont bien mis en œuvre, ces algorithmes de conversion demandent
 un temps de calcul de l'ordre de $n$ opérations pour un nombre de $n$ chiffres
-(binaires ou décimaux), soit de l'ordre de $log p$ opérations.
+(binaires ou décimaux), soit de l'ordre de $\log p$ opérations.
 \item Il existe des algorithmes plus efficaces. Meilleure complexité
   connue: complexité d'une multiplication de nombres de $n$ chiffres,
   soit $O(n\log n \log \log n)$ [Knuth].
@@ -541,7 +541,7 @@ C'est donc la \emph{représentation en complément à deux} qui est le plus souv
 \begin{rem}
   L'addition d'entiers relatifs (on dit aussi \emph{signés}) sera correcte modulo $2^{n}$ et utilisera les mêmes circuits que l'addition d'entiers naturels.
 \end{rem}
-\begin{exemple}
+\begin{exemple} ~\\
 \begin{itemize}
 \item[\textbullet] $-5$ est codé par $-5 \mmod 2^{16} = 65531 =
   \bin{1111\,1111\,1111\,1011}$.
@@ -552,8 +552,7 @@ C'est donc la \emph{représentation en complément à deux} qui est le plus souv
     \bin{1111\,1111\,1111\,1110} = 65534 = 2^{16}-2 = -2 \mmod 65536
   \end{equation*}
 \end{itemize}
-\end{exemple}
-\begin{exemple}
+
 \begin{itemize}
 \item[\textbullet] $-4$ est codé par $-4 \mmod 2^{16} = 65532 =
   \bin{1111\,1111\,1111\,1100}$.
