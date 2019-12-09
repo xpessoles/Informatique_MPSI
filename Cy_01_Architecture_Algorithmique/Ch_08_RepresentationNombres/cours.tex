@@ -514,56 +514,125 @@ On veut maintenant pouvoir travailler avec des entiers relatifs et notamment les
 Première possibilité de codage d'un entier relatif sur $n$ bits : on utilise $n-1$ bits pour la valeur absolue et
 $1$ bit pour le signe.
 \begin{exemple}
+
+\begin{minipage}{0.45\textwidth}
+Représentons les entiers relatifs sur 3 bits avec cette méthode :
 \begin{itemize}
-\item[\textbullet] On représente $-4$ par $\bin{1000\,0000\,0000\,0100}$.
-\item[\textbullet] On représente $4$ par $\bin{0000\,0000\,0000\,0100}$.
-\end{itemize}  
+\item On utilise $3-1=2 bits$ pour la valeur absolue et 1 bit pour le signe.
+\item On représenta alors les entiers de $-3$ à $+3$ avec deux fois la représentation de 0.
+\item Avec cette représentation l'addition est compliquée à mettre en oeuvre et incohérente avec la méthode habituelle :  $2+(-1)=\bin{010}+\bin{101}=\bin{111}$.
+\end{itemize} 
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\begin{tabular}{|p{0.1\textwidth}|p{0.13\textwidth}|p{0.28\textwidth}|p{0.28\textwidth}|}
+\hline 
+Signe & Valeur absolue & Représentation binaire & Représentation décimale \\ 
+\hline 
+$0$ & $00$ & $\bin{000}$ & $+0$ \\ 
+$0$ & $01$ & $\bin{001}$ & $+1$ \\ 
+$0$ & $10$ & $\bin{010}$ & $+2$ \\ 
+$0$ & $11$ & $\bin{011}$ & $+3$ \\ 
+$1$ & $00$ & $\bin{100}$ & $-0$ \\ 
+$1$ & $01$ & $\bin{101}$ & $-1$ \\ 
+$1$ & $10$ & $\bin{110}$ & $-2$ \\ 
+$1$ & $11$ & $\bin{111}$ & $-3$ \\ 
+\hline 
+\end{tabular} 
+\end{minipage}
+
+%\begin{itemize}
+%\item[\textbullet] On représente $-4$ par $\bin{1000\,0000\,0000\,0100}$.
+%\item[\textbullet] On représente $4$ par $\bin{0000\,0000\,0000\,0100}$.
+%\end{itemize}  
 \end{exemple}
 
-Mais cela a deux inconvénients majeurs.
-\begin{enumerate}
-\item On a deux représentations pour zéro ($\bin{1000\,0000\,0000\,0000}$
-  et $\bin{0000\,0000\,0000\,0000}$).
-\item L'addition est compliquée à mettre en {\oe}uvre, notamment par rapport à celle définie par les entiers naturels.
-\end{enumerate}
+%Mais cela a deux inconvénients majeurs.
+%\begin{enumerate}
+%\item On a deux représentations pour zéro ($\bin{1000\,0000\,0000\,0000}$
+%  et $\bin{0000\,0000\,0000\,0000}$).
+%\item L'addition est compliquée à mettre en {\oe}uvre, notamment par rapport à celle définie par les entiers naturels.
+%\end{enumerate}
 
 Ainsi, cette représentation n'est quasiment jamais utilisée pour les nombres
 \emph{entiers} d'un processeur.
 %\clearslide{}
 \subsubsection{Complément à deux}
 
-On va utilise l'idée suivante. Remarquons que l'addition d'entiers naturels sur le processeur n'est pas
-  correcte mais l'est modulo $2^{n}$. De plus, pour tout $p\in \Z$, $p\mmod 2^{n} \in \ii{0,2^{n}}$. 
+On va utiliser l'idée suivante. Remarquons que l'addition d'entiers naturels sur le processeur n'est pas correcte mais l'est modulo $2^{n}$. De plus, pour tout $p\in \Z$, $p\mmod 2^{n} \in \ii{0,2^{n}}$. 
   Ainsi, $p\mmod 2^{n}$ est représentable sur $n$ bits.
   
 C'est donc la \emph{représentation en complément à deux} qui est le plus souvent utilisée : un entier relatif $p$ est représenté sur $n$ bits comme l'entier naturel $p\mmod 2^n$. 
 
+Ainsi sur $n$ bits on représentera tous les entiers relatifs compris dans l'intervalle  $\ii{-2^{n-1},2^{n-1}}$
+
 \begin{rem}
   L'addition d'entiers relatifs (on dit aussi \emph{signés}) sera correcte modulo $2^{n}$ et utilisera les mêmes circuits que l'addition d'entiers naturels.
 \end{rem}
+
 \begin{exemple} ~\\
+
+\begin{minipage}{0.4\textwidth}
+sur 3 bits :
 \begin{itemize}
-\item[\textbullet] $-5$ est codé par $-5 \mmod 2^{16} = 65531 =
-  \bin{1111\,1111\,1111\,1011}$.
-\item[\textbullet] $3$ est codé par $3 \mmod 2^{16} = 3 =
-  \bin{0000\,0000\,0000\,0011}$.
-\item[\textbullet] La somme obtenue par le processeur est
-  \begin{equation*}
-    \bin{1111\,1111\,1111\,1110} = 65534 = 2^{16}-2 = -2 \mmod 65536
-  \end{equation*}
+\item  2 est codé par $2\mmod 2^3=2=\bin{001}$ ;
+\item -2 est code par $-2\mmod 2^3=6=\bin{110}$ car $-2=-1\times 2^3+6$ 
 \end{itemize}
 
-\begin{itemize}
-\item[\textbullet] $-4$ est codé par $-4 \mmod 2^{16} = 65532 =
-  \bin{1111\,1111\,1111\,1100}$.
-\item[\textbullet] $6$ est codé par $6 \mmod 2^{16} = 6 =
-  \bin{0000\,0000\,0000\,0110}$.
-\item[\textbullet] La somme obtenue par le processeur est
-  \begin{equation*}
-   \bin{0000\,0000\,0000\,0010} = 2 = 2 \mmod 65536
-  \end{equation*}
-\end{itemize}
+\item Avec cette représentation l'addition est cohérente : $2+(-1)=\bin{010}+\bin{111}=\bin{001}=1$.
+
+On trouve donc la table ci-contre : 
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+
+\begin{tabular}{|p{0.4\textwidth}|p{0.4\textwidth}|}
+\hline 
+Entier relatif en décimal & entier relatif en binaire \\ 
+\hline 
+-4 & $\bin{100}$ \\ 
+\hline 
+-3 & $\bin{101}$ \\ 
+\hline 
+-2 & $\bin{110}$ \\ 
+\hline 
+-1 & $\bin{111}$ \\ 
+\hline 
+0 & $\bin{000}$ \\ 
+\hline 
+1 & $\bin{001}$ \\ 
+\hline 
+2 & $\bin{010}$ \\ 
+\hline 
+3 & $\bin{011}$ \\ 
+\hline 
+\end{tabular} 
+\end{minipage}
+
 \end{exemple}
+
+
+%\begin{exemple}[Sur 16 bits]
+%\begin{itemize}
+%\item[\textbullet] $-5$ est codé par $-5 \mmod 2^{16} = 65531 =
+%  \bin{1111\,1111\,1111\,1011}$.
+%\item[\textbullet] $3$ est codé par $3 \mmod 2^{16} = 3 =
+%  \bin{0000\,0000\,0000\,0011}$.
+%\item[\textbullet] La somme obtenue par le processeur est
+%  \begin{equation*}
+%    \bin{1111\,1111\,1111\,1110} = 65534 = 2^{16}-2 = -2 \mmod 65536
+%  \end{equation*}
+%\end{itemize}
+%
+%\begin{itemize}
+%\item[\textbullet] $-4$ est codé par $-4 \mmod 2^{16} = 65532 =
+%  \bin{1111\,1111\,1111\,1100}$.
+%\item[\textbullet] $6$ est codé par $6 \mmod 2^{16} = 6 =
+%  \bin{0000\,0000\,0000\,0110}$.
+%\item[\textbullet] La somme obtenue par le processeur est
+%  \begin{equation*}
+%   \bin{0000\,0000\,0000\,0010} = 2 = 2 \mmod 65536
+%  \end{equation*}
+%\end{itemize}
+%\end{exemple}
 
 \subsubsection{Soustraction d'entiers relatifs}
 
