@@ -1,64 +1,38 @@
+alpha=4
+import sujet
 
-
-
-\question{
-}
-
-\begin{lstlisting}
-t = cree_tableau(alpha)
+t = sujet.cree_tableau(alpha)
+#Q1
 N=len(t)
 print('Q1 : '+str(N))
-\end{lstlisting}
 
-\question{
-}
-
-\begin{lstlisting}
+#Q2
 c=0
 for x in t:
     if x>=3000:
         c+=1
-        
+
 print('Q2 : '+str(c))
-\end{lstlisting}
 
-
-\question{
-}
-
-\begin{lstlisting}
+#Q3
 c=0
 for x in t:
     if x%3==0:
         c+=1
-        
+
 print('Q3 : '+str(c))
-\end{lstlisting}
 
-\question{
-}
-
-\begin{lstlisting}
+#Q4
 c=0
 for j in range(N):
     for i in range(j):
         if t[i]<t[j]:
             c+=1
-            
+
 print('Q4 : '+str(c))
-\end{lstlisting}
 
-\question{
-}
-\question{
-}
-\question{
-}
-\question{
-}
+#Q5
 
-
-\begin{lstlisting}
 u=10+alpha
 U=[u]
 c=0
@@ -73,17 +47,17 @@ d=0
 for i in range(1,10**4-1):
     if abs(U[i]-U[i+1])<=1000:
         d+=1
-        
+
+
+
 print('Q5 : '+str(U[42]))
 print('Q6 : '+str(U[-1]))
-print('Q7 : '+str(d))
-print('Q8 : '+str(S))
-\end{lstlisting}
+print('Q7 : '+str(c))
+print('Q8 : '+str(d))
+print('Q9 : '+str(S))
 
-\question{
-}
 
-\begin{lstlisting}
+#Q10
 with open('zeta5.txt','r') as f:
     data=f.readlines()
 
@@ -95,13 +69,10 @@ for ligne in data[2:]:
             for i in range(7):
                 if int(str(b[i:i+4]))==2000+alpha:
                     c+=1
-print('Q9 : '+str(c))
-\end{lstlisting}
 
-\question{
-}
+print('Q10 : '+str(c))
 
-\begin{lstlisting}
+#Q11
 c=0
 for ligne in data[1:]:
     ligne=ligne.split(' ')
@@ -113,13 +84,9 @@ for ligne in data[1:]:
             if int(str(b1[i:i+4]))==2000+alpha:
                 c+=1
 
-print('Q10 : '+str(c))
-\end{lstlisting}
+print('Q11 : '+str(c))
 
-\question{
-}
-
-\begin{lstlisting}
+#Q11
 c=0
 b1=''
 for ligne in data[2:]:
@@ -133,14 +100,9 @@ for ligne in data[2:]:
     else:
         for b in ligne[:5]:
             b1+=b
-            
-print('Q11 : '+str(c))
-\end{lstlisting}
 
-\question{
-}
+print('Q12 : '+str(c))
 
-\begin{lstlisting}
 c=0
 b1=''
 for ligne in data[2:]:
@@ -152,7 +114,16 @@ for ligne in data[2:]:
 for i in range(int(1e6)-3):
     if int(str(b1[i:i+4]))==2000+alpha:
         c+=1
-        
-print('Q12 : '+str(c))
-\end{lstlisting}
+
+print('Q13 : '+str(c))
+
+
+
+
+
+
+
+
+
+
 

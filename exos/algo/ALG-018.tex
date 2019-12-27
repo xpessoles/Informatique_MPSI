@@ -1,0 +1,13 @@
+Donnons ces invariant et variant pour l'algorithme de l'exemple \textbf{\ref{ex-suite}} (nous ne 
+pouvons malheureusement pas le faire pour l'exemple \textbf{\ref{ex-syracuse}}, puisque comme son 
+nom l'indique, la conjecture de Syracuse n'a jamais été demontrée) :\\
+
+\begin{pyconsole}
+n = 1
+s = 1           # s = somme des i de 1 à n
+while s < 11 :  # invariant : s = somme des i de 1 à n
+    n = n + 1
+    s = s + n   # variant : s, qui est entier et strictement croissant
+\end{pyconsole}
+
+\question{Démontrer cet algorithme.}
