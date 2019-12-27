@@ -13,3 +13,10 @@ def creation_grille(p, n):
             if rand() < p:
                 grille[i][j] = 1.
     return grille
+
+L=[]
+for i in range(10):
+    L.append(0)
+
+for i in range(10):
+    L.append(L)
