@@ -1,13 +1,35 @@
-Donnons ces invariant et variant pour l'algorithme de l'exemple \textbf{\ref{ex-suite}} (nous ne 
+Donnons ces invariant et variant pour l'algorithme de vérification de la conjecture de syracuse (nous ne 
 pouvons malheureusement pas le faire pour l'exemple \textbf{\ref{ex-syracuse}}, puisque comme son 
 nom l'indique, la conjecture de Syracuse n'a jamais été demontrée) :\\
 
-\begin{pyconsole}
-n = 1
-s = 1           # s = somme des i de 1 à n
-while s < 11 :  # invariant : s = somme des i de 1 à n
-    n = n + 1
-    s = s + n   # variant : s, qui est entier et strictement croissant
-\end{pyconsole}
+Conjecture de Syracuse :\\
+On note $f : \N^{*} \to \N^{*}$ l'application vérifiant, pour tout $n$ pair
+$f(n)=n/2$ et tout $n$ impair et $f(n)=3n+1$.
 
-\question{Démontrer cet algorithme.}
+On conjecture que pour tout entier $n$, il existe $k$ tel que
+$f^{k}(n)=1$.
+
+Voici un algorithme calculant, pour tout $n$ donné, le plus petit
+entier $k$ vérifiant $f^{k}(n) = 1$ :
+
+%\begin{pyverbatim}
+\begin{lstlisting}
+def f(n):
+    """Fonction de Syracuse.
+    Précondition : n est un entier strictement positif"""
+    if n % 2 == 0:
+        return n // 2
+    else:
+        return 3 * n + 1
+        
+def syracuse(n):
+    """Renvoie le premier entier k tel que  f\^k(n) = 0.
+    Précondition : n est un entier strictement positif"""
+    x = n
+    k = 0
+    while x != 1:
+        x = f(x)
+        k = k + 1
+    return k
+\end{lstlisting}
+

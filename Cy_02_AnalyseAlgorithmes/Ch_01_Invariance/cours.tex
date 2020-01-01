@@ -49,6 +49,29 @@ for k in range(20):
 
 \subsection{Tableau de valeurs}
 
+\begin{defi}
+Pour vérifier qu'un algorithme effectue bien ce qu'on lui demande, on peut utiliser un \textbf{tableau de valeurs} qui permet de déterminer en début ou fin de boucles les valeurs prises par les différentes variables.
+\end{defi}
+
+
+\begin{exemple}
+\begin{lstlisting}
+def fonctionMystere(n) :
+    if n==0 or n==1:
+         return 1
+    else :
+        res = 1
+    for i in range (2,n+1) :
+        res = res * i
+    return res
+\end{lstlisting}
+
+
+\question{Dresser le tableau de valeur pour les variables \pyv{i} et \pyv{res}.}
+
+\question{Quel est le nom mathématique usuel donné à la fonction \pyv{fonctionMystere} ?}
+\end{exemple}
+
 
 \section{Prouver qu'un algorithme se termine}
 
@@ -73,7 +96,20 @@ boucle, de telle sorte que cette modification finisse par rendre fausse la condi
 
 
 \begin{defi}
-Une preuve de terminaison repose sur l'utilisation d'un variant de boucle qui est généralement associé à la condition associé à la boucle \pyv{while.} La plupart des conditions associées au boucles indéfinies sont des inégalités. Il suffit alors généralement à montrer que le variant de boucle est défini par une suite d'entiers strictement croissante ou décroissante qui ne sera donc pas bornée.
+Une preuve de terminaison repose sur l'utilisation d'un variant de boucle qui est généralement associé à la condition donné à la boucle \pyv{while.} La plupart des conditions associées au boucles indéfinies sont des inégalités. Il suffit alors généralement à montrer que le variant de boucle est défini par une suite d'entiers strictement croissante ou décroissante qui ne sera donc pas bornée.
 \end{defi}
 
 \subsection{Exemple}
+
+
+\begin{exemple}
+Rechercher le premier entier n tel que la somme des entiers de 1 à n dépasse 11.
+
+\begin{lstlisting}
+n = 1
+s = 1           # s = somme des i de 1 à n
+while s < 11 :  # invariant : s = somme des i de 1 à n
+    n = n + 1
+    s = s + n   # variant : s, qui est entier et strictement croissant
+\end{lstlisting}
+\end{exemple}
