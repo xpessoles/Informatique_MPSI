@@ -12,8 +12,8 @@ $f^{k}(n)=1$.
 Voici un algorithme calculant, pour tout $n$ donné, le plus petit
 entier $k$ vérifiant $f^{k}(n) = 1$ :
 
-%\begin{pyverbatim}
-\begin{lstlisting}
+%\begin{lstlisting}
+\begin{pyverbatim}
 def f(n):
     """Fonction de Syracuse.
     Précondition : n est un entier strictement positif"""
@@ -21,7 +21,9 @@ def f(n):
         return n // 2
     else:
         return 3 * n + 1
-        
+\end{pyverbatim}
+
+\begin{pyverbatim}        
 def syracuse(n):
     """Renvoie le premier entier k tel que  f\^k(n) = 0.
     Précondition : n est un entier strictement positif"""
@@ -31,5 +33,6 @@ def syracuse(n):
         x = f(x)
         k = k + 1
     return k
-\end{lstlisting}
+\end{pyverbatim}
+%\end{lstlisting}
 

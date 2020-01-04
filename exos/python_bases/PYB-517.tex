@@ -1,5 +1,6 @@
 On considère la fonction suivante. 
-\begin{Verbatim}[gobble=0,numbers=left]
+%\begin{Verbatim}[gobble=0,numbers=left]
+\begin{pyverbatim}
 def mystere(a,b) :
     """Précondition : a,b sont des entiers, a>0, b>1"""
     k,p = 0,1
@@ -7,7 +8,8 @@ def mystere(a,b) :
         k = k+1
         p = p*b
     return k-1
-\end{Verbatim}
+\end{pyverbatim}    
+%\end{Verbatim}
 
 \question{} Dresser un tableau de valeurs décrivant les valeurs des variables \pyv{k} et \pyv{p} en entrée des trois premiers tours de la boucle \texttt{while} de la fonction \pyv{mystere(a,b)}. 
 

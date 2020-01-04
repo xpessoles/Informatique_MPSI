@@ -4,7 +4,7 @@
 On veut tester si un entier \pyv{n} est premier:
 
 
-\begin{lstlisting}
+\begin{pyverbatim}
 def est_premier(n):
     """ Renvoie True si n est premier, False sinon
         Préconditon : n est un entier."""
@@ -15,11 +15,14 @@ def est_premier(n):
             b = False
     # b <=> n premier
     return b
-\end{lstlisting}
+\end{pyverbatim}
 
-Remarque: les derniers tours de boucle sont inutiles dès que la
+\begin{rem}
+Les derniers tours de boucle sont inutiles dès que la
 variable \pyv{b} a été mise à \pyv{False}. Les exécuter tout de même est une perte de temps. Il 
 existe plusieurs possibilités pour améliorer cela~:
+
+\end{rem}
 
 L'instruction \pyv{break} :
 \begin{pyverbatim}
