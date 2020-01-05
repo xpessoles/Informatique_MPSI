@@ -1,54 +1,29 @@
 %\subsection{Un exemple : test de primalité} 
 
 
-On veut tester si un entier \pyv{n} est premier:
+On veut tester si un entier \pyv{n} est premier on donne l'algorithme suivant :
 
 
-\begin{pyverbatim}
-def est_premier(n):
-    """ Renvoie True si n est premier, False sinon
-        Préconditon : n est un entier."""
-    b = True
-    for d in range(2,n):
-        # b => n non divisible par 2, 3, ..., d-1.
-        if n % d == 0:
-            b = False
-    # b <=> n premier
-    return b
-\end{pyverbatim}
 
-\begin{rem}
-Les derniers tours de boucle sont inutiles dès que la
-variable \pyv{b} a été mise à \pyv{False}. Les exécuter tout de même est une perte de temps. Il 
-existe plusieurs possibilités pour améliorer cela~:
-
-\end{rem}
-
-L'instruction \pyv{break} :
-\begin{pyverbatim}
-def est_premier(n):
-    """ Renvoie True si n est premier, False sinon
-        Préconditon : n est un entier."""
-    b = True
-    for d in range(2,n):
-        # b => n pas divisible par 2, 3, ..., d-1.
-        if n % d == 0:
-            b = False
-            break
-    # b <=> n est premier
-    return b
-\end{pyverbatim}
-
-L'utilisation d'un \pyv{return} en milieu de boucle, à favoriser en Python{} pour 
-une question de style et d'élégance~:
+%\begin{pyverbatim}
+%def est_premier(n):
+%    """ Renvoie True si n est premier, False sinon
+%        Préconditon : n est un entier."""
+%    for d in range(2,n):
+%        # n n'est pas divisible par 2, 3, ..., d-1.
+%        if n % d == 0:
+%            return False
+%    return True
+%\end{pyverbatim}
 
 \begin{pyverbatim}
 def est_premier(n):
     """ Renvoie True si n est premier, False sinon
         Préconditon : n est un entier."""
     for d in range(2,n):
-        # n n'est pas divisible par 2, 3, ..., d-1.
         if n % d == 0:
             return False
     return True
 \end{pyverbatim}
+
+\question{Proposer un invariant de boucle pour démontrer cet algorithme.}

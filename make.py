@@ -141,10 +141,13 @@ def genere_fichiers_tex(info_activite,type_activite):
         os.system('cp style'+sep+'Cy_i_Ch_j_Cours_PDF.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_Cours_PDF.tex')
         os.system('cp style'+sep+'Cy_i_livret_Ch_j.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_livret_Ch_'+str(num_activite)+'.tex')
         os.system('cp style'+sep+'Cy_i_Ch_j_TD_j.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_TD_'+str(num_activite)+'.tex')
+        os.system('cp style'+sep+'Cy_i_Ch_j_TD_k_cor_pdf.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_TD_'+str(num_activite)+'_cor_pdf.tex')
+        os.system('cp style'+sep+'Cy_i_Ch_j_TD_j_cor.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_TD_'+str(num_activite)+'_cor.tex')
         # print(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_activite)+'_Cours_PDF.tex')
         changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_Cours_PDF.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_Cours.tex}')
         changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_livret_Ch_'+str(num_activite)+'.tex','\\input{Cy_01_Ch_01_Cours.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_Cours.tex}')
         changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_livret_Ch_'+str(num_activite)+'.tex','\\input{Cy_01_Ch_01_TD_01.tex}','\\input{Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_TD_'+str(num_activite)+'.tex}')
+        changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_TD_'+str(num_activite)+'_cor_pdf.tex','\\input{Cy_02_Ch_01_TD_01}','\\input{Cy_0'+str(n_cycle)+'_Ch_'+str(num_activite)+'_TD_'+str(num_activite)+'_cor.tex}')
     elif type_activite=='tp':
         num_chapitre=ref_cours.split(';')[0].split('-')[1]
         if int(num_chapitre)<10 and len(num_chapitre)<2:
@@ -362,6 +365,8 @@ def genere_support(rep,info_activite,type_activite):
         num_chapitre=trouver_chapitre(ref_cours)
     if type_activite=='cours':
         rep_activite=rep+sep+'td.tex'
+        rep_activite_cor=rep+sep+'td_cor.tex'
+        os.system('cp '+rep_activite+' '+rep_activite_cor)
         # print(num_activite,rep_activite,supports)
     elif type_activite=='tp':
         rep_activite=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite+sep+'tp.tex'
@@ -376,15 +381,20 @@ def genere_support(rep,info_activite,type_activite):
             # if type_activite=='tp':
             #     f.write('\\setcounter{section}{'+str(int(num_activite)-1)+'}\n')
             #     f.write('\\section{TP '+num_activite+'}\n')
-            if type_activite=='tp' or type_activite=='ds':
+            if type_activite=='tp' or type_activite=='ds' or type_activite=='cours':
                 f2=open(rep_activite_cor,'w',encoding='utf-8')
-                f2.write('\n\\vspace{0.1cm}\n\\begin{huge}\n Proposition de corrigé\n\\end{huge}\n')
+                f2.write('\n\\vspace{0.1cm}\n\\begin{huge}\n Proposition de corrigé\n\\end{huge}\n\n')
             for support in supports.split(';'):
                 if type_activite=='cours':
                     exo,source=trouve_exo_source(support)
+                    support_cor=support.split('.tex')[0]+'-cor.tex'
                     f.write('\\subsection{'+exo+'}\n')
                     f.write('\\setcounter{thequestion}{0}\n')
-                    f.write('\\input{'+'../../exos/'+support+'}\n')
+                    f.write('\\input{'+chemin_relatif+'exos/'+support+'}\n')
+                    f2.write('\\subsection{'+exo+'}\n')
+                    f2.write('\\setcounter{thequestion}{0}\n')
+                    if os.path.exists('exos/'+support_cor):
+                        f2.write('\\input{'+chemin_relatif+'exos/'+support_cor+'}\n')
                 elif type_activite=='tp' or type_activite=='ds':
                     if support[:2]=='F:':
                         support=support[2:]
@@ -427,12 +437,13 @@ def genere_support(rep,info_activite,type_activite):
 # #     
 
 
-def trouver_file_tex(activite,type_activite):
+def trouver_file_tex(activite,rep,type_activite):
     '''Trouve le fichier tex a compiler pour une activite donnee'''
     (date,n_cycle,num_activite,name_cycle,name_activite,supports,competences,figures,ref_cours)=activite
-    rep=trouver_repertoire(activite)
     if type_activite=='cours':
         file_tex=rep+sep+'Cy_0'+str(n_cycle)+'_Livret_Ch_'+num_activite+'.tex'
+    elif type_activite=='td':
+        file_tex=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+num_activite+'_TD_'+num_activite+'_cor_PDF.tex'
     elif type_activite=='tp':
         num_chap=ref_cours.split(';')[0].split('-')[1]
         if int(num_chap)<10 and len(num_chap)<2:
@@ -450,17 +461,19 @@ def compile_tex_python(file_abrege):
 def genere_pdf(file,rep,type_activite):
     '''genere le pdf avec le fichier complet et incomplet'''
     file_abrege=file.split('.')[0].split('/')[-1]
-    if type_activite=='cours':
+    if type_activite=='cours' or type_activite=='td':
         rep_activite=rep
     elif type_activite=='tp':
         rep_activite=rep+sep+file_abrege.split('_pdf')[0]
     elif type_activite=='ds':
         rep_activite=rep
         file_abrege+='_pdf'
+    #pdb.set_trace()
     os.chdir(rep_activite)
     os.system('rm *.aux')
     os.system('rm *.log')
     os.system('rm *.out')
+    os.system('rm *.gz')
     os.system('rm *.toc')
     os.system('rm *.pytxcode')
     os.system('rm *.nav')
@@ -574,8 +587,10 @@ for tp in info_tp:
 # 
 activite=info_cours[8]
 rep=trouver_repertoire(activite)
-file=trouver_file_tex(activite,'cours')
+file=trouver_file_tex(activite,rep,'cours')
 genere_pdf(file,rep,'cours')
+file_td=trouver_file_tex(activite,rep,'td')
+genere_pdf(file_td,rep,'td')
 
 # activite=info_ds[1]
 # num_ds_str=activite[0]
