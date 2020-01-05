@@ -1,0 +1,133 @@
+\section{Prouver qu'un algorithme réalise donne le résultat souhaité}
+
+\subsection{Invariant de boucle}
+
+\begin{defi}
+Un \textbf{invariant de boucle} est une proposition vérifiée à chaque tour d'une boucle. Plus 
+précisément, on distingue les invariants d'\textbf{entrée de boucle} et ceux de \textbf{sortie de 
+boucle}. C'est en fait une proposition de récurrence, qui doit être vrai au début de la première 
+boucle, puis se propager de tour de boucle en tour de boucle, jusqu'au dernier.\\
+Les invariants de boucles ont essentiellement deux intérêts :
+\begin{enumerate}
+ \item \textbf{Démontrer} l'algorithme, grâce au principe de récurrence ;
+ \item Répondre à une question primordiale : \textbf{où commencer et où finir une boucle ?}
+\end{enumerate}
+\end{defi}
+
+\begin{rem}
+Il est \textbf{fortement conseillé} de toujours indiquer les invariants de boucle en commentaire 
+dans vos algorithmes.\\ 
+\end{rem}
+
+
+
+\subsection{Preuve de correction}
+
+\begin{defi}
+Une preuve de correction permet de démontrer le résultat d'un algorithme. Elle repose sur l'utilisation \textbf{d'un invariant} et d'un raisonnement par \textbf{récurrence} qui possède plusieurs étapes : 
+<<<<<<< HEAD
+\begin{enumerate}
+\item \textbf{Initialisation : } l'invariant de boucle est vérifié au début de la première boucle ;
+\item \textbf{Supposition : } on suppose que l'invariant de boucle est vérifié au début de la n\up{ème} boucle ;
+\item \textbf{Hérédité : } à partir de la supposition on montre que l'invariant de boucle est vérifié en fin de boucle.
+\item \textbf{Conclusion : } en se basant sur l'hérédité on donne l'expression de l'invariant à la fin de la dernière boucle pour vérifier le résultat souhaité.
+\end{enumerate}
+
+=======
+\begin{itemize}
+\item \textbf{initialisation : } l'invariant de boucle est vérifié au début de la première boucle ;
+\item \textbf{supposition : } que l'invariant de boucle est vérifié au début de la n\up{ème} boucle ;
+\item \textbf{hérédité : } à partir de la supposition on montre que l'invariant de boucle est vérifié en fin de boucle.
+\item \textbf{conclusion : } en se basant sur l'hérédité on donne l'expression de l'invariant àa la fin de la dernière boucle pour vérifier le résultat souhaité.
+\end{itemize}
+>>>>>>> 37a90a48cdd35adc532be925deb73594fda66904
+\end{defi}
+
+\subsection{Exemple}
+
+\begin{exemple}
+Par exemple, on souhaite calculer $u_{20}$ où $u$ est la suite définie par
+
+\begin{align*}
+  u_{0} & = 5\\
+  \forall n\in\N\ u_{n+1} &= 2u_{n}- n - 3\\
+\end{align*}
+
+
+\begin{pyverbatim}
+x = 5			# x = u_0 (initialisation)
+for k in range(20): 	
+    # x = u_k (invariant en entrée de boucle)
+    x = 2 * x - k - 3	
+    # x = u_{k+1} (invariant en sortie de boucle)	
+# après la boucle for, k vaut 19, et x vaut donc u_{20}.
+\end{pyverbatim}
+\end{exemple}
+
+\subsection{Tableau de valeurs}
+
+\begin{defi}
+Pour vérifier qu'un algorithme effectue bien ce qu'on lui demande, on peut utiliser un \textbf{tableau de valeurs} qui permet de déterminer en début ou fin de boucles les valeurs prises par les différentes variables.
+\end{defi}
+
+
+\begin{exemple}~\\
+
+\begin{pyverbatim}
+def fonctionMystere(n) :
+    if n==0 or n==1:
+         return 1
+    else :
+        res = 1
+    for i in range (2,n+1) :
+        res = res * i
+    return res
+\end{pyverbatim}
+
+
+\question{Dresser le tableau de valeur pour les variables \pyv{i} et \pyv{res}.}
+
+\question{Quel est le nom mathématique usuel donné à la fonction \pyv{fonctionMystere} ?}
+\end{exemple}
+
+
+\section{Prouver qu'un algorithme se termine}
+
+\subsection{Variant de boucle}
+
+Comment démontrer un 
+algorithme reposant sur une boucle indéfinie ? Pour cela, nous utilisons encore les invariants de 
+boucle, afin de prouver qu'après la boucle, le résultat est bien celui voulu.\\
+Mais avant même cela, il y a un point épineux : la boucle \textbf{while} va-t-elle vraiment se 
+finir ? Il faut démontrer ce que l'on appelle la \textbf{terminaison} de l'algorithme. C'est là que 
+réside le danger des boucles \textbf{while} : si elles sont mal écrites, la condition de la boucle 
+ne devient jamais fausse, et la boucle est infinie.\\
+
+\begin{defi}
+Pour montrer la terminaison d'un algorithme, on utilise cette fois un \textbf{variant} de boucle. 
+Il consiste à mettre en avant une variable dont la valeur est modifiée au cours des tours de 
+boucle, de telle sorte que cette modification finisse par rendre fausse la condition de la boucle.\\
+\end{defi}
+
+
+\subsection{Preuve de terminaison}
+
+
+\begin{defi}
+Une preuve de terminaison repose sur l'utilisation d'un variant de boucle qui est généralement associé à la condition donnée à la boucle \pyv{while.} La plupart des conditions associées au boucles indéfinies sont des inégalités. Il suffit alors généralement de montrer que le variant de boucle est défini par une suite d'entiers strictement croissante ou décroissante qui ne sera donc pas bornée.
+\end{defi}
+
+\subsection{Exemple}
+
+
+\begin{exemple}
+Rechercher le premier entier $n$ tel que la somme des entiers de 1 à $n$ dépasse 11.
+
+\begin{lstlisting}
+n = 1
+s = 1           		# s = somme des i de 1 à n
+while s < 11 :  	# invariant : s = somme des i de 1 à n
+    n = n + 1
+    s = s + n   	# variant : s, qui est entier et strictement croissant
+\end{lstlisting}
+\end{exemple}
