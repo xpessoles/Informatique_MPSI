@@ -1,0 +1,153 @@
+\begin{multicols}{2}
+\begin{pyverbatim}
+def moyenne(t):
+    """Calcule la moyenne de t
+       Précondition : t est un tableau de 
+       nombres non vide"""
+    s = 0 
+    for x in t:
+        # Invariant : 
+        # s == somme des éléments de t 
+        # avant x
+        s = s + x 
+    return s/len(t)
+\end{pyverbatim}
+
+%\begin{lstlisting}
+\begin{pyverbatim}
+def variance(t):
+    """Renvoie la variance de t
+       Précondition : t est un tableau de 
+       nombres non vide"""
+    sc = 0
+    for x in t:
+        # Invariant : sc == somme des 
+        # carrés des éléments de 
+        # t avant x
+        sc = sc + x**2 
+    return sc/len(t) - moyenne(t)**2
+\end{pyverbatim}
+%\end{lstlisting}
+
+
+\begin{pyverbatim}
+def moyenne(t):
+    """Calcule la moyenne de t
+       Précondition : t est un tableau de 
+       nombres non vide"""
+    n = len(t) # Longueur de t
+    s = 0 
+    for i in range(n):
+        # Invariant : s == sum(t[0:i])
+        s = s + t[i]
+    return s/n 
+\end{pyverbatim}
+
+
+
+\begin{pyverbatim}
+def maxi(t):
+    """Renvoie le plus grand élément de t.
+       Précondition : t est un tableau 
+       non vide"""
+    m = t[0]
+    for x in t:
+        # Invariant : m est le plus grand 
+        # élément trouvé jusqu'ici
+        if x > m:
+            m = x # On a trouvé plus grand, 
+                  # on met à jour m
+    return m
+\end{pyverbatim}
+
+
+\begin{pyverbatim}
+def maxi(t):
+    """Renvoie le plus grand élément de t.
+       Précondition : t est un tableau 
+       non vide"""
+    m = t[0] # Initialisation par le 
+             # premier élément
+    for i in range(1, len(t)):
+        # Invariant : m == max(t[0:i])
+        if t[i] > m:
+            m = t[i] # On a trouvé plus
+                     # grand, on met à 
+                     # jour m
+    return m
+\end{pyverbatim}
+
+\vfill\null
+\columnbreak
+
+\begin{pyverbatim}
+def indicemaxi(t):
+    """Renvoie l'indice du plus grand 
+        élément de t.
+       Précondition : t est un tableau 
+       non vide"""
+    im = 0 # Indice du maximum, 
+           # initialisation par 
+           # le premier élément
+    for i in range(1, len(t)):
+        # Invariant : im est indice d'un 
+        # plus grand élément de t[0:i]
+        if t[i] > t[im]:
+            im = i # On a trouvé plus grand, 
+                   # on met à jour im
+    return im
+    
+\end{pyverbatim}
+
+
+
+\begin{pyverbatim}
+def indicemaxi(t):
+    """Renvoie l'indice du plus grand élément 
+       de t.
+       Précondition : t est un tableau 
+       non vide"""
+    im = 0 # Indice du maximum, 
+            # initialisation par le 
+            # premier élément
+    for i, x in enumerate(t):
+        # Invariant : im est indice 
+        # d'un plus grand élément de t[0:i]
+        if x > t[im]:
+            im = i # On a trouvé plus grand, 
+                    # on met à jour im
+    return im
+\end{pyverbatim}
+
+
+
+\begin{pyverbatim}
+def appartient(e, t):
+    """Renvoie un booléen disant si e 
+    appartient à t
+       Précondition : t est un tableau"""
+    for x in t:
+        # Invariant : e n'est pas positionné 
+        # dans t avant x
+        if e == x:
+            return True # On a trouvé e, 
+                      # on s'arrête
+    return False
+ 
+\end{pyverbatim}
+
+\begin{pyverbatim}
+def ind_appartient(e,t):
+    """Renvoie l'indice de la première 
+       occurrence de e dans t,
+       None si e n'est pas dans t
+       Précondition : t est un tableau"""
+    for i in len(t):
+        # Invariant : e n'est pas dans t[0:i]
+        if t[i] == e:
+            return i # On a trouvé e 
+                   # à l'indice i
+    return None
+\end{pyverbatim}
+
+\end{multicols}

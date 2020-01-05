@@ -25,6 +25,7 @@ dans vos algorithmes.\\
 
 \begin{defi}
 Une preuve de correction permet de démontrer le résultat d'un algorithme. Elle repose sur l'utilisation \textbf{d'un invariant} et d'un raisonnement par \textbf{récurrence} qui possède plusieurs étapes : 
+
 \begin{enumerate}
 \item \textbf{Initialisation : } l'invariant de boucle est vérifié au début de la première boucle ;
 \item \textbf{Supposition : } on suppose que l'invariant de boucle est vérifié au début de la n\up{ème} boucle ;
@@ -45,14 +46,14 @@ Par exemple, on souhaite calculer $u_{20}$ où $u$ est la suite définie par
 \end{align*}
 
 
-\begin{lstlisting}
+\begin{pyverbatim}
 x = 5			# x = u_0 (initialisation)
 for k in range(20): 	
     # x = u_k (invariant en entrée de boucle)
     x = 2 * x - k - 3	
     # x = u_{k+1} (invariant en sortie de boucle)	
 # après la boucle for, k vaut 19, et x vaut donc u_{20}.
-\end{lstlisting}
+\end{pyverbatim}
 \end{exemple}
 
 \subsection{Tableau de valeurs}
@@ -62,8 +63,9 @@ Pour vérifier qu'un algorithme effectue bien ce qu'on lui demande, on peut util
 \end{defi}
 
 
-\begin{exemple}
-\begin{lstlisting}
+\begin{exemple}~\\
+
+\begin{pyverbatim}
 def fonctionMystere(n) :
     if n==0 or n==1:
          return 1
@@ -72,7 +74,7 @@ def fonctionMystere(n) :
     for i in range (2,n+1) :
         res = res * i
     return res
-\end{lstlisting}
+\end{pyverbatim}
 
 
 \question{Dresser le tableau de valeur pour les variables \pyv{i} et \pyv{res}.}
@@ -111,13 +113,13 @@ Une preuve de terminaison repose sur l'utilisation d'un variant de boucle qui es
 
 
 \begin{exemple}
-Rechercher le premier entier n tel que la somme des entiers de 1 à n dépasse 11.
+Rechercher le premier entier $n$ tel que la somme des entiers de 1 à $n$ dépasse 11.
 
 \begin{lstlisting}
 n = 1
-s = 1           # s = somme des i de 1 à n
-while s < 11 :  # invariant : s = somme des i de 1 à n
+s = 1           		# s = somme des i de 1 à n
+while s < 11 :  	# invariant : s = somme des i de 1 à n
     n = n + 1
-    s = s + n   # variant : s, qui est entier et strictement croissant
+    s = s + n   	# variant : s, qui est entier et strictement croissant
 \end{lstlisting}
 \end{exemple}
