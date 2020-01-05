@@ -10,7 +10,7 @@ boucle, puis se propager de tour de boucle en tour de boucle, jusqu'au dernier.\
 Les invariants de boucles ont essentiellement deux intérêts :
 \begin{enumerate}
  \item \textbf{Démontrer} l'algorithme, grâce au principe de récurrence ;
- \item Répondre à notre question précédente : où commencer et où finir une boucle ?
+ \item Répondre à une question primordiale : \textbf{où commencer et où finir une boucle ?}
 \end{enumerate}
 \end{defi}
 
@@ -25,16 +25,24 @@ dans vos algorithmes.\\
 
 \begin{defi}
 Une preuve de correction permet de démontrer le résultat d'un algorithme. Elle repose sur l'utilisation \textbf{d'un invariant} et d'un raisonnement par \textbf{récurrence} qui possède plusieurs étapes : 
+\begin{enumerate}
 \item \textbf{Initialisation : } l'invariant de boucle est vérifié au début de la première boucle ;
-\item \textbf{Supposition : } que l'invariant de boucle est vérifié au début de la n\up{ème} boucle ;
+\item \textbf{Supposition : } on suppose que l'invariant de boucle est vérifié au début de la n\up{ème} boucle ;
 \item \textbf{Hérédité : } à partir de la supposition on montre que l'invariant de boucle est vérifié en fin de boucle.
-\item \textbf{Conclusion : } en se basant sur l'hérédité on donne l'expression de l'invariant àa la fin de la dernière boucle pour vérifier le résultat souhaité.
+\item \textbf{Conclusion : } en se basant sur l'hérédité on donne l'expression de l'invariant à la fin de la dernière boucle pour vérifier le résultat souhaité.
+\end{enumerate}
+
 \end{defi}
 
 \subsection{Exemple}
 
 \begin{exemple}
-Par exemple :
+Par exemple, on souhaite calculer $u_{20}$ où $u$ est la suite définie par
+
+\begin{align*}
+  u_{0} & = 5\\
+  \forall n\in\N\ u_{n+1} &= 2u_{n}- n - 3\\
+\end{align*}
 
 
 \begin{lstlisting}
@@ -96,7 +104,7 @@ boucle, de telle sorte que cette modification finisse par rendre fausse la condi
 
 
 \begin{defi}
-Une preuve de terminaison repose sur l'utilisation d'un variant de boucle qui est généralement associé à la condition donné à la boucle \pyv{while.} La plupart des conditions associées au boucles indéfinies sont des inégalités. Il suffit alors généralement à montrer que le variant de boucle est défini par une suite d'entiers strictement croissante ou décroissante qui ne sera donc pas bornée.
+Une preuve de terminaison repose sur l'utilisation d'un variant de boucle qui est généralement associé à la condition donnée à la boucle \pyv{while.} La plupart des conditions associées au boucles indéfinies sont des inégalités. Il suffit alors généralement de montrer que le variant de boucle est défini par une suite d'entiers strictement croissante ou décroissante qui ne sera donc pas bornée.
 \end{defi}
 
 \subsection{Exemple}

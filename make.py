@@ -566,11 +566,11 @@ for tp in info_tp:
     
     
     
-activite=info_tp[7]
-rep=trouver_repertoire(activite)
-file=trouver_file_tex(activite,'tp')
-genere_pdf(file,rep,'tp')
-impr_2_page(activite,'tp')
+# activite=info_tp[7]
+# rep=trouver_repertoire(activite)
+# file=trouver_file_tex(activite,'tp')
+# genere_pdf(file,rep,'tp')
+# impr_2_page(activite,'tp')
 # 
 activite=info_cours[8]
 rep=trouver_repertoire(activite)
