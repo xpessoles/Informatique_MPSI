@@ -469,7 +469,7 @@ def genere_pdf(file,rep,type_activite):
         rep_activite=rep
         file_abrege+='_pdf'
     #pdb.set_trace()
-    os.chdir(rep_activite)
+    os.chdir(path_ref+sep+rep_activite)
     os.system('rm *.aux')
     os.system('rm *.log')
     os.system('rm *.out')
@@ -506,10 +506,10 @@ def genere_pdf(file,rep,type_activite):
     # os.system('cp '+file.split('.')[0]+'_complet.pdf '+path_site+sep+file_abrege+'_complet.pdf ')
     # 
   
-def impr_2_page(activite,type_activite):
+def impr_2_page(activite,rep,type_activite):
     os.chdir(path_ref)
     #pdb.set_trace()
-    file=trouver_file_tex(activite,type_activite)
+    file=trouver_file_tex(activite,rep,type_activite)
     file=file.split('/')[-1]
     file=file.split('.tex')[-2]+'-cor.pdf'
     instr='/Library/TeX/texbin/pdfjam --batch --nup 2x1 --suffix 2up --landscape --outfile . '+file
@@ -579,11 +579,11 @@ for tp in info_tp:
     
     
     
-# activite=info_tp[7]
-# rep=trouver_repertoire(activite)
-# file=trouver_file_tex(activite,'tp')
-# genere_pdf(file,rep,'tp')
-# impr_2_page(activite,'tp')
+activite=info_tp[7]
+rep=trouver_repertoire(activite)
+file=trouver_file_tex(activite,rep,'tp')
+genere_pdf(file,rep,'tp')
+impr_2_page(activite,rep,'tp')
 # 
 activite=info_cours[8]
 rep=trouver_repertoire(activite)
