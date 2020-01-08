@@ -13,18 +13,19 @@ $10^{n}\leq t < 10^{n+1}$ où $n = \floor{x}$.
 \item Un an vaut environ $3,15\times 10^{7}$s, \emph{i.e.} $\pi \,\mathrm{s} \approx 1$ nano-siècle.
 \end{enumerate}
 
-%\begin{center}
-\begin{longtable}{rl}
-  \caption{Durées : ordre de grandeur ($t$ en secondes).}\\
-  \toprule{}
+\begin{center}
+%\begin{table}
+  %\caption{Durées : ordre de grandeur ($t$ en secondes).}\\
+  \begin{tabular}{rl}
+%  \toprule{}
+ % $\log_{10}(t)$ & Durée\\
+  %\midrule
+   %\endfirsthead
+   %\caption{Durées : ordre de grandeur (suite).}\\
+   %\toprule{}
   $\log_{10}(t)$ & Durée\\
-  \midrule
-   \endfirsthead
-   \caption{Durées : ordre de grandeur (suite).}\\
-   \toprule{}
-  $\log_{10}(t)$ & Durée\\
-  \midrule
-   \endhead
+  %\midrule
+  % \endhead
   $-9,0$ & exécution d'une instruction\\
   $0,0$ & une seconde\\
   $1,8$ & une minute \\
@@ -42,9 +43,9 @@ $10^{n}\leq t < 10^{n+1}$ où $n = \floor{x}$.
   $17,0$ & âge de la vie sur Terre\\
   $17,6$ & âge de l'univers\\
   $34,0$ & temps avant extinction des dernières étoiles\\
-\bottomrule{}
-\end{longtable}
-%\end{center}
+\end{tabular}
+%\end{table}
+\end{center}
 %\clearslide{}
 
 \section{Introduction}
@@ -63,21 +64,21 @@ $10^{n}\leq t < 10^{n+1}$ où $n = \floor{x}$.
 
 %\clearslide{}
 
-Nous avons déjà vu dans le TP06 que deux algorithmes résolvant un même problème peuvent avoir des temps d'exécution radicalement différents. 
-
-Nous allons étudier un exemple plus simple.
+%Nous avons déjà vu dans le TP06 que deux algorithmes résolvant un même problème peuvent avoir des temps d'exécution radicalement différents. 
+%
+%Nous allons étudier un exemple plus simple.
 
 \subsection{Rappels d'arithmétique : le petit théorème de Fermat}
 
-\begin{thm}[de Fermat]
+\begin{theorem}[de Fermat]
   Soit $p$ un nombre premier et $a \in \ii{1,p}$, alors $a^{p-1} = 1 [p]$.
-\end{thm}
+\end{theorem}
 
 On s'intéresse au problème de l'étude de la primalité d'un entier naturel donné. 
 Plusieurs méthodes existent pour répondre de manière déterministe à cette question, mais elles ne sont pas nécessairement satisfaisantes. 
 Notamment, dire si un grand nombre entier est premier est assez difficile. 
 
-On considèrera alors le \og test \fg\ de primalité de Fermat, en base 2, en fonction d'un entier $p$.
+On considérera alors le \og test \fg\ de primalité de Fermat, en base 2, en fonction d'un entier $p$.
 \begin{itemize}
   \item On calcule $2^{p-1}$ modulo $p$. 
   \item Si cela ne donne pas $1$, $p$ n'est pas premier. 
@@ -161,15 +162,16 @@ Dressons un tableau des temps de calcul $T_{i}(n)$ pour les fonctions
 que nous avions données, pour $i=1, 2, 3$.
 
 %\clearslide{}
-\begin{longtable}{rrrr}
-\caption{Logarithmes des temps d'exécution (en secondes).\label{tab:tempsexpo}}\\
-  \toprule
+\begin{center}
+\begin{tabular}{rrrr}
+%\caption{Logarithmes des temps d'exécution (en secondes).\label{tab:tempsexpo}}\\
+  %\toprule
+ % $\log_{10}(p)$ & $\log_{10}(T_1(p))$& $\log_{10}(T_2(p))$ & $\log_{10}(T_3(p))$\\
+%\midrule \endfirsthead
+%\caption{Logarithmes des temps d'exécution (suite).}\\
+%  \toprule
   $\log_{10}(p)$ & $\log_{10}(T_1(p))$& $\log_{10}(T_2(p))$ & $\log_{10}(T_3(p))$\\
-\midrule \endfirsthead
-\caption{Logarithmes des temps d'exécution (suite).}\\
-  \toprule
-  $\log_{10}(p)$ & $\log_{10}(T_1(p))$& $\log_{10}(T_2(p))$ & $\log_{10}(T_3(p))$\\
-\midrule \endhead
+%\midrule \endhead
 % $1$     & $-5,4$        & $-5,3$        & $-5,2$\\
 % $2$     & $-4,7$        & $-4,6$        & $-5,1$\\
 % $3$     & $-3,7$        & $-3,6$        & $-4,9$\\
@@ -187,10 +189,10 @@ $24$    & %$\mathit{37,2}$
 $100$ & & %$\mathit{93}$
                         & $-2,9$\\
 $2000$ & & & $0,0$\\
-\bottomrule
+%\bottomrule
 \multicolumn{4}{c}{\emph{(les valeurs en italique sont des extrapolations)}}\\
-\end{longtable}
-
+\end{tabular}
+\end{center}
 
 Ces temps varient \textbf{énormément} en fonction de l'algorithme utilisé.
 %\clearslide{}
