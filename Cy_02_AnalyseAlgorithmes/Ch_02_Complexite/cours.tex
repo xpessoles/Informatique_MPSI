@@ -91,7 +91,7 @@ La question qui se pose naturellement est de calculer $2^{p-1}$ modulo $p$ (sous
 
 \begin{enumerate}
   \item Une première idée est de calculer naïvement la puissance, de proche en proche, puis de considérer la division euclidienne de ce nombre par $p$.
-\begin{pyverbatim}
+\begin{lstlisting}
 def expo1(p):
     """Renvoie 2**(p-1) mod p"""
     x = 1
@@ -99,9 +99,9 @@ def expo1(p):
     	#Invariant : x=2**i
         x = 2*x
     return x % p
-\end{pyverbatim}
+\end{lstlisting}
   \item Une seconde idée est de réaliser chaque multiplication modulo $p$, ce qui permet de ne multiplier que de \og petits \fg\ nombres à chaque fois. 
-\begin{pyverbatim}
+\begin{lstlisting}
 def expo2(p):
     """Renvoie 2**(p-1) mod p"""
     x = 1
@@ -109,10 +109,10 @@ def expo2(p):
     	#Invariant : x=2**i mod p
         x = (2*x) % p
     return x  
-\end{pyverbatim}
+\end{lstlisting}
   \item Une troisième idée est de voir que si $n = 2k$, alors $2^n = \croch{\p{2^k}}^2$ et si $n = 2k+1$, alors $2^n = 2\croch{\p{2^k}}^2$. 
   Pour calculer une puissance (ici, de $2$), il suffit donc de calculer une puissance bien plus petite, suivie d'une mise au carré et d'une multiplication éventuelle. C'est l'idée de l'algorithme \emph{d'exponentiation rapide}.
-\begin{pyverbatim}
+\begin{lstlisting}
 def expo3(p):
     """Renvoie 2**(p-1) mod p par exponentiation rapide"""
     y = 1
@@ -129,12 +129,12 @@ def expo3(p):
         n = n // 2
     # n == 0 et y = 2 ** (p-1) modulo p
     return y
-\end{pyverbatim}
+\end{lstlisting}
 \end{enumerate}
 
 On a donc construit les \og tests \fg\ suivants.
 
-\begin{pyverbatim}
+\begin{lstlisting}
 def premierprobable1(p):
     return expo1(p) == 1
 
@@ -143,7 +143,7 @@ def premierprobable2(p):
 
 def premierprobable3(p):
     return expo3(p) == 1
-\end{pyverbatim}
+\end{lstlisting}
 
 \subsection{Temps d'exécution}
 
@@ -256,7 +256,7 @@ Comment faire cette étude théorique?
 %\clearslide{}
 \subsection{Étude théorique de \texttt{premierprobable2}}
 
-\begin{pyverbatim}
+\begin{lstlisting}
 def expo2(p):
     """Renvoie 2**(p-1) mod p"""
     x = 1
@@ -266,7 +266,7 @@ def expo2(p):
     
 def premierprobable2(p):
     return expo2(p) == 1
-\end{pyverbatim}
+\end{lstlisting}
 
 Comment estimer le temps d'exécution de \pyv{premierprobable2(p)}?
 
@@ -412,7 +412,7 @@ Il suffit de dire:
 
 \subsection{Étude théorique de \texttt{premierprobable3}}
 
-\begin{pyverbatim}
+\begin{lstlisting}
 def expo3(p):
     """Renvoie 2**(p-1) mod p par exponentiation rapide"""
     y = 1
@@ -432,7 +432,7 @@ def expo3(p):
 
 def premierprobable3(p):
     return expo3(p) == 1
-\end{pyverbatim}
+\end{lstlisting}
 
 
 On effectue un nombre constant d'opérations de temps constant, puis
@@ -494,7 +494,7 @@ Donc
 \subsection{Étude théorique de \texttt{premierprobable1}}
 
 
-\begin{pyverbatim}
+\begin{lstlisting}
 def expo1(p):
     """Renvoie 2**(p-1) mod p"""
     y = 1
@@ -504,7 +504,7 @@ def expo1(p):
 
 def premierprobable1(p):
     return expo1(p) == 1
-\end{pyverbatim}
+\end{lstlisting}
 
 %\clearslide{}
 \begin{itemize}
@@ -583,7 +583,7 @@ Retour sur l'expérimentation:
 
 Revenons sur la recherche d'un élément dans un tableau (fait dans le cours sur les tableaux). 
 
-\begin{pyverbatim}
+\begin{lstlisting}
 def appartient(e, t):
     """Retourne un booléen disant si e appartient à t
        Précondition : t est un tableau"""
@@ -592,7 +592,7 @@ def appartient(e, t):
         if e == x:
             return True # On a trouvé e, on s'arrête
     return False
-\end{pyverbatim}
+\end{lstlisting}
 
 Si l'on cherche à étudier la complexité d'une exécution \pyv{appartient(e, t)}, on tombe vite sur un écueil : le nombre de tour effectués dans la boucle \pyv{for} est variable ! 
 Il dépend en effet de la position de la première occurence de \pyv{e} dans \pyv{t}. 
@@ -699,40 +699,40 @@ $1000$ & $-5,5$ & & & & & \\
 % fin
 %\clearslide{}
 
-\section{Exercices}
-
-%\begin{exo}
-  \'Etudier la complexité théorique de la fonction \pyv{maxi} du cours \no 4.
-%\end{exo}
-
-%\begin{exo}
-  \'Etudier les complexité théoriques (dans le pire des cas) des fonctions \pyv{appartient} et \pyv{appartient_dicho} du cours \no 4. Les comparer.
-%\end{exo}
-
-%\begin{exo}
-  \'Etudier la complexité théorique dans le pire des cas de la fonction \pyv{recherche} du cours \no 
-5. On pourra être amené à la reformuler légèrement.
-%\end{exo}
-
-%\begin{exo}
-  \'Etudier la complexité théorique de la fonction \pyv{conv_b2} du cours \no 7.
-%\end{exo}
-
-%\begin{exo}
-  \'Etudier les complexités théoriques des fonctions \pyv{calc_b2_naif} et \pyv{calc_b2_horner} du cours \no 7. Les comparer.
-%\end{exo}
-
-%\begin{exo}
-%\input{COM-002}
-%\end{exo}
+%\section{Exercices}
 %
-%\begin{exo}
-%\input{COM-003}
-%\end{exo}
-
-
-% \section*{Copyleft}
-% 
-% Copyleft: cette œuvre est libre, vous pouvez la copier, la diffuser et
-% la modifier selon les termes de la Licence Art Libre
-% (\url{http://www.artlibre.org}).
+%%\begin{exo}
+%  \'Etudier la complexité théorique de la fonction \pyv{maxi} du cours \no 4.
+%%\end{exo}
+%
+%%\begin{exo}
+%  \'Etudier les complexité théoriques (dans le pire des cas) des fonctions \pyv{appartient} et \pyv{appartient_dicho} du cours \no 4. Les comparer.
+%%\end{exo}
+%
+%%\begin{exo}
+%  \'Etudier la complexité théorique dans le pire des cas de la fonction \pyv{recherche} du cours \no 
+%5. On pourra être amené à la reformuler légèrement.
+%%\end{exo}
+%
+%%\begin{exo}
+%  \'Etudier la complexité théorique de la fonction \pyv{conv_b2} du cours \no 7.
+%%\end{exo}
+%
+%%\begin{exo}
+%  \'Etudier les complexités théoriques des fonctions \pyv{calc_b2_naif} et \pyv{calc_b2_horner} du cours \no 7. Les comparer.
+%%\end{exo}
+%
+%%\begin{exo}
+%%\input{COM-002}
+%%\end{exo}
+%%
+%%\begin{exo}
+%%\input{COM-003}
+%%\end{exo}
+%
+%
+%% \section*{Copyleft}
+%% 
+%% Copyleft: cette œuvre est libre, vous pouvez la copier, la diffuser et
+%% la modifier selon les termes de la Licence Art Libre
+%% (\url{http://www.artlibre.org}).

@@ -59,7 +59,7 @@ def corrige(alpha):
 
   u = 10 + alpha
   U = []
-  for i in range(10000) :
+  for i in range(10000-1) :
       # invariant: u vaut u_k et U contient u_k pour k in range(i)
       #
       U.append(u)
@@ -123,7 +123,7 @@ def renvoie_line(l):
 from sys import argv
 
 def main():
-  alphas=list(range(99,100))
+  alphas=list(range(0,100))
   t = list(range(13))
   t[0] = 'alpha'
   #pdb.set_trace()

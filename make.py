@@ -579,13 +579,13 @@ for tp in info_tp:
     
     
     
-activite=info_tp[7]
-rep=trouver_repertoire(activite)
-file=trouver_file_tex(activite,rep,'tp')
-genere_pdf(file,rep,'tp')
-impr_2_page(activite,rep,'tp')
+# activite=info_tp[7]
+# rep=trouver_repertoire(activite)
+# file=trouver_file_tex(activite,rep,'tp')
+# genere_pdf(file,rep,'tp')
+# impr_2_page(activite,rep,'tp')
 # 
-activite=info_cours[8]
+activite=info_cours[9]
 rep=trouver_repertoire(activite)
 file=trouver_file_tex(activite,rep,'cours')
 genere_pdf(file,rep,'cours')
