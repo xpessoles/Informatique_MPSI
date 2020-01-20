@@ -123,7 +123,7 @@ def renvoie_line(l):
 from sys import argv
 
 def main():
-  alphas=list(range(0,100))
+  alphas=list(range(99,100))
   t = list(range(13))
   t[0] = 'alpha'
   #pdb.set_trace()
