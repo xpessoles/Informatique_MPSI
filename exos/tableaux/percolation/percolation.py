@@ -13,10 +13,10 @@ def creation_grille(p, n):
                 grille[i][j] = 1.
     return grille
 
-echelle = ListedColormap(['black', 'aqua', 'white'])
+
 
 #Q2
-
+echelle = ListedColormap(['black', 'aqua', 'white'])
 def afficher_grille(grille,nom_de_fichier):
     plt.matshow(grille,cmap=echelle)
     plt.colorbar()

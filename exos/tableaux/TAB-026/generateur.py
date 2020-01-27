@@ -59,7 +59,7 @@ def corrige(alpha):
 
   u = 10 + alpha
   U = []
-  for i in range(10000-1) :
+  for i in range(10000) :
       # invariant: u vaut u_k et U contient u_k pour k in range(i)
       #
       U.append(u)
