@@ -118,7 +118,7 @@ echelle = ListedColormap(['black', 'aqua', 'white'])
 
 
 
-\question{Écrire une fonction \pyv{afficher_grille(grille,nom_de_fichier)} qui prend en argument une variable grille qui correspond à une grille de percolation générée précédemment et ne renvoyant rien mais enregistrant dans \pyv{nom_de_fichier} le graphe obtenu. On pourra exporter une grille de $10\times 10$ cases avec l'échelle suggérée précédemment et l'enregistrer sous le nom "tp09$\_$q02$\_$vos$\_$noms.png" et l'envoyer à votre professeur.}
+\question{Écrire une fonction \pyv{afficher_grille(grille,nom_de_fichier)} qui prend en argument une variable grille qui correspond à une grille de percolation générée précédemment et ne renvoyant rien mais enregistrant dans \pyv{nom_de_fichier} le graphe obtenu. On pourra exporter une grille de $10\times 10$ cases avec l'échelle suggérée précédemment, l'enregistrer sous le nom "tp09$\_$q02$\_$vos$\_$noms.png" et l'envoyer à votre professeur.}
 
 
 
@@ -216,7 +216,7 @@ rapprocher du cas de la grille théorique infinie.
 
 Notons $P(p)$ la probabilité pour le fluide de traverser la grille. Pour déterminer une valeur approchée de la probabilité de traverser la grille, on se contente d'effectuer $k$ essais pour une valeur de $p$ puis de renvoyer le nombre moyen de fois où le test de percolation est vérifié.
 
-\question{Rédiger la fonction \pyv{proba(p,k,n)} qui prend en argument le nombre d'essai $k$, la variable $p$ ainsi que le nombre de cases $n$ sur la largeur et qui renvoie $P(p)$.}
+\question{Rédiger la fonction \pyv{proba(p,k,n)} qui prend en argument le nombre d'essai $k$, la variable $p$ ainsi que le nombre de cases $n$ sur la largeur de la grille et qui renvoie $P(p)$.}
 
 \question{Ecrire une fonction \pyv{tracer_proba(n,nom_de_fichier)} qui prendre en argument une taille $n$  ne renvoyant rien mais enregistrant dans \pyv{nom_de_fichier} le graphe obtenu. On pourra traiter le cas d'une grille de $128\times 128$ cases et enregistrer la figure obtenue sous le nom "tp09$\_$q07$\_$vos$\_$noms.png" et l'envoyer à votre professeur.}
 
