@@ -9,22 +9,7 @@ Compléter cet algorithme et le coder en python afin d'obtenir une valeur approc
 \fbox{somme+f(x)}
 \fbox{f(a)}.
 
-\question{} A partir de la question précédente, écrire une fonction que l'on appellera \pyv{rect_gauche}, qui prendra en argument une fonction \pyv{f}, des entiers la variables \pyv{a} et \pyv{b} définissant le domaine d'intégration et le paramètre \pyv{n} définissant le nombre de subdivisions. Cette fonction renverra la valeur approché de \pyv{I}.
-
-\question{}
-Modifier cet algorithme pour que la méthode soit celle des rectangles à droite. On l'appellera \pyv{rect_droit}, elle prendra les mêmes arguments et en renverra a valeur approché de \pyv{I}.
-
-\question{} Définir la fonction \pyv{f} permettant d'utiliser les deux fonctions précédentes. 
-
-
-
-\question{}
-Tester ces fonctions en augmentant le nombre de subdivisions. et tracer les résultats obtenus pour différentes valeurs de $n$.
-
-\question{}
-Justifier que la méthode des rectangles à droite donne un minorant de $I$ et que la méthode des rectangles à gauche donne un majorant. 
-
-
+\question{} A partir de la question précédente, écrire une fonction que l'on appellera \pyv{rect_gauche}, qui prendra en argument une fonction \pyv{f}, les variables \pyv{a} et \pyv{b} définissant le domaine d'intégration et le paramètre \pyv{n} définissant le nombre de subdivisions. Cette fonction renverra la valeur approché de \pyv{I}.
 \end{minipage} \hfill
 \begin{minipage}[r]{.35\linewidth}
 \begin{lstlisting}
@@ -41,9 +26,23 @@ print(somme*
 \end{lstlisting}
 \end{minipage}
 
+\question{}
+Modifier cet algorithme pour que la méthode soit celle des rectangles à droite. On l'appellera \pyv{rect_droit}, elle prendra les mêmes arguments et en renverra la valeur approché de \pyv{I}.
+
+\question{} Définir la fonction \pyv{f(x)} permettant d'utiliser les deux fonctions précédentes avec la fonction à intégrer. 
+
+
+\question{}
+Tester ces fonctions en augmentant le nombre de subdivisions. et en traçant les résultats obtenus sur l'estimation de $I$ pour différentes valeurs de $n$. Vous sauvegarderez le graphe obtenu sous le nom \textbf{"tp10$\_$q05$\_$vos$\_$noms.png"} et vous l'enverrez à votre professeur (On veillera à choisir des valeurs de $n$ et une échelle de représentation graphique pertinentes).
+
+
+
+\question{}
+Justifier que la méthode des rectangles à droite donne un minorant de $I$ et que la méthode des rectangles à gauche donne un majorant. 
+
 Pour tout $n\in\mathbb{N}$ soit l'intégrale : 
 $$I_n=\int_0^1\frac{x}{1+x^n} \text{d}x$$
 
-\question{} Écrire une fonction d'argument $n$ qui renvoie une valeur approchée de $I_n$ par une des méthodes des rectangles (avec une subdivision de 100 intervalles).
+\question{} Écrire une fonction que l'on appellera \pyv{calcul_in} d'argument $n$ qui renvoie une valeur approchée de $I_n$ par une des méthodes des rectangles (avec une subdivision de 100 intervalles).
 
-\question{} Afficher quelques  valeurs de cette suite afin de conjecturer sa monotonie et son comportement asymptotique.
+\question{} A l'aide d'un graphe choisi judicieusement (que vous sauvegarderez sous le nom \textbf{"tp10$\_$q08$\_$vos$\_$noms.png"} et vous l'enverrez à votre professeur), afficher quelques valeurs de cette suite afin de conjecturer sa monotonie et son comportement asymptotique.

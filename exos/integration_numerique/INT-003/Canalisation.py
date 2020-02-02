@@ -35,14 +35,15 @@ def trapeze(f,a,b,nb):
     return res
 
 
-def temp(z,t):
-  
+def Temperature(z,t):
     res = T1+(T0-T1)*erf(z/(math.sqrt(D*t)),1000)
-    return res 
+    return res
+
+
 z = 1 #m
 t = 10 * 24 * 3600
 print(temp(z,t)-273.15)
-""" 
+"""
 #
 """
 

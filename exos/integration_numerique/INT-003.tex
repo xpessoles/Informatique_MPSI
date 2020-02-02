@@ -30,15 +30,16 @@ $$
 
 Données numériques : $D=2,8\cdot 10^{-7} \; m^2\cdot s^{-1}$ (diffusivité thermique du sol terrestre).
 
+\question{} Écrire une fonction Python, appelée $\text{trapeze}$, en argument une fonction \pyv{f}, les variables \pyv{a} et \pyv{b} définissant le domaine d'intégration et le paramètre \pyv{n} définissant le nombre de subdivisions.
 
-\question{} Écrire une fonction Python, appelée $\text{erf}$, prenant en paramètre un nombre réel positif ou nul $x$ et
+\question{} Écrire une fonction Python, appelée $\text{erf}$, prenant en paramètre un nombre réel positif ou nul $x$, un entier $nb$ correspondant au nombre de subdivisions de la méthode d'intégration et
 retournant la valeur de $\text{erf(x)}$.
 
 \question{} Écrire une fonction Python, appelée Temperature, prenant en paramètre la profondeur $z$ (exprimée
-en $m$) et le temps $t$ (exprimé en $s$) et retournant la valeur de la température $T(z, t)$.
+en $m$) et le temps $t$ (exprimé en $s$) et retournant la valeur de la température $T(z, t)$ (On pourra utiliser 500 subdivisions pour les calculs d'intégration).
 
 \question{} Écrire un programme Python permettant de créer une liste, nommée ListeErreur, contenant les
-valeurs de la fonction $\text{erf(x)}$ pour $x$ variant par pas de 0,05 dans l'intervalle $[0 ; 2]$.
+valeurs de la fonction $\text{erf(x)}$ pour $x$ variant par pas de 0,05 dans l'intervalle $[0 ; 2]$ (On pourra utiliser 500 subdivisions pour les calculs d'intégration).
 
 \question{} En déduire, à 1 cm près, à quelle profondeur minimale $z_{min}$ il est nécessaire d'enterrer une
 canalisation d'eau pour qu'une brusque chute de la température de la surface du sol de 5\textdegree C à -15 \textdegree C
