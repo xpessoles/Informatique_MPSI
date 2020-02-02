@@ -467,8 +467,6 @@ def genere_pdf(file,rep,type_activite):
         rep_activite=rep+sep+file_abrege.split('_pdf')[0]
     elif type_activite=='ds':
         rep_activite=rep
-        file_abrege+='_pdf'
-    #pdb.set_trace()
     os.chdir(path_ref+sep+rep_activite)
     os.system('rm *.aux')
     os.system('rm *.log')
@@ -579,18 +577,18 @@ for tp in info_tp:
     
     
     
-# activite=info_tp[8]
-# rep=trouver_repertoire(activite)
-# file=trouver_file_tex(activite,rep,'tp')
-# genere_pdf(file,rep,'tp')
-# impr_2_page(activite,rep,'tp')
-# 
-activite=info_cours[10]
+activite=info_tp[9]
 rep=trouver_repertoire(activite)
-file=trouver_file_tex(activite,rep,'cours')
-genere_pdf(file,rep,'cours')
-file_td=trouver_file_tex(activite,rep,'td')
-genere_pdf(file_td,rep,'td')
+file=trouver_file_tex(activite,rep,'tp')
+genere_pdf(file,rep,'tp')
+impr_2_page(activite,rep,'tp')
+# 
+# activite=info_cours[9]
+# rep=trouver_repertoire(activite)
+# file=trouver_file_tex(activite,rep,'cours')
+# genere_pdf(file,rep,'cours')
+# file_td=trouver_file_tex(activite,rep,'td')
+# genere_pdf(file_td,rep,'td')
 
 # activite=info_ds[1]
 # num_ds_str=activite[0]
