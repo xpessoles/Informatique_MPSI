@@ -12,18 +12,11 @@
 
 \section{Méthodes géométriques.}
 
-L'objectif est d'approcher le réel 
-\begin{equation*}
-  \int_a^b f,
-\end{equation*}
-où $a$ et $b$ sont deux réels (on supposera $a<b$) et où $f$ est une fonction réelle définie sur le segment $[a,b]$.
+L'objectif est d'approcher le réel $  \int_a^b f$ où $a$ et $b$ sont deux réels (on supposera $a<b$) et où $f$ est une fonction réelle définie sur le segment $[a,b]$.
 
 Les méthodes les plus simples reposent toutes sur le même principe. 
 \begin{itemize}
-  \item On subdivise le segment $[a,b]$ en $n$ segments : $[x_0,x_1]$, ..., $[x_{n-1},x_n]$ avec, pour tout $0 \leq k \leq n$, 
-    \begin{equation*}
-      x_k = a + k\dfrac{b-a}{n}. 
-    \end{equation*}
+  \item On subdivise le segment $[a,b]$ en $n$ segments : $[x_0,x_1]$, ..., $[x_{n-1},x_n]$ avec, pour tout $0 \leq k \leq n$, $x_k = a + k\dfrac{b-a}{n}$.
   \item Sur chaque segment $[x_{k-1},x_{k}]$, on approche $\displaystyle\int_{x_{k-1}}^{x_{k}} f$ par l'intégrale d'une fonction, que l'on espère proche de $f$. 
   \item On renvoie la somme de ces $n$ intégrales comme approximation de $\displaystyle\int_a^b f$.
 \end{itemize}
@@ -31,10 +24,7 @@ Les méthodes les plus simples reposent toutes sur le même principe.
 L'objectif est dans chaque cas d'obtenir une approximation précise de l'intégrale à calculer, avec une complexité modérée. Notamment, nous utiliserons la définition suivante. 
 
 \begin{defi}[Erreur d'approximation]
-  Soit $A_n$ une approximation de $\displaystyle\int_a^b f$ obtenue à partir de $n$ segments. L'\emph{erreur d'approximation} de $\displaystyle\int_a^b f$ par $A_n$ est 
-  \begin{equation*}
-    \abs{\displaystyle\int_a^b f - A_n}.
-  \end{equation*}
+  Soit $A_n$ une approximation de $\displaystyle\int_a^b f$ obtenue à partir de $n$ segments. L'\emph{erreur d'approximation} de $\displaystyle\int_a^b f$ par $A_n$ est $    \abs{\displaystyle\int_a^b f - A_n}$.
 \end{defi}
 
 
@@ -42,10 +32,7 @@ L'objectif est dans chaque cas d'obtenir une approximation précise de l'intégr
 
 Cette méthode a été (ou sera bientôt) étudiée en détails dans le cours de mathématiques. 
 
-Pour chaque subdivision, on choisit un $t_k\in[x_{k-1},x_{k}]$ et l'on approche la fonction $f$ sur $[x_{k-1},x_{k}]$ par la valeur $f(t_k)$, on approche donc $\displaystyle\int_{x_{k-1}}^{x_{k}} f$ par $\dfrac{b-a}{n} f(t_k)$ et l'approximation de  $\displaystyle\int_a^b f$ obtenue est donc 
-\begin{equation*}
-  \dfrac{b-a}{n} \sum_{k=1}^n f(t_k).
-\end{equation*}
+Pour chaque subdivision, on choisit un $t_k\in[x_{k-1},x_{k}]$ et l'on approche la fonction $f$ sur $[x_{k-1},x_{k}]$ par la valeur $f(t_k)$, on approche donc $\displaystyle\int_{x_{k-1}}^{x_{k}} f$ par $\dfrac{b-a}{n} f(t_k)$ et l'approximation de  $\displaystyle\int_a^b f$ obtenue est donc $ \dfrac{b-a}{n} \sum_{k=1}^n f(t_k)$.
 Il y a donc autant de méthodes des rectangles que de manières de choisir ces nombres $t_1,\dots,t_n$. On n'en étudiera que deux. 
 
 
@@ -54,10 +41,7 @@ Il y a donc autant de méthodes des rectangles que de manières de choisir ces n
 
 Pour chaque $1 \leq k \leq n$, on choisit la borne gauche de $[x_{k-1},x_{k}]$, soit $x_{k-1}$.
 
-L'approximation de  $\displaystyle\int_a^b f$ calculée est donc 
-\begin{equation*}
-  R_n = \dfrac{b-a}{n} \sum_{k=1}^n f\p{a+(k-1)\dfrac{b-a}{n}}.
-\end{equation*}
+L'approximation de  $\displaystyle\int_a^b f$ calculée est donc $  R_n = \dfrac{b-a}{n} \sum_{k=1}^n f\p{a+(k-1)\dfrac{b-a}{n}}$.
 
 On code très simplement cette méthode, comme suit. 
 
@@ -76,10 +60,8 @@ def Rg(f,a,b,N):
 
 Pour chaque $1 \leq k \leq n$, on choisit la borne droite de $[x_{k-1},x_{k}]$, soit $x_k$.
 
-L'approximation de  $\displaystyle\int_a^b f$ calculée est donc 
-\begin{equation*}
-  R_n' = \dfrac{b-a}{n} \sum_{k=1}^n f\p{a+k\dfrac{b-a}{n}}.
-\end{equation*}
+L'approximation de  $\displaystyle\int_a^b f$ calculée est donc $
+  R_n' = \dfrac{b-a}{n} \sum_{k=1}^n f\p{a+k\dfrac{b-a}{n}}$.
 
 
 On code très simplement cette méthode, comme suit. 
