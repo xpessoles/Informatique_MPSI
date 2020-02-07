@@ -27,7 +27,7 @@ print(somme*
 \end{minipage}
 
 \question{}
-Modifier cet algorithme pour que la méthode soit celle des rectangles à droite. On l'appellera \pyv{rect_droit}, elle prendra les mêmes arguments et en renverra la valeur approché de \pyv{I}.
+Modifier cet algorithme pour que la méthode soit celle des rectangles à droite. On appellera la fonction associée \pyv{rect_droit}, elle prendra les mêmes arguments et en renverra la valeur approché de \pyv{I}.
 
 \question{} Définir la fonction \pyv{f(x)} permettant d'utiliser les deux fonctions précédentes avec la fonction à intégrer. 
 
@@ -43,6 +43,6 @@ Justifier que la méthode des rectangles à droite donne un minorant de $I$ et q
 Pour tout $n\in\mathbb{N}$ soit l'intégrale : 
 $$I_n=\int_0^1\frac{x}{1+x^n} \text{d}x$$
 
-\question{} Écrire une fonction que l'on appellera \pyv{calcul_in} d'argument $n$ qui renvoie une valeur approchée de $I_n$ par une des méthodes des rectangles (avec une subdivision de 100 intervalles).
+\question{} Écrire une fonction que l'on appellera \pyv{calcul_in} d'argument $n$ qui renvoie une valeur approchée de $I_n$ par une la méthodes des rectangles à gauche (avec une subdivision de 100 intervalles).
 
 \question{} A l'aide d'un graphe choisi judicieusement (que vous sauvegarderez sous le nom \textbf{"tp10$\_$q08$\_$vos$\_$noms.png"} et vous l'enverrez à votre professeur), afficher quelques valeurs de cette suite afin de conjecturer sa monotonie et son comportement asymptotique.

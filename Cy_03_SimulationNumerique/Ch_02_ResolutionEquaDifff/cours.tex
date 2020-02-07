@@ -270,7 +270,7 @@ On étudie l'évolution sur l'intervalle de temps $[0,6]$ (unité : $s$).
 
 Le code suivant permet de tracer (voir figure~\ref{11:fig:reaction_ordre1}) simplement la solution approchée par la méthode d'Euler pour le pas de $h=\dfrac{1}{10}$ (on considère que la fonction \pyv{euler} a déjà été écrite). 
 
-\begin{pyverbatim}
+\begin{lstlisting}
 import matplotlib.pyplot as plt
 
 A0 = 1 # mol
@@ -286,7 +286,7 @@ plt.xlabel('Temps ($s$)')
 plt.ylabel('Concentration ($mol$)')
 plt.grid()
 plt.savefig('reaction_ordre1.png')
-\end{pyverbatim}
+\end{lstlisting}
 \begin{figure}[!h]
     \begin{center}
         \includegraphics[width=\textwidth]{reaction_ordre1.png}
@@ -392,7 +392,7 @@ et la condition initiale
 On considère les constantes suivantes : $m = 250$ (unité : $kg$), $k = 1000$ (unité : $kg.s^{-2}$) et $c = 100$ (unité : $kg.s^{-1}$).
 
 Le script suivant permet d'appliquer la méthode d'Euler à l'équation vectorialisée (on suppose la fonction \pyv{euler} déjà écrite). 
-\begin{pyverbatim}
+\begin{lstlisting}
 y0 = 1 # m
 yp0 = 0 # m * s**-1
 t0, t1, h = 0, 20, .01 # s
@@ -408,7 +408,7 @@ def F(X,t) :
 X0 = array([y0,yp0])
 
 t_list, X_list = euler(F,t0,t1,X0,h)
-\end{pyverbatim}
+\end{lstlisting}
 
 \textsc{Attention !} La variable \pyv{X_list} est une liste de vecteurs ! On peut récupérer les positions et les vitesses comme suit. 
 
@@ -418,7 +418,7 @@ yp_list = [X[1] for X in X_list]
 \end{pyverbatim}
 
 On trace ensuite simplement la trajectoire (position en fonction du temps, voir figure~\ref{11:fig:oscillateur_amorti_trajectoire}) et le portrait de phase (courbe (position,vitesse), voir figure~\ref{11:fig:oscillateur_amorti_phase}) comme suit. 
-\begin{pyverbatim}
+\begin{lstlisting}
 plt.clf()
 plt.plot(t_list,y_list)
 plt.xlabel('Temps ($s$)')
@@ -432,7 +432,7 @@ plt.xlabel('Position ($m$)')
 plt.ylabel('Vitesse ($m.s^{-1}$)')
 plt.grid()
 plt.savefig('oscillateur_amorti_phase.png')
-\end{pyverbatim}
+\end{lstlisting}
 \begin{figure}[!h]
     \begin{center}
         \includegraphics[width=\textwidth]{oscillateur_amorti_trajectoire.png}
@@ -488,14 +488,14 @@ La bibliothèque \pyv{scipy} propose un grand nombre de méthodes de calcul num�
 
 %\clearslide{}
 On l'utilise comme suit.
-\begin{pyverbatim}
+\begin{lstlisting}
 from scipy.integrate import odeint
 y_list = odeint(F, y0, t_list)
-\end{pyverbatim}
+\end{lstlisting}
 
 %\clearslide{}
 Reprenons l'exemple de l'oscillateur amorti (voir le résultat figure~\ref{11:fig:oscillateur_amorti_odeint}).
-\begin{pyverbatim}
+\begin{lstlisting}
 from scipy.integrate import odeint
 from numpy import linspace
 
@@ -524,7 +524,7 @@ plt.xlabel('Temps ($s$)')
 plt.ylabel('Position ($m$)')
 plt.grid()
 plt.savefig('oscillateur_amorti_odeint.png')
-\end{pyverbatim}
+\end{lstlisting}
 
 
 %\clearslide{}
@@ -688,46 +688,11 @@ Il s'agit d'une méthode d'ordre de convergence $4$.
 
 Elle est facile à programmer et donc très populaire.
 
-\section{Exercices}
-
-%\begin{exo}
-  Déterminer une solution approchée des équations suivantes, à chaque fois par la méthode d'Euler, avec \texttt{odeint} et, si possible, théoriquement.
-  \begin{enumerate}
-    \item $y' = \sin(y)$, $y(0) = \dfrac{\pi}{2}$, sur $[0,1]$.
-    \item $y' + 3t^2 y = 5t^2$, $y(0) = 0$, sur $[0,10]$.
-    \item $\dfrac{y'}{1+y^2} = 1$, $y(0) = 1$, sur $\left[0,\dfrac{\pi}{4} \right[$.
-    \item $y'+y^2=t$, $y(0) = 1$, sur $[0,1]$.
-  \end{enumerate}
-%\end{exo}
-
-%\begin{exo}
-  Vectorialiser les équations suivantes (\emph{i.e.} donner une équation vectorielle d'ordre 1 équivalente, dont on détaillera la construction de la variable et la condition initiale).
-  \begin{enumerate}
-    \item $y'' + 2y' + y = 5$, $y(0) = 3$, $y'(0) = 3$.
-    \item $y'' + 5t \sin(y) = t^3$, $y(0) = 0$, $y'(0) = 1$.
-    \item $t^3y''' + 9t^2y'' + 18ty' + 6y = 5$, $y(1) = 2$, $y'(1) = 0$, $y''(1) = 0$, sur $\R_+^\ast$.  
-  \end{enumerate}
-%\end{exo}
-
-%\begin{exo}
-  Déterminer une solution approchée de chacune des équations précédentes, à chaque fois par la méthode d'Euler, avec \texttt{odeint} et, si possible, théoriquement.
-%\end{exo}
-
-%\begin{exo}
-   Problème de cinétique chimique: avec trois réactifs, $A$, $B$ et
-$C$. $A$ se transforme en $B$ qui se transforme en $C$ (réactions d'ordre $1$). 
-Les concentrations de $A$, $B$ et $C$ suivent donc les équations suivantes.
-\begin{align*}
-  \frac{\mathrm{d}[A]}{\mathrm{d}t}&=-\alpha[A]\\
-\frac{\mathrm{d}[B]}{dt}&=\alpha[A]-\beta[B]\\
-\frac{\mathrm{d}[C]}{\mathrm{d}t}&=\beta[B]
-\end{align*}
-
-On supposera $\alpha=1\text{s}^{-1}$, $\beta=10\text{s}^{-1}$ et au
-temps $t=0$, $[A] = 1\text{mol}/\text{l}$, $[B]=[C]=0$. On veut
-regarder l'évolution
-jusqu'à $t=6\text{s}$.
-
-Tracer l'évolution des concentrations des réactifs, par la méthode d'Euler et avec scipy.
-%\end{exo} 
-%\end{document}
+%\section{Exercices}
+%
+%
+%
+%%\begin{exo}
+%  
+%%\end{exo} 
+%%\end{document}

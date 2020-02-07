@@ -583,7 +583,7 @@ for tp in info_tp:
 # genere_pdf(file,rep,'tp')
 # impr_2_page(activite,rep,'tp')
 # 
-activite=info_cours[10]
+activite=info_cours[11]
 rep=trouver_repertoire(activite)
 file=trouver_file_tex(activite,rep,'cours')
 genere_pdf(file,rep,'cours')
