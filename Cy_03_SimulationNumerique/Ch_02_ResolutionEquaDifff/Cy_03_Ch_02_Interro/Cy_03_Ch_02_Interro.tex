@@ -1,0 +1,96 @@
+%%%% Paramétrage du cours %%%%
+\def\xxactivite{\ifprof TP -- Corrigé  \else  Interro B \fi}
+\def\xxauteur{\textsl{Émilien Durif -- Xavier Pessoles}}
+
+%\fichefalse
+%\proftrue
+%\tdfalse
+%\courstrue
+
+\input{info_entete}
+
+
+\def\xxfigures{
+%\includegraphics[width=.6\linewidth]{fig_00}
+}%figues de la page de garde
+
+
+\iflivret
+\input{../../../style/pagegarde_info}
+\else
+\input{../../../style/pagegarde_info}
+\fi
+\setlength{\columnseprule}{.1pt}
+
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\ifprof
+\vspace{4.5cm}
+\else
+\vspace{4.5cm}
+\fi
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{exo}{0}
+\vspace{2cm}
+\begin{multicols}{2}
+%\subparagraph{}\textit{Donner l'algorithme permettant de calculer l'intégrale d'une fonction sur un intervalle $[a,b]$ en utilisant la méthode des rectangles à gauche. Pour cela on implémentera la fonction \texttt{def IntRectGauche(f:function, a:float, b:float, n:int) -> float : }.}
+
+\subparagraph{}\textit{Donner l'algorithme permettant de calculer l'intégrale d'une fonction sur un intervalle $[a,b]$ en utilisant la méthode des rectangles à droite. Pour cela on implémentera la fonction \texttt{def IntRectDroite(f:function, a:float, b:float, n:int) -> float : }.}
+
+
+\subparagraph{}\textit{Donner l'algorithme permettant de calculer l'intégrale d'une fonction sur un intervalle $[a,b]$ en utilisant la méthode des trapèzes. Pour cela on implémentera la fonction \texttt{def IntRectTrapeze(f:function, a:float, b:float, n:int) -> float : }.}
+
+%\subparagraph{}\textit{Donner les instructions (et les fonctions) permettant de déterminer $\int\limits_0^1 x^2 \dd x$. en utilisant chacune des méthodes.}
+%
+%
+\subparagraph{}\textit{Donner les instructions (et les fonctions) permettant de déterminer $\int\limits_0^1 \sqrt{x} \dd x$. en utilisant chacune des méthodes.}
+
+
+%\subparagraph{}
+%\textit{Résoudre numériquement l'équation différentielle $\dot{y}+\alpha y= 0$ avec $y(0)=1$ et $\alpha=2$. On définira : 
+%\begin{itemize}
+%\item la fonction $F$ définie dans le problème de Cauchy;
+%\item la fonction \texttt{def euler(F, a, b, y0, h) -> list,list:}.
+%\end{itemize}h
+%Enfin, on tracera la solution de l'équation différentielle.}
+
+
+
+\subparagraph{}
+\textit{Résoudre numériquement l'équation différentielle $\beta \dot{\theta}+ \theta= 0$ avec $y(0)=1$ et $\beta=0,1$. On définira : 
+\begin{itemize}
+\item la fonction $F$ définie dans le problème de Cauchy;
+\item la fonction \texttt{def euler(F, a, b, y0, h) -> list,list:}.
+\end{itemize}
+Enfin, on tracera la solution de l'équation différentielle.}
+
+
+%\subparagraph{}
+%\textit{Vectoriser l'équation différentielle suivante en la mettant sous la forme  $f:\begin{pmatrix} a \\ b \end{pmatrix},t \mapsto \begin{pmatrix} g(a,b) \\ h(a,b) \end{pmatrix} $:
+%$a \ddot{u}(t) + \dot{u}(t)  + {u}(t) = 1$. On explicitera les fonctions $g$ et $h$.}
+
+\subparagraph{}
+\textit{Vectoriser l'équation différentielle suivante en la mettant sous la forme  $f:\begin{pmatrix} a \\ b \end{pmatrix},t \mapsto \begin{pmatrix} g(a,b) \\ h(a,b) \end{pmatrix} $:
+$m \ddot{y}(t) + c\dot{y}(t)  + k{y}(t) = 0$. On explicitera les fonctions $g$ et $h$.}
+%
+
+
+%%$\ddot{\theta}(t) + k_1\sin \left(\theta(t)\right)  + k_2 \dot{\theta}(t) = 0$
+%%avec $\theta(0)=1$ et $\dot{\theta}(0)=2$. 
+%%
+%%$a \ddot{u}(t) + b\dot{u}(t)  + {u}(t) = e(t)$
+%%avec $\theta(0)=1$ et $\dot{\theta}(0)=2$. 
+%%
+%%Reformuler l'équation différentielle sous la forme $f:\begin{pmatrix} a \\ b \end{pmatrix},t \mapsto \begin{pmatrix} g(t) \\ h(t) \end{pmatrix} $
+
+\end{multicols}
+
+
+
+
