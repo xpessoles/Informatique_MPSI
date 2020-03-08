@@ -56,11 +56,11 @@ d'après le TVI il y a un point d'annulation de $f$ entre $a$ et $b$). C'est éq
 
 \subsubsection*{Terminaison}
 
-On se donne un critère d'arrêt de boucle : on va demander à obtenir une valeur approchée du résultat à une précision $\eps>0$ près. 
+On se donne un critère d'arrêt de boucle : on va demander à obtenir une valeur approchée du résultat à une précision $\varepsilon>0$ près. 
 
 Pour un tel résultat à une précision $\varepsilon>0$, on
 s'arrête quand $b - a \leq 2\varepsilon$ et on renvoie $\frac{a+b}{2}$.
-On obtient bien une valeur approchée à $\eps>0$ près. 
+On obtient bien une valeur approchée à $\varepsilon>0$ près. 
 
 Comme l'écart $b-a$ suit une progression géométrique de raison
   $\frac{1}{2}$, donc tend vers $0$, l'algorithme s'arrête (après un nombre fini d'itérations).
@@ -68,7 +68,7 @@ Comme l'écart $b-a$ suit une progression géométrique de raison
 %\clearslide{}
 \subsection{Implantation}
 % \small{}
-\begin{pyverbatim}
+\begin{lstlisting}
 def dichotomie(f, a, b, epsilon):
     """Zéro de f sur [a,b] à epsilon près, par dichotomie
        Préconditions : f(a) * f(b) <= 0
@@ -84,7 +84,7 @@ def dichotomie(f, a, b, epsilon):
         else:
             c, fc = m, fm
     return (c + d) / 2.
-\end{pyverbatim}
+\end{lstlisting}
 % \normalsize{}
 %\clearslide{}
 \begin{rem}
@@ -178,7 +178,7 @@ tangente à la courbe de $f$ en $u_n$.
 \end{center}
 %\clearslide{}
 \subsection{Implantation}
-\begin{pyverbatim}
+\begin{lstlisting}
 def newton(f, fp, x0, epsilon):
     """Zéro de f par la méthode de Newton
        départ : x0, f' = fp, critère d'arrêt epsilon"""
@@ -187,7 +187,7 @@ def newton(f, fp, x0, epsilon):
     while abs(v-u) > epsilon:
         u, v = v, v - f(v)/fp(v)
     return u
-\end{pyverbatim}
+\end{lstlisting}
 %\clearslide{}
 \subsection{Correction, terminaison, complexité.}
 
@@ -279,10 +279,13 @@ Par une récurrence simple, on obtient directement que, pour tout $n\in \N$,
 % \begin{center}
 %   \includegraphics[width=0.7\textwidth]{precision-newton.pdf}
 % \end{center}
+
+On donne sur la figure \ref{precision} les erreurs d'approximation selon la méthode utilisée.
+
 \begin{figure}[!h]
 \begin{center}
   \includegraphics[width=\textwidth]{precision_newton.png}
-  \caption{Erreurs d'approximation de zéros de trois fonctions ($f$), par la méthode de Newton (point initial : $u_0$). Échelle semi-logarithmique.}
+  \caption{Erreurs d'approximation de zéros de trois fonctions ($f$), par la méthode de Newton (point initial : $u_0$). Échelle semi-logarithmique. \label{precision}}
 \end{center}
 \end{figure}
 \subsection{Applications}
@@ -332,7 +335,7 @@ pour obtenir une approximation de $\sqrt{a}$.
 Dans les jeux vidéos les calculs d'inverses et de racines carrées sont très utilisés, en particulier pour les calculs 
 d'angles d'incidence et de réflexion (calcul des
   lumières et des ombres en imagerie numérique). Pour cela on a besoin de normaliser des vecteurs ( \emph{i.e.} 
-calculer $\vec{u}/{\norm{\vec{u}}}$), on a donc besoin de calculer l'inverse d'une racine carrée. Cela a ammené la création de la
+calculer $\vec{u}/{\Vert\vec{u}}\Vert$), on a donc besoin de calculer l'inverse d'une racine carrée. Cela a ammené la création de la
 méthode \emph{Fast inverse square root}~: développée vers 1990 chez Silicon Graphics (probablement), elle a par exemple 
 été utilisée dans Quake III Arena (1999), et elle utilise la méthode de Newton.
 
@@ -387,7 +390,7 @@ On considère donc la suite définie par récurrence par :
 
 %\clearslide{}
 En Python, cela donne une fonction très proche de celle écrite pour la méthode de Newton. 
-\begin{pyverbatim}
+\begin{lstlisting}
 def secante(f,u0,u1,eps):
     """Zéro de f par la méthode de la sécante
     u0,u1 : deux premiers points
@@ -397,7 +400,7 @@ def secante(f,u0,u1,eps):
         p = (f(u)-f(v)) / (u-v)
         u,v = v,u - f(u)/p
     return u
-\end{pyverbatim}
+\end{lstlisting}
 
 %\clearslide{}
 
@@ -430,9 +433,9 @@ Pour calculer les racines de
  P = \sum_{k=0}^{n}a_{k}X^{k}
 \end{equation*}
 on utilise
-\begin{pyverbatim}
+\begin{lstlisting}
 numpy.roots([a0, a1, ..., an])
-\end{pyverbatim}
+\end{lstlisting}
 Exemple:
 \begin{pyconsole}
 import numpy
@@ -469,11 +472,11 @@ Pour continuer : consulter la bibliothèque universitaire la plus proche.
 
 Mais par quelle méthode calcule t-on ces valeurs propres ?
 Le code nous renseigne :
-\begin{pyverbatim}
+\begin{lstlisting}
 a = diag(nx.ones((n-2,), p.dtype), -1)
 a[0, :] = -p[1:] / p[0]
 roots = eigvals(a)
-\end{pyverbatim}
+\end{lstlisting}
 On construit une matrice $a$ nulle à l'exception de la sous-diagonale
 (où on met des $1$), puis on remplace la première ligne par les
 coefficients $-\frac{a_{1}}{a_{0}}, \ldots, -\frac{a_{n}}{a_{0}}$ et
@@ -619,19 +622,19 @@ Suivant les cas, on choisira la méthode :
 Vous devez être capables de mettre en {\oe}uvre \emph{vous-même} la méthode de la dichotomie ainsi que celle de Newton. 
 Commencez par vous exercer sur les exemples vus en cours ! 
 
-\section{Exercices}
-
-%\begin{exo}
-  On rappelle que $\cos\left(\frac{\pi}{10}\right)$ est une des solutions de l'équation $16x^4-20x^2+5 = 0$. En déterminer une valeur approchée à $10^{-10}$ près.
-%\end{exo}
-
-%\begin{exo}
-  Déterminer une valeur approchée du nombre d'or à $10^{-10}$ près.
-%\end{exo}
-
-%\begin{exo}
-  Écrire une fonction déterminant, pour tout $p \in \N^\ast$, une valeur approchée de l'équation $1 = x + x^2 + \dots + x^p$. 
-%\end{exo}
+%\section{Exercices}
+%
+%%\begin{exo}
+%  On rappelle que $\cos\left(\frac{\pi}{10}\right)$ est une des solutions de l'équation $16x^4-20x^2+5 = 0$. En déterminer une valeur approchée à $10^{-10}$ près.
+%%\end{exo}
+%
+%%\begin{exo}
+%  Déterminer une valeur approchée du nombre d'or à $10^{-10}$ près.
+%%\end{exo}
+%
+%%\begin{exo}
+%  Écrire une fonction déterminant, pour tout $p \in \N^\ast$, une valeur approchée de l'équation $1 = x + x^2 + \dots + x^p$. 
+%%\end{exo}
 
 
 

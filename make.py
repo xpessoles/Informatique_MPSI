@@ -4,7 +4,7 @@
 import numpy as np
 import xlrd
 import datetime
-import os, glob, platform,pdb
+import os, glob, platform,pdb, shutil
 
 Mois=['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Décembre']
 
@@ -483,13 +483,17 @@ def genere_pdf(file,rep,type_activite):
     # os.system('/usr/local/texlive/2017/bin/x86_64-darwin/pdflatex '+file)
     #pdb.set_trace()
     if type_activite=='ds':
-        os.system('mv '+file_abrege+'.pdf '+path_site_ds+sep+file_abrege+'.pdf')
+        # os.system('mv '+file_abrege+'.pdf '+path_site_ds+sep+file_abrege+'.pdf')
+        shutil.move(file_abrege+'.pdf',path_site_ds+sep+file_abrege+'.pdf')
     else:
-        os.system('cp '+file_abrege+'.pdf '+path_ref+sep+path_site+sep+file_abrege+'.pdf')
+        # os.system('cp '+file_abrege+'.pdf '+path_ref+sep+path_site+sep+file_abrege+'.pdf')
+        shutil.copy(file_abrege+'.pdf',path_ref+sep+path_site+sep+file_abrege+'.pdf')
     if type_activite=='tp':
-        os.system('cp '+file_abrege+'-cor.pdf '+path_ref+sep+path_site+sep+file_abrege+'-cor.pdf')
+        # os.system('cp '+file_abrege+'-cor.pdf '+path_ref+sep+path_site+sep+file_abrege+'-cor.pdf')
+        shutil.copy(file_abrege+'-cor.pdf',path_ref+sep+path_site+sep+file_abrege+'-cor.pdf')
     elif type_activite=='ds':
-        os.system('mv '+file_abrege+'-cor.pdf '+path_site_ds+sep+file_abrege+'-cor.pdf')
+        # os.system('mv '+file_abrege+'-cor.pdf '+path_site_ds+sep+file_abrege+'-cor.pdf')
+        shutil.move(file_abrege+'-cor.pdf',path_site_ds+sep+file_abrege+'-cor.pdf')
         os.system('rm *.aux')
         os.system('rm *.log')
         os.system('rm *.out')
@@ -577,18 +581,18 @@ for tp in info_tp:
     
     
     
-# activite=info_tp[9]
-# rep=trouver_repertoire(activite)
-# file=trouver_file_tex(activite,rep,'tp')
-# genere_pdf(file,rep,'tp')
-# impr_2_page(activite,rep,'tp')
-# 
-activite=info_cours[11]
+activite=info_tp[11]
 rep=trouver_repertoire(activite)
-file=trouver_file_tex(activite,rep,'cours')
-genere_pdf(file,rep,'cours')
-file_td=trouver_file_tex(activite,rep,'td')
-genere_pdf(file_td,rep,'td')
+file=trouver_file_tex(activite,rep,'tp')
+genere_pdf(file,rep,'tp')
+impr_2_page(activite,rep,'tp')
+# 
+# activite=info_cours[12]
+# rep=trouver_repertoire(activite)
+# file=trouver_file_tex(activite,rep,'cours')
+# genere_pdf(file,rep,'cours')
+# file_td=trouver_file_tex(activite,rep,'td')
+# genere_pdf(file_td,rep,'td')
 
 # activite=info_ds[1]
 # num_ds_str=activite[0]
