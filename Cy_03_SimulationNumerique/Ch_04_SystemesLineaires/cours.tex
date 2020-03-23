@@ -311,27 +311,38 @@ Trouver $j$ dans $\ii{i, n}$ tel que $\abs{a_{ji}}$ soit maximale.
 
 Nous représenterons les matrices par des tableaux bidimensionnels, en utilisant le type \texttt{array} de la bibliothèque \texttt{numpy}. 
 
+\begin{xxpyconsole}
+
 \begin{pyconsole}
 from numpy import array
 M = array([[1.,2.,3.],[4.,5.,6.],[7.,8.,9.],[10.,11.,12.]])
 M
 \end{pyconsole}
+
+\end{xxpyconsole}
+
 On remarquera notamment que les matrices sont décrites ligne par ligne. 
 On peut accéder à un coefficient de la matrice par un double indice. 
-\begin{pyconsole}
-M[0,0]
-M[1,2]
-\end{pyconsole}
+%\begin{xxpyconsole}
+\begin{lstlisting}
+M[0][0]
+M[1][2]
+\end{lstlisting}
+%\end{xxpyconsole}
+
 Il est aussi possible d'extraire une ou des lignes
+
 \begin{pyconsole}
 M[[0],:]
 M[[1,2],:]
 \end{pyconsole}
+
 De même, il est possible d'extraire une ou plusieurs colonnes d'une matrice. 
-\begin{pyconsole}
+\begin{lstlisting}
 M[:,[1]]
 M[:,[0,2]]
-\end{pyconsole}
+\end{lstlisting}
+
 \begin{rem}
 Il est aussi possible d'extraire une sous-matrice de $M$. 
 \end{rem}
@@ -369,19 +380,19 @@ N.dot(M).dot(X)
 
 
 Enfin, il y a deux fonctions très pratiques de création de matrices.
-\begin{pyconsole}
+\begin{lstlisting}
 from numpy import zeros, eye
 zeros((4,3))
 eye(4,3)
-\end{pyconsole}
+\end{lstlisting}
 
 \begin{rem}
 Attention, les données d'un objet de type \texttt{array} sont homogènes (\emph{i.e.} elles doivent toutes être du même type).
-\begin{pyconsole}
+\begin{lstlisting}
 M = array([[1,2,3],[4,5,6],[7,8,9]])
 M[0,0] = M[0,0] / 2
 M
-\end{pyconsole}
+\end{lstlisting}
 On fera donc particulièrement attention à ne manipuler que des matrices et vecteurs de flottants. 
 \end{rem}
 
@@ -447,7 +458,7 @@ Attention, la copie est nécessaire ici, sans quoi il y a une erreur due aux ali
 
 %\clearslide{}
 On peut réaliser la phase de descente.
-\begin{pyverbatim}
+\begin{lstlisting}
 def descente(A,b):
     """Phase de descente de la méthode du pivot pour résoudre Ax = b.
     Préconditions : A et b sont de type array,
@@ -466,7 +477,7 @@ def descente(A,b):
             b[i,:] = b[i,:] + alpha * b[j,:]
             A[i,:] = A[i,:] + alpha * A[j,:]
     return None
-\end{pyverbatim}
+\end{lstlisting}
 
 
 \medskip{}
@@ -474,12 +485,12 @@ def descente(A,b):
 %\clearslide{}
 \begin{rem}
 Attention, une erreur fréquente est d'écrire la chose suivante. 
-\begin{pyverbatim}
+\begin{lstlisting}
         p = A[j, j] # le pivot
         for j in range(j+1, n):
             A[i,:] = A[i,:] - (A[i,j] / p) * A[j,:]
             b[i,:] = b[i,:] - (A[i,j] / p) * b[j,:]
-\end{pyverbatim}
+\end{lstlisting}
 Pourquoi ? 
 \end{rem}
 
@@ -487,7 +498,7 @@ Pourquoi ?
 
 %\clearslide{}
 La phase de remontee se fait explicitement.
-\begin{pyverbatim}
+\begin{lstlisting}
 def remontee(U,B):
     """Résout le système UX = b.
     Préconditions: U triangulaire supérieure
@@ -500,7 +511,7 @@ def remontee(U,B):
         s = U[i, i+1:].dot(X[i+1:])
         X[i] = (B[i] - s) / U[i, i]
     return X
-\end{pyverbatim}
+\end{lstlisting}
 
 %\clearslide{}
 
@@ -646,7 +657,7 @@ Considérons la matrice $M = ((i+j-1)^{-1})_{1\leq i,j\leq 5}$ (matrice
 de Hilbert) et
 cherchons à résoudre $MX = B_{1}$ et $MX = B_{2}$ pour deux valeurs
 proches de $B_{1}$ et $B_{2}$.
-\begin{pyverbatim}
+\begin{lstlisting}
 n = 5
 M = array([[ 1/(i+j+1.) for j in range(n)] for i in range(n)])
 u0 = array([[-0.76785474],
@@ -661,10 +672,10 @@ u1 = array([[-0.76784856],
        [-0.25420613],
        [-0.20944639]])
 s1 = resout(M, u1)
-\end{pyverbatim}
+\end{lstlisting}
 
 Résultat:
-\begin{pyverbatim}
+\begin{lstlisting}
 >>> s0
 array([[-0.4900022],
        [-0.2844282],
@@ -689,7 +700,7 @@ array([[   -2.83209096],
        [ -748.32065172],
        [ 1447.1192691 ],
        [ -852.40387145]])
-\end{pyverbatim}
+\end{lstlisting}
 
 Le problème  n'est pas dû  au calcul numérique:  il est inhérent  à la
 matrice $M$.
@@ -742,7 +753,7 @@ Donc si le conditionnement de $M$ (donc de $M^{-1}$) est grand, une
 petite erreur relative sur $x$ peut donner une grande erreur relative
 sur $M^{-1}x$.
 
-\section{Extensions aisées de l'algorithme de Gauss-Jordan}
+\section{Extensions de l'algorithme de Gauss-Jordan}
 
 \subsection{Résolution simultanée de plusieurs systèmes}
 
@@ -984,7 +995,8 @@ Ainsi, le vecteur $x_0$ recherché est la solution du système
 $$A^TAx_0 = A^Tb.$$
 Sous des hypothèses raisonnables, $A^TA$ est inversible donc il existe une unique solution.
 
-\subsection{Exemple}
+\begin{exemple}
+
 
 On note $t^C$ la température en degrés Celsius et $t^F$ celle en degrés Farenheit. On sait qu'il existe $\alpha,\beta$ tels que $t^F=\alpha+\beta t^C$.
 
@@ -1005,7 +1017,7 @@ On cherche donc $X=\begin{pmatrix} x\\y\end{pmatrix}$ tel que $\norm{AX-b}$ soit
   A^TA \times X = A^Tb.
 \end{equation*}
 
-\begin{pyconsole}
+\begin{lstlisting}
 from numpy import array, transpose
 A = array([[1. ,  -40.],
            [1. ,  -35.5],
@@ -1035,11 +1047,12 @@ b = array([[-39.67],
            [93.18],
            [111.88],
            [121.52]])
-At = transpose(A)
-At
-At.dot(A)
-At.dot(b)
-\end{pyconsole}
+
+%At = transpose(A)
+%At
+%At.dot(A)
+%At.dot(b)
+\end{lstlisting}
 Il nous reste à résoudre le système 
 $$\begin{pmatrix} 14 & -31.5\\-31.5&11236.25\end{pmatrix}\begin{pmatrix} 
 x\\y\end{pmatrix}=\begin{pmatrix} 393.21\\19215.61\end{pmatrix}.$$
@@ -1051,6 +1064,8 @@ X = solve(At.dot(A),At.dot(b))
 X
 \end{pyconsole}
 Ainsi, $t^F \approx 32.1+1.8 t^C$ (voir figure~\ref{13systeme:fig:regression_temperature}).
+
+\end{exemple}
 
 \begin{figure}[!h]
 \begin{center}
@@ -1188,64 +1203,11 @@ Intérêt de ces méthodes:
   a priori plus faible.
 \end{enumerate}
 
-\section{Exercices}
 
-Dans chaque exercice, on demande une valeur approchée du résultat. 
 
 %\begin{exo}
-  Résoudre le système 
-  \begin{equation*}
-    \bpm 5 & 8 & -2 \\ 3 & 1 & 5 \\ 0 & -2 & 6 \epm \times X = \bpm 21 \\ 16 \\ 10 \epm.
-  \end{equation*}
-%\end{exo}
 
-%\begin{exo}
-  On pose
-  \begin{equation*}
-    A = \bpm 3 & -2 & 5 \\ -4 & 1 & 1 \\ 2 & 3 & -2 \epm. 
-  \end{equation*}
-  En effectuant un seul calcul, résoudre simultanément les systèmes : 
-  \begin{equation*}
-    AX = \bpm 20 \\ -2 \\ -7 \epm,\quad AX = \bpm -21 \\ 23 \\ -1 \epm,\quad AX = \bpm -12 \\ 17 \\ 4 \epm,\quad AX = \bpm 6\\-2\\3\epm.
-  \end{equation*}
-%\end{exo}
 
-%\begin{exo}
-  Inverser la matrice 
-  \begin{equation*}
-    A = \bpm 5&-3&2&1&-1 \\3&6&8&1&-3 \\ 5&6&3&0&2 \\ 4&6&2&8&3 \\ -6&3&5&-1&-2 \epm.
-  \end{equation*}
-%\end{exo}
-
-%\begin{exo}
-  On considère les points de coordonnées 
-  \begin{equation*}
-    M_1 \bpm -5 \\ 11,67 \epm,\quad M_2 \bpm -2 \\ 4,52 \epm,\quad M_3 \bpm 1\\-0,15 \epm,\quad M_4\bpm 2 \\ -3,31 \epm.
-  \end{equation*}
-  On cherche à ajuster une droite affine sur le nuage de points $(M_1,M_2,M_3,M_4)$ par le critère des moindres carrés. Avec 
-  \begin{equation*}
-    A = \bpm 1 & -5 \\ 1 & -2 \\ 1 & 1 \\ 1 & 2 \epm, \quad X = \bpm \alpha \\ \beta \epm \quad\textrm{et} \quad B = \bpm 11,67 \\ 4,52 \\ -0,15 \\ -3,31 \epm,
-  \end{equation*}
-  déterminer $X$ minimisant la quantité 
-  \begin{equation*}
-    \norm{AX-B}. 
-  \end{equation*}
-  Produire une figure superposant les points $(M_1,M_2,M_3,M_4)$ et la droite d'équation $y = \alpha + \beta x $. 
-%\end{exo}
-
-%\begin{exo}
-  On considère les points de coordonnées 
-  \begin{equation*}
-    M_1 \bpm -2 \\ 7,62 \epm,\quad M_2 \bpm -1 \\ 3,87 \epm,\quad M_3 \bpm 0 \\ 0,94 \epm,\quad M_4 \bpm 1\\1,56 \epm,\quad M_5\bpm 2 \\ 2,66 \epm.
-  \end{equation*}
-  On cherche à ajuster une courbe polynomiale de degré $2$ sur le nuage de points $(M_1,M_2,M_3,M_4,M_5)$ par le critère des moindres carrés. Avec 
-  \begin{equation*}
-    A = \bpm 1 & -2 & 4 \\ 1 & -1 & 1 \\ 1 & 0 & 0 \\ 1 & 1 & 1\\ 1 & 2 & 4\epm, \quad X = \bpm \alpha \\ \beta \\ \gamma \epm \quad\textrm{et} \quad B = \bpm 7,62 \\ 3,87 \\ 0.94 \\ 1,56 \\ 2,66 \epm,
-  \end{equation*}
-  déterminer $X$ minimisant la quantité 
-  \begin{equation*}
-    \norm{AX-B}. 
-  \end{equation*}
-  Produire une figure superposant les points $(M_1,M_2,M_3,M_4,M_5)$ et la courbe d'équation $y = \alpha + \beta x + \gamma x^2$. 
+ 
 %\end{exo}
 
