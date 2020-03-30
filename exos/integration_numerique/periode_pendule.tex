@@ -1,0 +1,67 @@
+
+\begin{minipage}{0.4\textwidth}
+On considère un pendule de masse $m=1+0,01\cdot \alpha$, de longueur $l=\alpha$ que l'on abandonne, sans vitesse
+initiale, à un angle de $\theta_0=\dfrac{\alpha\cdot \pi}{4}$.
+\end{minipage}
+\begin{minipage}{0.6\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.8] 
+\draw (0,0)--++(-2,+5); 
+\node at (-0.8,3) {L}; 
+\draw [rounded corners=4pt,color=white,ball color=gray,smooth] (0,0) circle (0.2); 
+\draw [dashed] (-2,-0.4)--++(0,5.4); 
+\draw [dotted] (-2,-0.4) arc (-90:-55:5.4); 
+\draw [dotted] (-2,-0.4) arc (-90:-125:5.4); 
+\fill [pattern=north east lines,rotate=0] (-2.5,5) rectangle (-1.5,5.3); %bloc qui tient le pendule 
+\draw[thick] (-2.5,5) --++ (1,0); %bloc qui tient le pendule 
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+
+
+En appliquant la conservation de l'énergie, on trouve l'équation suivante :
+
+\begin{align*}
+\dfrac{1}{2}ml^2\dot{\theta}^2+mgl\left(1-\cos\theta\right)=mgl\left(1-\cos\theta_0\right)
+\end{align*}
+
+On en déduit : 
+
+\begin{align*}
+\dfrac{d\theta}{dt}=\sqrt{\dfrac{2g}{l}\left(\cos\theta-\cos\theta_0\right)}
+\end{align*}
+
+Ce qui donne : 
+
+\begin{align*}
+dt=\dfrac{d\theta}{\sqrt{\dfrac{2g}{l}\left(\cos\theta-\cos\theta_0\right)}}
+\end{align*}
+
+La période est donc : 
+
+\begin{align*}
+T=\displaystyle{\int_0^Tdt}=4\times \int_0^{\theta_0}}\dfrac{d\theta}{\sqrt{\dfrac{2g}{l}\left(\cos\theta-\cos\theta_0\right)}}
+\end{align*}
+
+On rappelle que la période avec l'approximation des petites oscillations est donnée par : 
+
+\begin{align*}
+T_0=\sqrt{\dfrac{l}{g}}\times 2\pi
+\end{align*}
+
+
+\question{} Calculer $T_0$.
+
+Pour les méthode d'intégration numérique, on renverra les résultats avec 100 subdivisions.
+
+\question{} Calculer $T$ (noté $T_{g}$) par la méthode des rectangles à gauche.
+
+\question{} Calculer $T$ (noté $T_{d}$) par la méthode des rectangles à droite.
+
+\question{} Calculer $T$ (noté $T_{t}$) par la méthode des trapèzes.
+
+On note $\varepsilon_g=\vert T_g-T_0\vert$,  $\varepsilon_d=\vert T_d-T_0\vert$,  $\varepsilon_t=\vert T_t-T_0\vert$, les erreurs entre les différentes approximation et l'estimation de $T_0$.
+
+\question{} Renvoyer $\varepsilon_g$,  $\varepsilon_d$,  $\varepsilon_t$.
+
+

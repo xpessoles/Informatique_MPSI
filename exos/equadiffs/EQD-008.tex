@@ -10,18 +10,20 @@ Sans prédateur, l'évolution du nombre de proies est donné par l'équation dif
 
 On prendra  $u_0 = \alpha$ et $a=\alpha 10^{-2}$. 
 
-\question{Donner la population de lapins après 20 unités de temps.}
+\question{Donner la population de lapins à 1 près après 20 unités de temps.}
 
 
 \subsection*{Modèle avec prédation}
 Le modèle avec prédateur est donné par : 
-$\left\{
+$$
+\left\{
 \begin{array}{l}
-u'(t)=u(t)\left(a - b\times v(t)\right)
-v'(t)=-v(t)\left(c - d\times u(t)\right)
+\dfrac{du(t)}{dt}=u(t)\left(a - b\times v(t)\right)\\
+\dfrac{dv(t)}{dt}=-v(t)\left(c - d\times u(t)\right)
 \end{array}
 \right.
-$
+$$
+
 avec :
 \begin{itemize}
 \item $a $: taux de reproduction des proies;
