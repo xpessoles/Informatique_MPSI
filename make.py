@@ -581,18 +581,18 @@ for tp in info_tp:
     
     
     
-activite=info_tp[12]
-rep=trouver_repertoire(activite)
-file=trouver_file_tex(activite,rep,'tp')
-genere_pdf(file,rep,'tp')
-impr_2_page(activite,rep,'tp')
-# 
-# activite=info_cours[13]
+# activite=info_tp[12]
 # rep=trouver_repertoire(activite)
-# file=trouver_file_tex(activite,rep,'cours')
-# genere_pdf(file,rep,'cours')
-# file_td=trouver_file_tex(activite,rep,'td')
-# genere_pdf(file_td,rep,'td')
+# file=trouver_file_tex(activite,rep,'tp')
+# genere_pdf(file,rep,'tp')
+# impr_2_page(activite,rep,'tp')
+# 
+activite=info_cours[14]
+rep=trouver_repertoire(activite)
+file=trouver_file_tex(activite,rep,'cours')
+genere_pdf(file,rep,'cours')
+file_td=trouver_file_tex(activite,rep,'td')
+genere_pdf(file_td,rep,'td')
 
 # activite=info_ds[1]
 # num_ds_str=activite[0]
