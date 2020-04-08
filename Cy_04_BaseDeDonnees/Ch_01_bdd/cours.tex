@@ -39,7 +39,7 @@ On commence par se poser les questions suivantes.
 
 \section{Modèle conceptuel des données}
 
-On a besoin de modéliser le problème qu'on aborde \emph{avant} de commencer à programmer.
+On a besoin de modéliser le problème qu'on aborde \textbf{avant} de commencer à programmer.
 C'est une tâche très difficile. On peut retenir deux points fondamentaux. 
 \begin{itemize}
 \item Cela nécessite une collaboration entre des spécialistes du domaine et des informaticiens\footnote{En
@@ -50,14 +50,14 @@ C'est une tâche très difficile. On peut retenir deux points fondamentaux.
 
 %\clearslide{}
 \subsection{Le modèle entité-association}
-De l'anglais \emph{Entity-Relationship model}. 
+De l'anglais \textbf{Entity-Relationship model}. 
 
-C'est 
+C'est :
 \begin{itemize}
 \item une façon de  modéliser les  données à traiter ;
-\item un modèle \emph{conceptuel} de  données (MCD).
+\item un modèle \textbf{conceptuel} de  données (MCD).
 \end{itemize}
-Le mot \emph{conceptuel} doit s'entendre par opposition à  l'\emph{implantation} concrète de la base de données (qui donne le modèle \emph{physique} de données, MPD).
+Le mot \textbf{conceptuel} doit s'entendre par opposition à  l'\textbf{implantation} concrète de la base de données (qui donne le modèle \textbf{physique} de données, MPD).
 
 On l'appelle ainsi car il distingue :
 \begin{itemize}
@@ -76,7 +76,7 @@ Ici, dans notre exemple de base de donnée cinématographique, nous choisissons 
   On pourrait rajouter : les entreprises (producteurs), les livres
   (dont sont tirés certains scénarios), les pays (où ont eu lieu le
   tournage, du producteur, où sont distribués les films), les langues
-  (des films), les versions d'un même film (langues, montages), \emph{etc}.
+  (des films), les versions d'un même film (langues, montages), \textbf{etc}.
 \end{rem}
 
 
@@ -94,10 +94,10 @@ Pour chaque entité, on considère les données suivantes.
 \subsection{Associations}
 Ici, on ne considère dans notre exemple que deux types de relation :
   \begin{enumerate}
-  \item «joue dans» (Clint Eastwood joue Blondin dans \emph{Le bon, la brute
-      et le truand} et Walt Kowalski dans \emph{Gran Torino}) ;
-  \item «a réalisé» (Clint Eastwood a réalisé \emph{Invictus} et
-    \emph{Gran Torino}).
+  \item «joue dans» (Clint Eastwood joue Blondin dans \textbf{Le bon, la brute
+      et le truand} et Walt Kowalski dans \textbf{Gran Torino}) ;
+  \item «a réalisé» (Clint Eastwood a réalisé \textbf{Invictus} et
+    \textbf{Gran Torino}).
   \end{enumerate}
 
 %\clearslide{}
@@ -121,7 +121,7 @@ On remarquera que nous pourrions avoir intérêt à introduire une entité suppl
 
 On représente la modélisation précédente du lien entre les entités et les associations de notre projet de base de données cinématographique par le diagramme suivant.
 \begin{center}
-TO SOLVE %%%%\includegraphics[height=5cm]{films.png}
+\includegraphics[height=5cm]{films.png}
 \end{center}
 %\clearslide{}
 
@@ -260,7 +260,7 @@ FILMS = [
 ...
 \end{lstlisting}
 
-Ce modèle à  base de tables, appelé \emph{modèle  logique des données}
+Ce modèle à  base de tables, appelé \textbf{modèle  logique des données}
 est plus proche  de l'implantation que le modèle  conceptuel. Il reste
 cependant à  faire quelques choix  avant de pouvoir vraiment  passer à
 une implantation.
@@ -274,11 +274,11 @@ C'est en général une très très mauvaise idée: que se passe t-il si
 deux personnes ont le même nom et prénom?
 
 Une solution classique (en gestion) : attribuer un numéro unique (de
-dossier, de personne, \ldots{}), \emph{l'identifiant}.
+dossier, de personne, \ldots{}), \textbf{l'identifiant}.
 
 On modifie alors le diagramme entité/association comme suit. 
 \begin{center}
-TO SOLVE %%\includegraphics[height=5cm]{films-id.png}
+\includegraphics[height=5cm]{films-id.png}
 \end{center}
 %\clearslide{}
 
@@ -428,11 +428,11 @@ Reste à voir comment on implante ce MLD.
 
 % Mathématiquement:
 % \begin{itemize}
-% \item on dit qu'on a construit deux \emph{tables} $ noter les 
+% \item on dit qu'on a construit deux \textbf{tables} $ noter les 
 % \end{itemize}
 
 
-% \emph{On appelle \emph{relation} $n$-aire }
+% \textbf{On appelle \textbf{relation} $n$-aire }
 % TODO : index par date de retour
 
 % TODO : index par ouvrage (si l'ouvrage est rendu à l'avance)
