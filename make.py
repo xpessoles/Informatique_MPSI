@@ -283,12 +283,15 @@ def genere_entete(rep,info_activite,type_activite):
                 elif '\\chapterimage{' in ligne:
                     texte_entete+='\\chapterimage{'+figures+'}\n'
                 elif '\\lstinputpath{}' in ligne:
-                    texte_entete+='\\lstinputpath{'
-                    for support in supports.split(';'):
-                        if support[:1]=='F:':
-                            support=support[2:]
-                        texte_entete+='{'+chemin_relatif+'exos/'+support+'/}'
-                    texte_entete+='}\n'
+                    if type_activite=='cours':
+                        texte_entete+='%\\lstinputpath{}'
+                    else:
+                        texte_entete+='\\lstinputpath{'
+                        for support in supports.split(';'):
+                            if support[:1]=='F:':
+                                support=support[2:]
+                            texte_entete+='{'+chemin_relatif+'exos/'+support+'/}'
+                        texte_entete+='}\n'
                 elif '\\graphicspath{{../../style/png/}{images/}' in ligne:
                     texte_entete+='\\graphicspath{{'+chemin_relatif+'style/png/}{images/}'
                     for support in supports.split(';'):
@@ -581,18 +584,18 @@ for tp in info_tp:
     
     
     
-# activite=info_tp[12]
-# rep=trouver_repertoire(activite)
-# file=trouver_file_tex(activite,rep,'tp')
-# genere_pdf(file,rep,'tp')
-# impr_2_page(activite,rep,'tp')
-# 
-activite=info_cours[14]
+activite=info_tp[12]
 rep=trouver_repertoire(activite)
-file=trouver_file_tex(activite,rep,'cours')
-genere_pdf(file,rep,'cours')
-file_td=trouver_file_tex(activite,rep,'td')
-genere_pdf(file_td,rep,'td')
+file=trouver_file_tex(activite,rep,'tp')
+genere_pdf(file,rep,'tp')
+impr_2_page(activite,rep,'tp')
+# 
+# activite=info_cours[15]
+# rep=trouver_repertoire(activite)
+# file=trouver_file_tex(activite,rep,'cours')
+# genere_pdf(file,rep,'cours')
+# file_td=trouver_file_tex(activite,rep,'td')
+# genere_pdf(file_td,rep,'td')
 
 # activite=info_ds[1]
 # num_ds_str=activite[0]

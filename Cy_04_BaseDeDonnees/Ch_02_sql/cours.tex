@@ -530,7 +530,7 @@ Une première requête imbriquée naïve.
 Sous la condition qu'il n'y a qu'un enregistrement réalisant ce minimum, on pourra aussi utiliser l'idée suivante : il suffit de trier la table par dates de naissances, puis de conserver uniquement le premier enregistrement (fonction \texttt{LIMIT}, on pourra aussi utiliser  \texttt{OFFSET k} pour passer les \texttt{k} premières lignes).
 \lstinputlisting{images/lieu-max-age2.sql}
 \begin{center}
-FICHIER MANQUANT %\pgfplotstabletypeset{images/lieu-max-age2.csv}
+\pgfplotstabletypeset{images/lieu-max-age2.csv}
 \end{center}
 
 \subsubsection{Compter des enregistrements différents.}
@@ -540,7 +540,7 @@ On peut essayer de compter le nombre d'enregistrements ayant des valeurs distinc
 Commençons part une requête imbriquée naïve. 
 \lstinputlisting{images/nb-acteurs1.sql}
 \begin{center}
-FICHIER MANQUANT %\pgfplotstabletypeset{images/nb-acteurs1.csv}
+\pgfplotstabletypeset{images/nb-acteurs1.csv}
 \end{center}
 
 On peut aussi écrire cela comme suit. 
@@ -555,39 +555,29 @@ On peut réaliser des opérations arithmétiques sur les nombres : \texttt{+} po
 Par exemple, pour l'addition.
 \lstinputlisting{images/addition.sql}
 \begin{center}
-FICHIER MANQUANT %\pgfplotstabletypeset{images/addition.csv}
+\pgfplotstabletypeset{images/addition.csv}
 \end{center}
 
 Attention, comme en Python, les opérations sur les entiers donnent des résultats entiers. 
 \lstinputlisting{images/division1.sql}
 \begin{center}
-FICHIER MANQUANT %\pgfplotstabletypeset{images/division1.csv}
+\pgfplotstabletypeset{images/division1.csv}
 \end{center}
 
 Pour effectuer des divisions flottantes (par exemple, pour calculer ici un pourcentage), on pourra utiliser une fonction de conversion ou bien ruser avec la division entière.
 \lstinputlisting{images/division2.sql}
 \begin{center}
-FICHIER MANQUANT %\pgfplotstabletypeset{images/division2.csv}
+\pgfplotstabletypeset{images/division2.csv}
 \end{center}
 
 On pourra mettre des chaînes de caractères en minuscules ou en majuscules.
 \lstinputlisting{images/upper-lower.sql}
 \begin{center}
-FICHIER MANQUANT %\pgfplotstabletypeset{images/upper-lower.csv}
+\pgfplotstabletypeset{images/upper-lower.csv}
 \end{center}
 
 Cette liste n'est bien entendu pas exhaustive. 
 
-\section{Exercices}
+%\section{Exercices}
 
-Donner des requêtes pour:
 
-\begin{itemize}
-\item trouver le nombre d'acteurs qui ont joué au moins deux rôles ;
-\item trouver les acteurs qui sont aussi des réalisateurs ;
-\item trouver les acteurs nés le 1er janvier 1930 ou après ;
-\item compter les acteurs nés avant le 1er janvier 1940 ;
-\item trouver les acteurs qui ont joué au moins dans un film où jouait
-  Martin Freeman ;
-\item trouver les réalisateurs qui ont dirigé Clint Eastwood.
-\end{itemize}
