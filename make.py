@@ -584,7 +584,7 @@ for tp in info_tp:
     
     
     
-activite=info_tp[12]
+activite=info_tp[13]
 rep=trouver_repertoire(activite)
 file=trouver_file_tex(activite,rep,'tp')
 genere_pdf(file,rep,'tp')
