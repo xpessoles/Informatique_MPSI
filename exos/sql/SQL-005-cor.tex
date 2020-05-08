@@ -1,6 +1,8 @@
 \question{}
 Il y a 172 tables (valeur indiquée dans l'onglet Tables).
 
+\lstset{language=SQL,morekeywords={REFERENCES}}
+
 \question{}
 \texttt{pokemon(id : integer, identifier : string, species\_id : integer, height : integer, weight : integer, bASe\_experience : integer, order : integer, is\_default : boolean )} 
 
@@ -11,48 +13,139 @@ La clé primaire d'une table est une contrainte d'unicité, composée d'une ou p
 %\question{}
 %\texttt{SELECT count(*) FROM pokemon;}  \boxed{811}
 
+\begin{lstlisting}
+SELECT height 
+	FROM pokemon 
+	WHERE identifier = 'pikachu';
+\end{lstlisting}
 \question{}
-\texttt{SELECT height FROM pokemon WHERE identifier = 'pikachu';} \boxed{4} 
+\begin{lstlisting}
+SELECT height 
+	FROM pokemon 
+	WHERE identifier = 'pikachu';
+\end{lstlisting}
 
-\question{}
-\texttt{SELECT weight FROM pokemon WHERE identifier = "pikachu"} \boxed{60} 
-
-
-\question{}
-\texttt{SELECT identifier FROM pokemon WHERE height> 4}
-
-\question{}
-\texttt{SELECT identifier FROM pokemon WHERE height> (SELECT height FROM pokemon WHERE identifier = "pikachu")}
-
-
-\question{}
-\texttt{SELECT count(*) FROM pokemon WHERE height > (SELECT height FROM pokemon WHERE identifier = 'pikachu');} \boxed{678} 
+\boxed{4} 
 
 \question{}
-\texttt{SELECT count(*) FROM pokemon WHERE height = (SELECT height FROM pokemon WHERE identifier = 'pikachu');} \boxed{63} ;
-
-\texttt{SELECT max(weight) FROM pokemon WHERE height = (SELECT height FROM pokemon WHERE identifier = 'pikachu');} \boxed{600}
-
-\question{}
-\texttt{SELECT identifier FROM pokemon WHERE height = (SELECT max(height) FROM pokemon );} \boxed{\text{wailord}}
-
-\texttt{SELECT identifier FROM pokemon WHERE height = (SELECT min(height) FROM pokemon );} \boxed{\text{joltik et flabebe}} 
-
-\question{}
-\texttt{SELECT avg(height) FROM pokemon;} \boxed{12.2503082614057}
+\begin{lstlisting}
+SELECT weight 
+	FROM pokemon 
+	WHERE identifier = "pikachu";
+\end{lstlisting}
+\boxed{60} 
 
 
 \question{}
- \texttt{SELECT count(*) FROM pokemon WHERE height <= 8.5 AND height >= 7.5;} \boxed{44} 
+\begin{lstlisting}
+SELECT identifier 
+	FROM pokemon
+	WHERE height> 4;
+\end{lstlisting}
 
 \question{}
-\texttt{SELECT S.identifier,H.identifier FROM pokemon\_species AS S join pokemon\_habitats AS H on S.habitat\_id = H.id;}
+\begin{lstlisting}
+SELECT identifier 
+	FROM pokemon 
+	WHERE height > 
+		(SELECT height 
+		FROM pokemon 
+		WHERE identifier = "pikachu");
+\end{lstlisting}
 
 \question{}
-\texttt{SELECT count(*) FROM pokemon\_species AS S join pokemon\_habitats AS H on S.habitat\_id = H.id WHERE H.identifier = 'forest';}  \boxed{71} 
+\begin{lstlisting}
+SELECT count(*) 
+	FROM pokemon 
+	WHERE height > 
+		(SELECT height 
+		FROM pokemon 
+		WHERE identifier = 'pikachu');
+\end{lstlisting}
+\boxed{678} 
+
+\question{}
+\begin{lstlisting}
+SELECT count(*) 
+	FROM pokemon 
+	WHERE height = 
+		(SELECT height 
+		FROM pokemon 
+		WHERE identifier = 'pikachu');
+\end{lstlisting}
+ \boxed{63} ;
+
+\begin{lstlisting}
+SELECT max(weight) 
+	FROM pokemon 
+	WHERE height = 
+		(SELECT height 
+		FROM pokemon 
+		WHERE identifier = 'pikachu'); 
+\end{lstlisting}
+\boxed{600}
+
+\question{}
+\begin{lstlisting}
+SELECT identifier 
+	FROM pokemon 
+	WHERE height = 
+		(SELECT max(height) FROM pokemon);
+\end{lstlisting}
+\boxed{\text{wailord}}
+
+\begin{lstlisting}
+SELECT identifier 
+	FROM pokemon 
+	WHERE height = 
+		(SELECT min(height) FROM pokemon); 
+\end{lstlisting}
+
+\boxed{\text{joltik et flabebe}} 
+
+\question{}
+\begin{lstlisting}
+SELECT avg(height) FROM pokemon;
+\end{lstlisting}
+\boxed{12.2503082614057}
+ 
+\question{}
+\begin{lstlisting}
+SELECT count(*) 
+	FROM pokemon 
+	WHERE height <= 8.5 AND height >= 7.5;
+\end{lstlisting}
+\boxed{44} 
+
+\question{}
+\begin{lstlisting}
+SELECT S.identifier,H.identifier 
+	FROM pokemon\_species AS S 
+	JOIN pokemon\_habitats AS H 
+	ON S.habitat\_id = H.id;
+\end{lstlisting}
 
 
 \question{}
-\texttt{SELECT count(*) FROM pokemon\_species AS S join pokemon\_habitats AS H on S.habitat\_id = H.id WHERE H.identifier = 'forest' AND S.generation\_id = 3;} \boxed{29}
+\begin{lstlisting}
+SELECT count(*) 
+	FROM pokemon\_species AS S 
+	JOIN pokemon\_habitats AS H 
+	ON 
+	S.habitat\_id = H.id 
+	WHERE H.identifier = 'forest';
+\end{lstlisting}  
+\boxed{71} 
+
+
+\question{}
+\begin{lstlisting}
+SELECT count(*) 
+	FROM pokemon\_species AS S 
+	JOIN pokemon\_habitats AS H 
+	ON S.habitat\_id = H.id 
+	WHERE H.identifier = 'forest' AND S.generation\_id = 3;
+\end{lstlisting} 
+\boxed{29}
 
 
