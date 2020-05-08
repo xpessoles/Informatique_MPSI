@@ -2,44 +2,57 @@
 Il y a 172 tables (valeur indiquée dans l'onglet Tables).
 
 \question{}
-\texttt{pokemon(id : integer, identifier : string, species\_id : integer, height : integer, weight : integer, base\_experience : integer, order : integer, is\_default : boolean )} 
+\texttt{pokemon(id : integer, identifier : string, species\_id : integer, height : integer, weight : integer, bASe\_experience : integer, order : integer, is\_default : boolean )} 
 
 \question{}
 La clé primaire d'une table est une contrainte d'unicité, composée d'une ou plusieurs colonnes, et qui permet d'identifier de manière unique chaque ligne de la table.
 
+%
+%\question{}
+%\texttt{SELECT count(*) FROM pokemon;}  \boxed{811}
 
 \question{}
-\texttt{select count(*) from pokemon;}  \boxed{811}
+\texttt{SELECT height FROM pokemon WHERE identifier = 'pikachu';} \boxed{4} 
 
 \question{}
-\texttt{select height from pokemon where identifier = 'pikachu';} \boxed{4} 
-
-\question{}
-\texttt{select count(*) from pokemon where height > (select height from pokemon where identifier = 'pikachu');} \boxed{678} 
-
-\question{}
-\texttt{select count(*) from pokemon where height = (select height from pokemon where identifier = 'pikachu');} \boxed{63} ;
-\texttt{select max(weight) from pokemon where height = (select height from pokemon where identifier = 'pikachu');} \boxed{600}
-
-\question{}
-\texttt{select identifier from pokemon where height = (select max(height) from pokemon );} \boxed{\text{wailord}}
-\texttt{select identifier from pokemon where height = (select min(height) from pokemon );} \boxed{\text{joltik et flabebe}} 
-
-\question{}
-\texttt{select avg(height) from pokemon;} \boxed{12.2503082614057}
+\texttt{SELECT weight FROM pokemon WHERE identifier = "pikachu"} \boxed{60} 
 
 
 \question{}
- \texttt{select count(*) from pokemon where height <= 8.5 and height >= 7.5;} \boxed{44} 
+\texttt{SELECT identifier FROM pokemon WHERE height> 4}
 
 \question{}
-\texttt{select S.identifier,H.identifier from pokemon\_species as S join pokemon\_habitats as H on S.habitat\_id = H.id;}
-
-\question{}
-\texttt{select count(*) from pokemon\_species as S join pokemon\_habitats as H on S.habitat\_id = H.id where H.identifier = 'forest';}  \boxed{71} 
+\texttt{SELECT identifier FROM pokemon WHERE height> (SELECT height FROM pokemon WHERE identifier = "pikachu")}
 
 
 \question{}
-\texttt{select count(*) from pokemon\_species as S join pokemon\_habitats as H on S.habitat\_id = H.id where H.identifier = 'forest' and S.generation\_id = 3;} \boxed{29}
+\texttt{SELECT count(*) FROM pokemon WHERE height > (SELECT height FROM pokemon WHERE identifier = 'pikachu');} \boxed{678} 
+
+\question{}
+\texttt{SELECT count(*) FROM pokemon WHERE height = (SELECT height FROM pokemon WHERE identifier = 'pikachu');} \boxed{63} ;
+
+\texttt{SELECT max(weight) FROM pokemon WHERE height = (SELECT height FROM pokemon WHERE identifier = 'pikachu');} \boxed{600}
+
+\question{}
+\texttt{SELECT identifier FROM pokemon WHERE height = (SELECT max(height) FROM pokemon );} \boxed{\text{wailord}}
+
+\texttt{SELECT identifier FROM pokemon WHERE height = (SELECT min(height) FROM pokemon );} \boxed{\text{joltik et flabebe}} 
+
+\question{}
+\texttt{SELECT avg(height) FROM pokemon;} \boxed{12.2503082614057}
+
+
+\question{}
+ \texttt{SELECT count(*) FROM pokemon WHERE height <= 8.5 AND height >= 7.5;} \boxed{44} 
+
+\question{}
+\texttt{SELECT S.identifier,H.identifier FROM pokemon\_species AS S join pokemon\_habitats AS H on S.habitat\_id = H.id;}
+
+\question{}
+\texttt{SELECT count(*) FROM pokemon\_species AS S join pokemon\_habitats AS H on S.habitat\_id = H.id WHERE H.identifier = 'forest';}  \boxed{71} 
+
+
+\question{}
+\texttt{SELECT count(*) FROM pokemon\_species AS S join pokemon\_habitats AS H on S.habitat\_id = H.id WHERE H.identifier = 'forest' AND S.generation\_id = 3;} \boxed{29}
 
 
