@@ -1,36 +1,47 @@
 
-\section{Base de données!}
+\section*{Base de données des Pokemon}
 \label{sec:bdd}
 
-Nous souhaitons maintenant mettre à jour le programme précédent selon le pokémon rencontré. En effet la taille des pokémons étant différente, l'ordonnée du point P est donc différente à chaque nouvelle capture.
-
-Pour cela nous allons utiliser la base de données issue du site \url{http://veekun.com/}. Un fichier nommé "veekun-pokedex.sqlite" doit être présent sur le bureau de votre ordinateur. Ouvrir cette base de données avec Sqliteman.
+Nous allons utiliser la base de données issue du site \url{http://veekun.com/}. Un fichier nommé << veekun-pokedex.sqlite >> doit être présent sur le bureau de votre ordinateur. Ouvrir cette base de données avec DB Browser for SQLite.
 
 
-Dans un premier temps, nous allons utiliser uniquement la table \texttt{pokemon} qui répertorie les pokémons, elle contient les colonnes :
+%elle contient les colonnes :
+%
+%\begin{itemize}%[itemsep=0mm]
+%	\item \texttt{id} (clé primaire) : identifiant du pokemon 
+%	\item \texttt{identifier} : nom du pokemon
+%	\item \texttt{species\_id} : identifiant d'espèce
+%	\item \texttt{height} : hauteur
+%	\item \texttt{weight} : poids
+%	\item \texttt{base\_experience} : expérience
+%	\item \texttt{order} : ordre
+%	\item \texttt{is\_default} : défaut
+%\end{itemize}
 
-\begin{itemize}[itemsep=0mm]
-	\item \texttt{id} (clé primaire) : identifiant du pokemon 
-	\item \texttt{identifier} : nom du pokemon
-	\item \texttt{species\_id} : identifiant d'espèce
-	\item \texttt{height} : hauteur
-	\item \texttt{weight} : poids
-	\item \texttt{base\_experience} : expérience
-	\item \texttt{order} : ordre
-	\item \texttt{is\_default} : défaut
-\end{itemize}
-
+\subsection*{Structure de la table de données}
 
 \question{}
-Donner le schéma relationnel de cette table.
+En utilisant le logiciel, donner le nombre de tables contenu dans la base de données. 
+
+
+
+Dans un premier temps, nous allons utiliser uniquement la table \texttt{pokemon} qui répertorie les pokémons.
+
+\question{}
+Donner le schéma relationnel de cette table. On le donnera sous la forme nom\_table(attribut\_1, : type attribut_2, ...).
 
 \question{}
 Donner la définition d'une clé primaire.
 
+\subsection*{Table des pokemons}
 
 
 \question{}
 Combien y a t-il de pokémons dans cette base ?
+
+
+
+
 
 
 \question{}
@@ -107,72 +118,72 @@ Combien de pokemons vivent en forêt ('forest' en anglais) ?
 Combien de pokemons de la generation 3 vivent en forêt ('forest' en anglais) ?
 
 
-
-
-
-\begin{qexo}
-\end{qexo}
-\texttt{pokemon(id : integer, identifier : string, species\_id : integer, height : integer, weight : integer, base\_experience : integer, order : integer, is\_default : boolean )} 
-
-\begin{qexo}
-\end{qexo}
-La clé primaire d'une table est une contrainte d'unicité, composée d'une ou plusieurs colonnes, et qui permet d'identifier de manière unique chaque ligne de la table.
-
-
-\begin{qexo}
-\end{qexo}
-\texttt{select count(*) from pokemon;}  \boxed{811}
-
-\begin{qexo}
-\end{qexo}
-\texttt{select height from pokemon where identifier = 'pikachu';} \boxed{4} 
-
-\begin{qexo}
-\end{qexo}
-\texttt{select count(*) from pokemon where height > (select height from pokemon where identifier = 'pikachu');} \boxed{678} 
-
-\begin{qexo}
-\end{qexo}
-\texttt{select count(*) from pokemon where height = (select height from pokemon where identifier = 'pikachu');} \boxed{63} ;
-\texttt{select max(weight) from pokemon where height = (select height from pokemon where identifier = 'pikachu');} \boxed{600}
-
-\begin{qexo}
-\end{qexo}
-\texttt{select identifier from pokemon where height = (select max(height) from pokemon );} \boxed{\text{wailord}}
-\texttt{select identifier from pokemon where height = (select min(height) from pokemon );} \boxed{\text{joltik et flabebe}} 
-
-\begin{qexo}
-\end{qexo}
-\texttt{select avg(height) from pokemon;} \boxed{12.2503082614057}
-
-
-
-\begin{qexo}
-\end{qexo}
- \texttt{select count(*) from pokemon where height <= 8.5 and height >= 7.5;} \boxed{44} 
-
-
-
-\begin{qexo}
-\end{qexo}
-\texttt{select S.identifier,H.identifier from pokemon\_species as S join pokemon\_habitats as H on S.habitat\_id = H.id;}
-
-\begin{qexo}
-\end{qexo}
-\texttt{select count(*) from pokemon\_species as S join pokemon\_habitats as H on S.habitat\_id = H.id where H.identifier = 'forest';}  \boxed{71} 
-
-\begin{qexo}
-\end{qexo}
-\texttt{select count(*) from pokemon\_species as S join pokemon\_habitats as H on S.habitat\_id = H.id where H.identifier = 'forest' and S.generation\_id = 3;} \boxed{29}
-
-
-
-
-
-
-
-
-
-
-
-
+%
+%
+%
+%\begin{qexo}
+%\end{qexo}
+%\texttt{pokemon(id : integer, identifier : string, species\_id : integer, height : integer, weight : integer, base\_experience : integer, order : integer, is\_default : boolean )} 
+%
+%\begin{qexo}
+%\end{qexo}
+%La clé primaire d'une table est une contrainte d'unicité, composée d'une ou plusieurs colonnes, et qui permet d'identifier de manière unique chaque ligne de la table.
+%
+%
+%\begin{qexo}
+%\end{qexo}
+%\texttt{select count(*) from pokemon;}  \boxed{811}
+%
+%\begin{qexo}
+%\end{qexo}
+%\texttt{select height from pokemon where identifier = 'pikachu';} \boxed{4} 
+%
+%\begin{qexo}
+%\end{qexo}
+%\texttt{select count(*) from pokemon where height > (select height from pokemon where identifier = 'pikachu');} \boxed{678} 
+%
+%\begin{qexo}
+%\end{qexo}
+%\texttt{select count(*) from pokemon where height = (select height from pokemon where identifier = 'pikachu');} \boxed{63} ;
+%\texttt{select max(weight) from pokemon where height = (select height from pokemon where identifier = 'pikachu');} \boxed{600}
+%
+%\begin{qexo}
+%\end{qexo}
+%\texttt{select identifier from pokemon where height = (select max(height) from pokemon );} \boxed{\text{wailord}}
+%\texttt{select identifier from pokemon where height = (select min(height) from pokemon );} \boxed{\text{joltik et flabebe}} 
+%
+%\begin{qexo}
+%\end{qexo}
+%\texttt{select avg(height) from pokemon;} \boxed{12.2503082614057}
+%
+%
+%
+%\begin{qexo}
+%\end{qexo}
+% \texttt{select count(*) from pokemon where height <= 8.5 and height >= 7.5;} \boxed{44} 
+%
+%
+%
+%\begin{qexo}
+%\end{qexo}
+%\texttt{select S.identifier,H.identifier from pokemon\_species as S join pokemon\_habitats as H on S.habitat\_id = H.id;}
+%
+%\begin{qexo}
+%\end{qexo}
+%\texttt{select count(*) from pokemon\_species as S join pokemon\_habitats as H on S.habitat\_id = H.id where H.identifier = 'forest';}  \boxed{71} 
+%
+%\begin{qexo}
+%\end{qexo}
+%\texttt{select count(*) from pokemon\_species as S join pokemon\_habitats as H on S.habitat\_id = H.id where H.identifier = 'forest' and S.generation\_id = 3;} \boxed{29}
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
