@@ -27,7 +27,7 @@ En utilisant le logiciel, donner le nombre de tables contenu dans la base de don
 Dans un premier temps, nous allons utiliser uniquement la table \texttt{pokemon} qui répertorie les pokémons.
 
 \question{}
-Donner le schéma relationnel de cette table. On le donnera sous la forme nom\_table(attribut\_1, : type attribut_2, ...).
+Donner le schéma relationnel de cette table. On le donnera sous la forme nom\_table(attribut\_1, : type attribut\_2, ...).
 
 \question{}
 Donner la définition d'une clé primaire.
@@ -91,46 +91,46 @@ Nous souhaiterions donc savoir combien de pokemons pourront être attrapés sans
 
 %\begin{qexo}
 \question{}
-En considérant que le pokémon sera capturé si la pokeball l'atteint a plus ou moins 0.5 (inclus) de sa hauteur. Combien de pokémons sont capturés avec le reglage par défaut ?
+En considérant que le pokémon sera capturé si la pokeball l'atteint a plus ou moins 0.5 (inclus) de sa hauteur. Combien de pokémons sont capturés avec le réglage par défaut ?
 %\end{qexo}
 
-\section*{Classemenet des pokemons}
-Maintenant nous souhaitons placer les pokemons sur une carte selon leurs propriétés, pour cela nous allons utiliser les tables suivantes:
+\section*{Classement des pokemons}
+Maintenant nous souhaitons placer les pokemons sur une carte selon leurs propriétés, pour cela nous allons utiliser les tables suivantes.
 
 
 La table \texttt{pokemon\_species} contient les colonnes :
 
 \begin{itemize}[itemsep=0mm]
-	\item \texttt{id} (clé primaire) : identifiant du pokemon 
-	\item \texttt{identifier} : nom du pokemon
-	\item \texttt{generation\_id} : identifiant du génération 
-	\item \texttt{evolves\_from\_species\_id} : origine d'évolution (\emph{non utilisé dans notre étude})
-	\item \texttt{evolution\_chain\_id} : chaine d'évolution (\emph{non utilisé dans notre étude})
-	\item \texttt{color\_id} : identifiant de couleur (\emph{non utilisé dans notre étude})
-	\item \texttt{shape\_id} : identifiant de forme (\emph{non utilisé dans notre étude})
-	\item \texttt{habitat\_id} : identifiant d'habitat
-	\item \texttt{gender\_rate} : taux de genre (\emph{non utilisé dans notre étude})
-	\item \texttt{capture\_rate} : taux de capture (\emph{non utilisé dans notre étude})
-	\item \texttt{base\_happiness} : (\emph{non utilisé dans notre étude})
-	\item \texttt{is\_baby} : (\emph{non utilisé dans notre étude})
-	\item \texttt{hatch\_counter} : (\emph{non utilisé dans notre étude})
-	\item \texttt{has\_gender\_differences} : (\emph{non utilisé dans notre étude})
-	\item \texttt{growth\_rate\_id} : (\emph{non utilisé dans notre étude})
-	\item \texttt{forms\_switchable} : (\emph{non utilisé dans notre étude})
-	\item \texttt{order} : (\emph{non utilisé dans notre étude})
-	\item \texttt{conquest\_order} : (\emph{non utilisé dans notre étude})
+	\item \texttt{id} (clé primaire) : identifiant du pokemon ;
+	\item \texttt{identifier} : nom du pokemon;
+	\item \texttt{generation\_id} : identifiant du génération ;
+%	\item \texttt{evolves\_from\_species\_id} : origine d'évolution (\emph{non utilisé dans notre étude});
+%	\item \texttt{evolution\_chain\_id} : chaine d'évolution (\emph{non utilisé dans notre étude});
+%	\item \texttt{color\_id} : identifiant de couleur (\emph{non utilisé dans notre étude});
+%	\item \texttt{shape\_id} : identifiant de forme (\emph{non utilisé dans notre étude});
+%	\item \texttt{habitat\_id} : identifiant d'habitat;
+%	\item \texttt{gender\_rate} : taux de genre (\emph{non utilisé dans notre étude});
+%	\item \texttt{capture\_rate} : taux de capture (\emph{non utilisé dans notre étude});
+%	\item \texttt{base\_happiness} : (\emph{non utilisé dans notre étude});
+%	\item \texttt{is\_baby} : (\emph{non utilisé dans notre étude});
+%	\item \texttt{hatch\_counter} : (\emph{non utilisé dans notre étude});
+%	\item \texttt{has\_gender\_differences} : (\emph{non utilisé dans notre étude});
+%	\item \texttt{growth\_rate\_id} : (\emph{non utilisé dans notre étude});
+%	\item \texttt{forms\_switchable} : (\emph{non utilisé dans notre étude});
+%	\item \texttt{order} : (\emph{non utilisé dans notre étude});
+%	\item \texttt{conquest\_order} : (\emph{non utilisé dans notre étude}).
 \end{itemize}
-
+D'autres attributs existent, mais ils ne seront pas utilisés dans notre étude. 
 
 La table \texttt{pokemon\_habitats} contient les colonnes :
 
 \begin{itemize}[itemsep=0mm]
-	\item \texttt{id} (clé primaire) : identifiant d'habitat
-	\item \texttt{identifier} : nom de l'habitat
+	\item \texttt{id} (clé primaire) : identifiant d'habitat;
+	\item \texttt{identifier} : nom de l'habitat;
 \end{itemize}
 
 \question{}
-\'Ecrire la requête SQL permettant d'afficher le nom du pokemon et le nom de son habitat
+\'Ecrire la requête SQL permettant d'afficher le nom du pokemon et le nom de son habitat.
 
 \question{}
 Combien de pokemons vivent en forêt ('forest' en anglais) ?
