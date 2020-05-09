@@ -43,49 +43,44 @@ sol_Q9_res = "63"
 
 ## Question 10
 sol_Q10_req = "SELECT identifier,max(weight) FROM pokemon WHERE height = (SELECT height FROM pokemon WHERE identifier = 'pikachu');"
-sol_Q10_res = "nom,poids"
+sol_Q10_res = "aron,600"
 
 ## Question 11
-sol_Q11_req = ""
-sol_Q11_res = ""
+sol_Q11_req = "SELECT identifier, height, weight FROM pokemon WHERE height = (SELECT max(height) FROM pokemon);"
+sol_Q11_res = "wailord,145,3980"
 
 ## Question 12
-sol_Q12_req = ""
-sol_Q12_res = ""
+sol_Q12_req = "SELECT identifier FROM pokemon WHERE height = (SELECT min(height) FROM pokemon); "
+sol_Q12_res = "joltik,flabebe"
 
 ## Question 13
-sol_Q13_req = ""
+sol_Q13_req = "SELECT height,count(height) FROM pokemon GROUP BY height order BY height DESC"
 sol_Q13_res = ""
+
 ## Question 14
-sol_Q14_req = ""
-sol_Q14_res = ""
+sol_Q14_req = "SELECT height,MAX(ch) FROM (SELECT height,count(height) AS ch FROM pokemon GROUP BY height)"
+sol_Q14_res = "6,68"
+
 ## Question 15
-sol_Q15_req = ""
+sol_Q15_req = "SELECT identifier,max(height) FROM (SELECT identifier,height FROM pokemon WHERE height!=(SELECT max(height) from pokemon))"
 sol_Q15_res = ""
+
 ## Question 16
-sol_Q16_req = ""
-sol_Q16_res = ""
+sol_Q16_req = "SELECT avg(height) FROM pokemon;"
+sol_Q16_res = "12.2503082614057"
+
 ## Question 17
-sol_Q17_req = ""
-sol_Q17_res = ""
+sol_Q17_req = "SELECT count(*) FROM pokemon WHERE height <= 8.5 AND height >= 7.5;"
+sol_Q17_res = "44"
+
 ## Question 18
-sol_Q18_req = ""
+sol_Q18_req = "SELECT S.identifier,H.identifier FROM pokemon_species AS S JOIN pokemon_habitats AS H ON S.habitat_id = H.id;"
 sol_Q18_res = ""
+
 ## Question 19
-sol_Q19_req = ""
-sol_Q19_res = ""
+sol_Q19_req = "SELECT count(*) FROM pokemon_species AS S JOIN pokemon_habitats AS H ON S.habitat_id = H.id WHERE H.identifier = 'forest';"
+sol_Q19_res = "71"
+
 ## Question 20
-sol_Q20_req = ""
-sol_Q20_res = ""
-## Question 21
-sol_Q21_req = ""
-sol_Q21_res = ""
-## Question 22
-sol_Q22_req = ""
-sol_Q22_res = ""
-## Question 23
-sol_Q23_req = ""
-sol_Q23_res = ""
-## Question 24
-sol_Q24_req = ""
-sol_Q24_res = ""
+sol_Q20_req = "SELECT count(*) FROM pokemon_species AS S JOIN pokemon_habitats AS H ON S.habitat_id = H.id WHERE H.identifier = 'forest' AND S.generation_id = 3;"
+sol_Q20_res = "29"

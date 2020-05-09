@@ -77,13 +77,6 @@ SELECT count(*)
  \boxed{63} ;
 
 
-
-
-
-
-
-
-
 %Q10
 \begin{lstlisting}
 SELECT identifier,max(weight) 
@@ -98,18 +91,21 @@ SELECT identifier,max(weight)
 
 
 
-%%%
+% Q11
 \question{}
 \begin{lstlisting}
-SELECT identifier 
+SELECT identifier, height, weight
 	FROM pokemon 
 	WHERE height = 
 		(SELECT max(height) FROM pokemon);
 \end{lstlisting}
-\boxed{\text{wailord}}
+\boxed{\text{wailord, 145, 3980}}
 
+
+% Q12
+\question{}
 \begin{lstlisting}
-SELECT identifier 
+SELECT identifier
 	FROM pokemon 
 	WHERE height = 
 		(SELECT min(height) FROM pokemon); 
@@ -117,12 +113,44 @@ SELECT identifier
 
 \boxed{\text{joltik et flabebe}} 
 
+% Q13
 \question{}
+\begin{lstlisting}
+SELECT height,count(height) 
+	FROM pokemon 
+	GROUP BY height
+	order BY height DESC
+\end{lstlisting}
+
+% Q14
+\question{}
+\begin{lstlisting}
+SELECT height,MAX(ch) FROM 
+	(SELECT height,count(height) AS ch
+		FROM pokemon 
+		GROUP BY height)
+\end{lstlisting}
+\boxed{\text{6,68}} 
+
+% Q15
+\question{}
+\begin{lstlisting}
+SELECT identifier,max(height) FROM 
+	(SELECT identifier,height 
+	FROM pokemon 
+	WHERE height!=(SELECT max(height) from pokemon))
+\end{lstlisting}
+\boxed{\text{rayquaza-mega, 108}} 
+
+
+
+\question{}% Q16
 \begin{lstlisting}
 SELECT avg(height) FROM pokemon;
 \end{lstlisting}
 \boxed{12.2503082614057}
  
+ % Q17
 \question{}
 \begin{lstlisting}
 SELECT count(*) 
@@ -131,6 +159,7 @@ SELECT count(*)
 \end{lstlisting}
 \boxed{44} 
 
+ % Q18
 \question{}
 \begin{lstlisting}
 SELECT S.identifier,H.identifier 
@@ -139,7 +168,7 @@ SELECT S.identifier,H.identifier
 	ON S.habitat\_id = H.id;
 \end{lstlisting}
 
-
+ % Q19
 \question{}
 \begin{lstlisting}
 SELECT count(*) 
@@ -151,7 +180,7 @@ SELECT count(*)
 \end{lstlisting}  
 \boxed{71} 
 
-
+ % Q20
 \question{}
 \begin{lstlisting}
 SELECT count(*) 
