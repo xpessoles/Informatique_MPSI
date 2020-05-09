@@ -1,23 +1,20 @@
+\lstset{language=SQL,morekeywords={REFERENCES}}
+
 \question{}
 Il y a 172 tables (valeur indiquée dans l'onglet Tables).
-
-\lstset{language=SQL,morekeywords={REFERENCES}}
 
 \question{}
 \texttt{pokemon(id : integer, identifier : string, species\_id : integer, height : integer, weight : integer, bASe\_experience : integer, order : integer, is\_default : boolean )} 
 
+% Q3
 \question{}
-La clé primaire d'une table est une contrainte d'unicité, composée d'une ou plusieurs colonnes, et qui permet d'identifier de manière unique chaque ligne de la table.
+La clé primaire d'une table est une contrainte d'unicité, composée d'une ou plusieurs colonnes et qui permet d'identifier de manière unique chaque ligne de la table.
 
 %
 %\question{}
 %\texttt{SELECT count(*) FROM pokemon;}  \boxed{811}
 
-\begin{lstlisting}
-SELECT height 
-	FROM pokemon 
-	WHERE identifier = 'pikachu';
-\end{lstlisting}
+% Q4
 \question{}
 \begin{lstlisting}
 SELECT height 
@@ -27,6 +24,7 @@ SELECT height
 
 \boxed{4} 
 
+% Q5
 \question{}
 \begin{lstlisting}
 SELECT weight 
@@ -35,7 +33,7 @@ SELECT weight
 \end{lstlisting}
 \boxed{60} 
 
-
+% Q6
 \question{}
 \begin{lstlisting}
 SELECT identifier 
@@ -43,6 +41,7 @@ SELECT identifier
 	WHERE height> 4;
 \end{lstlisting}
 
+% Q7
 \question{}
 \begin{lstlisting}
 SELECT identifier 
@@ -53,6 +52,7 @@ SELECT identifier
 		WHERE identifier = "pikachu");
 \end{lstlisting}
 
+%Q8
 \question{}
 \begin{lstlisting}
 SELECT count(*) 
@@ -64,6 +64,7 @@ SELECT count(*)
 \end{lstlisting}
 \boxed{678} 
 
+%Q9
 \question{}
 \begin{lstlisting}
 SELECT count(*) 
@@ -75,16 +76,29 @@ SELECT count(*)
 \end{lstlisting}
  \boxed{63} ;
 
+
+
+
+
+
+
+
+
+%Q10
 \begin{lstlisting}
-SELECT max(weight) 
+SELECT identifier,max(weight) 
 	FROM pokemon 
 	WHERE height = 
 		(SELECT height 
 		FROM pokemon 
 		WHERE identifier = 'pikachu'); 
 \end{lstlisting}
-\boxed{600}
+\boxed{aron, 600}
 
+
+
+
+%%%
 \question{}
 \begin{lstlisting}
 SELECT identifier 
