@@ -55,7 +55,6 @@ sol_Q12_res = "joltik,flabebe"
 
 ## Question 13
 sol_Q13_req = "SELECT height,count(height) FROM pokemon GROUP BY height order BY height DESC"
-sol_Q13_res = ""
 
 ## Question 14
 sol_Q14_req = "SELECT height,MAX(ch) FROM (SELECT height,count(height) AS ch FROM pokemon GROUP BY height)"
@@ -63,7 +62,6 @@ sol_Q14_res = "6,68"
 
 ## Question 15
 sol_Q15_req = "SELECT identifier,max(height) FROM (SELECT identifier,height FROM pokemon WHERE height!=(SELECT max(height) from pokemon))"
-sol_Q15_res = ""
 
 ## Question 16
 sol_Q16_req = "SELECT avg(height) FROM pokemon;"
@@ -75,7 +73,6 @@ sol_Q17_res = "44"
 
 ## Question 18
 sol_Q18_req = "SELECT S.identifier,H.identifier FROM pokemon_species AS S JOIN pokemon_habitats AS H ON S.habitat_id = H.id;"
-sol_Q18_res = ""
 
 ## Question 19
 sol_Q19_req = "SELECT count(*) FROM pokemon_species AS S JOIN pokemon_habitats AS H ON S.habitat_id = H.id WHERE H.identifier = 'forest';"
