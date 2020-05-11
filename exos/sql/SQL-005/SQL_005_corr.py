@@ -1,5 +1,6 @@
 import sqlite3
 conn = sqlite3.connect('veekun-pokedex.sqlite')
+conn.close()
 #c = conn.cursor()
 
 """
