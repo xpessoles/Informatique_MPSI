@@ -12,7 +12,7 @@ for i in range(1,25):
 """
     
 ## Question 1
-sol_Q1_res = 172
+sol_Q1_res = "172"
 
 ## Question 2
 sol_Q2_res = 'pokemon(id : integer, identifier : string, species_id : integer, height : integer, weight : integer, base_experience : integer, order : integer, is_default : boolean)'
