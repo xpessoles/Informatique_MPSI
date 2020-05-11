@@ -21,25 +21,25 @@ Q5_res = "60"
 
 ## Question 6
 Q6_req = "SELECT IDENTIFIER, height FROM pokemon where height>=4;"
-"
+
 
 ## Question 7
-Q7_req = "SELECT IDENTIFIER, height FROM pokemon where height>=(SELECT height FROM pokemon where lower(identifier)='pikachu');
-"
+Q7_req = "SELECT IDENTIFIER, height FROM pokemon where height>=(SELECT height FROM pokemon where lower(identifier)='pikachu');"
+
 
 ## Question 8
-Q8_req = "SELECT COUNT(*) FROM (SELECT IDENTIFIER, height FROM pokemon where height>(SELECT height FROM pokemon where lower(identifier)='pikachu'));
-"
+Q8_req = "SELECT COUNT(*) FROM (SELECT IDENTIFIER, height FROM pokemon where height>(SELECT height FROM pokemon where lower(identifier)='pikachu'));"
+
 Q8_res = "678"
 
 ## Question 9
-Q9_req = "SELECT COUNT(*) FROM (SELECT IDENTIFIER, height FROM pokemon where height=(SELECT height FROM pokemon where lower(identifier)='pikachu'));
-"
+Q9_req = "SELECT COUNT(*) FROM (SELECT IDENTIFIER, height FROM pokemon where height=(SELECT height FROM pokemon where lower(identifier)='pikachu'));"
+
 Q9_res = "9"
 
 ## Question 10
-Q10_req = "SELECT identifier, max(weight) FROM (SELECT IDENTIFIER, height, weight FROM pokemon where height=(SELECT height FROM pokemon where lower(identifier)='pikachu'));
-"
+Q10_req = "SELECT identifier, max(weight) FROM (SELECT IDENTIFIER, height, weight FROM pokemon where height=(SELECT height FROM pokemon where lower(identifier)='pikachu'));"
+
 Q10_res = "aron,600"
 
 ## Question 11
@@ -58,8 +58,8 @@ Q14_req = "SELECT max(nb_meme_taille), height FROM (SELECT count(*) as nb_meme_t
 Q14_res = "(68,6)"
 
 ## Question 15
-Q15_req = "select identifier, max(height) from (select * from pokemon EXCEPT select * from pokemon where height=(select max(height) from pokemon));
-"
+Q15_req = "select identifier, max(height) from (select * from pokemon EXCEPT select * from pokemon where height=(select max(height) from pokemon));"
+
 Q15_res ="rayquaza-mega,108"
 ## Question 16
 Q16_req = "SELECT AVG(height) from pokemon;"
