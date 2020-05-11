@@ -27,7 +27,7 @@ En utilisant DB Browser for SQLite, donner le nombre de tables contenu dans la b
 Dans un premier temps, nous allons utiliser uniquement la table \texttt{pokemon} qui répertorie les pokémons.
 
 \question{}
-Donner le schéma relationnel de cette table. On le donnera sous la forme nom\_table(attribut\_1, : type attribut\_2, ...).
+Donner le schéma relationnel de cette table. On le donnera sous la forme nom\_table(attribut\_1 : type, attribut\_2 : type, ...).
 
 % Q3
 \question{}
@@ -89,7 +89,7 @@ Donner la taille et le nombre.
 
 % Q15
 \question{}
-Quels sont le nom et la taille du second pokemon le plus grand ? 
+Quels est le nom et la taille du second pokemon le plus grand ? 
 
 % Q16
 \question{}
@@ -97,7 +97,7 @@ Quelle est la taille moyenne des pokemons ? (deux décimales après la virgule).
 
 %Les paramètres réglés par défaut (angle et vitesse) dans notre application de capture permettent d'atteindre un pokemon de hauteur 8. 
 
-Notre niveau d'expérience permet d'attraper des pokemons de hauteur inférieure ou égale à 8 à 0.5 près (inclus).
+Notre niveau d'expérience permet d'attraper des pokemons de hauteur égale à 8 à 0.5 près (inclus).
 Nous souhaiterions donc savoir combien de pokemons pourront être attrapés sans changer ces réglages.
 
 %\begin{qexo}
@@ -115,12 +115,12 @@ La table \texttt{pokemon\_species} contient les colonnes :
 \begin{itemize}[itemsep=0mm]
 	\item \texttt{id} (clé primaire) : identifiant du pokemon ;
 	\item \texttt{identifier} : nom du pokemon;
-	\item \texttt{generation\_id} : identifiant du génération ;
+	\item \texttt{generation\_id} : identifiant de génération qui correspond aussi au numéro de la génération ;
 %	\item \texttt{evolves\_from\_species\_id} : origine d'évolution (\emph{non utilisé dans notre étude});
 %	\item \texttt{evolution\_chain\_id} : chaine d'évolution (\emph{non utilisé dans notre étude});
 %	\item \texttt{color\_id} : identifiant de couleur (\emph{non utilisé dans notre étude});
 %	\item \texttt{shape\_id} : identifiant de forme (\emph{non utilisé dans notre étude});
-%	\item \texttt{habitat\_id} : identifiant d'habitat;
+	\item \texttt{habitat\_id} : identifiant d'habitat;
 %	\item \texttt{gender\_rate} : taux de genre (\emph{non utilisé dans notre étude});
 %	\item \texttt{capture\_rate} : taux de capture (\emph{non utilisé dans notre étude});
 %	\item \texttt{base\_happiness} : (\emph{non utilisé dans notre étude});

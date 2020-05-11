@@ -54,7 +54,7 @@ Q14_res = ""
 
 ## Question 15
 Q15_req = ""
-
+Q15_res ="nom,taille"
 ## Question 16
 Q16_req = ""
 Q16_res = ""
