@@ -4,7 +4,8 @@ import sqlite3
 
 from SQL_005_corr import *
 #from SQL_005_eleve import *
-from SQL_005_eleve_durif import *
+#from SQL_005_eleve_durif import *
+from tp_14_eleve import *
 
 
 def generate_test(nb):
