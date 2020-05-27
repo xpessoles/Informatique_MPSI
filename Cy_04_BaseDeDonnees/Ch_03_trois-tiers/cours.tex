@@ -227,9 +227,9 @@ Ces besoins conduisent à une structuration en trois couches:
 \subsection{En pratique}
 On trouvera:
 \begin{enumerate}
-\item Un (logiciel) client graphique (interface graphique);
-\item Un serveur applicatif;
-\item Un serveur de base de données.
+\item un (logiciel) client graphique (interface graphique);
+\item un serveur applicatif;
+\item un serveur de base de données.
 \end{enumerate}
 
 Le serveur applicatif répond aux requêtes du client en consultant le
@@ -239,9 +239,9 @@ serveur de base de données.
 Le client et les serveurs peuvent être ou non sur la même machine. En
 général:
 \begin{enumerate}
-\item Le client est sur un ordinateur de bureau;
-\item Les deux serveurs sont sur une même machine puissante;
-\item On met les serveurs sur des machines différentes si le travail à
+\item le client est sur un ordinateur de bureau;
+\item les deux serveurs sont sur une même machine puissante;
+\item on met les serveurs sur des machines différentes si le travail à
   fournir est trop important pour une seule machine.
 \end{enumerate}
 
@@ -250,12 +250,11 @@ général:
 
 Programmer une interface graphique est très long et coûteux:
 \begin{itemize}
-\item Parce que c'est difficile à tester automatiquement;
-\item Parce qu'il y a une grande variété de machines
-  clientes;
-\item Parce que programmer une interface graphique sur l'OS le plus
-  répandu (MS-Windows) est un cauchemar (sans comparaison
-  avec son concurrent principal);
+\item parce que c'est difficile à tester automatiquement;
+\item parce qu'il y a une grande variété de machines  clientes.
+%\item parce que programmer une interface graphique sur l'OS le plus
+%  répandu (MS-Windows) est un cauchemar (sans comparaison
+%  avec son concurrent principal).
 \end{itemize}
 Et de plus, c'est compliqué à \emph{déployer} (il faut l'installer sur chaque
 machine).
@@ -286,13 +285,11 @@ Nom donné aux applications dont l'interface est le navigateur web.
 
 Évolution à mentionner:
 \begin{itemize}
-\item Le navigateur web ne connaît rien à l'application;
-\item Donc il faut lui dire quelles données présenter et comment:
-  ça s'ajouter au travail du serveur applicatif.
+\item le navigateur web ne connaît rien à l'application;
+\item donc il faut lui dire quelles données présenter et comment :  cela s'ajoute au travail du serveur applicatif.
 \end{itemize}
 
-Défaut des applications web: souvent moins réactives que des vraies
-applications. Mais ça s'améliore nettement.
+Défaut des applications web: souvent moins réactives que des vraies applications. Mais ça s'améliore nettement.
 
 %\clearslide{}
 Technologies les plus souvent utilisées: LAMP
@@ -367,6 +364,7 @@ On peut ensuite récupérer la réponse, ligne par ligne:
 retournées).
 
 %\clearslide{}
+\begin{multicols}{2}
 Ou en une seule fois:
 {\small
 \begin{pyverbatim}
@@ -406,22 +404,14 @@ On peut aussi itérer sur le curseur:
 \end{pyverbatim}
 }
 %\clearslide{}
+\end{multicols}
 
 \subsubsection{Transactions}
-Si on a effectué des modifications, on peut les valider avec
-\begin{pyverbatim}
-conn.commit()
-\end{pyverbatim}
-ou les annuler avec
-\begin{pyverbatim}
-conn.rollback()  
-\end{pyverbatim}
-
+Si on a effectué des modifications, on peut les valider avec \pyv{conn.commit()}
+ou les annuler avec \pyv{conn.rollback()}. 
 Quand on a terminé, on peut fermer la connexion. Penser à valider les
-changements auparavant s'il y en a!
-\begin{lstlisting}
-conn.close()
-\end{lstlisting}
+changements auparavant s'il y en a : \pyv{conn.close()}.
+
 
 \subsubsection{Requêtes paramétrées}
 
@@ -444,7 +434,7 @@ def personne(c, id):
 
 %\clearslide{}
 Pourquoi pas {\small 
-\lstinline{"""SELECT * FROM PERSONNE WHERE id = """ + str(id)}
+\texttt{"""SELECT * FROM PERSONNE WHERE id = """ + str(id)}
 }?
 
 Réponse : et si l'on avait mis 
