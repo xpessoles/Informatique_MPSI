@@ -34,7 +34,7 @@ On veut formaliser la notion de tables contenant des colonnes nommées.
   Pour tout attribut $a\in\att$, on appelle \emph{domaine de }$a$ un ensemble de
   \emph{constantes} noté \dom($a$) (analogue au \emph{type} de $a$).
 
-  Le domaine, noté \dom{}, est union de toutes les constantes de tous les attributs : 
+  Le domaine, noté \dom{}, est l'union de toutes les constantes de tous les attributs : 
   \begin{equation*}
     \dom = \bigcup_{a \in \att} \dom(a).
   \end{equation*}
@@ -155,7 +155,7 @@ Nous détaillerons neuf opérations :
 \item sélection ;
 \item renommage ;
 \item produit cartésien ;
-\item division cartésienne ; 
+%\item division cartésienne ; 
 \item jointure (naturelle) ;
 \item union ;
 \item intersection ;
@@ -336,42 +336,42 @@ FROM PERSONNE, FILM;
 
 
 %\clearslide{}
-\subsection{Division cartésienne}
-
-Quels sont les noms des acteurs ayant joué dans \textbf{tous} les films réalisés par Clint Eastwood ? 
-
-Considérons les notations suivantes
-\begin{itemize}
-\item  $J[\ttnom, \tttitre]$ est l'ensemble des $(n,t) \in (\dom(\ttnom),\dom(\tttitre))$ pour chaque 
-  \begin{itemize}
-    \item[\textbullet] $n$ nom d'une personne ;
-    \item[\textbullet] $t$ titre de film ;
-    \item[\textbullet] tels que $n$ a joué dans $t$ et Clint Eastwood a réalisé $t$.
-  \end{itemize}
-% \item  $P[\ttnom]$ est l'ensemble des $n \in \dom(\ttnom)$ noms de personnes (\emph{i.e.} $P=\pi_{\ttnom}(\PERSONNE)$).
-\item $E[\tttitre]$ est l'ensemble des $t \in \dom(\tttitre)$ tels que $t$ a été réalisé par Clint Eastwood.
-\item $K[\ttnom]$ l'ensemble des  $n \in \dom(\ttnom)$ tels que $n$ a
-  joué dans \textbf{tous} les films de Clint Eastwood.
-\end{itemize}
-
-$K$ est la plus grande relation sur $\left\{\ttnom\right\}$ vérifiant
-$K\times E \subset J$.
-
-Cette relation est appelée \emph{division cartésienne} de $J$ par $E$.
-
-%\clearslide{}
-\begin{defi}[Division cartésienne]
-  Soit $R$ et $S$ deux relations, respectivement sur $U$ et $V$ avec
-  $U\subset V$. Alors la \emph{division cartésienne} de $S$ par $R$
-  est la relation sur $V\setminus U$ notée $S\div R$ et définie par:
-  \begin{align*}
-    S\div R
-    &=  \left\{t  \in S[V\setminus U] ~|~ \forall u \in R, \quad t\oplus u \in S\right\}\\
-    &= \left\{t ~|~ \forall u \in R,~ \exists v \in S, \quad v[U] = u \text{ et }
-      v[V\setminus U]=t\right\}.
-  \end{align*}
-\end{defi}
-Comme nous le verrons plus tard, cette opération n'est pas traduite directement en SQL.
+%\subsection{Division cartésienne}
+%
+%Quels sont les noms des acteurs ayant joué dans \textbf{tous} les films réalisés par Clint Eastwood ? 
+%
+%Considérons les notations suivantes
+%\begin{itemize}
+%\item  $J[\ttnom, \tttitre]$ est l'ensemble des $(n,t) \in (\dom(\ttnom),\dom(\tttitre))$ pour chaque 
+%  \begin{itemize}
+%    \item[\textbullet] $n$ nom d'une personne ;
+%    \item[\textbullet] $t$ titre de film ;
+%    \item[\textbullet] tels que $n$ a joué dans $t$ et Clint Eastwood a réalisé $t$.
+%  \end{itemize}
+%% \item  $P[\ttnom]$ est l'ensemble des $n \in \dom(\ttnom)$ noms de personnes (\emph{i.e.} $P=\pi_{\ttnom}(\PERSONNE)$).
+%\item $E[\tttitre]$ est l'ensemble des $t \in \dom(\tttitre)$ tels que $t$ a été réalisé par Clint Eastwood.
+%\item $K[\ttnom]$ l'ensemble des  $n \in \dom(\ttnom)$ tels que $n$ a
+%  joué dans \textbf{tous} les films de Clint Eastwood.
+%\end{itemize}
+%
+%$K$ est la plus grande relation sur $\left\{\ttnom\right\}$ vérifiant
+%$K\times E \subset J$.
+%
+%Cette relation est appelée \emph{division cartésienne} de $J$ par $E$.
+%
+%%\clearslide{}
+%\begin{defi}[Division cartésienne]
+%  Soit $R$ et $S$ deux relations, respectivement sur $U$ et $V$ avec
+%  $U\subset V$. Alors la \emph{division cartésienne} de $S$ par $R$
+%  est la relation sur $V\setminus U$ notée $S\div R$ et définie par:
+%  \begin{align*}
+%    S\div R
+%    &=  \left\{t  \in S[V\setminus U] ~|~ \forall u \in R, \quad t\oplus u \in S\right\}\\
+%    &= \left\{t ~|~ \forall u \in R,~ \exists v \in S, \quad v[U] = u \text{ et }
+%      v[V\setminus U]=t\right\}.
+%  \end{align*}
+%\end{defi}
+%Comme nous le verrons plus tard, cette opération n'est pas traduite directement en SQL.
 %\clearslide{}
 \subsection{Jointure simple}
 
@@ -566,119 +566,119 @@ SELECT idrealisateur AS id FROM FILM;
 \end{verbatim}
 \end{exemple}
 
-\section{Division cartésienne en SQL}
-
-On veut l'ensemble des  noms des personnes ayant
-joué dans \textbf{tous} les films de Clint Eastwood.
-
-Malheureusement, il n'y a pas d'opérateur de division dans SQL!
-
-On peut calculer d'abord l'ensemble des noms $n$ de personnes n'ayant pas joué dans \textbf{tous} les
-films de Clint Eastwood (réalisateur \no 3), c'est-à-dire pour $n$ tel
-qu'il existe
-au moins un film de Clint Eastwood dans lequel $n$ n'a pas joué, puis
-calculer le complémentaire par différence.
-
-%\clearslide{}
-C'est (horriblement) compliqué :
-\begin{Verbatim}
-SELECT nom FROM PERSONNE
-EXCEPT
-SELECT DISTINCT nom FROM (
-    SELECT nom, titre FROM
-        (SELECT nom FROM PERSONNE),
-        (SELECT titre FROM FILM WHERE idrealisateur=3)
-    EXCEPT
-    SELECT nom, titre FROM PERSONNE, FILM, JOUE
-        WHERE idfilm=FILM.id AND idacteur = PERSONNE.id
-        AND idrealisateur=3
-);
-\end{Verbatim}
-
-%\clearslide{}
-et encore, notre requête:
-\begin{enumerate}
-\item utilise le \ttid{} de Clint Eastwood;
-\item est boguée en cas d'homonymes (on aurait dû faire des recherches
-  sur les \ttid{} et non les \ttnom{}).
-\end{enumerate}
-
-%\clearslide{}
-Deux façons de faire plus simple:
-\begin{enumerate}
-\item Faire autrement;
-\item Décomposer la requête grâce à des vues.
-\end{enumerate}
-
-%\clearslide{}
-Faire autrement:
+%\section{Division cartésienne en SQL}
+%
+%On veut l'ensemble des  noms des personnes ayant
+%joué dans \textbf{tous} les films de Clint Eastwood.
+%
+%Malheureusement, il n'y a pas d'opérateur de division dans SQL!
+%
+%On peut calculer d'abord l'ensemble des noms $n$ de personnes n'ayant pas joué dans \textbf{tous} les
+%films de Clint Eastwood (réalisateur \no 3), c'est-à-dire pour $n$ tel
+%qu'il existe
+%au moins un film de Clint Eastwood dans lequel $n$ n'a pas joué, puis
+%calculer le complémentaire par différence.
+%
+%%\clearslide{}
+%C'est (horriblement) compliqué :
 %\begin{Verbatim}
-SELECT nom FROM PERSONNE, FILM, JOUE
-WHERE idfilm=FILM.id 
-      AND 
-      idacteur = PERSONNE.id
-      AND 
-      idrealisateur = 3
-GROUP BY PERSONNE.id
-HAVING COUNT(*) =
-  (SELECT COUNT(*) FROM FILM WHERE idrealisateur=3)
+%SELECT nom FROM PERSONNE
+%EXCEPT
+%SELECT DISTINCT nom FROM (
+%    SELECT nom, titre FROM
+%        (SELECT nom FROM PERSONNE),
+%        (SELECT titre FROM FILM WHERE idrealisateur=3)
+%    EXCEPT
+%    SELECT nom, titre FROM PERSONNE, FILM, JOUE
+%        WHERE idfilm=FILM.id AND idacteur = PERSONNE.id
+%        AND idrealisateur=3
+%);
 %\end{Verbatim}
-\begin{itemize}
-\item Résout le bogue précédent;
-\item En introduit un autre si le diviseur est vide (i.e. si le
-  réalisateur $3$ n'a réalisé aucun film).
-\end{itemize}
-
-%\clearslide{}
-Décomposer la requête grâce à des vues.
-%\begin{Verbatim}
--- table des id des films de Clint Eastwood
-CREATE VIEW FILMS\_EASTWOOD AS
-SELECT FILM.id as idfilm
-FROM FILM, PERSONNE
-WHERE idrealisateur = PERSONNE.id
-      AND 
-      nom = 'Eastwood' 
-      AND 
-      prenom = 'Clint';
-%\end{Verbatim}
-(crée une table virtuelle qui contiendra le résultat de cette requête;
-si le contenu des tables \FILM{} et \PERSONNE{} est modifié, la vue
-est modifiée)
-
-%\clearslide{}
-%\begin{Verbatim}
--- table des couples acteurs/films
--- pour les films de Clint Eastwood 
-CREATE VIEW ACTEURS\_EASTWOOD AS
-SELECT id, nom, JOUE.idfilm
-FROM FILMS\_EASTWOOD, JOUE, PERSONNE
-WHERE FILMS\_EASTWOOD.idfilm = JOUE.idfilm
-      AND 
-      idacteur=id;
-%\end{Verbatim}
-
-%\clearslide{}
-%\begin{Verbatim}
--- produit cartésien PERSONNE * FILMS\_EASTWOOD
-CREATE VIEW PROD\_PERSONNE\_FILMS\_EASTWOOD AS
-SELECT id, nom, idfilm
-FROM PERSONNE, FILMS\_EASTWOOD;
-%\end{Verbatim}
-
-%\clearslide{}
-Et finalement, la requête s'écrit
-%\begin{Verbatim}
-SELECT id, nom FROM personne
-EXCEPT
-SELECT id, nom FROM (
-    SELECT * FROM PROD\_PERSONNE\_FILMS\_EASTWOOD
-    EXCEPT
-    SELECT * FROM ACTEURS\_EASTWOOD
-);
-%\end{Verbatim}
-
-(Ouf!)
+%
+%%\clearslide{}
+%et encore, notre requête:
+%\begin{enumerate}
+%\item utilise le \ttid{} de Clint Eastwood;
+%\item est boguée en cas d'homonymes (on aurait dû faire des recherches
+%  sur les \ttid{} et non les \ttnom{}).
+%\end{enumerate}
+%
+%%\clearslide{}
+%Deux façons de faire plus simple:
+%\begin{enumerate}
+%\item Faire autrement;
+%\item Décomposer la requête grâce à des vues.
+%\end{enumerate}
+%
+%%\clearslide{}
+%Faire autrement:
+%%\begin{Verbatim}
+%SELECT nom FROM PERSONNE, FILM, JOUE
+%WHERE idfilm=FILM.id 
+%      AND 
+%      idacteur = PERSONNE.id
+%      AND 
+%      idrealisateur = 3
+%GROUP BY PERSONNE.id
+%HAVING COUNT(*) =
+%  (SELECT COUNT(*) FROM FILM WHERE idrealisateur=3)
+%%\end{Verbatim}
+%\begin{itemize}
+%\item Résout le bogue précédent;
+%\item En introduit un autre si le diviseur est vide (i.e. si le
+%  réalisateur $3$ n'a réalisé aucun film).
+%\end{itemize}
+%
+%%\clearslide{}
+%Décomposer la requête grâce à des vues.
+%%\begin{Verbatim}
+%-- table des id des films de Clint Eastwood
+%CREATE VIEW FILMS\_EASTWOOD AS
+%SELECT FILM.id as idfilm
+%FROM FILM, PERSONNE
+%WHERE idrealisateur = PERSONNE.id
+%      AND 
+%      nom = 'Eastwood' 
+%      AND 
+%      prenom = 'Clint';
+%%\end{Verbatim}
+%(crée une table virtuelle qui contiendra le résultat de cette requête;
+%si le contenu des tables \FILM{} et \PERSONNE{} est modifié, la vue
+%est modifiée)
+%
+%%\clearslide{}
+%%\begin{Verbatim}
+%-- table des couples acteurs/films
+%-- pour les films de Clint Eastwood 
+%CREATE VIEW ACTEURS\_EASTWOOD AS
+%SELECT id, nom, JOUE.idfilm
+%FROM FILMS\_EASTWOOD, JOUE, PERSONNE
+%WHERE FILMS\_EASTWOOD.idfilm = JOUE.idfilm
+%      AND 
+%      idacteur=id;
+%%\end{Verbatim}
+%
+%%\clearslide{}
+%%\begin{Verbatim}
+%-- produit cartésien PERSONNE * FILMS\_EASTWOOD
+%CREATE VIEW PROD\_PERSONNE\_FILMS\_EASTWOOD AS
+%SELECT id, nom, idfilm
+%FROM PERSONNE, FILMS\_EASTWOOD;
+%%\end{Verbatim}
+%
+%%\clearslide{}
+%Et finalement, la requête s'écrit
+%%\begin{Verbatim}
+%SELECT id, nom FROM personne
+%EXCEPT
+%SELECT id, nom FROM (
+%    SELECT * FROM PROD\_PERSONNE\_FILMS\_EASTWOOD
+%    EXCEPT
+%    SELECT * FROM ACTEURS\_EASTWOOD
+%);
+%%\end{Verbatim}
+%
+%(Ouf!)
 %\clearslide{}
 \section{Mis sous le tapis}
 En fait, SQL a quelques autres différences avec l'algèbre
