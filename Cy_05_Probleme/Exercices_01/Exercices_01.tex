@@ -1,0 +1,145 @@
+%%%% Paramétrage du cours %%%%
+\def\xxactivite{\ifprof TP -- Corrigé  \else  TP \fi}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+%\fichefalse
+%\proftrue
+%\tdfalse
+%\courstrue
+
+\input{info_entete}
+
+
+\def\xxfigures{
+%\includegraphics[width=.6\linewidth]{fig_00}
+}%figues de la page de garde
+
+
+\iflivret
+\input{../../style/pagegarde_info}
+\else
+\input{../../style/pagegarde_info}
+\fi
+\setlength{\columnseprule}{.1pt}
+
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\ifprof
+\vspace{4.5cm}
+\else
+\vspace{4.5cm}
+\fi
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{exo}{0}
+\vspace{1.5cm}
+
+\begin{multicols}{2}
+\subsection*{Exercice 1 -- Arithmétique}
+\begin{enumerate}
+\item Soit l’entier $n = 1234$. Quel est le quotient, noté $q$, dans la division euclidienne de $n$ par $10$ ? Quel est
+le reste ? Que se passe-t-il si on recommence la division par 10 à partir de $q$ ?
+\item Écrire la suite d’instructions calculant la somme des cubes des chiffres de l’entier 1234.
+\item Écrire une fonction \texttt{somcube}, d’argument \texttt{n}, renvoyant la somme des cubes des chiffres du nombre
+entier \texttt{n}.
+\item Trouver tous les nombres entiers inférieurs à 1000 égaux à la somme des cubes de leurs chiffres.
+\item En modifiant les instructions de la fonction \texttt{somcube}, écrire une fonction \texttt{somcube2} qui convertit
+l’entier \texttt{n} en une chaîne de caractères permettant ainsi la récupération de ses chiffres sous forme de
+caractères. Cette nouvelle fonction renvoie toujours la somme des cubes des chiffres de l’entier \texttt{n}.
+\end{enumerate}
+
+
+%\addcontentsline{toc}{subsection}{Exercice 2 -- Intégration}
+\subsection*{Exercice 2 -- Intégration}
+On cherche à calculer une valeur approchée de l’intégrale d’une fonction donnée par des points dont les coordonnées sont situées dans un fichier.
+\begin{enumerate}
+\item Le fichier \texttt{ex\_01.txt}, contient des lignes écrites selon le modèle suivant :
+
+\begin{center}
+
+\texttt{0.0;1.00988282142}
+
+\texttt{0.1;1.07221264497}
+
+\end{center}
+
+Chaque ligne contient deux valeurs flottantes séparées par un point-virgule, représentant respective-
+ment l’abscisse et l’ordonnée d’un point. Les points sont ordonnés par abscisses croissantes.
+Ouvrir le fichier en lecture, le lire et construire la liste \texttt{LX} des abscisses et la liste \texttt{LY} des ordonnées contenues dans ce fichier.
+\item Représenter les points sur une figure.
+\item Les points précédents sont situés sur la courbe représentative d’une fonction \texttt{f}. On souhaite déterminer une valeur approchée de l’intégrale \texttt{I} de cette fonction sur le segment où elle est définie. Écrire une fonction \texttt{trapeze}, d’arguments deux listes \texttt{y} et \texttt{x} de même longueur \texttt{n}, renvoyant :
+
+$$
+\sum\limits_{i=1}^{n-1} \left(x_i - x_{i-1} \right) \dfrac{y_i +y_{i-1}}{2}.
+$$
+
+\texttt{trapeze(LY,LX)} renvoie donc une valeur approchée de l’intégrale $I$ par la méthode des trapèzes.
+\item En utilisant la méthode d’intégration numérique \texttt{trapz} de la sous-bibliothèque \texttt{scipy.integrate} du langage Python ou la méthode \texttt{inttrap} du logiciel Scilab, retrouver la valeur approchée de l'intégrale $I$.
+\end{enumerate}
+
+%\addcontentsline{toc}{subsection}{Exercice 3 -- Graphe}
+\subsection*{Exercice 3}
+On considère le graphe \texttt{G} suivant, où le nombre situé sur l'arête joignant deux sommets est leur distance, supposée entière :
+\begin{center}
+\includegraphics[width=.75\linewidth]{images/exo_3}
+\end{center}
+
+\begin{enumerate}
+\item Construire la matrice $\left( M_{ij}\right)_{0\leq i,j\leq 4}$, matrice de distances du graphe \texttt{G}, définie par :
+
+<< pour tous les indices $i$, $j$, $M_{ij}$ représente la distance entre les sommets $i$ et $j$,
+ou encore la longueur de l'arête reliant les sommets $i$ et $j$ >>.
+
+On convient que, lorsque les sommets ne sont pas reliés, cette distance vaut -1. La distance du
+sommet $i$ à lui-même est, bien sûr, égale à 0.
+\item Écrire une suite d'instructions permettant de dresser à partir de la matrice \texttt{M} la liste des voisins du sommet 4.
+\item Écrire une fonction \texttt{voisins}, d'argument un sommet $i$, renvoyant la liste des voisins du sommet $i$.
+\item Écrire une fonction \texttt{degre}, d'argument un sommet $i$, renvoyant le nombre des voisins du sommet $i$, c'est-à-dire le nombre d’arêtes issues de $i$.
+\item Écrire une fonction \texttt{longueur}, d’argument une liste \texttt{L} de sommets de \texttt{G}, renvoyant la longueur du trajet d'écrit par cette liste \texttt{L}, c’est-à-dire la somme des longueurs des arêtes empruntées. Si le trajet n'est pas possible, la fonction renverra $-1$.
+\end{enumerate}
+
+
+%\addcontentsline{toc}{subsection}{Exercice 4 -- Gestion de liste}
+\subsection*{Exercice 4 -- Gestion de liste}
+Soit un entier naturel $n$ non nul et une liste \texttt{t} de longueur $n$ dont les termes valent 0 ou 1. Le but de cet exercice est de trouver le nombre maximal de 0 contigus dans \texttt{t} (c’est-à-dire figurant dans des cases consécutives). Par exemple, le nombre maximal de zéros contigus de la liste \texttt{t1} suivante vaut 4 :
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline 
+\texttt{i} & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+\hline
+\texttt{t1[i]} & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 1 \\
+\hline
+\hline
+\texttt{i} & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\
+\cline{0-7} 
+\texttt{t1[i]} & 0 & 1 & 1 & 0 & 0 & 0 & 0 \\
+\cline{0-7}  
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+\item Écrire une fonction \texttt{nombreZeros(t,i)}, prenant en paramètres une liste \texttt{t}, de longueur n, et un indice i compris entre 0 et $n-1$, et renvoyant :
+$$
+\left\{
+\begin{array}{l}
+0, \text{ si } t[i]=1 \\
+\text{le  nombre de zéros consécutifs dans t} \\ \text{à partir de t[i] inclus, si t[i] = 0}.
+\end{array}
+\right.
+$$
+Par exemple, les appels \texttt{nombreZeros(t1,4)}, \texttt{nombreZeros(t1,1)} et \texttt{nombreZeros(t1,8)} renvoient respectivement les valeurs 3, 0 et 1.
+\item Comment obtenir le nombre maximal de zéros contigus d’une liste \texttt{t} connaissant la liste des \texttt{nombreZeros(t,i)} pour $0\leq i \leq n-1$ ?
+En déduire une fonction \texttt{nombreZerosMax(t)}, de paramètre \texttt{t}, renvoyant le nombre maximal de 0 contigus d’une liste \texttt{t} non vide. On utilisera la fonction \texttt{nombreZeros}.
+\item Quelle est la complexité de la fonction \texttt{nombreZerosMax(t)} construite à la question précédente ?
+\item Trouver un moyen simple, toujours en utilisant la fonction \texttt{nombreZeros}, d’obtenir un algorithme plus performant.
+\end{enumerate}
+
+\end{multicols}
+
+
+

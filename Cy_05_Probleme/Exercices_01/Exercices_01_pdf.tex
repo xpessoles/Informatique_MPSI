@@ -1,0 +1,33 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Modélisation dynamique},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{../../style/new_style}
+\input{../../style/macros_SII}
+\input{info_entete}
+
+\livretfalse
+
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usetikzlibrary{chains}
+\usetikzlibrary{calc,patterns,decorations.pathmorphing,decorations.markings,intersections,
+positioning}
+
+
+
+\begin{document}
+% Sujet
+\TPtrue \fichefalse \proffalse \tdfalse \coursfalse \collefalse
+\corrigefalse
+\graphicspath{{../../../style/png/}{images/}}
+\input{Exercices_01.tex}
+
+%% Corrigé
+%\newpage
+%\fichetrue \proftrue \tdtrue \coursfalse \collefalse
+%\graphicspath{{../../style/png/}{images/}}
+%\newpage \input{\td.tex}
+
+\end{document}
