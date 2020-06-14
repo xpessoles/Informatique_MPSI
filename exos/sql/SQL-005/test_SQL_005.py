@@ -11,11 +11,18 @@ from tp_14_eleve import *
 def generate_test(nb):
     for n in range(1,nb+1):
         print("def test_Q"+str(n)+"_res ():")
-        print("    assert sol_Q"+str(n)+"_res ==  Q"+str(n)+"_res")
+        print("    assert sol_Q"+str(n)+"_res.upper() ==  Q"+str(n)+"_res.upper()")
         print()
         print("def test_Q"+str(n)+"_req ():")
         print("    assert requete(sol_Q"+str(n)+"_req) == requete(Q"+str(n)+"_req)")
-        print() 
+        print()
+
+
+for k in range(1,21):
+    generate_test(k)
+
+
+
 def generate_go(nb):
     for n in range(1,nb+1):
         print("test_Q"+str(n)+"_res ()")
@@ -29,99 +36,123 @@ def requete (req):
     rep = c.fetchall()
     conn.close()
     return rep
-    
+
 def test_Q1_res ():
-    assert (sol_Q1_res ==  Q1_res) or (sol_Q1_res in Q1_res)
+    assert sol_Q1_res.upper() ==  Q1_res.upper()
+
+def test_Q1_req ():
+    assert requete(sol_Q1_req) == requete(Q1_req)
 
 def test_Q2_res ():
-    assert sol_Q2_res ==  Q2_res
+    assert sol_Q2_res.upper() ==  Q2_res.upper()
+
+def test_Q2_req ():
+    assert requete(sol_Q2_req) == requete(Q2_req)
 
 def test_Q3_res ():
-    assert sol_Q3_res ==  Q3_res
+    assert sol_Q3_res.upper() ==  Q3_res.upper()
+
+def test_Q3_req ():
+    assert requete(sol_Q3_req) == requete(Q3_req)
 
 def test_Q4_res ():
-    assert sol_Q4_res ==  Q4_res
+    assert sol_Q4_res.upper() ==  Q4_res.upper()
 
 def test_Q4_req ():
     assert requete(sol_Q4_req) == requete(Q4_req)
 
 def test_Q5_res ():
-    assert sol_Q5_res ==  Q5_res
+    assert sol_Q5_res.upper() ==  Q5_res.upper()
 
 def test_Q5_req ():
     assert requete(sol_Q5_req) == requete(Q5_req)
 
+def test_Q6_res ():
+    assert sol_Q6_res.upper() ==  Q6_res.upper()
+
 def test_Q6_req ():
     assert requete(sol_Q6_req) == requete(Q6_req)
+
+def test_Q7_res ():
+    assert sol_Q7_res.upper() ==  Q7_res.upper()
 
 def test_Q7_req ():
     assert requete(sol_Q7_req) == requete(Q7_req)
 
 def test_Q8_res ():
-    assert sol_Q8_res ==  Q8_res
+    assert sol_Q8_res.upper() ==  Q8_res.upper()
 
 def test_Q8_req ():
     assert requete(sol_Q8_req) == requete(Q8_req)
 
 def test_Q9_res ():
-    assert sol_Q9_res ==  Q9_res
+    assert sol_Q9_res.upper() ==  Q9_res.upper()
 
 def test_Q9_req ():
     assert requete(sol_Q9_req) == requete(Q9_req)
 
 def test_Q10_res ():
-    assert sol_Q10_res ==  Q10_res
+    assert sol_Q10_res.upper() ==  Q10_res.upper()
 
 def test_Q10_req ():
     assert requete(sol_Q10_req) == requete(Q10_req)
 
 def test_Q11_res ():
-    assert sol_Q11_res ==  Q11_res
+    assert sol_Q11_res.upper() ==  Q11_res.upper()
 
 def test_Q11_req ():
     assert requete(sol_Q11_req) == requete(Q11_req)
 
 def test_Q12_res ():
-    assert (sol_Q12_res ==  Q12_res) or (("joltik" in Q12_res) and ("flabebe" in Q12_res))
+    assert sol_Q12_res.upper() ==  Q12_res.upper()
 
 def test_Q12_req ():
     assert requete(sol_Q12_req) == requete(Q12_req)
+
+def test_Q13_res ():
+    assert sol_Q13_res.upper() ==  Q13_res.upper()
 
 def test_Q13_req ():
     assert requete(sol_Q13_req) == requete(Q13_req)
 
 def test_Q14_res ():
-    assert (sol_Q14_res ==  Q14_res) or (sol_Q14_res in Q14_res)
+    assert sol_Q14_res.upper() ==  Q14_res.upper()
 
 def test_Q14_req ():
     assert requete(sol_Q14_req) == requete(Q14_req)
+
+def test_Q15_res ():
+    assert sol_Q15_res.upper() ==  Q15_res.upper()
 
 def test_Q15_req ():
     assert requete(sol_Q15_req) == requete(Q15_req)
 
 def test_Q16_res ():
-    assert (sol_Q16_res ==  Q16_res) or (Q16_res in sol_Q16_res)
+    assert sol_Q16_res.upper() ==  Q16_res.upper()
 
 def test_Q16_req ():
-    assert (requete(sol_Q16_req) == requete(Q16_req))
+    assert requete(sol_Q16_req) == requete(Q16_req)
 
 def test_Q17_res ():
-    assert sol_Q17_res ==  Q17_res
+    assert sol_Q17_res.upper() ==  Q17_res.upper()
 
 def test_Q17_req ():
     assert requete(sol_Q17_req) == requete(Q17_req)
+
+def test_Q18_res ():
+    assert sol_Q18_res.upper() ==  Q18_res.upper()
 
 def test_Q18_req ():
     assert requete(sol_Q18_req) == requete(Q18_req)
 
 def test_Q19_res ():
-    assert sol_Q19_res ==  Q19_res
+    assert sol_Q19_res.upper() ==  Q19_res.upper()
 
 def test_Q19_req ():
     assert requete(sol_Q19_req) == requete(Q19_req)
 
 def test_Q20_res ():
-    assert sol_Q20_res ==  Q20_res
+    assert sol_Q20_res.upper() ==  Q20_res.upper()
 
 def test_Q20_req ():
     assert requete(sol_Q20_req) == requete(Q20_req)
