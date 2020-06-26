@@ -3,7 +3,7 @@ import sqlite3
 
 
 from SQL_005_corr import *
-from SQL_005_eleve import *
+from crancee_eliott_tp_14 import *
 
 def generate_test(nb):
     for n in range(1,nb+1):

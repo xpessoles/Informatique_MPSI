@@ -1,0 +1,148 @@
+\subsection*{Exercice 10}
+On appelle un intervalle une liste de 2 éléments $[a,b]$ tel que $a <b$.
+
+\begin{enumerate}
+\item Créer une fonction disjoints de paramètres i1 et i2 2 intervalles qui renvoie True si les deux intervalles sont disjoints ou False sinon.
+\item Créer une fonction fusion qui renvoie un intervalle $[a,b]$ tel que $a$ est le minimum de i1 et i2, et b le max.
+\item On considère une liste d intervalle l=[i1,i2,i3...]. Elle est considérée "juste" si les intervalles vérifient 2 à 2 :
+\begin{itemize}
+\item ils sont disjoints 2 à 2;
+\item ils sont croissant, ie le max du précédent est inférieur strict au minimum du suivant.
+\end{itemize}
+
+Écrire une fonction récursive juste de paramètres L qui renvoie True si cette liste d'intervalle est juste ou False sinon.
+\end{enumerate}
+
+
+\subsection*{Exercice 11}
+
+\begin{enumerate}
+\item Définir une fonction polynomiale \texttt{q(x,y)} classique à deux variables.
+\item Définir une fonction renvoyant un tableau(matrice) de paramètre \texttt{e}.
+\item On a une fonction \texttt{p(x,y)} continue sur un intervalle, modélisation de la fonction par une avancée de triangles. Si la fonction \texttt{p(x,y)} entre dans le triangle ABC par AB alors $p(xa,xb)\cdot p(ya,yb)\leq 0$ et elle rentre dans un autre triangle (on conserve les points qui tracent le segment d'entrée et le point restant est le symétrique du 3e point par rapport au segment d'entrée) et ainsi de suite.
+\end{enumerate}
+
+
+\subsection*{Exercice 12}
+
+\begin{enumerate}
+\item Tester deux lignes de commandes (elles permettaient de transformer un entier en la liste des nombres sous forme de caractères , ou quelque chose comme ça et inversement )  
+\item À partir de ça, créer une fonction \texttt{R(n)} qui renvoie la retournée de \texttt{n}. (La retournée de 13 est 31, celle de 140 est 41 par exemple.)
+\item Créer une fonction qui renvoie la distance entre un nombre et sa retournée.
+\item Créer une fonction de paramètres \texttt{(a,N)} qui renvoie les \texttt{N+1} termes de la suite $u_{n+1}=R(u_n), u_0=a$    (je ne sais plus si c’est la suite des retournées ou la suite des distances entre retournées … mais je penche plus pour le deuxième).
+\item Trouver le plus petit a tel que $u_{20}= 0$.
+\item Trouver la liste des $a$ entre 1000 et 10000 tels que $u_{20}= 0$ (pas sûr non plus).
+\item Vérifier que la suite un est 2-périodique à partir d’un certain rang et qu’elle oscille entre les valeurs …. Et …. (en gros, ces deux valeurs sont retournées l’une de l’autre, donc dès qu’on en atteint une, la suite est limitée à ces deux valeurs ).
+\end{enumerate}
+
+\subsection*{Exercice 13}
+
+On s’intéresse ici au codage d’un mot. On note A l’alphabet, M le message à coder et k la clé du code. Le message est codé si chaque lettre du mot de base est décalée de k places vers la droite dans l’alphabet A.
+Si un caractère du message de base n’est pas dans l’alphabet A, le codage de modifie pas le dit-caractère.
+
+\begin{enumerate}
+\item Créer la chaine de caractère suivante : \texttt{mnsc = ‘abcdefghijklmnopqrstuvwxyz’}.
+\item Vérifier qu’il y a bien 26 caractères.
+\item Créer une fonction \texttt{codee} d’arguments A, M, k renvoyant le message M codé.
+\item Comment obtenir le mot de base connaissant la clé k d’un mot codé ?
+\item On dispose d’un fichier txt contenant un message codé. On ignore la clé de ce message
+Quelle est le caractère le plus fréquent dans ce message ?
+\end{enumerate}
+
+\subsection*{Exercice 14}
+$(u_n)$ definie par $u_0=1$ et et $u_{n+1}= f(u_n)$ où 
+$$
+\begin{array}{rcl}
+f : [1,1] & \rightarrow  & [2,1] \\
+\big[  1,1,1,2,1 \big]  & \rightarrow &  [3,1,1,2,1,1] \\
+\end{array}
+$$
+renvoie le nombre d'apparitions consécutives d'un élément + cet élément.
+\begin{enumerate}
+\item Écrire une fonction lire d'argument une liste \texttt{L} renvoyant \texttt{f(L)}. Afficher \texttt{lire([1,1,2,2,1])}.
+\item Que fait la fonction \texttt{L2str} :
+\begin{python}
+def  L2str(L) :
+    ch='' ''
+    for e in L :
+        ch=ch+str(e)
+    return (ch)
+\end{python}
+\item Afficher les 15 premiers termes de $u_n$. Quels nombres apparaissent ?
+\end{enumerate}
+
+
+\subsection*{Exercice 15}
+
+Il y avait un graphe exemple. Un graphe est défini par une liste de tuples. Un tuple est une arrête: c'est le numéro des deux sommets qu'elle relie.
+
+Par exemple: \texttt{L=[(0,1),(1,2),(4,1),(0,1)]}.
+
+\begin{enumerate}
+\item Le degré d'un sommet est son nombre de voisin. Écrire une fonction \texttt{degre} d'arguments une liste L et un entier k qui renvoie le degré du sommet numéro k du graphe définit par la liste L.
+\item Un sommet est dit non isolé si il n'a pas de voisin. Écrire une fonction \texttt{non\_isole} d'argument L qui renvoie le nombre de sommets non isolé du graphe définit par L.
+\item La liste d'adjacence d'un graphe est une liste de liste. Ainsi l'élément d'indice k est la liste des voisins du sommet numéro k.
+Écrire une fonction \texttt{adjacance} d'arguments L et n le nombre de sommets du graphe et qui renvoie la liste A d'adjacence du graphe.
+
+Pour l'exemple initial, on a A=[[1],[0,2,4],[1,4],[],[1,2]].
+
+\item Écrire une fonction \texttt{deg\_max} d'argument A la liste d'adjacence d'un graphe et qui renvoie le numéro du sommet ayant le plus haut degré. (Je crois qu'il fallait renvoyer le numéro du sommet et pas le degré maximal mais je ne suis pas très sûr).
+\end{enumerate}
+
+\subsection*{Exercice 16}
+
+Soit $u_n$ une suite définie par $u_{n+3}=2u_{n+2}+u_{n+1} - u_n$. Soit $P$ un polynôme défini par $P=X^3-2X^2-X+1$. $u_n=a\lambda^n+b\mu^n+ c\nu ^n$, $|\lambda|>|\mu|>|\nu|$ avec $\lambda$, $\mu$, $\nu$ racines de $P$.
+\begin{enumerate}
+\item Écrire une fonction \texttt{f(N,x,y,z)} affichant les $N$ premiers termes de $u_n$ dans une liste sachant que $(x,y,z)$ sont les trois premiers termes. Test par $N=10$, $x=1$, $y=2$, $z=3$.
+\item À l'aide de $\dfrac{u_{n+1}}{u_n}$, trouver $\lambda$ tel que $P$ soit inférieur à $10^{-10}$.
+\item Soit $Q(x)=X^3P\left(\dfrac{1}{X}\right)$. Trouver $r$ tel que $Q$ soit inférieur à $10^{-10}$.
+\item Trouver $\mu$.
+\end{enumerate}
+
+\subsection*{Exercice 17}
+Écrire les fonctions permettant de transformer la liste $[0,0,1,1,1,0,0,1,1]$ :
+\begin{itemize}
+\item en $[2,5,6,8]$ (places des coupures);
+\item en $[2,0,3,1,1,0,2,1]$.
+\end{itemize}
+
+\subsection*{Exercice 18}
+
+On modélise un pendule pesant. On a une masse au bout d’une corde, on note $\alpha$ son angle avec la verticale.
+On donne l’équation vérifiée par $\alpha$ :
+$$\begin{array}{c}
+\alpha '' = - m \alpha  - f \alpha   (m \text{ et } f \text{ sont donnés}) \\
+\alpha (0) = 0 \, \text{rad} \\
+\alpha'(0) = \omega_0 rad / s (on lance la masse avec une vitesse initiale qui sera préciser après je crois)\\
+\end{array}
+$$
+Question à faire sur le brouillon : 
+on note $u(t) = (\alpha, \alpha')$ donner $\psi(u(t)) = u’(t)$.
+
+\begin{enumerate}
+\item Résoudre le système avec « odeint ».
+
+\item Tracer la courbe de $\alpha$ en fonction du temps (avec $\omega_0 =$1 ; 2 ; 4 ; 8 rad/s ).
+
+\item Pourquoi $\alpha$(infini) = cste qui dépend de $\omega_0$ ?
+\end{enumerate}
+
+\subsection*{Exercice 19}
+$$ A= \begin{pmatrix}
+2 & 4 & 6 & 9 \\
+11 & 13 & 15 & 17 \\
+27 & 29 & 31 & 33 \\
+47 & 49 & 51 & 53 \\
+\end{pmatrix}$$
+
+Soit $P$ un polynôme tel que $P(X)=a_n X^n + a_{n-1}X^{n-1} + ... + a_1 X + a_0$. Soit la suite des $(B_k)$ telle que $\left\{ \begin{array}{c} B_0 = M \\ B_{k+1} = M\left( B_k - \dfrac{Tr(B_k)}{k+1} I\right)\end{array}\right.$. On note $Q(x)=X^n - \sum \limits^n_{k=1}  \dfrac{Tr(B_{k-1})}{k}X^{n-k}$. $L=[a_n,a_{n-1},...;a_1,a_0]$.
+
+\begin{enumerate}
+\item Définir une fonction \texttt{valpol} d’arguments la liste $L$ et $x$ et qui renvoie $P(x)$. 
+\item Écrire la matrice $A$.
+\item Calculer $A(A-Tr(A)I_4)$.
+\item Définir une fonction \texttt{pol} d’argument $M$ et qui renvoie une liste associée à Q(X).
+\item Obtenir pol(A)
+\item Tracer la courbe des Pol(A) pour x variant de -5 à 1.5.
+\end{enumerate}
+

@@ -16,9 +16,9 @@
 
 
 \iflivret
-\input{../../../style/pagegarde_info}
+\input{../../style/pagegarde_info}
 \else
-\input{../../../style/pagegarde_info}
+\input{../../style/pagegarde_info}
 \fi
 \setlength{\columnseprule}{.1pt}
 
@@ -37,8 +37,306 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 
 \setcounter{exo}{0}
-\vspace{3cm}
-\input{tp-cor.tex}
+\vspace{1cm}
+
+\subsection*{Exercice 1 -- Arithmétique -- Corrigé}
+
+\begin{corrige}
+$\quad$
+
+\begin{lstlisting}[language=Python]
+# Question 1
+n = 1234
+q = n//10
+r =  n%q
+
+# r contient le nombre d'unités de n
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}[language=Python] 
+# Question 2
+s=0
+while n!=0:
+    q=n//10
+    r = n%10
+    #print(r)
+    s=s+r**3
+    n=q
+\end{lstlisting}%\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}[language=Python] 
+# Question 3
+def somcube(n):
+    """
+    Entrées :
+     * n, int : nombre
+    Sortie : 
+     * s, int : somme des cubes du chiffre n
+    """
+    s=0
+    while n!=0:
+        q=n//10
+        r = n%10
+        s=s+r**3
+        n=q
+    return s
+\end{lstlisting}%\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}[language=Python] 
+# Question 4
+res = []
+for i in range (10001):
+    if i == somcube(i):
+        res.append(i)
+\end{lstlisting}%\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}[language=Python] 
+# Question 5
+def somcube2(n):
+    """
+    Entrées :
+     * n, int : nombre
+    Sortie : 
+     * s, int : somme des cubes du chiffre n
+    """
+    nombre=str(n)
+    s=0
+    for chiffre in nombre :
+        s = s+int(chiffre)**3
+    return s
+    
+print(somcube2(1234))
+\end{lstlisting}%\end{python}
+\end{corrige}
+
+%\vfill
+
+%%\columnbreak
+
+%\addcontentsline{toc}{subsection}{Exercice 2 -- Intégration -- Corrigé}
 
 
+
+\subsection*{Exercice 2 -- Intégration -- Corrigé}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}[language=Python] 
+# Question 1
+# ==========
+# Le répertoire courant est Exercice_02.
+# Le sous-répertoire data contient le
+# fichier ex_02.txt.
+
+# On ouvre le fichier en lecture)
+fid = open("data\ex_02.txt")
+
+# On charge le fichier dans une liste.
+# Chaque élément de la liste correspond à 
+# chaque ligne sous forme de chaîne de caractère.
+file = fid.readlines()
+# On ferme le fichier
+fid.close()
+
+LX=[]
+LY=[]
+for ligne in file :
+    ligne = ligne.split(';')
+    LX.append(float(ligne[0]))
+    LY.append(float(ligne[1]))
+\end{lstlisting}%\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}[language=Python] 
+# Question 2
+# ==========
+# Ne pas oublier de charger préalablement 
+# import matplotlib.pyplot as plt
+
+plt.plot(LX,LY)
+plt.show()
+\end{lstlisting}%\end{python}
+\end{corrige}
+\begin{center}
+\includegraphics[width=6cm] {images/exo_02}
+\end{center}
+
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}[language=Python] 
+# Question 3
+# ==========
+def trapeze(x,y):
+    res = 0 
+    for i in range(1,len(LX)):
+        res = res+(LX[i]-LX[i-1])*0.5*(LY[i]+LY[i-1])
+    return res
+print(trapeze(LX,LY))
+
+>>> 75.13635
+\end{lstlisting}%\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}[language=Python] 
+# Question 4
+# ==========
+from scipy.integrate import trapz
+# Attention à l'ordre des arguments dans 
+# la fonction trapz : les_y puis les_x
+# Après l'import, help(trapz) permet d'avoir 
+# de l'aide sur la fonction.
+print(trapz(LY,LX))
+
+>>> 75.13635
+\end{lstlisting}%\end{python}
+\end{corrige}
+
+%\addcontentsline{toc}{subsection}{Exercice 3 -- Graphe -- Corrigé}
+\subsection*{Exercice 3 -- Graphe -- Corrigé}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}[language=Python] 
+# Question 1
+# ==========
+# Matrices avec des listes
+M=[[0,9,3,-1,7],
+      [9,0,1,8,-1],
+      [3,1,0,4,2],
+      [-1,8,4,0,-1],
+      [7,-1,2,-1,0]]
+\end{lstlisting}%\end{python}
+\end{corrige}
+%\newpage
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}[language=Python] 
+# Question 2 & 3
+# ==============
+def voisins(M,i):
+    """
+    Entrées : 
+      * M(lst) : graphe
+      * i : noeud considéré
+    Sortie :
+      * v(lst) : liste des voisins
+    """
+    v = []
+    # On cherche les voisins sur une ligne 
+    # (on pourrait le faire sur une colonne)
+    for j in range(len(M[i])):
+        if M[i][j]>0:
+            v.append(j)
+    return v
+    
+# print(voisins(M,0))
+\end{lstlisting}%\end{python}
+\end{corrige}
+
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}[language=Python] 
+# Question 4
+# ==========
+def degre(M,i):
+    """
+    Entrées : 
+      * M(lst) : graphe
+      * i : noeud considéré
+    Sortie :
+      * (int) : nomnbre de voisins
+    """
+    return len(voisins(M,i))
+\end{lstlisting}%\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}[language=Python] 
+# Question 5
+# ==========
+def longueur(M,chemin):
+    l = 0
+    for i in range(len(chemin)-1):
+        if M[chemin[i]][chemin[i+1]]<0:
+            return -1
+        else :
+            l=l+M[chemin[i]][chemin[i+1]]
+    return l
+    
+chemin = [1,2,3,1,4]
+print(longueur(M,chemin))        
+chemin = [0,4,2,1,0]
+print(longueur(M,chemin))
+\end{lstlisting}%\end{python}
+\end{corrige}
+
+\vfill
+
+%\columnbreak
+%\addcontentsline{toc}{subsection}{Exercice 4 -- Corrigé}
+\subsection*{Exercice 4 -- Corrigé}
+\begin{corrige}
+$\quad$
+\begin{lstlisting}[language=Python] 
+# Question 1 
+# ==========
+def nombreZeros(t,i):
+    if t[i]==1:
+        return 0
+    else : 
+        res = 1
+        j=i+1
+        while j<len(t) and t[j]==0:
+            res = res+1
+            j=j+1
+    return res
+# t1=[0,1,1,1,0,0,0,1,0,1,1,0,0,0,0]
+# print(nombreZeros(t1,4))
+# print(nombreZeros(t1,1))
+# print(nombreZeros(t1,8))
+\end{lstlisting}%\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}[language=Python] 
+# Question 2
+# ==========
+def nombreZerosMax(t):
+    max=nombreZeros(t,0)
+    for i in range(1,len(t)):
+        tmp = nombreZeros(t,i)
+        if tmp>max:
+            max = tmp
+    return max
+print(nombreZerosMax(t1))
+\end{lstlisting}%\end{python}
+\end{corrige}
+
+\begin{corrige}
+La complexité est quadratique ($\mathcal{O}^2$)  du fait de la boucle \texttt{for} et de la boucle \texttt{while} imbriquée.
+
+Pour diminuer la complexité, il est possible de parcourir une seule fois la liste. On lit alors les termes un à un. Quand on détecte un zéro, on compte alors le nombre de zéros consécutifs et on poursuit jusqu'à la fin...
+
+\end{corrige}
 
