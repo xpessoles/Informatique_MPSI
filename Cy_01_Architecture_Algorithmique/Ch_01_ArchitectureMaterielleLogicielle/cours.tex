@@ -2,13 +2,14 @@
 
 \begin{defi}[Informatique]
 Le terme informatique désigne littéralement l'automatisation du traitement de l'information par ordinateur. Il s'agit en fait des sciences et techniques de l'information. 
+
 \textbf{larousse.fr :} science du traitement automatique et rationnel de l'information considérée comme le support des connaissances et des communications.
 
 \textbf{fr.wikipedia.org :} l'informatique est un domaine d'activité scientifique, technique et industriel concernant le traitement automatique de l'information par l'exécution de programmes informatiques par des machines : des systèmes embarqués, des ordinateurs, des robots, des automates, etc.
 
 Ces champs d'application peuvent être séparés en deux branches, l'une, de nature théorique, qui concerne la définition de concepts et modèles, et l'autre, de nature pratique, qui s'intéresse aux techniques concrètes de mise en œuvre.
 
-Le terme informatique a été créé en 1962 par Philippe Dreyfus à partir des mots «information» et «automatique».
+Le terme informatique a été créé en 1962 par Philippe Dreyfus à partir des mots «~information~» et «~automatique~».
 \end{defi}
 
 
@@ -37,10 +38,10 @@ La programmation représente donc ici la rédaction du (ou des) code source d'un
 
 
 
-\begin{exemple}
+\begin{exemple}~\\
 
 \begin{itemize}
-\item Recettes de cuisine dans la limite de la connaissance d'une certaine technicité ;
+\item Recettes de cuisine dans la limite de la connaissance d'une certaine technicité.
 \item Notice d'assemblage d'un meuble à condition de disposer des outils nécessaire.
 \end{itemize}
 \end{exemple}
@@ -55,7 +56,7 @@ La programmation représente donc ici la rédaction du (ou des) code source d'un
 \section{Système d'exploitation -- Operating Systems (OS)}
 \subsection{Présentation}
 
-Dans le cadre du modèle de la machine de von Neumann, un\textbf{ seul programme s’exécute}. Il s'agit donc du système d'exploitation qui est chargé dès le démarrage.  Ce programme a pour but de gérer les accés aux processeurs et à la mémoire et aux périphériques, ce qui permet
+Dans le cadre du modèle de la machine de von Neumann, un\textbf{ seul programme s’exécute}. Il s'agit donc du système d'exploitation qui est chargé dès le démarrage.  Ce programme a pour but de gérer les accès aux processeurs et à la mémoire et aux périphériques, ce qui permet
 effectivement que l’ordinateur exécute plusieurs programmes à la fois.
 
 Par ailleurs l'OS permet de manière générale de gérer l'organisation des données sur le disque dur ainsi que leur droit d'accès. Il gère aussi les différentes ressources et sert de garde-fou en cas de tentative de mauvaise utilisation des ressources de l'ordinateur.
@@ -67,8 +68,8 @@ Pour finir, l'OS permet à un ou plusieurs utilisateurs de s'identifier leur per
 \subsection{Exemples d'OS}
 Il existe deux grandes familles d'OS : Windows et UNIX. UNIX est elle-même une grande famille derrière laquelle on peut retrouver beaucoup de distributions:  GNU/Linux (Debian, Ubuntu, \textit{etc.}), FreeBSD, MacOS, \textit{etc}. Les différences pouvant être mises en avant sont les suivantes:
 \begin{itemize}
-\item sous UNIX, il existe des distributions dont les sources sont libres (modifiable par tous);
-\item sous UNIX, l'accès à un shell, permet de réaliser une multitude de tâche en ligne de commande, ce qui est parfois plus efficace qu'avec la souris;
+\item sous UNIX, il existe des distributions dont les sources sont libres (modifiables par tous);
+\item sous UNIX, l'accès à un shell, permet de réaliser une multitude de tâches en ligne de commande, ce qui est parfois plus efficace qu'avec la souris;
 \item sous UNIX, la base de logiciels disponibles est centralisée, ce qui peut faciliter la recherche d'un logiciel et son installation;
 \item sous Windows, lest installations de périphériques est souvent plus aisée. 
 \end{itemize}
@@ -104,17 +105,17 @@ Les distributions UNIX sont beaucoup plus répandues qu'on peut parfois le pense
 
 Les données sont organisées par fichiers:
   \begin{itemize}
-  \item Programmes (et leurs données): $\approx 10^{5}$ fichiers sur mon PC
-  \item Données: $\approx 10^{6}$ fichiers sur mon PC (20 ans de données)
+  \item programmes (et leurs données): $\approx 10^{5}$ fichiers sur mon PC;
+  \item données: $\approx 10^{6}$ fichiers sur mon PC (20 ans de données).
   \end{itemize}
   
 \begin{figure}[!htb]
 \begin{minipage}{0.5\textwidth}
-Du point de vue de l'utilisateur les fichiers sont organisés en une \emph{structure arborescente} :
+Du point de vue de l'utilisateur les fichiers sont organisés en une {structure arborescente} :
 \begin{itemize}
-	\item Chaque fichier est contenu dans un répertoire. 
-	\item Ce répertoire, ainsi que d'autres répertoires ou fichiers, peuvent éventuellement être à leur tour contenus dans un autre répertoire.
-	\item On peut ainsi remonter dans l'arborescence jusqu'à un répertoire appelée \emph{répertoire racine}.
+	\item chaque fichier est contenu dans un répertoire;
+	\item ce répertoire, ainsi que d'autres répertoires ou fichiers, peuvent éventuellement être à leur tour contenus dans un autre répertoire;
+	\item on peut ainsi remonter dans l'arborescence jusqu'à un répertoire appelée {répertoire racine}.
 \end{itemize}
 
 \end{minipage}
@@ -145,9 +146,7 @@ Sous UNIX, les fichiers sont triés par type de fichiers puis par applications.
 \item \texttt{/$a$/$b$}: fichier ou sous-répertoire  $b$ du
   sous-répertoire $a$ de la racine. Notation appelée \emph{chemin
     absolu} du fichier ou répertoire $b$.
-\item \texttt{$a$/$b$}: fichier ou sous-répertoire $b$ d'un sous-répertoire $a$ (d'emplacement non précisé), c'est donc un chemin relatif. 
-	  
-	  Par exemple, si le répertoire courant est \texttt{/home/adent/} et qu'une commande fait référence à \texttt{Documents/trombi.pdf}, le fichier concerné se trouve au chemin absolu \texttt{/home/adent/Documents/trombi.pdf} !
+\item \texttt{$a$/$b$}: fichier ou sous-répertoire $b$ d'un sous-répertoire $a$ (d'emplacement non précisé), c'est donc un chemin relatif. Par exemple, si le répertoire courant est \texttt{/home/adent/} et qu'une commande fait référence à \texttt{Documents/trombi.pdf}, le fichier concerné se trouve au chemin absolu \texttt{/home/adent/Documents/trombi.pdf} !
 \end{itemize}
 
 \begin{minipage}[c]{.49\linewidth}
@@ -180,19 +179,18 @@ Quelques dossiers courants sous UNIX:
 À chaque fichier/répertoire sont associées des informations, appelées
 \emph{métadonnées} et notamment:
 \begin{itemize}
-\item taille du fichier
-\item propriétaire
+\item taille du fichier;
+\item propriétaire;
 \item droits d'accès (lecture, écriture, exécution) pour le
   propriétaire, les membres de son groupe, les autres utilisateurs
-\item date de dernière modification, dernier accès
+\item date de dernière modification, dernier accès.
 \end{itemize}
-Utilisées par le système pour accorder/refuser l'accès, pour savoir ce
+Ces métadonnées sont utilisées par le système pour accorder/refuser l'accès, pour savoir ce
 qui doit être sauvegardé, etc.
 
 \subsection{Droits d’accès}
 
 Les droits d'accès font partie des propriétés d'un fichier. 
-
 Sous UNIX, on peut recenser 3 principaux droits pour un fichier : 
 \begin{itemize}
 \item le droit en lecture (\textit{r -- read}), qui permet à l'utilisateur de lire le contenu du fichier;
@@ -213,7 +211,7 @@ Ainsi il est possible de distribuer des droits à un utilisateur, à un groupe d
 \begin{center}
 \includegraphics[width=.8\textwidth]{droits_lin.png}
 $$
--\underbrace{rw-}_{1}\underbrace{r--}_{2}\underbrace{r--}_{3}
+-\underbrace{\text{rw}-}_{1}\underbrace{\text{r}--}_{2}\underbrace{\text{r}--}_{3}
 $$
 \begin{itemize}
 \item 1 : droits pour l'utilisateur pessoles;
@@ -227,25 +225,26 @@ $$
 
 \begin{prop}
 Les programmes existent essentiellement sous deux formes:
-
-\item \textbf{les rogrammes en langage machine} qui contiennent le code des
+\begin{itemize}
+\item \textbf{les programmes en langage machine} qui contiennent le code des
   instructions du processeur qu'il faut mettre en mémoire pour
-  exécuter le programme.
+  exécuter le programme;
 \item \textbf{les scripts} qui sont des programmes sous forme de texte dans un langage
   humainement compréhensible. Techniquement, le système va lancer un
-  programme appelé \emph{interpréteur} et lui donner ce
+  programme appelé {interpréteur} et lui donner ce
   texte. L'interpréteur va alors exécuter le programme.
+  \end{itemize}
 \end{prop}
 
 \begin{center}
-\begin{tabular}{|p{0.4\textwidth}|p{0.4\textwidth}|}
+\begin{tabular}{|p{0.47\textwidth}|p{0.47\textwidth}|}
 \hline
 \textbf{Programmes en langage machine}& \textbf{Scripts (sous Unix)}\\
 \hline
 \begin{itemize}
 \item Difficiles à écrire directement, spécifiques à une architecture
   processeur/système d'exploitation donnée.
-\item En général produits par un \emph{compilateur}, programme
+\item En général produits par un {compilateur}, programme
   permettant de transformer un programme écrit dans un langage évolué
   en langage machine.
 \end{itemize}
@@ -257,7 +256,7 @@ Les programmes existent essentiellement sous deux formes:
   \begin{itemize}
   \item écrire le texte du programme dans un fichier texte
   \item ajouter en première ligne :
-    \verb+#!+ \emph{chemin-vers-l'interpréteur}
+    \verb+#!+ {chemin-vers-l'interpréteur}
     (par exemple \verb+#! /bin/sh+)
   \item Donner les droits d'exécution sur le fichier.
   \end{itemize}
@@ -375,10 +374,10 @@ En contrepartie, un langage compilé se révélera bien plus rapide qu'un langag
 \subsection{Environnement de développement intégré (IDE)}
 Logiciel permettant
 \begin{itemize}
-\item d'\textbf{écrire} des programmes
-\item de les \textbf{exécuter}
-\item de chercher l'origine d'un bogue (\textbf{débogueur})
-\item de consulter la documentation du langage et des bibliothèques utilisées
+\item d'\textbf{écrire} des programmes;
+\item de les \textbf{exécuter};
+\item de chercher l'origine d'un bogue (\textbf{débogueur});
+\item de consulter la documentation du langage et des bibliothèques utilisées.
 \end{itemize}
 
 La plupart des IDE sont spécialisés à un ou à quelques langages,
@@ -388,8 +387,8 @@ langages.
 
 Dans ce cours:
 \begin{itemize}
-\item Langage : \includegraphics[height=1cm]{logo_python.png}
-\item IDE : Pyzo ou IDLE (fourni avec Python)
+\item langage : \includegraphics[height=1cm]{logo_python.png};
+\item IDE : Pyzo ou IDLE (fourni avec Python).
 \end{itemize}
 
 
@@ -494,11 +493,11 @@ Différents sites proposent des IDE en ligne. Le site \url{http://repl.it} est p
 \subsection{Généralités sur le fonctionnement d'un ordinateur.}\label{sec.ordi}
 
 \begin{defi}
-C'est une machine
+C'est une machine :
 \begin{itemize}
-\item Servant à traiter de l'information
-\item Programmable
-\item Universelle
+\item servant à traiter de l'information;
+\item programmable;
+\item universelle.
 \end{itemize}
 \end{defi}
 
@@ -592,10 +591,10 @@ le bus.
 \begin{minipage}{0.6\textwidth}
 Processeur:
 \begin{itemize}
-\item Mémoire réduite à quelques mots appelés registres
-\item Calculs sur les registres par l'Unité Arithmétique et Logique
-\item Accès à la mémoire vive
-\item Unité de contrôle
+\item mémoire réduite à quelques mots appelés registres;
+\item calculs sur les registres par l'Unité Arithmétique et Logique;
+\item accès à la mémoire vive;
+\item unité de contrôle.
 \end{itemize}
 
 \end{minipage}
@@ -635,15 +634,15 @@ Processeur:
 \textbf{Inconvénients}\\
 \hline
 \begin{itemize}
-\item Simplicité conceptuelle
+\item Simplicité conceptuelle.
 \item Souplesse (peut manipuler tout ce qui est représentable
-  numériquement, un programme est une donnée)
+  numériquement, un programme est une donnée).
 \end{itemize}
 &
 \begin{itemize}
-\item Exécution séquentielle
-\item Goulet d'étranglement
-\item Fragilité (faible robustesse aux erreurs)
+\item Exécution séquentielle.
+\item Goulet d'étranglement.
+\item Fragilité (faible robustesse aux erreurs).
 \end{itemize}
 \end{tabular}
 \end{center}
@@ -1944,7 +1943,7 @@ Il s'agit d'une interface audio vidéo totalement numérique permettant de racco
 \begin{thebibliography}{2}
 \bibitem{Tous}{Wack, Conchon, Courant, deFalco, Dowek, Filliatre, Gonnord, Informatique pour tous en classes préparatoires aux grandes écoles, éditions Eyrolles.}
 \bibitem{zero}{Apprenez à programmer en Python \url{http://www.siteduzero.com/}.}
-\bibitem{medevielle}{François Médevielle, Architecture des ordinateurs -- UPSTI}
+\bibitem{medevielle}{François Médevielle, Architecture des ordinateurs -- UPSTI.}
 \bibitem{beynet}{Patrick Beynet, ISN -- Architectures matérielles -- Architecture des ordinateurs. Lycée Rouvière.}
 \bibitem{martins}{Ressources des enseignants du lycée La Martinière Monplaisir.}
 \end{thebibliography}
