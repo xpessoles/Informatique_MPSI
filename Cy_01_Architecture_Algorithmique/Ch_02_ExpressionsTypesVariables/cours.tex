@@ -16,7 +16,7 @@ cherche à traduire.
 
 Une expression est une suite de caractères faisant intervenir des valeurs et des 
 opérations, afin d'obtenir une nouvelle valeur. Pour calculer cette nouvelle valeur,
-la machine doit \emph{évaluer} l'expression. Voici des exemples d'expressions : \texttt{42 , 1+4 , 
+la machine doit {évaluer} l'expression. Voici des exemples d'expressions : \texttt{42 , 1+4 , 
 1.2 / 3.0 , x+3}.
 
 \end{defi}
@@ -60,7 +60,7 @@ type(1.2/3.0)
 \end{pyconsole}
 Le mot qui suit \texttt{class} indique le type de la valeur, entier (\texttt{int} en anglais) pour 
 la première et flottant (\texttt{float} en anglais) pour la seconde. Le mot \texttt{class} fait 
-référence au fait que Python, est un langage \emph{orienté objet}, ce que nous ignorerons pour 
+référence au fait que Python, est un langage {orienté objet}, ce que nous ignorerons pour 
 l'instant.\\
 \end{xxpyconsole}
 
@@ -78,26 +78,26 @@ bornés en Python .
 \begin{enumerate}
  \item $+$ : addition usuelle;
  \item $-$ : soustraction usuelle (\texttt{15-9} renvoie \texttt{6}), mais aussi opposé (\texttt{-4});
-\item  $//$ : \emph{division entière} : \texttt{a//b} correspond au quotient de la 
+\item  $//$ : {division entière} : \texttt{a//b} correspond au quotient de la 
 division euclidienne de \texttt{a} par \textbf{b} si \texttt{b} est strictement positif 
 (\texttt{256 // 3} renvoie \texttt{85} car $256 = 85*3 + 1$). Mais si \texttt{b} est strictement 
 négatif, alors \texttt{a//b} renvoie ce quotient moins 1 ($15 = (-4)\times(-4)-1=(-4)\times(-3)+3$, 
 le quotient de la division euclidienne de 15 par $-4$ est $-3$, mais \texttt{15//-4} renvoie 
 \texttt{-4}). Cette division n'est pas définie si \texttt{b} est nul;
-\item $\%$ : \emph{modulo} : même remarque que dans le point précédent, relativement au reste de la 
+\item $\%$ : {modulo} : même remarque que dans le point précédent, relativement au reste de la 
 division euclidienne cette fois (\texttt{256 \% 3} renvoie 
 \texttt{1}, \texttt{15\%-4} renvoie \texttt{-1}).
 \item $**$ : exponentiation (\texttt{2\raisebox{0.3ex}{**}3} renvoie \texttt{8}).
 \end{enumerate}
 \end{itemize}
-Les \emph{règles de précédence}, autrement dit les règles de priorité entre opérations, sont 
+Les {règles de précédence}, autrement dit les règles de priorité entre opérations, sont 
 similaires aux règles mathématiques usuelles.
 \end{defi}
 \subsection{Flottants}
 \begin{defi}[Flottants]
 Ce type est noté \texttt{float} en Python .
 \begin{itemize}
-\item  \textbf{Constantes :} ce sont les \emph{nombres à virgule flottante}. Nous en
+\item  \textbf{Constantes :} ce sont les {nombres à virgule flottante}. Nous en
 donnerons une définition précise dans un chapitre ultérieur : pour simplifier, disons pour 
 l'instant que ce sont des nombres à virgule, avec un nombre borné de chiffres dans leur écriture.
 \item \textbf{Opérateurs : }
@@ -116,7 +116,7 @@ l'instant que ce sont des nombres à virgule, avec un nombre borné de chiffres 
 \subsection{Booléens}
 
 
-\begin{defi}[Booléen\footnote{Le mot \emph{booléen} a été donné en hommage au mathématicien 
+\begin{defi}[Booléen\footnote{Le mot {booléen} a été donné en hommage au mathématicien 
 britannique George Boole.}]
 Ce type est noté \texttt{bool} en Python.
 \begin{itemize}
@@ -131,7 +131,7 @@ Ce type est noté \texttt{bool} en Python.
 \begin{enumerate}
  \item \texttt{==} : test d'égalité : \texttt{2==3} renvoie \texttt{False}, \texttt{4==4} renvoie 
 \texttt{True}. Problème : \texttt{0.1+0.2==0.3} renvoie \texttt{False} ! Nous y reviendrons plus 
-tard. Il ne faut pas confondre \texttt{==} avec \texttt{=}, symbole de l'\emph{affectation}.
+tard. Il ne faut pas confondre \texttt{==} avec \texttt{=}, symbole de l'{affectation}.
  \item \texttt{!=} : \texttt{a != b} est une écriture équivalente à \texttt{not (a == b)}.
  \item \texttt{<,>,<=,>=} : ce à quoi on s'attend.
 \end{enumerate}
@@ -175,17 +175,17 @@ Il n'est pas obligatoire que les éléments d'un tuple soient de même type. Par
 \texttt{(1,1.2,True)} est un triplet tout à fait valable.\\
 On accède à la $k\ieme$ coordonnée d'un tuple \texttt{t} par la commande \texttt{t[k]}. Attention : 
 \textbf{en Python , les coordonnées sont numérotées à partir de 0} ! On dit que $k$ est 
-l'\emph{indice} de \texttt{t[k]}. Ainsi, si \texttt{t = (1,2,3)}, \texttt{t[0]} vaut 1, 
+l'{indice} de \texttt{t[k]}. Ainsi, si \texttt{t = (1,2,3)}, \texttt{t[0]} vaut 1, 
 \texttt{t[2]} vaut 3, et \texttt{t[3]} n'existe pas.\\
 On dit que les tuples sont \textbf{immuables} ou \textbf{non mutables}: il n'est pas possible de changer un élément d'un 
 tuple.
 \item \textbf{Opérateurs :}
 \begin{enumerate}
  \item $+$ : concaténation. \texttt{(1,2,3)+(1,4,5,6)} renvoie \texttt{1,2,3,1,4,5,6};
- \item \texttt{len} : \emph{longueur} du tuple. \texttt{len(1,2,3)} renvoie \texttt{3};
+ \item \texttt{len} : {longueur} du tuple. \texttt{len(1,2,3)} renvoie \texttt{3};
  \item \texttt{in} : test d'appartenance. \texttt{3 in (1,2,3)} renvoie \texttt{True}, alors que 
 \texttt{3 in (1,2,4,5)} renvoie \texttt{False};
-\item le \emph{slicing}, qui permet de construire des sous-tuples : \texttt{(5,2,6,7,8,9)[1:5]} 
+\item le {slicing}, qui permet de construire des sous-tuples : \texttt{(5,2,6,7,8,9)[1:5]} 
 renvoie \texttt{(2,6,7,8)} (attention à la borne de droite !).\\
 \end{enumerate}
 \end{itemize}
@@ -193,7 +193,7 @@ renvoie \texttt{(2,6,7,8)} (attention à la borne de droite !).\\
 
 \subsection{Chaînes de caractères}
 \begin{defi}[Chaînes de caractères]
-Ce type est noté \texttt{str} en Python , pour \emph{string} en anglais.
+Ce type est noté \texttt{str} en Python , pour {string} en anglais.
 \begin{itemize}
 \item \textbf{Construction et composantes :} ce sont des suites finies de caractères, un caractère étant en python un caractère du clavier. On 
 les note entre guillemets ou apostrophes : \texttt{``Ceci est un chaîne de caractères''} ou  
@@ -207,7 +207,7 @@ On accède aux composantes d'une chaîne de la même manière que pour un tuple.
 \begin{defi}[Listes]
 Ce type est noté \texttt{list} en Python .
 
-Comme les tuples, les \emph{listes} sont des suites finies de valeurs arbitraires, mais cette fois 
+Comme les tuples, les {listes} sont des suites finies de valeurs arbitraires, mais cette fois 
 ils sont \textbf{mutables} : on peut changer la valeur d'une composante d'une liste.\\
 Les listes s'écrivent entre crochets. On change la valeur de la $k\ieme$ composante d'une liste 
 \texttt{L} grâce à la commande \texttt{L[k] = n}, où \texttt{n} est la nouvelle valeur. Ainsi :
@@ -441,10 +441,10 @@ pour repérer d'éventuelles erreurs ou manquements.
 
 \begin{rem}
  L'indentation des blocs n'est pas là que pour décorer. Dans la plupart des langages de 
-programmation on \emph{conseille} d'indenter les différents blocs afin de faciliter la lecture du 
-code. En Python , l'indentation est \emph{signifiante} : après le mot-clé \texttt{def}, chaque 
+programmation on {conseille} d'indenter les différents blocs afin de faciliter la lecture du 
+code. En Python , l'indentation est {signifiante} : après le mot-clé \texttt{def}, chaque 
 ligne indentée fait partie de la fonction. La première ligne non indentée rencontrée marque la 
 fin de la fonction : cette ligne ne fait plus partie de la fonction, mais celles qui précéde en 
-font partie. Il est donc \emph{impératif} d'indenter quand il le faut, et seulement 
+font partie. Il est donc {impératif} d'indenter quand il le faut, et seulement 
 quand il le faut. On rencontrera ce phénomène constamment en Python .
 \end{rem}
