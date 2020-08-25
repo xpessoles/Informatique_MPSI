@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 import random
 import numpy as np
+from numpy import array,zeros
 import matplotlib.pyplot as plt
 
 #Q1

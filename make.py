@@ -11,7 +11,7 @@ Mois=['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembr
 #RAZ du fichier log
 f=open('log.txt','w')
 
-path=r"progression_2019_2020_IPT_MPSI.xlsx"#chemin de la progression
+path=r"progression_2020_2021_IPT_MPSI.xlsx"#chemin de la progression
 path_classe=''
 path_site='site_info_mpsi'#Chemin pour exporter les pdf vers site
 path_site_ds='/Users/emiliendurif/Dropbox/cpge/ipt_mpsi_ds'#Chemin pour exporter les pdf vers site
@@ -52,8 +52,8 @@ def lire_semanier(path):
     =1,2,3,4,8,5,9,10,11,12,13,16,17
     nligne=40#Derniere ligne où figure une donnée
     delta_td=1#position du jour des TD dans la semaine
-    delta_cours=1#position du jour des cours dans la semaine
-    delta_tp=3#position du jour des TD dans la semaine
+    delta_cours=2#position du jour des cours dans la semaine
+    delta_tp=3#position du jour des TP dans la semaine
     liste_cours=[]
     liste_cycle=[]
     liste_tp=[]
@@ -583,19 +583,20 @@ for tp in info_tp:
 #     genere_support(rep,ds,'ds')
     
     
-    
-activite=info_tp[11]
-rep=trouver_repertoire(activite)
-file=trouver_file_tex(activite,rep,'tp')
-genere_pdf(file,rep,'tp')
-impr_2_page(activite,rep,'tp')
+# for k in range(2):
+#     activite=info_tp[k]
+#     rep=trouver_repertoire(activite)
+#     file=trouver_file_tex(activite,rep,'tp')
+#     genere_pdf(file,rep,'tp')
+#     impr_2_page(activite,rep,'tp')
 # 
-# activite=info_cours[17]
-# rep=trouver_repertoire(activite)
-# file=trouver_file_tex(activite,rep,'cours')
-# genere_pdf(file,rep,'cours')
-# file_td=trouver_file_tex(activite,rep,'td')
-# genere_pdf(file_td,rep,'td')
+for k in range(1,2):
+    activite=info_cours[k]
+    rep=trouver_repertoire(activite)
+    file=trouver_file_tex(activite,rep,'cours')
+    genere_pdf(file,rep,'cours')
+    file_td=trouver_file_tex(activite,rep,'td')
+    genere_pdf(file_td,rep,'td')
 
 # activite=info_ds[1]
 # num_ds_str=activite[0]
