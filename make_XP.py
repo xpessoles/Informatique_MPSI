@@ -15,8 +15,9 @@ path=r"progression_2020_2021_IPT_MPSI.xlsx"#chemin de la progression
 path_classe=''
 path_site='site_info_mpsi'#Chemin pour exporter les pdf vers site
 path_site_ds='/Users/emiliendurif/Dropbox/cpge/ipt_mpsi_ds'#Chemin pour exporter les pdf vers site
-path_ref=os.popen('pwd').readlines()[0].strip()
 
+#path_ref=os.popen('pwd').readlines()[0].strip()
+path_ref=""
 # os.chdir(os.system('pwd'))
 
 #Separateur de dossier
@@ -169,7 +170,7 @@ def genere_fichiers_tex(info_activite,type_activite):
         changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'_pdf.tex','\\input{Cy_01_Ch_01_TP_01}','\\input{Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'.tex}')
             #TP : corrige
         shutil.copyfile('style'+sep+'Cy_i_Ch_j_TP_k.tex',rep+'/Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'-cor.tex')
-        shutil.copyfile('cp style'+sep+'Cy_i_Ch_j_TP_k_pdf.tex',rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'_pdf-cor.tex')
+        shutil.copyfile('style'+sep+'Cy_i_Ch_j_TP_k_pdf.tex',rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'_pdf-cor.tex')
         #os.system('cp style'+sep+'Cy_i_Ch_j_TP_k.tex '+rep+'/Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'-cor.tex')
         #os.system('cp style'+sep+'Cy_i_Ch_j_TP_k_pdf.tex '+rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'_pdf-cor.tex')
         changer_ligne(rep+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+sep+'Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'_pdf-cor.tex','\\input{Cy_01_Ch_01_TP_01}','\\input{Cy_0'+str(n_cycle)+'_Ch_'+str(num_chapitre)+'_TP_'+num_activite+'-cor.tex}')
@@ -183,8 +184,8 @@ def genere_fichiers_tex(info_activite,type_activite):
         #os.system('cp style'+sep+'DSk_pdf.tex '+rep+sep+'DS'+num_ds_str+'_pdf.tex')
         changer_ligne(rep+sep+'DS'+num_ds_str+'_pdf.tex','\\input{Cy_01_Ch_01_TP_01}','\\input{DS'+num_ds_str+'.tex}')
             #DS : corrige
-        shutil.copyfile('cp style'+sep+'DSk.tex',rep+sep+'DS'+num_ds_str+'-cor.tex')
-        shutil.copyfile('cp style'+sep+'DSk_pdf.tex',rep+sep+'DS'+num_ds_str+'_pdf-cor.tex')
+        shutil.copyfile('style'+sep+'DSk.tex',rep+sep+'DS'+num_ds_str+'-cor.tex')
+        shutil.copyfile('style'+sep+'DSk_pdf.tex',rep+sep+'DS'+num_ds_str+'_pdf-cor.tex')
         #os.system('cp style'+sep+'DSk.tex '+rep+sep+'DS'+num_ds_str+'-cor.tex')
         #os.system('cp style'+sep+'DSk_pdf.tex '+rep+sep+'DS'+num_ds_str+'_pdf-cor.tex')
         changer_ligne(rep+sep+'DS'+num_ds_str+'_pdf-cor.tex','\\input{Cy_01_Ch_01_TP_01}','\\input{DS'+num_ds_str+'-cor.tex}')
@@ -387,7 +388,7 @@ def genere_support(rep,info_activite,type_activite):
         rep_activite=rep+sep+'td.tex'
         rep_activite_cor=rep+sep+'td_cor.tex'
         shutil.copyfile(rep_activite,rep_activite_cor)
-        os.system('cp '+rep_activite+' '+rep_activite_cor)
+        #os.system('cp '+rep_activite+' '+rep_activite_cor)
         # print(num_activite,rep_activite,supports)
     elif type_activite=='tp':
         rep_activite=rep+sep+'Cy_0'+str(n_cycle)+'_Ch_0'+str(num_chapitre[0])+'_TP_'+num_activite+sep+'tp.tex'
