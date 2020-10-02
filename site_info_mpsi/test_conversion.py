@@ -2,7 +2,7 @@ def conversion(h,m,s):
     """Convertit blablabla"""
     t=3600*h+60*m+s
     return t
-
+c=2*t
 def conversion2(h,m,s):
     """Convertit blablabla"""
     t=3600*h+60*m+s

@@ -60,8 +60,8 @@ def rendre_monnaie(cout,somme_client,valeurs):
 
             
 def afficher_rendu_monnaie(cout,somme_client,valeurs):
-    cout=100*cout
-    somme_client=100*somme_client
+    cout=round(100*cout)
+    somme_client=round(100*somme_client)
     nombre_billets=rendre_monnaie(cout,somme_client,valeurs)
     for k in range(len(nombre_billets)):
         if valeurs[k]>200:

@@ -590,7 +590,7 @@ for k in range(2,3):
     genere_pdf(file,rep,'tp')
     impr_2_page(activite,rep,'tp')
 
-for k in range(3,4):
+for k in range(4,5):
     os.chdir(path_ref)
     activite=info_cours[k]
     rep=trouver_repertoire(activite)
