@@ -583,14 +583,14 @@ for tp in info_tp:
 #     genere_support(rep,ds,'ds')
     
     
-for k in range(3,4):
+for k in range(4,5):
     activite=info_tp[k]
     rep=trouver_repertoire(activite)
     file=trouver_file_tex(activite,rep,'tp')
     genere_pdf(file,rep,'tp')
     impr_2_page(activite,rep,'tp')
 
-for k in range(4,5):
+for k in range(5,6):
     os.chdir(path_ref)
     activite=info_cours[k]
     rep=trouver_repertoire(activite)
