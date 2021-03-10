@@ -1,0 +1,59 @@
+NOM = "BRAMAS"
+Prenom = "Timothe"
+Classe = "Mpsi2"
+alpha="82"
+
+## Question 1
+Q1_req = "SELECT	 TIT_CODE, CLI_NOM, CLI_PRENOM FROM T_CLIENT"
+
+## Question 2
+Q2_req = "SELECT count (*) as NB_clients FROM T_CLIENT"
+Q2_res = "86"
+
+## Question 3
+Q3_req = "SELECT  CLI_NOM, CLI_PRENOM FROM T_CLIENT WHERE TIT_CODE ='Mme.'"
+
+## Question 4
+Q4_req = "SELECT TIT_CODE, CLI_NOM, CLI_PRENOM FROM T_CLIENT WHERE TIT_CODE = 'Mme.' or TIT_CODE='Melle.'"
+
+
+## Question 5
+Q5_req = "SELECT count (*) as NB_clientes FROM (SELECT TIT_CODE, CLI_NOM, CLI_PRENOM FROM T_CLIENT WHERE TIT_CODE = 'Mme.' or TIT_CODE='Melle.')"
+Q5_res = "16"
+
+## Question 6
+Q6_req = "SELECT CLI_NOM as Noms, CLI_PRENOM as Prénoms FROM T_CLIENT WHERE TIT_CODE = 'Mme.' or TIT_CODE='Melle.' ORDER by CLI_NOM, CLI_PRENOM ASC"
+
+
+## Question 7
+Q7_req = "SELECT CLI_NOM, CLI_PRENOM, TEL_NUMERO FROM T_CLIENT, T_TELEPHONE WHERE T_CLIENT.CLI_ID = T_TELEPHONE.CLI_ID"
+
+## Question 8
+Q8_req = "SELECT  CLI_NOM, CLI_PRENOM FROM T_CLIENT GROUP by CLI_NOM"
+
+## Question 9
+Q9_req = "SELECT  count(*), CLI_NOM FROM T_CLIENT GROUP by CLI_NOM"
+Q9_res = "1"
+
+## Question 10
+Q10_req = "SELECT avg(LIF_REMISE_POURCENT) as moyenne_pourcentage, avg(LIF_REMISE_MONTANT) as moyenne_montant FROM T_LIGNE_FACTURE"
+Q10_res = "97 ; 131.0"
+
+## Question 11
+Q11_req = "SELECT max(LIF_REMISE_POURCENT) as max_pourcentage, max(LIF_REMISE_MONTANT) as max_montant FROM T_LIGNE_FACTURE "
+Q11_res = "97; 131"
+
+## Question 12
+Q12_req = "SELECT FAC_ID as fac_id1 FROM T_LIGNE_FACTURE WHERE LIF_REMISE_MONTANT >0 GROUP by FAC_ID"
+
+
+## Question 13
+Q13_req = "SELECT CLI_ID FROM T_LIGNE_FACTURE, T_FACTURE WHERE LIF_REMISE_MONTANT > 0 AND T_LIGNE_FACTURE.FAC_ID = T_FACTURE.FAC_ID GROUP by CLI_ID"
+
+## Question 14
+Q14_req = "SELECT CLI_ID FROM T_LIGNE_FACTURE, T_FACTURE WHERE LIF_REMISE_MONTANT= NULL AND T_LIGNE_FACTURE.FAC_ID = T_FACTURE.FAC_ID GROUP by CLI_ID"
+
+
+## Question 15
+Q15_req = "SELECT max(nb_remises)*131 as remise_totale, CLI_NOM, CLI_PRENOM FROM (SELECT nb_remises, CLI_ID, CLI_NOM, CLI_PRENOM FROM (SELECT CLI_ID as id_client, LIF_REMISE_MONTANT, count() as nb_remises FROM T_LIGNE_FACTURE, T_FACTURE WHERE LIF_REMISE_MONTANT > 0 AND T_LIGNE_FACTURE.FAC_ID = T_FACTURE.FAC_ID GROUP by CLI_ID), T_CLIENT WHERE id_client = T_CLIENT.CLI_ID)"
+Q15_res ="SILLET,Jacques,1441"

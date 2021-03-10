@@ -1,0 +1,538 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Modélisation systèmes multiphysiques : Modélisation linéaire et non linéaire},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+    
+\usepackage{listingsutf8}
+
+
+\input{style/new_style}
+\input{style/macros_SII}
+\usepackage{multicol}
+\usepackage{standalone}
+\standaloneconfig{mode=buildnew}
+\usepackage{siunitx}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{wasysym}
+
+
+
+
+\graphicspath{{images/}}
+
+\fichetrue
+
+%\fichefalse
+
+\proftrue
+%\proffalse
+
+\tdtrue
+%\tdfalse
+
+\courstrue
+\coursfalse
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{MPSI}
+\def\xxnumpartie{{DS 3}}%\textsf{\textsf{Cy. 4, 6 \& 7}}}
+\def\xxpartie{Devoir Surveillé 3}
+
+
+\def\xxnumchapitre{20 novembre 2020 \vspace{.2cm}}
+\def\xxchapitre{\hspace{.12cm} }
+
+
+\def\xxtitreexo{\noindent Analyse des données des prélèvements}
+\def\xxsourceexo{\hspace{.2cm} }
+
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+%\def\xxonglet{Part. 1 -- Ch. 3}
+\def\xxonglet{\textsf{DS 3}}%\textsf{\textsf{Cy. 4, 6 \& 7}}}
+
+\def\xxactivite{\textsf{DS 3}}
+\def\xxauteur{\textsl{ }}
+
+\def\xxcompetences{%
+\textsl{%
+%\textbf{Savoirs et compétences :}\\
+%Les sources sont associées par un \emph{hacheur série}. La détermination des grandeurs électriques associées à ce montage permet de conclure vis à vis du cahier des charges.
+%\noindent \textbf{Résoudre :} à partir des modèles retenus :
+%\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+%\item choisir une méthode de résolution analytique, graphique, numérique;
+%\item mettre en \oe{}uvre une méthode de résolution.
+%\end{itemize}
+%\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+%\item \textit{Rés -- C1.1 :} Loi entrée sortie géométrique et cinématique -- Fermeture géométrique.
+%\end{itemize}
+%
+%\noindent \textit{Mod2 -- C4.1 :} Représentation par schéma-blocs.
+}}
+
+\def\xxfigures{
+\includegraphics[width=.5\linewidth]{images/spf}
+}%figues de la page de garde
+
+
+\def\xxpied{%
+%Cycle 01 -- Modéliser le comportement des systèmes multiphysiques\\
+\xxactivite%
+}
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+\usepackage{pgfplots}
+\begin{document}
+%\defimages{images}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{5cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+
+%\defimages2{images}
+
+%\begin{multicols}{2}
+
+
+\lstset{language=Python,
+  inputencoding=utf8/latin1,
+  breaklines=true,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange}}  
+\definecolor{mygreen}{rgb}{0,0.6,0}
+
+
+\lstset{
+     literate=%
+         {é}{{\'e}}1    
+         {à}{{\`a}}1    
+         {ô}{{\^o}}1    
+         {ù}{{\`u}}1    
+}
+
+
+
+\section{Introduction}
+\ifprof
+\else
+Pour rester proches des préoccupations actuelles, nous proposons dans ce devoir de réaliser une analyse des données gouvernementales relatives aux résultats des tests virologiques COVID-19. Ces données sont librement téléchargeables à l'adresse \\ 
+\url{https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/}.
+
+\begin{obj}
+\begin{itemize}
+\item Tracer les courbes de tests ou de cas positifs suivant plusieurs critères.
+\end{itemize}
+\end{obj}
+
+
+
+Les données disponibles sont initialement récupérées sous forme du tableau suivant. Seules les données pour la région << 1 >> du 13 mai 2020 sont données en exemple. 
+
+\begin{center}
+\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+\hline
+Code région & 
+Date de prélèvement & 
+Nb de cas positifs \female & 
+Nb de cas positif chez les \mars & 
+Nb de prélèvements chez les \female & 
+Nb de prélèvements chez les \mars & 
+Classe d'âge \\ 
+\hline
+\footnotesize \texttt{code\_regions list[int]} & 
+\footnotesize\texttt{liste\_jours list[str]} & 
+\footnotesize\texttt{nb\_cas\_pos\_f list[int]} & 
+\footnotesize\texttt{nb\_cas\_pos\_h list[int]} &
+\footnotesize\texttt{nb\_prelev\_f list[int]} & 
+\footnotesize\texttt{nb\_prelev\_h list[int]} &
+\footnotesize\texttt{cl\_age list[int]} \\
+\hline\normalsize
+1&	13-05-2020&	0&	0&	0&	0&	9 \\
+1&	13-05-2020&	0&	0&	1&	0&	19 \\
+1&	13-05-2020&	0&	0&	1&	0&	29 \\
+1&	13-05-2020&	0&	0&	5&	1&	39 \\
+1&	13-05-2020&	0&	0&	2&	1&	49 \\
+1&	13-05-2020&	0&	0&	5&	2&	59 \\
+1&	13-05-2020&	0&	0&	1&	1&	69 \\
+1&	13-05-2020&	0&	0&	1&	4&	79 \\
+1&	13-05-2020&	0&	0&	1&	0&	89 \\
+1&	13-05-2020&	0&	0&	0&	0&	90 \\
+1&	13-05-2020&	0&	0&	17&	9&	0 \\
+\hline
+\end{tabular}
+\end{center}
+
+Chacune des données de ce tableau sont stockées dans des listes dont le nom est donné dans la deuxième ligne. On précise aussi dans cette colonne le type de données. Ainsi, par exemple, le nombre de cas positifs chez les femmes est donné dans la liste \texttt{nb\_cas\_pos\_f = [0,0,0,0,...]}. 
+
+%La correspondance entre le code de région est donné dans une liste Python nommée \texttt{liste\_regions=list[int,str]} :
+%
+%\begin{lstlisting}
+%liste_regions = [[1, 'Guadeloupe'], [2, 'Martinique'], [3, 'Guyane'], [4, 'Réunion'], [6, 'Mayotte'], [11, 'Ile de France'], [24, 'Centre Val de Loire'], [27, 'Bourgogne et Franche Comté'], [28, 'Normandie'], [32, 'Hauts de France'], [44, 'Grand Est'], [52, 'Pays de Loire'], [53, 'Bretagne'], [75, 'Nouvelle Aquitaine'], [76, 'Occitanie'], [84, 'Auvergne et Rhône-Alpes'], [93, 'Provence-Alpes-Côte dAzur'], [94, 'Corse'], [975, 'Saint-Pierre et Miquelon'], [977, 'Saint-Barthelemy'], [978, 'Saint-Martin']].
+%\end{lstlisting}
+
+\fi
+
+\section{Tracer du nombre de prélèvements par jour}
+
+Pour traiter les données fournies, il est nécessaire de calculer le nombre de prélèvement réalisé chacun des jours. 
+
+\subparagraph{}
+\textit{Donner l'instruction permettant de savoir combien il existe d'éléments dans la liste des jours \texttt{liste\_jours}.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+>>> len(jours)
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Écrire la fonction d’en-tête \texttt{def is\_test(jours:list, jour:str) -> bool :} permettant de savoir si le jour \texttt{jour} est dans la liste des jours \texttt{jours} et renvoyant un booléen. Vous utiliserez une boucle \texttt{for}.}
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+def is_test(jours:list,jour:str) -> bool :
+    for d in dates :
+        if d == jour :
+            return True
+    return False
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+
+\subparagraph{}
+\textit{Écrire la fonction d’en-tête \texttt{def is\_test(jours:list, jour:str) -> bool :} permettant de savoir si le jour \texttt{jour} est dans la liste des jours \texttt{jours} et renvoyant un booléen. Vous utiliserez une boucle \texttt{while}.}
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+def is_test_while(jours:list,jour:str) -> bool :
+    i = 0
+    while i<len(jours): 
+        if jours[i] == jour :
+            return True
+        i=i+1
+    return False
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Écrire l'instruction permettant de savoir si des tests ont été faits le 13 mai 2020. Que renvoie cette instruction ?}
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+>>> is_test(liste_jours,"2020-05-13")
+\end{lstlisting}
+Cette instruction renvoie le booléen True. 
+\end{corrige}
+\else
+\fi
+
+
+
+
+
+\subparagraph{}
+\textit{Écrire la fonction d’en-tête \texttt{def indices\_jour(jours:list, jour:str) -> list :} permettant de renvoyer  \texttt{liste\_indices = list[int]}, la liste des indices correspondants au jour \texttt{jour}.}
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+def indices_jour(jours:list, jour:str) -> list :
+    liste_indices = []
+    for i in range(len(jours)):
+        if jours[i] == jour :
+            liste_indices.append(i)
+    return liste_indices
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Écrire la fonction d’en-tête \texttt{def compte\_test\_jour(jours:list, jour:str, tests:list) -> int :} permettant de renvoyer le nombres de tests faits le jour \texttt{jour}.}
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+def compte_test_jour(jours:list, jour:str, tests:list) -> int :
+    liste_indices = indices_jour(jours, jour)
+    nb_tests = 0
+    for i in liste_indices : 
+        nb_tests = nb_tests + tests[i]
+    return nb_tests
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Écrire les instructions permettant de déterminer le nombre de tests réalisés sur les femmes le 5 novembre 2020 et le nombre de tests positifs dénombrés le même jour chez les hommes.}
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+>>> compte_test_jour(liste_dates,'2020-11-05',nb_prelev_f)
+>>> compte_test_jour(liste_dates,'2020-11-05',nb_cas_pos_h)
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Écrire la fonction d’en-tête \texttt{def compte\_test\_jour(jours:list, jour:str, tests:list) -> int :} permettant de renvoyer le nombres de tests faits le jour \texttt{jour}.}%Erreur corrigée
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+def compte_test_jour(jours:list, jour:str, tests:list) -> int :
+    liste_indices = indices_jour(jours, jour)
+    nb_tests = 0
+    for i in liste_indices : 
+        nb_tests = nb_tests + tests[i]
+    return nb_tests
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+
+\subparagraph{}
+\textit{Écrire la fonction d’en-tête \texttt{def creer\_liste\_jours(jours:list) -> list :} permettant de renvoyer la liste des jours où des tests ont été faits (éliminant donc les doublons) parmi la liste des jours \texttt{jours}.}
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+def creer_liste_jours(jours:list) -> list :
+    liste_jours = []
+    for d in jours :
+        if not(d in liste_jours) :
+             liste_jours.append(d)
+    return liste_jours 
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Écrire la fonction d’en-tête \texttt{def creer\_liste\_test(dates:list, tests:list) -> list :} permettant de renvoyer la liste du nombre de tests faits chaque jour.}
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+def creer_liste_test(dates:list, tests:list) -> list :
+    liste_j = creer_liste_jours(dates)
+    res = []
+    for jour in liste_j :
+        res.append(compte_test_jour(dates,jour,tests))
+    return res
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Écrire les instructions permettant d'obtenir la liste du nombre de tests réalisés par les femmes chaque jour ainsi que le nombre de cas positifs chez les femmes chaque jour.}
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+>>> l_test_f = creer_liste_test(liste_jours,nb_prelev_f)
+>>> l_pos_f = creer_liste_test(liste_jours,nb_cas_pos_f)
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+
+\subparagraph{}
+\textit{Écrire la fonction d’en-tête \texttt{def nb\_tests\_jour(dates:list, test1:list, test2:list) -> list :} permettant de renvoyer la liste du nombre de tests faits chaque jour en sommant les tests faits sur les hommes et sur les femmes.}
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+def nb_tests_jour(dates:list, tests1:list, tests2:list) -> list :
+    nb_tests_h = creer_liste_test(dates,tests1)
+    nb_tests_f = creer_liste_test(dates,tests2)
+    
+    nb_tests = [nb_tests_h[i][1]+nb_tests_f[i][1] for i in range(len(nb_tests_h))]
+    return nb_tests
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Donner les instructions permettant de charger les bibliothèques nécessaire au tracer de graphes.}
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+>>> import numpy as np
+>>> import matplotlib.pyplot as plt
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+On dipose de la liste du nombre de tests faits chaque jour (\texttt{nb\_test}) et du nombre de tests positifs chaque jour  (\texttt{nb\_pos}).
+
+\subparagraph{}
+\textit{Donner les instructions permettant de tracer les courbes suivantes : nombre de tests en fonction du jour, nombre de cas positifs en fonction du jour.}
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+plt.plot(nb_test,label="Nombre de tests")
+plt.plot(nb_pos,label="Nombre de cas positifs")
+plt.xlabel('Jour')
+plt.legend()
+plt.show()
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\ifprof
+\else
+Le résultat obtenu est le suivant. 
+
+\begin{center}
+\includegraphics[width=.6\linewidth]{images/Figure_1.pdf}
+\end{center}
+\fi
+
+\section{Traitement des mesures}
+\ifprof
+\else
+On dispose des listes suivantes : \texttt{nb\_tests = list[int]} la liste du nombre de prélèvement par jour et de \texttt{nb\_pos = list[int]} la liste du nombre de tests positifs par jour ainsi que  \texttt{liste\_jours = list[int]}
+\fi
+
+\subparagraph{}
+\textit{Écrire la fonction d’en-tête \texttt{def recherche\_max(liste:list) -> int :} permettant de renvoyer le maximum d'une liste. On pourrait ainsi avoir le maximum de tests réalisés en une journée, ou le nombre maximum de cas. \textbf{On ne pourra pas utiliser la fonction max.}}
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\ifprof
+Afin de lisser les courbes réalisées précédemment, on se propose de réaliser un lissage sur $n$ jours. Pour cela on fait la moyenne des cas du jour 0 au jour $n$, puis du jour 1 au jour $n+1$ \textit{etc}. Cette méthode se nomme moyenne glissante. 
+\else
+\fi
+
+\subparagraph{}
+\textit{Compléter la fonction d’en-tête \texttt{def moyenne\_glissante(tests:list, nb:int) -> list :} permettant de réaliser la moyenne glissante sur $n$ jours. }
+\ifprof
+\else
+\begin{lstlisting}
+def moyenne_glissante(tests,nb):
+    res = []
+    for i in range(    à compléter    ):
+        s = 0
+        for j in range(    à compléter    ):
+            s = s+tests[j]
+        res.append(    à compléter    )
+    return res
+\end{lstlisting}
+\fi
+
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+def moyenne_glissante(tests,nb):
+    res = []
+    for i in range(len(tests)-nb):
+        s = 0
+        for j in range(i,i+nb):
+            s = s+tests[j]
+        res.append(s/nb)
+    return res
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\ifprof
+\else
+On souhaiterait savoir s'il y a déjà eu un jour où $n$ tests ont été faits. \textit{Ok, cette question est artificielle, mais on voulait faire une question sur la dichotomie:))}.
+
+On souhaite écrire la fonction d’en-tête \texttt{def recherche\_dicho(tests:list, nb:int) -> bool :} permettant de savoir si un nombre de test $nb$ a déjà été fait. 
+\fi
+
+\subparagraph{}
+\textit{Quelles conditions doit-il y avoir sur la liste \texttt{tests} pour pouvoir faire une recherche dichotomique ?}
+\ifprof
+\begin{corrige}~\\
+Il est nécessaire  \texttt{tests} soit une liste d'entiers triés.
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Écrire la fonction d’en-tête \texttt{def recherche\_dicho(tests:list, nb:int) -> bool :} permettant de savoir si un nombre de tests $nb$ a déjà été fait. On utilisera donc une recherche par dichotomie.}
+\ifprof
+\begin{corrige}~\\
+
+
+\begin{lstlisting}
+def appartient_dicho(e,t):
+    """Renvoie un booléen indiquant si e est dans t
+       Préconditions : t est un tableau de nombres trié par ordre croissant
+                       e est un nombre"""
+    g = 0 # Limite gauche de la tranche où l'on recherche e
+    d = len(t)-1 # Limite droite de la tranche où l'on recherche e
+    while g <= d: # La tranche où l'on cherche e n'est pas vide
+        m = (g+d)//2 # Milieu de la tranche où l'on recherche e
+        pivot = t[m] 
+        if e == pivot: # On a trouvé e
+            return True
+        elif e < pivot: 
+            d = m-1 # On recherche e dans la partie gauche de la tranche
+        else:
+            g = m+1 # On recherche e dans la partie droite de la tranche
+    return False
+\end{lstlisting}
+    
+\end{corrige}
+\else
+\fi
+
+
+
+\ifprof
+\else
+\vfill
+\begin{center}
+\textbf{	Fin du sujet	}
+\end{center}
+\vfill
+\fi
+
+\end{document}
+
+\begin{itemize}
+\item \texttt{liste\_dates= ['2020-05-13', '2020-05-13', '2020-05-13',...]} (\texttt{list} de \texttt{list}) : liste des dates des prélèvements;
+\item \texttt{codes\_regions = [1,1,...]} (\texttt{list} de \texttt{int}) : liste des codes régions dans lesquels ont été effectués les prélèvements. La correspondance entre 
+\end{itemize}

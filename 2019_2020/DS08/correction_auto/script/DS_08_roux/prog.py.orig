@@ -1,0 +1,61 @@
+NOM = "ROUX"
+Prenom = "Anthony"
+Classe = "MPSI2"
+alpha="34"
+
+## Question 1
+Q1_req = "SELECT CLI_NOM, CLI_PRENOM, TIT_CODE FROM T_CLIENT;"
+
+## Question 2
+Q2_req = "SELECT count(*) FROM T_CLIENT;"
+Q2_res = "93"
+
+## Question 3
+Q3_req = "SELECT CLI_NOM, CLI_PRENOM FROM T_CLIENT WHERE TIT_CODE='Mme.';"
+
+## Question 4
+Q4_req = "SELECT CLI_NOM, CLI_PRENOM, TIT_CODE FROM T_CLIENT WHERE (TIT_CODE='Mme.' OR TIT_CODE='Melle.');"
+
+
+## Question 5
+Q5_req = "SELECT count(*) FROM T_CLIENT WHERE(TIT_CODE='Mme.' OR TIT_CODE='Melle.');"
+Q5_res = "17"
+
+## Question 6
+Q6_req = "SELECT CLI_NOM AS Noms, CLI_PRENOM AS Prénoms FROM T_CLIENT WHERE (TIT_CODE='Mme.' OR TIT_CODE='Melle.') ORDER BY CLI_NOM ASC, CLI_PRENOM ASC;"
+
+
+## Question 7
+Q7_req = "SELECT CLI_NOM, TEL_NUMERO FROM T_CLIENT JOIN T_TELEPHONE ON T_CLIENT.CLI_ID=T_TELEPHONE.CLI_ID;"
+
+## Question 8
+Q8_req = "SELECT CLI_NOM FROM T_CLIENT GROUP BY CLI_NOM HAVING count(*)>1;"
+
+## Question 9
+Q9_req = "SELECT CLI_NOM, count(*) FROM T_CLIENT GROUP BY CLI_NOM HAVING count(*)>1;"
+Q9_res = "BENATTAR 2, MARTIN 3"
+
+## Question 10
+Q10_req = "SELECT ROUND((SELECT cast((SELECT sum( LIF_REMISE_POURCENT) FROM T_LIGNE_FACTURE) as float)/15152) , 2);
+ SELECT ROUND((SELECT cast((SELECT sum( LIF_REMISE_MONTANT) FROM T_LIGNE_FACTURE) as float)/15152) , 2);"
+Q10_res = "pourcentage:2.15, montant:3.25"
+
+## Question 11
+Q11_req = "SELECT LIF_REMISE_MONTANT FROM T_LIGNE_FACTURE WHERE LIF_REMISE_MONTANT = (SELECT max(LIF_REMISE_MONTANT) FROM T_LIGNE_FACTURE);
+SELECT LIF_REMISE_POURCENT FROM T_LIGNE_FACTURE WHERE LIF_REMISE_POURCENT = (SELECT max(LIF_REMISE_POURCENT) FROM T_LIGNE_FACTURE);"
+Q11_res = "Montant:83,Pourcentage:49"
+
+## Question 12
+Q12_req = ""
+
+
+## Question 13
+Q13_req = ""
+
+## Question 14
+Q14_req = ""
+
+
+## Question 15
+Q15_req = ""
+Q15_res ="nom,prenom,montant"

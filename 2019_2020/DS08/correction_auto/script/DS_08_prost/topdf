@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Transforme l'entrée standard en utf-8 en pdf
+# en utilisant tops et ps2pdf
+
+# usage :
+# topdf titre < fichier
+# zéro options.
+# n'accepte qu'un seul argument
+# sort le résultat sur sa sortie standard.
+
+bash tops "$1" | ps2pdf - -

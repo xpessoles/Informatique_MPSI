@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Transforme l'entrée standard en utf-8 en postscript
+# en utilisant a2ps
+
+# usage :
+# tops titre < fichier
+# beaucoup plus simple que a2ps : zéro options.
+# n'accepte qu'un seul argument
+# sort le résultat sur sa sortie standard.
+
+# passage à fr_FR pour les invocations de date et a2ps
+LC_ALL=fr_FR
+export LC_ALL
+
+file="$1"
+test -n "$file" || file=stdin
+latinfilename=$(echo "$file" | recode UTF-8..latin9)
+
+recode UTF-8..latin9 -f \
+| a2ps -q -o- -1 --stdin="$latinfilename" --major=columns --margin=20\
+    --left-footer="$(date) $latinfilename" --left-title="$(date +%F)"

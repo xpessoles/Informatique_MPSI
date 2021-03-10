@@ -1,0 +1,66 @@
+NOM = ""
+Prenom = "HUGO"
+Classe = "MPSI 2"
+alpha="58"
+
+## Question 1
+Q1_req = " SELECT CLI_NOM, CLI_PRENOM, TIT_CODE FROM T_CLIENT;"
+
+## Question 2
+Q2_req = " SELECT count(*) FROM T_CLIENT;"
+Q2_res = "89"
+
+## Question 3
+Q3_req = "SELECT CLI_NOM, CLI_PRENOM FROM T_CLIENT WHERE TIT_CODE = 'Mme.';"
+
+## Question 4
+Q4_req = "SELECT CLI_NOM, CLI_PRENOM, TIT_CODE FROM T_CLIENT WHERE TIT_CODE = 'Mme.' OR TIT_CODE = 'Melle.' ;"
+
+
+## Question 5
+Q5_req = "SELECT count(*) FROM T_CLIENT WHERE TIT_CODE = 'Mme.' OR TIT_CODE = 'Melle.';"
+Q5_res = "14"
+
+## Question 6
+Q6_req = "SELECT CLI_NOM AS Noms, CLI_PRENOM AS Prénoms FROM T_CLIENT WHERE TIT_CODE = 'Mme.' OR TIT_CODE = 'Melle.'
+ORDER BY CLI_NOM ASC;"
+
+
+## Question 7
+Q7_req = "SELECT CLI_NOM, TEL_NUMERO FROM T_CLIENT JOIN T_TELEPHONE ON T_CLIent.CLI_ID=T_TELEPHONE.CLI_ID;"
+
+## Question 8
+Q8_req = "SELECT CLI_NOM FROM T_CLIENT GROUP BY CLI_NOM having count(CLI_NOM)>1;"
+
+## Question 9
+Q9_req = "SELECT CLI_NOM, count(*) FROM T_CLIENT GROUP BY CLI_NOM having count(CLI_NOM)>1;"
+Q9_res = "2 pour BENATTAR et 3 pour MARTIN"
+
+## Question 10
+Q10_req = "SELECT avg(LIF_REMISE_MONTANT), avg(LIF_REMISE_POURCENT) FROM T_LIGNE_FACTURE;"
+Q10_res = "Pour le montant : 107.0 et Pour le pourcentage : 73.0"
+
+## Question 11
+Q11_req = "SELECT max(LIF_REMISE_MONTANT), max(LIF_REMISE_POURCENT) FROM T_LIGNE_FACTURE;"
+Q11_res = "Pour le montant : 107.0 et Pour le pourcentage : 73.0"
+
+## Question 12
+Q12_req = "SELECT FAC_ID AS fac_id1 FROM T_LIGNE_FACTURE WHERE LIF_REMISE_MONTANT>0 OR LIF_REMISE_POURCENT>0;"
+
+
+## Question 13
+Q13_req = "SELECT DISTINCT CLI_ID from T_FACTURE
+JOIN T_LIGNE_FACTURE on T_LIGNE_FACTURE.FAC_ID=T_FACTURE.FAC_ID
+where LIF_REMISE_POURCENT>0 or LIF_REMISE_MONTANT>0;"
+
+## Question 14
+Q14_req = "SELECT DISTINCT CLI_ID FROM T_FACTURE
+EXCEPT
+SELECT DISTINCT CLI_ID from T_FACTURE
+JOIN T_LIGNE_FACTURE on T_LIGNE_FACTURE.FAC_ID=T_FACTURE.FAC_ID
+where LIF_REMISE_POURCENT>0 or LIF_REMISE_MONTANT>0;"
+
+
+## Question 15
+Q15_req = ""
+Q15_res ="nom,prenom,montant"

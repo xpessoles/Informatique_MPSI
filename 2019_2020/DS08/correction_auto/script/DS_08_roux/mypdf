@@ -1,0 +1,50 @@
+#! /bin/sh
+
+usage () {
+cat <<EOF
+mypdf num_pages
+mypdf uneven_pages 
+mypdf make_even
+
+Prennent sur leur entrée standard un PDF et, respectivement :
+- écrit sur sa sortie standard le nombre de pages du PDF
+- retourne un code d'erreur valant vrai (0) si le nombre de pages est impair,
+  et faux (1) s'il est pair.
+- écrit sur sa sortie standard un PDF complété avec des pages blanches
+  si nécessaire pour que le nombre total de pages soit impair.
+
+Ce script nécessite pdftk.
+EOF
+}
+
+com=$1
+
+file=$(mktemp -t mypdf.$$.XXXXXXXXX)
+cleanup () { rm -f $file; }
+trap cleanup 1 2 3 15
+
+cat > $file
+
+num_pages() {
+  pdftk $file dump_data | sed -e '/NumberOfPages/!d;s/NumberOfPages: //'
+}
+
+uneven_pages() {
+  nb=$(num_pages)
+  uneven=$(dc -e "1 $nb 2 % - p")
+  return $uneven
+}
+
+make_even() {
+  if uneven_pages
+  then
+    pdftk $file ../blank.pdf cat output -
+  else
+    cat $file
+  fi
+}
+  
+$com
+X=$?
+cleanup
+exit $X

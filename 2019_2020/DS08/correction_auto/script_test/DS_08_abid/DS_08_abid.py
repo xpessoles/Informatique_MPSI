@@ -1,0 +1,58 @@
+NOM = "ABID"
+Prenom = "Hamza"
+Classe = "MPSI2"
+alpha="32"
+
+## Question 1
+Q1_req = "SELECT TIT_CODE, CLI_NOM, CLI_PRENOM FROM T_CLIENT;"
+
+## Question 2
+Q2_req = "SELECT COUNT(*) FROM T_CLIENT;"
+Q2_res = "93"
+
+## Question 3
+Q3_req = "SELECT CLI_NOM, CLI_PRENOM FROM T_CLIENT WHERE TIT_CODE='Mme.';"
+
+## Question 4
+Q4_req = "SELECT TIT_CODE, CLI_NOM, CLI_PRENOM FROM T_CLIENT WHERE TIT_CODE IN ('Mme.', 'Melle.');"
+
+## Question 5
+Q5_req = "SELECT COUNT(*) FROM T_CLIENT WHERE TIT_CODE IN ('Mme.', 'Melle.');"
+Q5_res = "16"
+
+## Question 6
+Q6_req = "SELECT CLI_NOM AS Noms, CLI_PRENOM AS Prenoms FROM T_CLIENT WHERE TIT_CODE IN ('Mme.', 'Melle.') ORDER BY Noms, Prenoms ASC;"
+
+## Question 7
+Q7_req = "SELECT cl.CLI_NOM, cl.CLI_PRENOM, tel.TEL_NUMERO FROM T_CLIENT as cl INNER JOIN T_TELEPHONE as tel ON cl.CLI_ID = tel.CLI_ID;"
+
+## Question 8
+Q8_req = "SELECT CLI_NOM, CLI_PRENOM FROM T_CLIENT WHERE CLI_NOM IN (SELECT CLI_NOM FROM T_CLIENT GROUP BY CLI_Nom HAVING COUNT(CLI_NOM) > 1);"
+
+## Question 9
+Q9_req = "SELECT CLI_NOM, COUNT(*) as nb_occur FROM T_CLIENT GROUP BY CLI_Nom HAVING nb_occur > 1"
+Q9_res = "(BENATTAR, 2) et (MARTIN, 2)"
+
+## Question 10
+Q10_req = "SELECT AVG(LIF_REMISE_POURCENT), AVG(LIF_REMISE_MONTANT) FROM T_LIGNE_FACTURE;"
+Q10_res = "Pourcentage : 47.0 et Montant : 81.0"
+
+## Question 11
+Q11_req = "SELECT MAX(LIF_REMISE_POURCENT), MAX(LIF_REMISE_MONTANT) FROM T_LIGNE_FACTURE;"
+Q11_res = "Pourcentage : 47 et Montant : 81"
+
+## Question 12
+Q12_req = "SELECT DISTINCT FAC_ID as fac_id1 FROM T_LIGNE_FACTURE WHERE (LIF_REMISE_MONTANT IS NOT NULL) OR (LIF_REMISE_POURCENT IS NOT NULL);"
+
+## Question 13
+Q13_req = "SELECT DISTINCT CLI_ID FROM T_FACTURE AS fac WHERE fac.FAC_ID IN (SELECT DISTINCT FAC_ID as fac_id1 FROM T_LIGNE_FACTURE WHERE (LIF_REMISE_MONTANT IS NOT NULL) OR (LIF_REMISE_POURCENT IS NOT NULL));"
+
+## Question 14
+Q14_req = "SELECT DISTINCT CLI_ID FROM T_FACTURE AS fac WHERE fac.FAC_ID IN (SELECT DISTINCT FAC_ID FROM T_LIGNE_FACTURE WHERE (LIF_REMISE_MONTANT IS NULL) AND (LIF_REMISE_POURCENT IS NULL));"
+
+## Question 15
+Q15_req = "SELECT cli.CLI_NOM as nom, cli.CLI_PRENOM as prenom, SUM(LIF_REMISE_MONTANT)+SUM(LIF_REMISE_POURCENT) as valeur_max FROM T_FACTURE as fac INNER JOIN T_CLIENT as cli ON fac.CLI_ID = cli.CLI_ID INNER JOIN (SELECT CLI_ID, MAX(nb) as max_nb FROM (SELECT CLI_ID, COUNT(*) as nb FROM T_FACTURE AS fac WHERE fac.FAC_ID IN (SELECT DISTINCT FAC_ID as fac_id1 FROM T_LIGNE_FACTURE WHERE (LIF_REMISE_MONTANT IS NOT NULL) OR (LIF_REMISE_POURCENT IS NOT NULL)) GROUP BY CLI_ID)) as max_tab ON fac.CLI_ID = max_tab.CLI_ID INNER JOIN T_LIGNE_FACTURE as ligfac ON ligfac.FAC_ID = fac.FAC_ID;"
+Q15_res ="Gérard,Mathieu,1037"
+
+# Il y avait plusieurs personnes qui ont bénéficié du plus grand nombre de remises or une seule était demandée.
+# J'ai donc mis celle que me proposait directement sqlite
