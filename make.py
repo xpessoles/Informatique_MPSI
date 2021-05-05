@@ -583,7 +583,7 @@ for tp in info_tp:
 #     genere_support(rep,ds,'ds')
     
     
-for k in range(14,16):
+for k in range(14,15):
     activite=info_tp[k]
     rep=trouver_repertoire(activite)
     file=trouver_file_tex(activite,rep,'tp')
